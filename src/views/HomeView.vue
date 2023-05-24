@@ -24,17 +24,17 @@
                         </div>
                     </div>
                     <!--Nav-Links-->
-                    <div class="flex justify-between items-center w-100 py-2 text-mainBlue">
-                        <a href="#" class="hover:scale-110 duration-200">So geht's</a>
-                        <a href="#" class="hover:scale-110 duration-200">Preise</a>
-                        <a href="#" class="hover:scale-110 duration-200">Fächer</a>
-                        <a href="#" class="hover:scale-110 duration-200">Lehrer werden</a>
-                        <a href="#" class="hover:scale-110 duration-200">Blog</a>
-                        <a href="#" class="hover:scale-110 duration-200">Kontakt</a>
+                    <div class="flex justify-between items-center w-100 py-2">
+                        <a href="#" class="navlink">So geht's</a>
+                        <a href="#" class="navlink">Preise</a>
+                        <a href="#" class="navlink">Fächer</a>
+                        <a href="#" class="navlink">Lehrer werden</a>
+                        <a href="#" class="navlink">Blog</a>
+                        <a href="#" class="navlink">Kontakt</a>
                     </div>
                 </div>
                 <!--Images-->
-                <!--Hero-Image Desktop-->
+                <!--Hero-Image Desktop @todo: background instead of border-->
                 <div class="relative hidden md:block">
                     <img src="@/assets/images/home/title-desktop2.jpg" alt="happy users of nachhilfe.at"
                          class="w-100">
@@ -103,3 +103,11 @@
         </section>
     </main>
 </template>
+
+<style scoped>
+
+.navlink {
+    @apply hover:scale-110 duration-200 text-mainBlue
+}
+
+</style>
