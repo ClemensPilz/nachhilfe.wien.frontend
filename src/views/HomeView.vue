@@ -1,38 +1,26 @@
 <script setup>
 
+import TopBar from "@/components/TopBar.vue";
 </script>
 
 <template>
+
+    <nav>
+        <!--Nav-Section-->
+        <section id="nav">
+            <div class="container max-w-6xl mx-auto mt-6">
+
+                <top-bar/>
+
+            </div>
+        </section>
+    </nav>
+
     <main>
         <!--Hero-Section-->
         <section id="hero">
-            <div class="container max-w-6xl mx-auto mt-6 md:pb-12">
-                <!--Logo and Login-->
-                <div class="flex flex-col w-100 space-y-2 mx-2 mb-2">
-                    <div class="flex justify-between items-center pb-4 border-b border-sky-300">
-                        <img class="h-20 md:h-30" src="@/assets/images/logos/main-logo.png" alt="nachhilfe.wien-logo">
-                        <div class="flex space-x-6 items-center">
-                            <div class="group hover:cursor-pointer">
-                                <div class="text text-lg text-mainBlue uppercase group-hover:scale-110 duration-200">
-                                    login
-                                </div>
-                            </div>
-                            <div class="text text-lg text-white uppercase px-5 py-2 bg-mainBlue rounded-3xl
-                            hover:bg-blue-200 hover:text-mainBlue hover:cursor-pointer hover:shadow-xl">
-                                registrieren
-                            </div>
-                        </div>
-                    </div>
-                    <!--Nav-Links-->
-                    <div class="flex justify-between items-center w-100 py-2">
-                        <a href="#" class="navlink">So geht's</a>
-                        <a href="#" class="navlink">Preise</a>
-                        <a href="#" class="navlink">Fächer</a>
-                        <a href="#" class="navlink">Lehrer werden</a>
-                        <a href="#" class="navlink">Blog</a>
-                        <a href="#" class="navlink">Kontakt</a>
-                    </div>
-                </div>
+            <div class="container max-w-6xl mx-auto md:mb-12">
+
                 <!--Images-->
                 <!--Hero-Image Desktop @todo: background instead of border-->
                 <div class="relative hidden md:block">
@@ -55,9 +43,7 @@
                         Jetzt Termin vereinbaren
                     </div>
                 </div>
-
             </div>
-
         </section>
 
         <!--Achievement Section-->
@@ -106,8 +92,5 @@
 
 <style scoped>
 
-.navlink {
-    @apply hover:scale-110 duration-200 text-mainBlue
-}
 
 </style>
