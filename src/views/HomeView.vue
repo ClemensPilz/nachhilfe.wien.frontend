@@ -1,22 +1,36 @@
 <script setup>
 
-import TopBar from "@/components/TopBar.vue";
+import TopBar from "@/components/home/TopBar.vue";
+import LoginModal from "@/components/home/LoginModal.vue";
+import {ref} from "vue";
+
+const isLoggingIn = ref(false);
+const isRegistering = ref(false);
 </script>
 
 <template>
+
+    <login-modal
+            v-if="isLoggingIn"
+            @clicked="isLoggingIn = false"
+    />
 
     <nav>
         <!--Nav-Section-->
         <section id="nav">
             <div class="container max-w-6xl mx-auto mt-6">
 
-                <top-bar/>
+                <top-bar
+                        @loginClick="isLoggingIn = true"
+                        @registerClick="isRegistering = true"
+                />
 
             </div>
         </section>
     </nav>
 
     <main>
+
         <!--Hero-Section-->
         <section id="hero">
             <div class="container max-w-6xl mx-auto md:mb-12">
@@ -87,6 +101,8 @@ import TopBar from "@/components/TopBar.vue";
             </div>
 
         </section>
+
+
     </main>
 </template>
 
