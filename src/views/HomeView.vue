@@ -66,28 +66,28 @@ const isRegistering = ref(false);
                 <div class="flex flex-col md:flex-row justify-between items-center flex-wrap
                     space-y-12 md:space-y-0">
 
-                    <div class="flex-col items-center text-center md:text-left">
-                        <div class="text-4xl md:text-6xl font-bold text-mainBlue">
+                    <div class="achievementItem">
+                        <div>
                             2.700
                         </div>
-                        <div class="text-xl md:text-2xl text-gray-700 font-light">
+                        <div>
                             5-Star-Reviews
                         </div>
                     </div>
-                    <div class="flex-col items-center text-center md:text-left">
+                    <div class="achievementItem">
 
-                        <div class="text-4xl md:text-6xl font-bold text-mainBlue">
+                        <div>
                             30+
                         </div>
-                        <div class="text-xl md:text-2xl text-gray-700 font-light">
+                        <div>
                             Fachbereiche
                         </div>
                     </div>
-                    <div class="flex-col items-center text-center md:text-left">
-                        <div class="text-4xl md:text-6xl font-bold text-mainBlue">
+                    <div class="achievementItem">
+                        <div>
                             3.000
                         </div>
-                        <div class="text-xl md:text-2xl text-gray-700 font-light">
+                        <div>
                             vermittelte Termine
                         </div>
                     </div>
@@ -106,7 +106,18 @@ const isRegistering = ref(false);
     </main>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 
+.achievementItem {
+    @apply flex-col items-center text-center md:text-left;
+
+    > div:nth-child(odd) {
+        @apply text-4xl md:text-6xl font-bold text-mainBlue;
+    }
+
+    > div:nth-child(even) {
+        @apply text-xl md:text-2xl text-gray-700 font-light;
+    }
+}
 
 </style>
