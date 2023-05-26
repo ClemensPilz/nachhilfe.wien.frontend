@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-col w-100 space-y-2 mx-2 mb-2">
 
-        <!--Logo and Login/Register-->
+        <!--Logo and Authentification/Register-->
         <div class="flex justify-between items-center px-4 md:px-0 pb-4 border-b border-sky-300">
 
             <!--Logo-->
             <img class="h-20 md:h-30" src="../../assets/images/logos/main-logo.png" alt="nachhilfe.wien-logo">
 
-            <!--Login/Register-->
+            <!--Authentification/Register-->
             <div class="flex space-x-6 items-center">
                 <div class="group hover:cursor-pointer">
                     <div class="loginBtn" @click="$emit('loginClick')">

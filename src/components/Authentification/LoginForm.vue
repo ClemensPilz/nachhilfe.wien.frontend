@@ -1,21 +1,23 @@
 <template>
-    <form class="loginForm" @submit="testForm">
-        <MyInput name="vorname"/>
-        <MyInput name="nachname"/>
+    <form class="loginForm" @submit="">
+
+        <!--Input Fields-->
+        <input type="text" name="vorname" v-model="vorname" placeholder="vorname">
+        <div>{{ errors.vorname }}</div>
+        <input type="text" name="nachname" v-model="nachname" placeholder="nachname">
+        <div>{{ errors.nachname }}</div>
+
+        <!--Submit-->
         <button v-if="meta.valid">Submit</button>
-        <div>
-            Value is: {{formValue}}
-        </div>
+
     </form>
 </template>
 
 <script setup>
 
-import MyInput from "@/components/Login/MyInput.vue";
 import {useForm} from "vee-validate";
 
-
-const simpleSchema = {
+const validationSchema = {
     vorname(value) {
         if (value.trim().length < 4) {
             return "Must be four characters or more."
@@ -32,20 +34,22 @@ const simpleSchema = {
     }
 }
 
-const { meta } = useForm({
-    validationSchema: simpleSchema,
+const {meta, errors, useFieldModel} = useForm({
+    validationSchema: validationSchema,
     initialValues: {
         nachname: '',
         vorname: ''
     }
 })
 
+const [vorname, nachname] = useFieldModel(['vorname', 'nachname']);
+
 </script>
 
 <style lang="scss" scoped>
 
 .loginForm {
-    @apply flex flex-col space-y-3 items-center
+  @apply flex flex-col space-y-3 items-center
 }
 
 </style>
