@@ -1,19 +1,13 @@
-<script setup>
-
-import TopBar from "@/components/home/TopBar.vue";
-import LoginModal from "@/components/home/LoginModal.vue";
-import {ref} from "vue";
-
-const isLoggingIn = ref(false);
-const isRegistering = ref(false);
-</script>
-
 <template>
 
-    <login-modal
-            v-if="isLoggingIn"
-            @clicked="isLoggingIn = false"
-    />
+  <!--Modals for Login and Registration-->
+    <FormModal v-if="isLoggingIn">
+        <LoginForm @exit="isLoggingIn = !isLoggingIn"/>
+    </FormModal>
+
+    <FormModal v-if="isRegistering">
+        <RegisterForm @exit="isRegistering = !isRegistering"/>
+    </FormModal>
 
     <nav>
         <!--Nav-Section-->
@@ -105,6 +99,22 @@ const isRegistering = ref(false);
 
     </main>
 </template>
+
+<script setup>
+
+import TopBar from "@/components/home/TopBar.vue";
+import FormModal from "@/components/atoms/FormModal.vue";
+import {ref} from "vue";
+import LoginForm from "@/components/authentification/LoginForm.vue";
+import RegisterForm from "@/components/authentification/RegisterForm.vue";
+
+const isLoggingIn = ref(false);
+const isRegistering = ref(false);
+
+function testClose() {
+    console.log('close');
+}
+</script>
 
 <style scoped lang="postcss">
 
