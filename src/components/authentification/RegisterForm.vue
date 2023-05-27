@@ -24,13 +24,16 @@
         <input type="password" name="password" v-model="password" placeholder="Passwort">
         <div class="error">{{ errors.password }}</div>
 
-        <label class="text-white" for="type">Ich möchte...</label>
+        <div class="border-y-2 border-gray-200 flex flex-col space-y-2 items-center py-6 my-6">
+        <label class="text-black" for="type">Ich möchte...</label>
         <select class="typeSelect" v-model="type" name="type" id="type">
             <option value="student">Nachhilfe erhalten</option>
             <option value="teacher">Selbst unterrichten</option>
         </select>
+        </div>
 
-        <FormButton v-if="meta.valid" text="Registrieren" @click="register"/>
+        <FormButton v-if="meta.valid" text="Register" @click="register"/>
+        <FormButtonInactive v-else text="Register" />
     </form>
 
 </template>
@@ -39,8 +42,9 @@
 <script setup>
 
 import {useForm} from "vee-validate";
-import FormButton from "@/components/atoms/FormButton.vue";
+import FormButton from "@/components/util/FormButton.vue";
 import {ref} from 'vue';
+import FormButtonInactive from "@/components/util/FormButtonInactive.vue";
 
 function register() {
     console.log('register');
@@ -130,24 +134,25 @@ const [email, password, firstname, lastname, username, birthdate, description]
 
 <style lang="scss" scoped>
 
+
 .exitButton {
-  @apply text-right max-w-lg mx-auto px-10 text-white select-none hover:cursor-pointer
+    @apply w-fit ml-auto p-5 text-white  hover:cursor-pointer select-none
 }
 
 .loginForm {
-  @apply flex flex-col items-center p-4 w-full max-w-sm mx-auto
+    @apply flex flex-col items-center p-4 w-fit mx-auto
 }
 
 input {
-  @apply text-gray-500 m-2 w-full py-1 px-2 rounded-lg focus:outline-none focus:text-gray-900 bg-white
+    @apply text-gray-200 m-2 py-1 px-2 rounded-lg focus:outline-none bg-gray-500 appearance-none w-full
 }
 
 .error {
-  @apply text-xs text-red-600 italic mb-2
+    @apply text-xs text-red-600 italic
 }
 
 .typeSelect {
-    @apply py-1 px-2 mb-4 rounded-lg focus:outline-none
+    @apply py-1 px-2 mb-4 rounded-lg focus:outline-none bg-gray-500 text-white
 }
 
 </style>

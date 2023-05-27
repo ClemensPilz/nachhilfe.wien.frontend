@@ -9,12 +9,12 @@
 
             <!--authentification/Register-->
             <div class="flex space-x-6 items-center">
-                <div class="group hover:cursor-pointer">
+                <div class="group hover:cursor-pointer select-none">
                     <div class="loginBtn" @click="$emit('loginClick')">
                         Login
                     </div>
                 </div>
-                <div class="registerBtn" @click="$emit('registerClick')">
+                <div class="registerBtn select-none" @click="$emit('registerClick')">
                     Register
                 </div>
             </div>

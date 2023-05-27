@@ -1,11 +1,11 @@
 <template>
 
   <!--Modals for Login and Registration-->
-    <FormModal v-if="isLoggingIn">
+    <FormModal class="formModal" v-if="isLoggingIn">
         <LoginForm @exit="isLoggingIn = !isLoggingIn"/>
     </FormModal>
 
-    <FormModal v-if="isRegistering">
+    <FormModal class="formModal" v-if="isRegistering">
         <RegisterForm @exit="isRegistering = !isRegistering"/>
     </FormModal>
 
@@ -15,8 +15,8 @@
             <div class="container max-w-6xl mx-auto mt-6">
 
                 <top-bar
-                        @loginClick="isLoggingIn = true"
-                        @registerClick="isRegistering = true"
+                        @loginClick="isLoggingIn = true; isRegistering = false"
+                        @registerClick="isRegistering = true; isLoggingIn = false"
                 />
 
             </div>
@@ -103,7 +103,7 @@
 <script setup>
 
 import TopBar from "@/components/home/TopBar.vue";
-import FormModal from "@/components/atoms/FormModal.vue";
+import FormModal from "@/components/util/FormModal.vue";
 import {ref} from "vue";
 import LoginForm from "@/components/authentification/LoginForm.vue";
 import RegisterForm from "@/components/authentification/RegisterForm.vue";
@@ -128,6 +128,10 @@ function testClose() {
     > div:nth-child(even) {
         @apply text-xl md:text-2xl text-gray-700 font-light;
     }
+}
+
+.formModal {
+    @apply shadow-2xl
 }
 
 </style>

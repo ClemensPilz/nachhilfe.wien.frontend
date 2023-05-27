@@ -11,6 +11,7 @@
 
         <!--Submit-->
         <FormButton v-if="meta.valid" text="Login" @click="login"/>
+        <FormButtonInactive v-else text="Login" />
     </form>
 
 </template>
@@ -19,7 +20,8 @@
 <script setup>
 
 import {useForm} from "vee-validate";
-import FormButton from "@/components/atoms/FormButton.vue";
+import FormButton from "@/components/util/FormButton.vue";
+import FormButtonInactive from "@/components/util/FormButtonInactive.vue";
 
 function login(){
     console.log('login');
@@ -58,7 +60,7 @@ const [email, password] = useFieldModel(['email', 'password']);
 <style lang="scss" scoped>
 
 .exitButton {
-    @apply text-right max-w-lg mx-auto px-10 text-white hover:cursor-pointer select-none
+    @apply w-fit ml-auto p-5 text-white  hover:cursor-pointer select-none
 }
 
 .loginForm {
@@ -66,7 +68,7 @@ const [email, password] = useFieldModel(['email', 'password']);
 }
 
 input {
-    @apply text-gray-500 m-2 py-1 px-2 rounded-lg focus:outline-none focus:text-gray-900 bg-white
+    @apply text-gray-200 m-2 py-1 px-2 rounded-lg focus:outline-none bg-gray-500 appearance-none
 }
 
 .error {
