@@ -122,7 +122,7 @@ const {meta, errors, useFieldModel} = useForm({
         firstname: '',
         lastname: '',
         username: '',
-        birthdate: null,
+        birthdate: '2001-01-01',
         description: ''
     }
 })
