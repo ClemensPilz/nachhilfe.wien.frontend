@@ -3,24 +3,31 @@
     <form class="loginForm">
 
         <!--Input Fields-->
+        <label for="email">E-Mail:</label>
         <input type="email" name="email" v-model="email" placeholder="E-Mail">
         <div class="error">{{ errors.email }}</div>
 
+        <label for="firstname">Vorname:</label>
         <input type="text" name="firstname" v-model="firstname" placeholder="Vorname">
         <div class="error">{{ errors.firstname }}</div>
 
+        <label for="lastname">Nachname:</label>
         <input type="text" name="lastname" v-model="lastname" placeholder="Nachname">
         <div class="error">{{ errors.lastname }}</div>
 
+        <label for="username">Username:</label>
         <input type="text" name="username" v-model="username" placeholder="Username">
         <div class="error">{{ errors.username }}</div>
 
+        <label for="birthdate">Geburtsdatum:</label>
         <input type="date" name="birthdate" v-model="birthdate" placeholder="Geburtsdatum">
         <div class="error">{{ errors.birthdate }}</div>
 
+        <label for="description">Über mich:</label>
         <input type="text" name="description" v-model="description" placeholder="Über mich...">
         <div class="error">{{ errors.description }}</div>
 
+        <label for="password">Passwort:</label>
         <input type="password" name="password" v-model="password" placeholder="Passwort">
         <div class="error">{{ errors.password }}</div>
 
@@ -141,6 +148,10 @@ const [email, password, firstname, lastname, username, birthdate, description]
 
 .loginForm {
     @apply flex flex-col items-center p-4 w-fit mx-auto
+}
+
+label {
+    @apply text-white text-xs md:text-sm
 }
 
 input {

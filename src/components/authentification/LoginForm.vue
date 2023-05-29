@@ -3,15 +3,17 @@
     <form class="loginForm">
 
         <!--Input Fields-->
+        <label for="email">E-Mail:</label>
         <input type="email" name="email" v-model="email" placeholder="E-Mail">
         <div class="error">{{ errors.email }}</div>
 
+        <label for="password">Passwort:</label>
         <input type="password" name="password" v-model="password" placeholder="Passwort">
         <div class="error">{{ errors.password }}</div>
 
         <!--Submit-->
         <FormButton v-if="meta.valid" text="Login" @click="login"/>
-        <FormButtonInactive v-else text="Login" />
+        <FormButtonInactive v-else text="Login"/>
     </form>
 
 </template>
@@ -23,7 +25,7 @@ import {useForm} from "vee-validate";
 import FormButton from "@/components/util/FormButton.vue";
 import FormButtonInactive from "@/components/util/FormButtonInactive.vue";
 
-function login(){
+function login() {
     console.log('login');
 }
 
@@ -60,19 +62,23 @@ const [email, password] = useFieldModel(['email', 'password']);
 <style lang="scss" scoped>
 
 .exitButton {
-    @apply w-fit ml-auto p-5 text-white  hover:cursor-pointer select-none
+  @apply w-fit ml-auto p-5 text-white  hover:cursor-pointer select-none
 }
 
 .loginForm {
   @apply flex flex-col space-y-3 items-center p-4 w-fit mx-auto
 }
 
+label {
+  @apply text-white text-xs md:text-sm
+}
+
 input {
-    @apply text-gray-200 m-2 py-1 px-2 rounded-lg focus:outline-none bg-gray-500 appearance-none
+  @apply text-gray-200 m-2 py-1 px-2 rounded-lg focus:outline-none bg-gray-500 appearance-none
 }
 
 .error {
-    @apply text-xs text-red-600 italic
+  @apply text-xs text-red-600 italic
 }
 
 </style>
