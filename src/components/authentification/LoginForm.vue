@@ -24,9 +24,22 @@
 import {useForm} from "vee-validate";
 import FormButton from "@/components/util/FormButton.vue";
 import FormButtonInactive from "@/components/util/FormButtonInactive.vue";
+import axios from "axios";
 
-function login() {
-    console.log('login');
+async function login(){
+    try {
+    const response = await axios({
+        method: 'post',
+        url: 'http://localhost:8080/api/auth',
+        body: {
+            "email": email.value,
+            "password": password.value
+        }
+    })} catch (e) {
+        console.log(e);
+        console.log('password: ' + password.value);
+        console.log('email: ' + email.value);
+    }
 }
 
 const emits = defineEmits(['exit']);
