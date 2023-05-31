@@ -1,13 +1,14 @@
 <template>
     <div>
-        <h1>Hello User {{route.params.userId}}</h1>
+        <h1>Hello User {{ route.params.userId }}</h1>
     </div>
 
     <br>
     <div class="container mx-auto flex flex-wrap">
 
-    <PublicProfile class="w-full md:w-2/3" :userId="parseInt(userId)" />
-    <PublicComments class="w-full md:w-1/3" />
+        <PublicProfile :profile="profile"/>
+        <PublicComments :profile="profile"/>
+
     </div>
 
 
@@ -18,9 +19,26 @@
 import {useRoute} from "vue-router";
 import PublicProfile from "@/components/profile/PublicProfile.vue";
 import PublicComments from "@/components/profile/PublicComments.vue";
+import axios from "axios";
+import {onMounted, ref} from "vue";
 
 const route = useRoute();
 const userId = route.params.userId;
+const profile = ref();
+
+async function getUserProfile(userId) {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: 'http://localhost:3000/user'
+        });
+        profile.value = response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+onMounted(() => getUserProfile(userId));
 
 </script>
 
