@@ -1,6 +1,6 @@
 <template>
-    <div>
-
+    <div class="w-full bg-blue-950">
+        Hello Comments
     </div>
 </template>
 
