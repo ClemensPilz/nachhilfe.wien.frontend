@@ -29,7 +29,7 @@
         <!--Hero-Section-->
         <section id="hero">
             <div class="container max-w-6xl mx-auto md:mb-12">
-                <VCalendar/>
+
 
                 <!--Images-->
                 <!--Hero-Image Desktop @todo: background instead of border-->

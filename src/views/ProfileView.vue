@@ -1,9 +1,8 @@
 <template>
-    <div>
-        <h1>Hello User {{ route.params.userId }}</h1>
-    </div>
 
-    <br>
+    <nav>
+        <NavBar />
+    </nav>
     <div class="container mx-auto flex flex-wrap">
 
         <PublicProfile :profile="profile"/>
@@ -21,6 +20,7 @@ import PublicProfile from "@/components/profile/PublicProfile.vue";
 import PublicComments from "@/components/profile/PublicComments.vue";
 import axios from "axios";
 import {onMounted, ref} from "vue";
+import NavBar from "@/components/util/NavBar.vue";
 
 const route = useRoute();
 const userId = route.params.userId;

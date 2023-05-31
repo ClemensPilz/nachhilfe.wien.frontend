@@ -1,16 +1,20 @@
 <template>
-    <div class="w-full md:w-1/3 bg-blue-950 p-4">
-        <div class="bg-black text-white text-xl p-2 m-2" v-for="feedback in feedbacks">
-            <div>{{feedback.comment}}</div>
-            <div class="text-sm">{{feedback.user}}</div>
+    <div class="w-full md:w-1/3 bg-lightPrimary p-4 space-y-4">
 
-        </div>
+        <the-card v-for="feedback in feedbacks" class="bg-white hover:bg-white">
+            <h5 class="mb-2 font-bold tracking-tight text-primary">{{feedback.user}}</h5>
+            <p class="font-normal text-sm text-primaryText">
+                {{feedback.comment}}
+            </p>
+        </the-card>
+
     </div>
 </template>
 
 <script setup>
 
 import {computed} from "vue";
+import {TheCard} from "flowbite-vue";
 
 const props = defineProps({
     profile: Object

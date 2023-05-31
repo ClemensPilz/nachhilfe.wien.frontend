@@ -11,6 +11,8 @@
     "@heroicons/vue": "^2.0.18",
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
+    "flowbite": "^1.6.5",
+    "flowbite-vue": "^0.0.10",
     "pinia": "^2.0.36",
     "sass": "^1.62.1",
     "v-calendar": "^3.0.3",
