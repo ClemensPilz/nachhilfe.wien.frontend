@@ -29,7 +29,7 @@ const router = createRouter({
       component: SearchView
     },
     {
-      path: '/profile/:userId',
+      path: '/profile',
       name: 'profile',
       component: ProfileView
     }

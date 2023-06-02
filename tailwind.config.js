@@ -8,11 +8,18 @@ module.exports = {
                 primary: '#607D8B',
                 darkPrimary: '#455A64',
                 lightPrimary: '#CFD8DC',
-                accent: '#FF5722',
+                accent: '#FF7400',
+                accentgreen: '#B2F200',
                 primaryText: '#212121',
                 secondaryText: '#757575',
                 divider: '#BDBDBD'
-            }
+            },
+            fontFamily:
+                {
+                    'webseite': ['Ubuntu', 'Arial', 'sans-serif'],
+                    'cardinhalte': ['Roboto', 'sans-serif'],
+                    'message': ['Ubuntu Mono', 'monospace'],
+                },
         },
     },
     plugins: [],
