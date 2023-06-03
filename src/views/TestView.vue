@@ -4,11 +4,223 @@
   <!--Container-->
   <div class="container max-w-6xl min-h-full mx-auto">
 
+    <!--Navbar-->
+    <!-- Main navigation container -->
+    <nav
+        class="flex-no-wrap relative flex w-full items-center justify-between bg-neutral-100 py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+        data-te-navbar-ref>
+      <div class="flex w-full flex-wrap items-center justify-between px-3">
+        <!-- Hamburger button for mobile view -->
+        <button
+            class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+            type="button"
+            data-te-collapse-init
+            data-te-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent1"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+          <!-- Hamburger icon -->
+          <span class="[&>svg]:w-7">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-7 w-7">
+          <path
+              fill-rule="evenodd"
+              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+              clip-rule="evenodd"/>
+        </svg>
+      </span>
+        </button>
+
+        <!-- Collapsible navigation container -->
+        <div
+            class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
+            id="navbarSupportedContent1"
+            data-te-collapse-item>
+          <!-- Logo -->
+          <a
+              class="mb-4 mr-2 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
+              href="#">
+            <img
+                src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
+                style="height: 15px"
+                alt=""
+                loading="lazy"/>
+          </a>
+          <!-- Left navigation links -->
+          <ul
+              class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
+              data-te-navbar-nav-ref>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <!-- Dashboard link -->
+              <a
+                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                  href="#"
+                  data-te-nav-link-ref
+              >Dashboard</a
+              >
+            </li>
+            <!-- Team link -->
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a
+                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                  href="#"
+                  data-te-nav-link-ref
+              >Team</a
+              >
+            </li>
+            <!-- Projects link -->
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a
+                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                  href="#"
+                  data-te-nav-link-ref
+              >Projects</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right elements -->
+        <div class="relative flex items-center">
+          <!-- Cart Icon -->
+          <a
+              class="mr-4 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#">
+        <span class="[&>svg]:w-5">
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="h-5 w-5">
+            <path
+                d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
+          </svg>
+        </span>
+          </a>
+
+          <!-- Container with two dropdown menus -->
+          <div class="relative" data-te-dropdown-ref>
+            <!-- First dropdown trigger -->
+            <a
+                class="hidden-arrow mr-4 flex items-center text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                href="#"
+                id="dropdownMenuButton1"
+                role="button"
+                data-te-dropdown-toggle-ref
+                aria-expanded="false">
+              <!-- Dropdown trigger icon -->
+              <span class="[&>svg]:w-5">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-5 w-5">
+              <path
+                  fill-rule="evenodd"
+                  d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                  clip-rule="evenodd"/>
+            </svg>
+          </span>
+              <!-- Notification counter -->
+              <span
+                  class="absolute -mt-2.5 ml-2 rounded-[0.37rem] bg-accent px-[0.45em] py-[0.2em] text-[0.6rem] leading-none text-white"
+              >1</span
+              >
+            </a>
+            <!-- First dropdown menu -->
+            <ul
+                class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                aria-labelledby="dropdownMenuButton1"
+                data-te-dropdown-menu-ref>
+              <!-- First dropdown menu items -->
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Action</a
+                >
+              </li>
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Another action</a
+                >
+              </li>
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Something else here</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Second dropdown container -->
+          <div class="relative" data-te-dropdown-ref>
+            <!-- Second dropdown trigger -->
+            <a
+                class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                href="#"
+                id="dropdownMenuButton2"
+                role="button"
+                data-te-dropdown-toggle-ref
+                aria-expanded="false">
+              <!-- User avatar -->
+              <img
+                  src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                  class="rounded-full"
+                  style="height: 25px; width: 25px"
+                  alt=""
+                  loading="lazy"/>
+            </a>
+            <!-- Second dropdown menu -->
+            <ul
+                class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                aria-labelledby="dropdownMenuButton2"
+                data-te-dropdown-menu-ref>
+              <!-- Second dropdown menu items -->
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Action</a
+                >
+              </li>
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Another action</a
+                >
+              </li>
+              <li>
+                <a
+                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    href="#"
+                    data-te-dropdown-item-ref
+                >Something else here</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
     <!--Top-Jumbo-->
     <section class="mb-12">
 
       <div
-          class="bigImage relative overflow-hidden rounded-lg bg-cover bg-no-repeat p-12 text-center"
+          class="bigImage relative overflow-hidden rounded-b-lg bg-cover bg-no-repeat p-12 text-center"
           style="height: 400px">
         <div
             class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
@@ -86,24 +298,49 @@
       </div>
     </section>
 
-    <!--Lehrer und Schüler Cards-->
-    <section class="mb-12">
-
-      <div class="flex flex-col md:flex-row gap-4 md:gap-10">
 
 
-        <CardNormal title="Nachhilfe finden" class="text-center md:text-left md:w1/2"
-                    content="Melde dich jetzt an, um einen Nachhilfelehrer in deiner Umgebung zu finden."
-                    button-text="anmelden" button-bg="bg-accent"/>
-
-        <CardNormal title="Lehrer werden" class="text-center md:text-right md:w-1/2"
-                    content="Du möchtest dein Wissen weitergeben und selbst Lehrer werden? Kontaktiere uns über das Kontaktformular."
-                    button-text="Kontakt" button-bg="bg-darkPrimary"/>
+    <!--Testimonial-->
+    <!--Background-->
+    <section
+        class="p-6 text-center bg-lightPrimary md:p-12 md:py-4 md:text-left">
+      <div class="flex justify-center">
+        <div class="max-w-3xl">
+          <div
+              class="m-4 block rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800 dark:shadow-black/20">
+            <!--Testimonial-->
+            <div class="md:flex md:flex-row">
+              <div
+                  class="mx-auto mb-6 flex w-36 items-center justify-center md:mx-0 md:w-96 lg:mb-0">
+                <img
+                    src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20%2810%29.jpg"
+                    class="rounded-full shadow-md dark:shadow-black/30"
+                    alt="woman avatar" />
+              </div>
+              <div class="md:ml-6">
+                <p
+                    class="mb-6 font-light text-neutral-500 dark:text-neutral-300">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id
+                  quam sapiente molestiae numquam quas, voluptates omnis nulla
+                  ea odio quia similique corrupti magnam.
+                </p>
+                <p
+                    class="mb-2 text-xl font-semibold text-primary">
+                  Anna Annabauer
+                </p>
+                <p
+                    class="mb-0 font-semibold text-neutral-500 dark:text-neutral-400">
+                  Studentin
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!--Timeline-->
-    <section class="mb-12">
+    <section class="mb-12 mx-16 lg:mx-44">
       <ol class="border-l border-neutral-300 dark:border-neutral-500">
         <!--First item-->
         <li>
@@ -165,6 +402,22 @@
         </li>
       </ol>
 
+    </section>
+
+    <!--Lehrer und Schüler Cards-->
+    <section class="mb-12">
+
+      <div class="flex flex-col md:flex-row gap-4 md:gap-10">
+
+
+        <CardNormal title="Nachhilfe finden" class="text-center md:text-left md:w1/2"
+                    content="Melde dich jetzt an, um einen Nachhilfelehrer in deiner Umgebung zu finden."
+                    button-text="anmelden" button-bg="bg-accent"/>
+
+        <CardNormal title="Lehrer werden" class="text-center md:text-right md:w-1/2"
+                    content="Du möchtest dein Wissen weitergeben und selbst Lehrer werden? Kontaktiere uns über das Kontaktformular."
+                    button-text="Kontakt" button-bg="bg-darkPrimary"/>
+      </div>
     </section>
 
     <!--Footer-->
@@ -397,167 +650,167 @@
 
   </div>
 
-<div class="dnone">
+  <div class="dnone">
 
 
-  <!--    Test Components-->
-  <div class="container max-w-md min-h-screen flex flex-col mx-auto justify-center items-center space-y-4">
+    <!--    Test Components-->
+    <div class="container max-w-md min-h-screen flex flex-col mx-auto justify-center items-center space-y-4">
 
-    <!--    Normale Cards-->
-    <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
-                button-text="Click me" button-bg="bg-primary"/>
+      <!--    Normale Cards-->
+      <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
+                  button-text="Click me" button-bg="bg-primary"/>
 
-    <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
-                button-text="Click me" button-bg="bg-secondary"/>
+      <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
+                  button-text="Click me" button-bg="bg-secondary"/>
 
-    <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
-                button-text="Click me" button-bg="bg-accent"/>
+      <CardNormal title="Hello Container!" content="Ich versuche jetzt einfach mal, einen Card-Text zu erstellen."
+                  button-text="Click me" button-bg="bg-accent"/>
 
-    <!--    Image-Cards-->
-    <CardImage title="Das ist eine Bild-Card"
-               content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
-               button-bg="bg-primary" button-text="Image-Click"/>
+      <!--    Image-Cards-->
+      <CardImage title="Das ist eine Bild-Card"
+                 content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
+                 button-bg="bg-primary" button-text="Image-Click"/>
 
-    <CardImage title="Das ist eine Bild-Card"
-               content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
-               button-bg="bg-secondary" button-text="Image-Click"/>
+      <CardImage title="Das ist eine Bild-Card"
+                 content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
+                 button-bg="bg-secondary" button-text="Image-Click"/>
 
-    <CardImage title="Das ist eine Bild-Card"
-               content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
-               button-bg="bg-accent" button-text="Image-Click"/>
+      <CardImage title="Das ist eine Bild-Card"
+                 content="Schaut ganz gut aus, oder? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur atque delectus, deleniti doloremque enim labore molestiae nemo porro quia quidem"
+                 button-bg="bg-accent" button-text="Image-Click"/>
 
-    <!--Spinners-->
-    <div
-        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        role="status">
-  <span
-      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-  >Loading...</span
-  >
-    </div>
-    <div
-        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        role="status">
-  <span
-      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-  >Loading...</span
-  >
-    </div>
-    <div
-        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-accent motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        role="status">
-  <span
-      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-  >Loading...</span
-  >
-    </div>
-
-  </div>
-
-  <!--stepper-->
-  <ul
-      data-te-stepper-init
-      class="relative m-0 flex list-none justify-between overflow-hidden p-0 transition-[height] duration-200 ease-in-out">
-    <!--First item-->
-    <li
-        data-te-stepper-step-ref
-        data-te-stepper-step-active
-        class="w-[4.5rem] flex-auto">
+      <!--Spinners-->
       <div
-          data-te-stepper-head-ref
-          class="flex cursor-pointer items-center pl-2 leading-[1.3rem] no-underline after:ml-2 after:h-px after:w-full after:flex-1 after:bg-[#e0e0e0] after:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
+          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status">
+  <span
+      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+  >Loading...</span
+  >
+      </div>
+      <div
+          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status">
+  <span
+      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+  >Loading...</span
+  >
+      </div>
+      <div
+          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-accent motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status">
+  <span
+      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+  >Loading...</span
+  >
+      </div>
+
+    </div>
+
+    <!--stepper-->
+    <ul
+        data-te-stepper-init
+        class="relative m-0 flex list-none justify-between overflow-hidden p-0 transition-[height] duration-200 ease-in-out">
+      <!--First item-->
+      <li
+          data-te-stepper-step-ref
+          data-te-stepper-step-active
+          class="w-[4.5rem] flex-auto">
+        <div
+            data-te-stepper-head-ref
+            class="flex cursor-pointer items-center pl-2 leading-[1.3rem] no-underline after:ml-2 after:h-px after:w-full after:flex-1 after:bg-[#e0e0e0] after:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
       <span
           data-te-stepper-head-icon-ref
           class="my-6 mr-2 flex h-[1.938rem] w-[1.938rem] items-center justify-center rounded-full bg-[#ebedef] text-sm font-medium text-[#40464f]">
         1
       </span>
-        <span
-            data-te-stepper-head-text-ref
-            class="font-medium text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
+          <span
+              data-te-stepper-head-text-ref
+              class="font-medium text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
         step1
       </span>
-      </div>
-      <div
-          data-te-stepper-content-ref
-          class="absolute w-full p-4 transition-all duration-500 ease-in-out">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </div>
-    </li>
+        </div>
+        <div
+            data-te-stepper-content-ref
+            class="absolute w-full p-4 transition-all duration-500 ease-in-out">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </li>
 
-    <!--Second item-->
-    <li data-te-stepper-step-ref class="w-[4.5rem] flex-auto">
-      <div
-          data-te-stepper-head-ref
-          class="flex cursor-pointer items-center leading-[1.3rem] no-underline before:mr-2 before:h-px before:w-full before:flex-1 before:bg-[#e0e0e0] before:content-[''] after:ml-2 after:h-px after:w-full after:flex-1 after:bg-[#e0e0e0] after:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:before:bg-neutral-600 dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
+      <!--Second item-->
+      <li data-te-stepper-step-ref class="w-[4.5rem] flex-auto">
+        <div
+            data-te-stepper-head-ref
+            class="flex cursor-pointer items-center leading-[1.3rem] no-underline before:mr-2 before:h-px before:w-full before:flex-1 before:bg-[#e0e0e0] before:content-[''] after:ml-2 after:h-px after:w-full after:flex-1 after:bg-[#e0e0e0] after:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:before:bg-neutral-600 dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
       <span
           data-te-stepper-head-icon-ref
           class="my-6 mr-2 flex h-[1.938rem] w-[1.938rem] items-center justify-center rounded-full bg-[#ebedef] text-sm font-medium text-[#40464f]">
         2
       </span>
-        <span
-            data-te-stepper-head-text-ref
-            class="text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
+          <span
+              data-te-stepper-head-text-ref
+              class="text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
         step2
       </span>
-      </div>
-      <div
-          data-te-stepper-content-ref
-          class="absolute left-0 w-full translate-x-[150%] p-4 transition-all duration-500 ease-in-out">
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat.
-      </div>
-    </li>
+        </div>
+        <div
+            data-te-stepper-content-ref
+            class="absolute left-0 w-full translate-x-[150%] p-4 transition-all duration-500 ease-in-out">
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat.
+        </div>
+      </li>
 
-    <!--Third item-->
-    <li data-te-stepper-step-ref class="w-[4.5rem] flex-auto">
-      <div
-          data-te-stepper-head-ref
-          class="flex cursor-pointer items-center pr-2 leading-[1.3rem] no-underline before:mr-2 before:h-px before:w-full before:flex-1 before:bg-[#e0e0e0] before:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:before:bg-neutral-600 dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
+      <!--Third item-->
+      <li data-te-stepper-step-ref class="w-[4.5rem] flex-auto">
+        <div
+            data-te-stepper-head-ref
+            class="flex cursor-pointer items-center pr-2 leading-[1.3rem] no-underline before:mr-2 before:h-px before:w-full before:flex-1 before:bg-[#e0e0e0] before:content-[''] hover:bg-[#f9f9f9] focus:outline-none dark:before:bg-neutral-600 dark:after:bg-neutral-600 dark:hover:bg-[#3b3b3b]">
       <span
           data-te-stepper-head-icon-ref
           class="my-6 mr-2 flex h-[1.938rem] w-[1.938rem] items-center justify-center rounded-full bg-[#ebedef] text-sm font-medium text-[#40464f]">
         3
       </span>
-        <span
-            data-te-stepper-head-text-ref
-            class="text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
+          <span
+              data-te-stepper-head-text-ref
+              class="text-neutral-500 after:flex after:text-[0.8rem] after:content-[data-content] dark:text-neutral-300">
         step3
       </span>
-      </div>
-      <div
-          data-te-stepper-content-ref
-          class="absolute left-0 w-full translate-x-[150%] p-4 transition-all duration-500 ease-in-out">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur.
-      </div>
-    </li>
-  </ul>
+        </div>
+        <div
+            data-te-stepper-content-ref
+            class="absolute left-0 w-full translate-x-[150%] p-4 transition-all duration-500 ease-in-out">
+          Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur.
+        </div>
+      </li>
+    </ul>
 
-  <!--Jumbotron-->
-  <div
-      class="relative overflow-hidden rounded-lg bg-cover bg-no-repeat p-12 text-center"
-      style="background-image: url('https://tecdn.b-cdn.net/img/new/slides/041.webp'); height: 400px">
+    <!--Jumbotron-->
     <div
-        class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-        style="background-color: rgba(0, 0, 0, 0.6)">
-      <div class="flex h-full items-center justify-center">
-        <div class="text-white">
-          <h2 class="mb-4 text-4xl font-semibold text-accent">Heading</h2>
-          <h4 class="mb-6 text-xl font-semibold text-lightPrimary">Subheading</h4>
-          <button
-              type="button"
-              class="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-              data-te-ripple-init
-              data-te-ripple-color="light">
-            Call to action
-          </button>
+        class="relative overflow-hidden rounded-lg bg-cover bg-no-repeat p-12 text-center"
+        style="background-image: url('https://tecdn.b-cdn.net/img/new/slides/041.webp'); height: 400px">
+      <div
+          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
+          style="background-color: rgba(0, 0, 0, 0.6)">
+        <div class="flex h-full items-center justify-center">
+          <div class="text-white">
+            <h2 class="mb-4 text-4xl font-semibold text-accent">Heading</h2>
+            <h4 class="mb-6 text-xl font-semibold text-lightPrimary">Subheading</h4>
+            <button
+                type="button"
+                class="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init
+                data-te-ripple-color="light">
+              Call to action
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
 </template>
 
 <script setup>
@@ -567,12 +820,14 @@ import CardNormal from "@/components/util/elements/CardNormal.vue";
 import CardImage from "@/components/util/elements/CardImage.vue";
 
 import {
+  Collapse,
+  Dropdown,
   Stepper,
   initTE,
 } from "tw-elements";
 import {onMounted} from "vue";
 
-onMounted(() => initTE({Stepper}));
+onMounted(() => initTE({Stepper, Collapse, Dropdown}));
 </script>
 
 <style lang="scss" scoped>
