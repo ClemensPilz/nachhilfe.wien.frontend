@@ -98,19 +98,38 @@
 
   <nav class="sticky top-0 z-[1000]">
     <!--Container-->
-    <div class="w-full bg-lightPrimary px-4 py-2 flex justify-between">
+    <div class="w-full bg-lightPrimary shadow-xl px-4 md:pr-12 py-4 flex justify-between">
       <div class="text-xl text-accent">
         Nachhilfe.Wien
       </div>
-      <div class="text-xl text-accent" @click="toggle">
+
+      <!--Toggle-Button-->
+      <div class="text-xl text-accent md:hidden" @click="toggle">
         X
+      </div>
+
+      <!--Desktop-Links-->
+      <div class="hidden md:flex space-x-2">
+        <div class="text-right">
+          <RouterLink to="/test">Home</RouterLink>
+        </div>
+        <div class="text-right">
+          <RouterLink to="/profile/123">World</RouterLink>
+        </div>
+
       </div>
     </div>
     <!--Mobile-Links-->
-    <div class="w-full bg-primary text-right hiddenLinks transition-all duration-500" id="mobileLinks">
-        <RouterLink to="/test">Home</RouterLink> <br>
+    <div class="w-ful flex-col p-2 bg-neutral-100 shadow-xl hiddenLinks md:hidden" id="mobileLinks">
+      <div class="text-right">
+        <RouterLink to="/test">Home</RouterLink>
+      </div>
+      <div class="text-right">
         <RouterLink to="/profile/123">World</RouterLink>
+      </div>
     </div>
+
+
   </nav>
 </template>
 
@@ -120,7 +139,6 @@ import {onMounted} from "vue";
 import {useRouter, useRoute} from "vue-router";
 
 const route = useRoute;
-
 
 
 function toggle() {
@@ -139,7 +157,6 @@ function toggle() {
 .router-link-active {
   @apply text-accent
 }
-
 
 
 </style>
