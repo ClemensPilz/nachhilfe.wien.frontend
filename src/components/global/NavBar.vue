@@ -1,7 +1,6 @@
 <template>
-  <!--@todo: echte Modals für Login/Registration, Nav fertigstellen-->
-
   <nav class="sticky top-0 z-[1000]">
+
     <!--Container-->
     <div class="w-full bg-lightPrimary shadow-xl px-4 md:pr-12 py-4 flex justify-between">
 
@@ -26,6 +25,7 @@
 
       </div>
     </div>
+
     <!--Mobile-Links-->
     <div class="w-ful flex-col p-2 bg-neutral-100 shadow-xl hiddenLinks md:hidden" id="mobileLinks">
       <div class="text-right">
@@ -36,25 +36,16 @@
       </div>
     </div>
 
-
   </nav>
 </template>
 
 <script setup>
-
-import {onMounted} from "vue";
-import {useRouter, useRoute} from "vue-router";
-
-const route = useRoute;
-
-
 function toggle() {
   const mobileLinks = document.getElementById("mobileLinks");
   mobileLinks.classList.toggle('hiddenLinks');
 }
 
 </script>
-
 <style lang="scss" scoped>
 
 .hiddenLinks {
@@ -64,6 +55,4 @@ function toggle() {
 .router-link-active {
   @apply text-accent
 }
-
-
 </style>

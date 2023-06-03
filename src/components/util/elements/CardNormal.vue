@@ -1,18 +1,15 @@
 <template>
-  <div
-      class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-    <h5
-        class="mb-2 text-xl font-medium leading-tight text-darkPrimary">
+  <div class="block rounded-lg bg-white p-6 shadow-lg">
+    <h5 class="mb-2 text-xl font-medium leading-tight text-darkPrimary">
       {{ props.title }}
     </h5>
     <p class="mb-4 text-primary">
       {{ props.content }}
     </p>
-    <button
-        type="button" :class="props.buttonBg"
-        class="inline-block rounded-xl px-3 pb-.5 pt-1 text-xs font-medium uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:bg-darkPrimary focus:outline-none focus:ring-0"
-        data-te-ripple-init
-        data-te-ripple-color="light">
+    <button type="button" :class="props.buttonBg"
+            class="inline-block rounded-xl px-6 py-2 text-xs font-medium uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:bg-darkPrimary focus:outline-none focus:ring-0"
+            data-te-ripple-init
+            data-te-ripple-color="light">
       {{ props.buttonText }}
     </button>
   </div>
