@@ -5,6 +5,7 @@ import DashboardView from "@/views/DashboardView.vue";
 import SearchView from "@/views/SearchView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import NotesView from "@/views/NotesView.vue";
+import MessageView from "@/views/MessageView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
             path: '/mynotes',
             name: 'notes',
             component: NotesView
+        },
+        {
+            path: '/messages',
+            name: 'messages',
+            component: MessageView
         }
 
     ]
