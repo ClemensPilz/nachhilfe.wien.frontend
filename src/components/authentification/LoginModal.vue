@@ -17,7 +17,7 @@
           <h5
               class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
               id="exampleModalLabel">
-            Modal title
+            Login
           </h5>
           <!--Close button-->
           <button
@@ -42,21 +42,17 @@
 
         <!--Modal body-->
         <div class="relative flex-auto p-4" data-te-modal-body-ref>
-          <form class="loginForm">
+          <form class="">
 
-            <div class="flex-col text-center items-center justify center">
-            <!--Input Fields-->
-            <label for="email">E-Mail:</label>
-            <input type="email" name="email" v-model="email" placeholder="E-Mail">
-            <div class="error">{{ errors.email }}</div>
+            <div class="flex-col space-y-2 text-left items-center justify center">
+              <!--Input Fields-->
+              <label for="email">E-Mail: </label>
+              <input type="email" name="email" v-model="email" placeholder="E-Mail">
+              <div class="error">{{ errors.email }}</div>
 
-            <label for="password">Passwort:</label>
-            <input type="password" name="password" v-model="password" placeholder="Passwort">
-            <div class="error">{{ errors.password }}</div>
-
-            <!--Submit-->
-            <FormButton v-if="meta.valid" text="Login" @click="login"/>
-            <FormButtonInactive v-else text="Login"/>
+              <label for="password">Passwort: </label>
+              <input type="password" name="password" v-model="password" placeholder="Passwort">
+              <div class="error">{{ errors.password }}</div>
             </div>
           </form>
 
@@ -68,19 +64,20 @@
           <button
               type="button"
               v-if="meta.valid"
-              @click="login"
+              @click=""
               class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
               data-te-modal-dismiss
               data-te-ripple-init
               data-te-ripple-color="light">
-            Login
+            Zurück
           </button>
           <button
               type="button"
               class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+              @click="login"
               data-te-ripple-init
               data-te-ripple-color="light">
-            Save changes
+            Anmelden
           </button>
         </div>
       </div>
@@ -92,26 +89,28 @@
 import {onMounted} from "vue";
 import {Modal, Ripple, initTE} from "tw-elements";
 import {useForm} from "vee-validate";
-import FormButton from "@/components/util/FormButton.vue";
-import FormButtonInactive from "@/components/util/FormButtonInactive.vue";
 import axios from "axios";
+import {useUserStore} from "@/stores/user";
+const userStore = useUserStore();
 
 onMounted(() => initTE({Modal, Ripple}));
 
 async function login() {
   try {
     const response = await axios({
+      headers: {
+        "Content-Type": "application/json"
+      },
       method: 'post',
-      url: 'http://localhost:8080/api/auth',
-      body: {
+      url: 'http://localhost:8080/auth',
+      data: {
         "email": email.value,
         "password": password.value
       }
     })
+    userStore.updateUser(response.data);
   } catch (e) {
     console.log(e);
-    console.log('password: ' + password.value);
-    console.log('email: ' + email.value);
   }
 }
 
@@ -126,8 +125,8 @@ const validationSchema = {
   },
 
   password(value) {
-    if (value.trim().length < 8) {
-      return "Passwort muss mindestens 8 Zeichen lang sein"
+    if (value.trim().length < 1) {
+      return "Passwort muss mindestens 1 Zeichen lang sein"
     }
     return true;
   }

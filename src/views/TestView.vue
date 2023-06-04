@@ -3,8 +3,7 @@
     <LoginModal />
 
     <!--Navbar-->
-    <NavBar >
-    </NavBar>
+    <NavBar />
 
     <!--Modal-->
 
@@ -66,6 +65,7 @@ import TestimonialHorizontal from "@/components/util/elements/TestimonialHorizon
 import TimeLine from "@/components/home/TimeLine.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
 import LoginModal from "@/components/authentification/LoginModal.vue";
+
 </script>
 
 <style lang="scss" scoped>

@@ -33,6 +33,7 @@
         </div>
 
 
+
       </div>
     </div>
 
@@ -50,7 +51,6 @@
 </template>
 
 <script setup>
-import LoginModal from "@/components/authentification/LoginModal.vue";
 import LoginModalButton from "@/components/authentification/LoginModalButton.vue";
 
 function toggle() {
