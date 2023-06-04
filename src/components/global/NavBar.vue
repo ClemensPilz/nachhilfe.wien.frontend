@@ -2,10 +2,10 @@
   <nav class="sticky top-0 z-[1000]">
 
     <!--Container-->
-    <div class="w-full bg-lightPrimary shadow-xl px-4 md:pr-12 py-4 flex justify-between">
+    <div class="w-full bg-white shadow-xl px-4 md:pr-12 py-4 flex justify-between items-center">
 
       <!--Branding-->
-      <div class="text-xl text-accent">
+      <div class="text-xl font-bold text-white bg-primary p-1 px-2">
         Nachhilfe.Wien
       </div>
 
@@ -15,13 +15,23 @@
       </div>
 
       <!--Desktop-Links-->
-      <div class="hidden md:flex space-x-2">
-        <div class="text-right">
+      <div class="hidden md:flex md:items-center space-x-4">
+        <div class="routerLink">
           <RouterLink to="/test">Home</RouterLink>
         </div>
-        <div class="text-right">
-          <RouterLink to="/profile/123">World</RouterLink>
+        <div class="routerLink">
+          <RouterLink to="/profile/123">Profile</RouterLink>
         </div>
+        <div class="routerLink">
+          <RouterLink to="/messages">Messages</RouterLink>
+        </div>
+        <div class="routerLink">
+          <RouterLink to="/search">Search</RouterLink>
+        </div>
+        <div>
+          <LoginModalButton />
+        </div>
+
 
       </div>
     </div>
@@ -40,6 +50,9 @@
 </template>
 
 <script setup>
+import LoginModal from "@/components/authentification/LoginModal.vue";
+import LoginModalButton from "@/components/authentification/LoginModalButton.vue";
+
 function toggle() {
   const mobileLinks = document.getElementById("mobileLinks");
   mobileLinks.classList.toggle('hiddenLinks');
@@ -53,6 +66,11 @@ function toggle() {
 }
 
 .router-link-active {
-  @apply text-accent
+  @apply text-accent underline underline-offset-4
 }
+
+.routerLink {
+  @apply text-right text-primary font-bold
+}
+
 </style>

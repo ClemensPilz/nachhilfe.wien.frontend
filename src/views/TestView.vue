@@ -1,8 +1,12 @@
 <template>
   <div class="container max-w-6xl min-h-full mx-auto">
+    <LoginModal />
 
     <!--Navbar-->
-    <NavBar/>
+    <NavBar >
+    </NavBar>
+
+    <!--Modal-->
 
     <!--Top-Jumbo-->
     <section class="mb-12">
@@ -61,6 +65,7 @@ import FeatureBlock from "@/components/home/FeatureBlock.vue";
 import TestimonialHorizontal from "@/components/util/elements/TestimonialHorizontal.vue";
 import TimeLine from "@/components/home/TimeLine.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
+import LoginModal from "@/components/authentification/LoginModal.vue";
 </script>
 
 <style lang="scss" scoped>
