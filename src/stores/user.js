@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const router = useRouter();
   const user = ref({});
 
+//Saves userId to localStorage and returns 1 if successful, -1 if not
   async function auth(email, password) {
     try {
       const response = await axios({

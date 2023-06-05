@@ -159,8 +159,10 @@ const [email, password, firstname, lastname, username, birthdate, description]
 //Rest-Request
 const type = ref('Student');
 
+//Posts new user to backend and then authenticates the user with userStore.auth().
+//@todo: Save userId and token directly within register without the need for userStore.auth()
 async function register() {
-  const requestUrl = `http://localhost:8080/user/create${type.value}`
+  const requestUrl = `${userStore.url}/user/create${type.value}`
   if (meta.value.valid) {
     try {
       const response = await axios({
