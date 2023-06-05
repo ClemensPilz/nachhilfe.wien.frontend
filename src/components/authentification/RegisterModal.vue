@@ -1,14 +1,11 @@
 <template>
-  <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-    <div class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl">
+  <div v-if="props.isOpen" @click="closeModal" @keydown.enter="register"
+       class="fixed inset-0 flex items-center justify-center z-[1001] bg-black bg-opacity-50">
+    <div @click.stop="" class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl">
       <h2 class="text-2xl mb-4">{{ title }}</h2>
       <div>
         <slot/>
-
-        <!--Form-->
         <form>
-
-          <!--Input Fields-->
           <label for="email">E-Mail:</label>
           <input type="email" name="email" v-model="email" placeholder="E-Mail">
           <div class="error">{{ errors.email }}</div>
@@ -45,11 +42,10 @@
             </select>
           </div>
         </form>
-
-
       </div>
-      <div class="flex gap-2 justify-end">
 
+      <!--Buttons-->
+      <div class="flex gap-2 justify-end">
         <button class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl" @click="closeModal">Close</button>
         <button class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl" @click="register">Anmelden</button>
       </div>
@@ -61,8 +57,27 @@
 import {ref} from 'vue'
 import {useForm} from "vee-validate";
 import axios from "axios";
+import {useUserStore} from "@/stores/user";
+import {useRouter} from "vue-router";
 
-const type = ref('Student');
+const router = useRouter();
+const userStore = useUserStore();
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  isOpen: {
+    type: Boolean
+  }
+})
+
+const emit = defineEmits(['update:registerOpen'])
+
+const closeModal = () => {
+  emit('update:registerOpen', false)
+}
 
 // Validation
 const validationSchema = {
@@ -141,22 +156,8 @@ const {meta, errors, useFieldModel} = useForm({
 const [email, password, firstname, lastname, username, birthdate, description]
     = useFieldModel(['email', 'password', 'firstname', 'lastname', 'username', 'birthdate', 'description']);
 
-
-const props = defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  isOpen: {
-    type: Boolean
-  }
-})
-
-const emit = defineEmits(['update:registerOpen'])
-
-const closeModal = () => {
-  emit('update:registerOpen', false)
-}
+//Rest-Request
+const type = ref('Student');
 
 async function register() {
   const requestUrl = `http://localhost:8080/user/create${type.value}`
@@ -181,21 +182,30 @@ async function register() {
           }
         }
       })
-    console.log(response.data);
+      if (response.status === 201) {
+        try {
+          const res = await userStore.auth(email.value, password.value);
+          if (res.status === 1) {
+            await router.push(`/profile/${res.data.id}`);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
     } catch (e) {
       console.log(e);
     }
   } else {
     console.log('invalid!');
   }
-
-
 }
+
 </script>
 
 <style scoped>
+
 label {
-  @apply text-primary text-xs
+  @apply text-primary text-xs w-full
 }
 
 input {

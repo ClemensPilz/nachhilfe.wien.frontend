@@ -10,19 +10,19 @@
           alt=""/>
       <div class="flex flex-col justify-start p-6">
         <h1 class="mb-2.5 mt-0 text-5xl font-medium leading-tight">
-          {{ props.profile.username }}
+          {{ props.profile.profile.userName }}
 
         </h1>
 
         <div class="text-2xl text-secondary"
-             v-if="props.profile">{{ props.profile.firstname }} {{ props.profile.lastname }}
+             v-if="props.profile">{{ props.profile.firstName }} {{ props.profile.lastName }}
           <span
               class="inline-block whitespace-nowrap rounded-2xl text-accent bg-lightPrimary px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none"
           >{{ props.profile.avgRating }}</span
           >
         </div>
 
-        <div class="text-darkPrimary my-2">{{ props.profile.description }}</div>
+        <div class="text-darkPrimary my-2">{{ props.profile.profile.description }}</div>
 
         <div class="flex space-x-2 my-2">
 
@@ -46,7 +46,6 @@
 </template>
 
 <script setup>
-import {StarIcon} from '@heroicons/vue/24/solid';
 
 const props = defineProps({
   profile: Object

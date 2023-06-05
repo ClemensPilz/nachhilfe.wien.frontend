@@ -1,12 +1,11 @@
 <template>
 
-  <div class="container mx-auto flex flex-wrap">
+  <div class="container mx-auto max-w-6xl">
 
     <!--Nav-->
     <nav-bar />
 
     <PublicProfile :profile="profile"/>
-    <PublicComments :profile="profile"/>
 
   </div>
 
@@ -21,16 +20,18 @@ import PublicComments from "@/components/profile/PublicComments.vue";
 import axios from "axios";
 import {onMounted, ref} from "vue";
 import NavBar from "@/components/global/NavBar.vue";
+import {useUserStore} from "@/stores/user";
 
 const route = useRoute();
+const userStore = useUserStore();
 const userId = route.params.userId;
 const profile = ref();
 
-async function getUserProfile(userId) {
+async function getUserProfile(id) {
   try {
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:3000/user'
+      url: `${userStore.url}/user/${id}`
     });
     profile.value = response.data;
   } catch (e) {

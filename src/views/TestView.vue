@@ -6,8 +6,8 @@
     <NavBar>
       <div class="container mx-auto px-4">
         <div class="flex space-x-2">
-        <button class="py-2 px-4 text-primary text-sm uppercase" @click="openLoginModal">Login</button>
-        <button class="py-2 px-4 bg-primary text-white text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
+        <button class="py-2 px-4 text-primary text-xs md:text-sm uppercase" @click="openLoginModal">Login</button>
+        <button class="py-.5 px-3 md:py-2 md:px-4 bg-primary text-white text-xl text-xs md:text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
         </div>
       </div>
     </NavBar>

@@ -5,22 +5,17 @@
     <div class="w-full bg-white shadow-xl px-4 md:pr-12 py-4 flex justify-between items-center">
 
       <!--Branding-->
-      <div class="text-xl font-bold text-white bg-primary p-1 px-2">
+      <div class="hidden md:block text-xl font-bold text-white bg-primary p-1 px-2">
         Nachhilfe.Wien
       </div>
 
-      <!--Toggle-Button for Mobile Links-->
-      <div class="text-xl hidden text-accent md:hidden" @click="toggle"> //hidden for now
-        X
-      </div>
-
-      <!--Desktop-Links-->
-      <div class="hidden md:flex md:items-center space-x-4">
+      <!--Links-->
+      <div class="flex items-center space-x-4">
         <div class="routerLink">
-          <RouterLink to="/test">Home</RouterLink>
+          <RouterLink to="/">Home</RouterLink>
         </div>
         <div class="routerLink">
-          <RouterLink to="/profile/123">Profile</RouterLink>
+          <RouterLink :to="`/profile/${userId}`">Settings</RouterLink>
         </div>
         <div class="routerLink">
           <RouterLink to="/messages">Messages</RouterLink>
@@ -28,36 +23,31 @@
         <div class="routerLink">
           <RouterLink to="/search">Search</RouterLink>
         </div>
-
-
       </div>
 
-        <div>
-          <slot />
-        </div>
-
-
-
-    </div>
-
-    <!--Mobile-Links-->
-    <div class="w-ful flex-col p-2 bg-neutral-100 shadow-xl hiddenLinks md:hidden" id="mobileLinks">
-      <div class="text-right">
-        <RouterLink to="/test">Home</RouterLink>
-      </div>
-      <div class="text-right">
-        <RouterLink to="/profile/123">World</RouterLink>
+      <!--Slot for Register and Login Buttons-->
+      <div>
+        <slot/>
       </div>
     </div>
+
 
   </nav>
 </template>
 
 <script setup>
-function toggle() {
-  const mobileLinks = document.getElementById("mobileLinks");
-  mobileLinks.classList.toggle('hiddenLinks');
-}
+
+import {computed} from "vue";
+
+//get the user's ID from local storage
+const userId = computed(() => {
+  const id = localStorage.getItem('userId');
+  if (id) {
+    return id;
+  } else {
+    return 0;
+  }
+});
 
 </script>
 <style lang="scss" scoped>
@@ -71,7 +61,7 @@ function toggle() {
 }
 
 .routerLink {
-  @apply text-right text-primary font-bold
+  @apply text-right text-primary font-bold text-sm md:text-base
 }
 
 </style>
