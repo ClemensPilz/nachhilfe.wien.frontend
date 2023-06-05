@@ -5,15 +5,19 @@
     <!--Navbar-->
     <NavBar>
       <div class="container mx-auto px-4">
-        <button class="py-2 px-4 bg-secondary text-white text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
+        <div class="flex space-x-2">
+        <button class="py-2 px-4 text-primary text-sm uppercase" @click="openLoginModal">Login</button>
+        <button class="py-2 px-4 bg-primary text-white text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
+        </div>
       </div>
     </NavBar>
 
     <!--Modal-->
 
     <RegisterModal :isOpen="registerOpen" title="Neuen Account anlegen" @update:registerOpen="v => registerOpen = v">
-
     </RegisterModal>
+    <LoginModal :isOpen="loginOpen" title="Einloggen" @update:loginOpen="v => loginOpen = v">
+    </LoginModal>
     <!--Top-Jumbo-->
     <section class="mb-12">
       <HeroImage/>
@@ -78,9 +82,16 @@ import RegisterModal from "@/components/authentification/RegisterModal.vue";
 
 
 const registerOpen = ref(false)
+const loginOpen = ref(false)
 
 const openRegisterModal = () => {
   registerOpen.value = true
+}
+
+const openLoginModal = () => {
+  console.log('open')
+  loginOpen.value = true
+  console.log(loginOpen.value)
 }
 
 </script>

@@ -5,8 +5,8 @@
       <div>
         <slot/>
 
-        <!--          Form-->
-        <form class="loginForm">
+        <!--Form-->
+        <form>
 
           <!--Input Fields-->
           <label for="email">E-Mail:</label>
@@ -152,7 +152,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:registerOpen'], ['exit'])
+const emit = defineEmits(['update:registerOpen'])
 
 const closeModal = () => {
   emit('update:registerOpen', false)

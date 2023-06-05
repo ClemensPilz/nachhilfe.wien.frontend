@@ -1,99 +1,42 @@
 <template>
-  <div
-      data-te-modal-init
-      class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-      id="loginModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-    <div
-        data-te-modal-dialog-ref
-        class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
-      <div
-          class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-        <div
-            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-          <!--Modal title-->
-          <h5
-              class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-              id="exampleModalLabel">
-            Login
-          </h5>
-          <!--Close button-->
-          <button
-              type="button"
-              class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-              data-te-modal-dismiss
-              aria-label="Close">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-6 w-6">
-              <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
+  <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl">
+      <h2 class="text-2xl mb-4">{{ title }}</h2>
+      <div>
+        <slot/>
 
-        <!--Modal body-->
-        <div class="relative flex-auto p-4" data-te-modal-body-ref>
-          <form class="">
+        <!--Form-->
+        <form>
 
-            <div class="flex-col space-y-2 text-left items-center justify center">
-              <!--Input Fields-->
-              <label for="email">E-Mail: </label>
-              <input type="email" name="email" v-model="email" placeholder="E-Mail">
-              <div class="error">{{ errors.email }}</div>
+          <!--Input Fields-->
+          <label for="email">E-Mail:</label>
+          <input type="email" name="email" v-model="email" placeholder="E-Mail">
+          <div class="error">{{ errors.email }}</div>
 
-              <label for="password">Passwort: </label>
-              <input type="password" name="password" v-model="password" placeholder="Passwort">
-              <div class="error">{{ errors.password }}</div>
-            </div>
-          </form>
+          <label for="password">Passwort:</label>
+          <input type="password" name="password" v-model="password" placeholder="Passwort">
+          <div class="error">{{ errors.password }}</div>
 
-        </div>
+        </form>
 
-        <!--Modal footer-->
-        <div
-            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-          <button
-              type="button"
-              v-if="meta.valid"
-              @click=""
-              class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-              data-te-modal-dismiss
-              data-te-ripple-init
-              data-te-ripple-color="light">
-            Zurück
-          </button>
-          <button
-              type="button"
-              class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-              @click="login"
-              data-te-ripple-init
-              data-te-ripple-color="light">
-            Anmelden
-          </button>
-        </div>
+
+      </div>
+      <div class="flex gap-2 justify-end">
+
+        <button class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl" @click="closeModal">Close</button>
+        <button class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl" @click="login">Login</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {onMounted} from "vue";
-import {Modal, Ripple, initTE} from "tw-elements";
+import {ref} from 'vue'
 import {useForm} from "vee-validate";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
-const userStore = useUserStore();
 
-onMounted(() => initTE({Modal, Ripple}));
+const userStore = useUserStore();
 
 async function login() {
   try {
@@ -114,8 +57,9 @@ async function login() {
   }
 }
 
-const emits = defineEmits(['exit']);
+const type = ref('Student');
 
+// Validation
 const validationSchema = {
   email(value) {
     if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))) {
@@ -125,11 +69,12 @@ const validationSchema = {
   },
 
   password(value) {
-    if (value.trim().length < 1) {
-      return "Passwort muss mindestens 1 Zeichen lang sein"
+    if (value.trim().length < 8) {
+      return "Mindestens 8 Zeichen"
     }
     return true;
   }
+
 }
 
 const {meta, errors, useFieldModel} = useForm({
@@ -140,11 +85,39 @@ const {meta, errors, useFieldModel} = useForm({
   }
 })
 
-const [email, password] = useFieldModel(['email', 'password']);
+const [email, password]
+    = useFieldModel(['email', 'password']);
+
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  isOpen: {
+    type: Boolean
+  }
+})
+
+const emit = defineEmits(['update:loginOpen'])
+
+const closeModal = () => {
+  emit('update:loginOpen', false)
+}
 
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+label {
+  @apply text-primary text-xs
+}
 
+input {
+  @apply text-gray-200 m-2 py-1 px-2 rounded-lg focus:outline-none bg-gray-500 appearance-none
+}
+
+.error {
+  @apply text-xs text-red-600 italic
+}
 </style>

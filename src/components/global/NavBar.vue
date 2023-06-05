@@ -10,7 +10,7 @@
       </div>
 
       <!--Toggle-Button for Mobile Links-->
-      <div class="text-xl text-accent md:hidden" @click="toggle">
+      <div class="text-xl hidden text-accent md:hidden" @click="toggle"> //hidden for now
         X
       </div>
 
@@ -28,16 +28,16 @@
         <div class="routerLink">
           <RouterLink to="/search">Search</RouterLink>
         </div>
-        <div>
-          <LoginModalButton />
-        </div>
+
+
+      </div>
+
         <div>
           <slot />
         </div>
 
 
 
-      </div>
     </div>
 
     <!--Mobile-Links-->
@@ -54,8 +54,6 @@
 </template>
 
 <script setup>
-import LoginModalButton from "@/components/authentification/LoginModalButton.vue";
-
 function toggle() {
   const mobileLinks = document.getElementById("mobileLinks");
   mobileLinks.classList.toggle('hiddenLinks');
