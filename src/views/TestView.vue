@@ -11,8 +11,8 @@
 
     <!--Modal-->
 
-    <RegisterModal :isOpen="registerOpen" title="Modal Title" @update:register-open="v => registerOpen = v">
-      <p class="text-base">Modal Content</p>
+    <RegisterModal :isOpen="registerOpen" title="Neuen Account anlegen" @update:registerOpen="v => registerOpen = v">
+
     </RegisterModal>
     <!--Top-Jumbo-->
     <section class="mb-12">
