@@ -31,6 +31,9 @@
         <div>
           <LoginModalButton />
         </div>
+        <div>
+          <slot />
+        </div>
 
 
 

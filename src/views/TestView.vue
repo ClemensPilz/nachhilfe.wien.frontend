@@ -3,10 +3,17 @@
     <LoginModal />
 
     <!--Navbar-->
-    <NavBar />
+    <NavBar>
+      <div class="container mx-auto px-4">
+        <button class="py-2 px-4 bg-secondary text-white text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
+      </div>
+    </NavBar>
 
     <!--Modal-->
 
+    <RegisterModal :isOpen="registerOpen" title="Modal Title" @update:register-open="v => registerOpen = v">
+      <p class="text-base">Modal Content</p>
+    </RegisterModal>
     <!--Top-Jumbo-->
     <section class="mb-12">
       <HeroImage/>
@@ -65,6 +72,16 @@ import TestimonialHorizontal from "@/components/util/elements/TestimonialHorizon
 import TimeLine from "@/components/home/TimeLine.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
 import LoginModal from "@/components/authentification/LoginModal.vue";
+import {ref} from "vue";
+import RegisterModal from "@/components/authentification/RegisterModal.vue";
+
+
+
+const registerOpen = ref(false)
+
+const openRegisterModal = () => {
+  registerOpen.value = true
+}
 
 </script>
 
