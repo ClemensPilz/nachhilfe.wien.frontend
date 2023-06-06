@@ -3,7 +3,7 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-  <div class="messanger p-4 bg-white h-screen overflow-hidden">
+  <div class="messenger p-4 bg-white h-screen overflow-hidden">
     <div class="flex">
       <div class="basis-2/6 pt-3 bg-white border-r border-slate-100">
         <div class="">
@@ -131,7 +131,7 @@
             </div>
           </div> <!-- End message area -->
 
-          <div class="bg-gray-100 fixed bottom-0 w-full pl-4">
+          <div class="bg-mainBlue-100 fixed bottom-0 w-full pl-4">
             <textarea class="w-full bg-gray-100 pt-3 h-12 focus:outline-none font-light"
                       placeholder="Write a message"></textarea>
           </div> <!-- Footer message -->
