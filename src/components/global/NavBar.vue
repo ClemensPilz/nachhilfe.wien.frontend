@@ -21,7 +21,7 @@
           <RouterLink to="/messages">Messages</RouterLink>
         </div>
         <div class="routerLink">
-          <RouterLink to="/search">Search</RouterLink>
+          <RouterLink to="/test">Test</RouterLink>
         </div>
       </div>
 
