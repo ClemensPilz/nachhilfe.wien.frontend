@@ -6,8 +6,8 @@
     <NavBar>
       <div class="container mx-auto px-4">
         <div class="flex space-x-2">
-          <button class="py-2 px-4 text-primary text-xs md:text-sm uppercase" @click="openLoginModal">Login</button>
-          <button class="py-.5 px-3 md:py-2 md:px-4 bg-primary text-white text-xl text-xs md:text-sm rounded-xl uppercase" @click="openRegisterModal">Register</button>
+          <ButtonSecondary text="Login" @click="openLoginModal" />
+          <ButtonPrimary text="Register" @click="openRegisterModal" />
         </div>
       </div>
     </NavBar>
@@ -77,6 +77,8 @@ import FooterBar from "@/components/global/FooterBar.vue";
 import LoginModal from "@/components/authentification/LoginModal.vue";
 import {ref} from "vue";
 import RegisterModal from "@/components/authentification/RegisterModal.vue";
+import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const registerOpen = ref(false)
 const loginOpen = ref(false)

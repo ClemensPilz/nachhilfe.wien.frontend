@@ -13,6 +13,7 @@ module.exports = {
                 darkPrimary: '#455A64',
                 lightPrimary: '#CFD8DC',
                 accent: '#FF5722',
+                darkAccent: '#B3340F',
                 primaryText: '#212121',
                 secondaryText: '#757575',
                 divider: '#BDBDBD'

@@ -5,13 +5,7 @@
         <div class="text-white">
           <h2 class="mb-4 text-4xl bg-primary px-2 font-semibold text-white">nachhilfe.wien</h2>
           <h4 class="mb-6 text-xl font-semibold text-lightPrimary">Wir bringen dich auf Zack!</h4>
-          <button
-              type="button"
-              class="rounded-xl bg-accent text-white p-4 py-2"
-              data-te-ripple-init
-              data-te-ripple-color="light">
-            Termin vereinbaren
-          </button>
+          <ButtonAccent text="Termin vereinbaren" />
         </div>
       </div>
     </div>
@@ -20,6 +14,7 @@
 
 <script setup>
 
+import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
 </script>
 
 <style lang="scss" scoped>
