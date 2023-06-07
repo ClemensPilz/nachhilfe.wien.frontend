@@ -25,6 +25,7 @@ export const useUserStore = defineStore('user', () => {
       });
       if (response.status === 200)  {
       user.value = response.data;
+      console.log(response.data);
       localStorage.setItem("userId", response.data.id);
       return { status: 1, data: response.data};
       } else {

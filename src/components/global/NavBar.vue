@@ -15,10 +15,10 @@
           <RouterLink to="/">Home</RouterLink>
         </div>
         <div class="routerLink">
-          <RouterLink :to="`/profile/${userId}`">Settings</RouterLink>
+          <RouterLink :to="`/profile/${userId}`">Profile</RouterLink>
         </div>
         <div class="routerLink">
-          <RouterLink to="/messages">Messages</RouterLink>
+          <RouterLink to="/inbox">Inbox</RouterLink>
         </div>
         <div class="routerLink">
           <RouterLink to="/test">Test</RouterLink>
