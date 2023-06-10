@@ -12,6 +12,8 @@
       </div>
     </NavBar>
 
+
+
     <!--Modal-->
     <RegisterModal :isOpen="registerOpen" title="Neuen Account anlegen" @update:registerOpen="v => registerOpen = v" />
 

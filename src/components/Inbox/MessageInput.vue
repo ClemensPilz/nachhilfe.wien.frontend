@@ -7,7 +7,7 @@
       {{ props.content }}
       <slot />
     </p>
-    <button type="button" :class="props.buttonBg"
+    <button type="button" :class="props.buttonBg" @click="$emit('send')"
             class="inline-block rounded-xl px-6 py-2 text-xs font-medium uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:bg-darkPrimary focus:outline-none focus:ring-0"
             data-te-ripple-init
             data-te-ripple-color="light">
@@ -29,6 +29,8 @@ const props = defineProps({
   buttonText: String,
   buttonBg: String
 })
+
+const emits = defineEmits(['send'])
 
 </script>
 
