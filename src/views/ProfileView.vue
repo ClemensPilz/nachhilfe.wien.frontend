@@ -5,8 +5,10 @@
     <!--Nav-->
     <nav-bar />
 
-    <PublicProfile :profile="profile"/>
+    <PublicProfile :profile="profile" :key="userId"/>
 
+    <!--Link to userprofile 2 for testing purposes-->
+    <ButtonAccent text="TestProfile" @click="test"></ButtonAccent>
   </div>
 
 
@@ -18,14 +20,21 @@ import {useRoute} from "vue-router";
 import PublicProfile from "@/components/profile/PublicProfile.vue";
 import PublicComments from "@/components/profile/PublicComments.vue";
 import axios from "axios";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import NavBar from "@/components/global/NavBar.vue";
 import {useUserStore} from "@/stores/user";
+import router from "@/router";
+import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
 const userId = route.params.userId;
 const profile = ref();
+
+async function test() {
+  await router.push('/profile/2');
+  await getUserProfile(2);
+}
 
 async function getUserProfile(id) {
   try {
@@ -40,6 +49,7 @@ async function getUserProfile(id) {
 }
 
 onMounted(() => getUserProfile(userId));
+
 
 </script>
 

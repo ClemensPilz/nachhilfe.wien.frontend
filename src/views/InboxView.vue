@@ -9,6 +9,7 @@
       <div class="sticky h-fit col-span-3 top-20">
         <div class="flex flex-col">
           <ConversationThumb v-for="conversation in conversations"
+                             :key="conversation.conversationId"
                              :users="conversation.users"
                              @click="getMessages(conversation.conversationId)"/>
         </div>
@@ -42,7 +43,6 @@
                  class="w-full border border-lightPrimary p-4"
                  v-model="messageText">
         </MessageInput>
-        <div id="pageEnd"></div>
 
       </div>
 
@@ -54,18 +54,21 @@
 <script setup>
 
 import NavBar from "@/components/global/NavBar.vue";
-import {onMounted, onUpdated, ref, watch} from "vue";
+import {onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
 import {useUserStore} from "@/stores/user";
 import MessageInput from "@/components/Inbox/MessageInput.vue";
+import {useConversationStore} from "@/stores/conversation";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
 const conversations = ref(null);
 const messages = ref(null);
 const messageText = ref('');
+const conversationStore = useConversationStore();
+
 
 //Gets an array of conversations from API
 async function getConversations(userId) {
@@ -104,7 +107,7 @@ async function sendMessage() {
       data: {
         "title": "title",
         "content": messageText.value,
-        "senderId": userStore.user.id
+        "senderId": userStore.userId
       }
     })
 
@@ -131,14 +134,30 @@ function scroll() {
   document.getElementById('pageEnd').scrollIntoView();
 }
 
-onUpdated(() => {
-  scroll();
-})
+async function initInboxView() {
+  try {
+
+    await getConversations(userStore.userId);
+    if (conversationStore.getActiveConversationInInbox() !== -1) {
+      await getMessages(conversationStore.getActiveConversationInInbox());
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// onUpdated(() => {
+//   scroll();
+// })
 
 onMounted(() => {
-      getConversations(userStore.user.id)
+      initInboxView();
     }
 );
+
+onUnmounted(() => {
+  conversationStore.setActiveConversationInInbox(conversationId);
+})
 
 </script>
 
