@@ -136,9 +136,9 @@ function scroll() {
 
 async function initInboxView() {
   try {
-
     await getConversations(userStore.userId);
     if (conversationStore.getActiveConversationInInbox() !== -1) {
+      console.log(conversationStore.getActiveConversationInInbox())
       await getMessages(conversationStore.getActiveConversationInInbox());
     }
   } catch (e) {
@@ -156,7 +156,7 @@ onMounted(() => {
 );
 
 onUnmounted(() => {
-  conversationStore.setActiveConversationInInbox(conversationId);
+  conversationStore.setActiveConversationInInbox(conversationId.value);
 })
 
 </script>
