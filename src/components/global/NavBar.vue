@@ -23,6 +23,9 @@
         <div class="routerLink">
           <RouterLink to="/test">Test</RouterLink>
         </div>
+        <div class="routerLink">
+          <RouterLink to="/search">Search</RouterLink>
+        </div>
       </div>
 
       <!--Slot for Register and Login Buttons-->

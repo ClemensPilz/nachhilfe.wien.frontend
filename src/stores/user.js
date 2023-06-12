@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 import axios from "axios";
 
 export const useUserStore = defineStore('user', () => {
@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
     return user.value.id;
   })
 
-//Saves userId to localStorage and returns 1 if successful, -1 if not
+//Saves userId to localStorage, userinfos to store and returns 1 if successful, -1 if not
   async function auth(email, password) {
     try {
       const response = await axios({
