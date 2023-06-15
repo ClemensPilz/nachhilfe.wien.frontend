@@ -162,7 +162,8 @@ const type = ref('Student');
 //Posts new user to backend and then authenticates the user with userStore.auth().
 //@todo: Save userId and token directly within register without the need for userStore.auth()
 async function register() {
-  const requestUrl = `${userStore.url}/user/create${type.value}`
+  const requestUrl = `${userStore.url}/auth/create${type.value}`
+
   if (meta.value.valid) {
     try {
       const response = await axios({
@@ -184,11 +185,12 @@ async function register() {
           }
         }
       })
+
       if (response.status === 201) {
         try {
-          const res = await userStore.auth(email.value, password.value);
+          const res = await userStore.auth({'email': email.value, 'password': password.value});
           if (res.status === 1) {
-            await router.push(`/profile/${res.data.id}`);
+            await router.push(`/profile/${res.data.userId}`);
           }
         } catch (e) {
           console.log(e);
@@ -197,6 +199,7 @@ async function register() {
     } catch (e) {
       console.log(e);
     }
+
   } else {
     console.log('invalid!');
   }

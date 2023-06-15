@@ -86,9 +86,9 @@ const type = ref('Student');
 
 async function login() {
   try {
-    const res = await userStore.auth(email.value, password.value);
-    if (res.status === 1) {
-      await router.push(`/profile/${res.data.id}`);
+    const response = await userStore.auth({'email': email.value, 'password': password.value});
+    if (response.status === 1) {
+      await router.push(`/profile/${response.data.userId}`);
     }
   } catch (e) {
     console.log(e);

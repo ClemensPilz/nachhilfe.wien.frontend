@@ -8,15 +8,22 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import {onMounted} from "vue";
+import axios from "axios";
+import {useUserStore} from "@/stores/user";
+
+const userStore = useUserStore();
 
 
 async function initApp() {
-  console.log('init');
-  if (localStorage.getItem('userId')) {
-    const userId = localStorage.getItem('userId');
+  if (localStorage.getItem('token')) {
+    const token = localStorage.getItem('token');
 
-    //use Token to authentificate
-    //save Enums in appStore and userInformation in userStore
+    try {
+      const response = await userStore.auth({'token': token});
+
+    } catch (e) {
+      console.log(e);
+    }
 
   }
 }
