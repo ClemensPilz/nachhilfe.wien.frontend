@@ -7,8 +7,6 @@
 
     <PublicProfile :profile="profile" :key="userId"/>
 
-    <!--Link to userprofile 2 for testing purposes-->
-    <ButtonAccent text="TestProfile" @click="test"></ButtonAccent>
   </div>
 
 
@@ -30,11 +28,6 @@ const route = useRoute();
 const userStore = useUserStore();
 const userId = route.params.userId;
 const profile = ref();
-
-async function test() {
-  await router.push('/profile/2');
-  await getUserProfile(2);
-}
 
 async function getUserProfile(id) {
   try {
