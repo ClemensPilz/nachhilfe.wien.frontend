@@ -39,6 +39,9 @@ async function test() {
 async function getUserProfile(id) {
   try {
     const response = await axios({
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'get',
       url: `${userStore.url}/user/${id}`
     });

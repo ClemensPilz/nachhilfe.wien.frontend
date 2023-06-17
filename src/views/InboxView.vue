@@ -54,7 +54,7 @@
 <script setup>
 
 import NavBar from "@/components/global/NavBar.vue";
-import {onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {onBeforeMount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
@@ -87,6 +87,9 @@ async function getConversations(userId) {
 async function getMessages(id) {
   try {
     const response = await axios({
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'get',
       url: `${userStore.url}/conversation/${id}`
     });
@@ -150,8 +153,13 @@ async function initInboxView() {
 //   scroll();
 // })
 
-onMounted(() => {
-      initInboxView();
+onMounted(async () => {
+      const unwatch = watch(() => userStore.isAuth, async (newVal) => {
+        if (newVal) {
+          await initInboxView();
+          unwatch();
+        }
+      }, {immediate: true});
     }
 );
 

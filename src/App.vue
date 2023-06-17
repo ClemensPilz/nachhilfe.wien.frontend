@@ -2,7 +2,7 @@
 <template>
   <header></header>
 
-  <RouterView />
+  <RouterView :key="$route.fullPath" />
 </template>
 
 <script setup>
@@ -10,6 +10,7 @@ import { RouterView } from 'vue-router'
 import {onMounted} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
+import router from "@/router";
 
 const userStore = useUserStore();
 
@@ -25,6 +26,8 @@ async function initApp() {
       console.log(e);
     }
 
+  } else {
+    await router.push('/');
   }
 }
 

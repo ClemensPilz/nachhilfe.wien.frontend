@@ -162,7 +162,7 @@ const type = ref('Student');
 //Posts new user to backend and then authenticates the user with userStore.auth().
 //@todo: Save userId and token directly within register without the need for userStore.auth()
 async function register() {
-  const requestUrl = `${userStore.url}/auth/create${type.value}`
+  const requestUrl = `${userStore.url}/auth/create-${type.value.toLowerCase()}`
 
   if (meta.value.valid) {
     try {
