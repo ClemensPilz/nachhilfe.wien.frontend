@@ -1,6 +1,5 @@
 <template>
   <div class="container max-w-6xl min-h-full mx-auto">
-    <LoginModal />
 
     <!--Navbar-->
     <NavBar>
@@ -12,9 +11,7 @@
       </div>
     </NavBar>
 
-
-
-    <!--Modal-->
+    <!--Modals-->
     <RegisterModal :isOpen="registerOpen" title="Neuen Account anlegen" @update:registerOpen="v => registerOpen = v" />
 
     <LoginModal :isOpen="loginOpen" title="Einloggen" @update:loginOpen="v => loginOpen = v" />

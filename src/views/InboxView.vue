@@ -153,8 +153,10 @@ async function initInboxView() {
 //   scroll();
 // })
 
+// This function sets up a watcher that listens for a change in the isAuthenticated-variable in userStore. This is
+// necessary because initInboxView() will only work once the appropriate user information has been fetched.
 onMounted(async () => {
-      const unwatch = watch(() => userStore.isAuth, async (newVal) => {
+      const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
         if (newVal) {
           await initInboxView();
           unwatch();

@@ -1,5 +1,7 @@
 <template>
 
+  <ReviewModal :isOpen="reviewModalOpen" title="Review verfassen" @update:reviewModalOpen="v => reviewModalOpen = v" />
+
   <!--Container-->
   <div class="mt-10">
 
@@ -35,7 +37,7 @@
         <div
             class="order-3 px-32 sm:px-40 md:order-3 flex flex-col md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-6">
           <ButtonPrimary text="Termin"/>
-          <ButtonSecondary text="Review "/>
+          <ButtonSecondary text="Review" @click="reviewModalOpen = true"/>
         </div>
 
       </div>
@@ -57,7 +59,7 @@
             {{ props.profile.profile.description }}
           </p>
 
-          <ButtonAccent text="Nachricht senden" @click="sendMessage"></ButtonAccent>
+          <ButtonAccent text="Nachricht senden" @click="sendMessage" />
 
 
         </div>
@@ -74,16 +76,18 @@
 
 <script setup>
 
-import NavBar from '@/components/global/NavBar.vue'
+
 import ButtonPrimary from '@/components/util/elements/ButtonPrimary.vue'
 import {Ripple, initTE} from "tw-elements";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
 import {useConversationStore} from "@/stores/conversation";
 import router from "@/router";
+import ReviewModal from "@/components/profile/ReviewModal.vue";
+
 
 const props = defineProps({
   "profile": Object
@@ -91,11 +95,13 @@ const props = defineProps({
 
 const userStore = useUserStore();
 
+const reviewModalOpen = ref(false);
+
 async function sendMessage() {
   try {
     const response = await axios({
       method: 'post',
-      url: `${userStore.url}/conversation/${userStore.user.id}/${props.profile.id}`
+      url: `${userStore.url}/conversation/${userStore.userId}/${props.profile.id}`
     })
     const conversationStore = useConversationStore();
     conversationStore.activeConversationInInbox = response.data.conversationId;

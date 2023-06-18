@@ -8,9 +8,9 @@ export const useUserStore = defineStore('user', () => {
     const url = 'http://localhost:8080'
     const router = useRouter();
     const user = ref({});
-    const _userId = ref();
-    const userId = computed(() => _userId.value);
-    const isAuth = ref(false);
+    const storeUserId = ref();
+    const userId = computed(() => storeUserId.value);
+    const isAuthenticated = ref(false);
 
     async function tokenAuth(token) {
 
@@ -52,10 +52,10 @@ export const useUserStore = defineStore('user', () => {
             if (response.status === 200) {
                 console.log(response.data);
                 user.value = response.data;
-                _userId.value = response.data.userId;
+                storeUserId.value = response.data.userId;
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem("userId", response.data.userId);
-                isAuth.value = true;
+                isAuthenticated.value = true;
                 return {status: 1, data: response.data};
 
             } else {
@@ -69,5 +69,5 @@ export const useUserStore = defineStore('user', () => {
     }
 
 
-    return {userId, user, url, auth, isAuth}
+    return {userId, user, url, auth, isAuthenticated}
 })
