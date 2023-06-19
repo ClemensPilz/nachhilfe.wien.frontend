@@ -124,11 +124,16 @@ async function postReview() {
         }
       });
       console.log(response.data);
+      if(response.status === 201) {
+        alert('Vielen Dank für dein Review!');
+        closeModal();
+      } else {
+        alert('Fehler beim Absenden des Reviews!');
+        closeModal();
+      }
     } catch (e) {
       console.log(e)
     }
-
-    console.log("valid!");
   } else {
     console.log("invalid");
   }

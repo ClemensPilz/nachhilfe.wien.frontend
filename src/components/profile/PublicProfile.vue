@@ -103,8 +103,11 @@ const reviewModalOpen = ref(false);
 async function sendMessage() {
   try {
     const response = await axios({
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
       method: "post",
-      url: `${userStore.url}/conversation/${userStore.userId}/${props.profile.id}`,
+      url: `${userStore.url}/conversation/create-conversation/${userStore.userId}/${props.profile.id}`,
     });
     const conversationStore = useConversationStore();
     conversationStore.activeConversationInInbox = response.data.conversationId;

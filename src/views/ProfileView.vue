@@ -39,6 +39,8 @@ async function getUserProfile(id) {
       url: `${userStore.url}/user/${id}`
     });
     profile.value = response.data;
+    console.log('---')
+    console.log(profile.value.feedbacks)
   } catch (e) {
     console.log(e);
   }
