@@ -66,7 +66,7 @@
             {{ props.profile.profile.description }}
           </p>
 
-          <ButtonAccent text="Nachricht senden" @click="sendMessage" />
+          <ButtonAccent text="Nachricht senden" @click="appStore.sendMessage(props.profile.id)" />
         </div>
         <div
           class="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50"
@@ -90,32 +90,19 @@ import { useConversationStore } from "@/stores/conversation";
 import router from "@/router";
 import ReviewModal from "@/components/profile/ReviewModal.vue";
 import {useRoute} from "vue-router";
+import {useAppStore} from "@/stores/app";
 
 const props = defineProps({
   profile: Object,
 });
+
 const route = useRoute();
 
 const userStore = useUserStore();
+const appStore = useAppStore();
 
 const reviewModalOpen = ref(false);
 
-async function sendMessage() {
-  try {
-    const response = await axios({
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      },
-      method: "post",
-      url: `${userStore.url}/conversation/create-conversation/${userStore.userId}/${props.profile.id}`,
-    });
-    const conversationStore = useConversationStore();
-    conversationStore.activeConversationInInbox = response.data.conversationId;
-    await router.push("/inbox");
-  } catch (e) {
-    console.log(e);
-  }
-}
 
 onMounted(() => initTE({ Ripple }));
 </script>

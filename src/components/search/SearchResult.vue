@@ -15,7 +15,7 @@
           {{ coaching.subject }}: {{ coaching.price }}
         </div>
       </div>
-      <ButtonAccent text="Contact" class="w-fit my-3"/>
+      <ButtonAccent text="Contact" class="w-fit my-3" @click="$emit('contact')"/>
     </div>
 
     <!--Image-Part-->
@@ -36,6 +36,8 @@ const props = defineProps({
   'rating': String,
   'coachings': Array
 })
+
+const emits = defineEmits(['contact']);
 </script>
 
 <style lang="scss" scoped>

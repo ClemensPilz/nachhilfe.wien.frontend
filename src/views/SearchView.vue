@@ -2,23 +2,15 @@
   <div class="container mx-auto max-w-6xl">
     <nav-bar/>
 
-    <div class="container min-h-screen max-w-lg mx-auto flex flex-col justify-center mt-4">
+    <div class="searchResult">
       <SearchResult
-          name="Hansi Huber"
-          description="Student in Wien, will etwas dazuverdienen und mein Wissen weitergeben"
-          :coachings="[
-              {
-                'subject': 'Mathematik',
-                'price': '19 €'
-              },
-              {
-                'subject': 'Deutsch',
-                'price': '17 €'
-              }
-          ]"
-
-
+          v-for="teacher in teachersArray"
+          @contact="appStore.sendMessage(teacher.teacherId) "
+          :name="`${teacher.firstName} ${teacher.lastName}`"
+          :description="`${teacher.description}`"
+          :coachings="teacher.coachings"
       />
+
       <SearchResult/>
       <SearchResult/>
       <SearchResult/>
@@ -34,8 +26,11 @@ import NavBar from "@/components/global/NavBar.vue";
 import {onMounted, ref, watch} from "vue";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
+import {useAppStore} from "@/stores/app";
 
 const userStore = useUserStore();
+const appStore = useAppStore();
+
 const teachersArray = ref();
 
 async function getAllTeachers() {
@@ -70,5 +65,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+
+.searchResult {
+  @apply container min-h-screen max-w-lg mx-auto flex flex-col justify-center mt-4
+}
 
 </style>
