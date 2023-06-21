@@ -26,6 +26,9 @@
         <div class="routerLink">
           <RouterLink to="/search">Search</RouterLink>
         </div>
+        <div class="routerLink">
+          <RouterLink to="/about">About Us</RouterLink>
+        </div>
       </div>
 
       <!--Slot for Register and Login Buttons-->
