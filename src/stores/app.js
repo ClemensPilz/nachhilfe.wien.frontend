@@ -9,6 +9,7 @@ export const useAppStore = defineStore('app', () => {
     const conversationStore = useConversationStore();
     const userStore = useUserStore();
     const subjects = ref({});
+    const levels = ["VOLKSSCHULE", "MITTELSCHULE"]
 
     async function sendMessage(recipientId) {
         try {
@@ -28,5 +29,5 @@ export const useAppStore = defineStore('app', () => {
     }
 
 
-    return { sendMessage, subjects }
+    return { sendMessage, subjects, levels }
 })
