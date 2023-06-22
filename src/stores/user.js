@@ -2,6 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import {useAppStore} from "@/stores/app";
 
 export const useUserStore = defineStore("user", () => {
   const url = "http://localhost:8080";
@@ -10,6 +11,8 @@ export const useUserStore = defineStore("user", () => {
   const storeUserId = ref();
   const userId = computed(() => storeUserId.value);
   const isAuthenticated = ref(false);
+
+  const appStore = useAppStore();
 
   async function tokenAuth(token) {}
 
@@ -49,6 +52,7 @@ export const useUserStore = defineStore("user", () => {
         storeUserId.value = response.data.userId;
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
+        appStore.subjects = response.data.availableSubjects;
         isAuthenticated.value = true;
         return { status: 1, data: response.data };
       } else {

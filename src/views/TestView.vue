@@ -26,6 +26,32 @@
 
     <div>{{base64}}</div>
 
+    <br>
+    <section id="coachingSelect">
+
+      <div class="max-w-xl p-4 bg-lightPrimary text-primary">
+        <div class="w-full">
+          <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
+            <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
+          </select>
+          <div class="text-xl text-accent">{{selectedSubject}}</div>
+
+          <!--2 dropdowns for subject and level-->
+          <!--At auth, save subjects in appstore-->
+          <!--Now, get available subjects-->
+          <!--Use v-for to load these as options-->
+
+
+        </div>
+
+        <div class="w-full">
+          Slider to choose hourly rate
+        </div>
+      </div>
+
+
+    </section>
+
   </div>
 </template>
 
@@ -47,6 +73,8 @@ const userStore = useUserStore();
 const appStore = useAppStore();
 const image = ref();
 const base64 = ref();
+const subjects = computed(() => appStore.subjects);
+const selectedSubject = ref();
 
 function openCoachingForm() {
 
@@ -81,6 +109,7 @@ async function offerCoaching(newCoachingsArray) {
     console.log('Error trying to post new coachings: ' + e.toString());
   }
 }
+
 
 onMounted(() => initTE({Ripple}));
 </script>

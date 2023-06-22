@@ -8,6 +8,7 @@ export const useAppStore = defineStore('app', () => {
 
     const conversationStore = useConversationStore();
     const userStore = useUserStore();
+    const subjects = ref({});
 
     async function sendMessage(recipientId) {
         try {
@@ -27,6 +28,5 @@ export const useAppStore = defineStore('app', () => {
     }
 
 
-
-    return { sendMessage }
+    return { sendMessage, subjects }
 })
