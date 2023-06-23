@@ -15,8 +15,8 @@
 <script setup>
 
 import {useRoute} from "vue-router";
-import PublicProfile from "@/components/profile/PublicProfile.vue";
-import PublicComments from "@/components/profile/PublicComments.vue";
+import PublicProfile from "@/components/profile/public/PublicProfile.vue";
+import PublicComments from "@/components/profile/public/PublicComments.vue";
 import axios from "axios";
 import {computed, onMounted, ref} from "vue";
 import NavBar from "@/components/global/NavBar.vue";
@@ -36,11 +36,11 @@ async function getUserProfile(id) {
         "Authorization": `Bearer ${localStorage.getItem('token')}`
       },
       method: 'get',
-      url: `${userStore.url}/user/${id}`
+      url: `${userStore.url}/teacher/find-teacher/${id}`
     });
     profile.value = response.data;
     console.log('---')
-    console.log(profile.value.feedbacks)
+    console.log(profile.value)
   } catch (e) {
     console.log(e);
   }
