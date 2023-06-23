@@ -1,5 +1,5 @@
 <template>
-      <div class="w-full">
+      <div class="w-full bg-gray-300">
         <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
           <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
         </select>
@@ -16,9 +16,7 @@
 
       </div>
 
-      <div class="w-full">
-        Slider to choose hourly rate
-      </div>
+
 
 </template>
 
@@ -37,6 +35,7 @@ const selectedSubject = ref();
 const levels = computed(() => appStore.levels);
 const selectedLevel = ref();
 const selectedRate = ref();
+const emit = defineEmits(['update']);
 
 async function validateCoaching() {
   if (selectedSubject.value && selectedLevel.value && selectedRate.value &&
@@ -67,8 +66,10 @@ async function postCoaching(newCoaching) {
       }
     });
     console.log(response);
+    emit('update');
   } catch (e) {
     console.log('Error trying to post new coachings: ' + e.toString());
+    alert('Fehlgeschlagen – existiert bereits ein Coaching zu diesem Fach?')
   }
 }
 

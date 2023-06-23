@@ -2,7 +2,7 @@
 
   <div class="w-full my-2 flex flex-wrap justify-center gap-2">
     <div v-for="coaching in coachings" :key="`coaching${coaching.coachingId}`"
-         class="flex flex-col items-center p-2 gap-1">
+         class="flex flex-col items-center p-2 gap-1" :data-coachingId="coaching.coachingId" @click="console.log(coaching.coachingId)">
       <div>{{ coaching.subject }}</div>
       <div>{{ coaching.level }}</div>
       <div>{{ coaching.rate }}€ / Stunde</div>
@@ -13,9 +13,9 @@
     <!--coachings from api-->
   </div>
 
-  <CoachingForm>
+  <CoachingForm @update="getCoachingsFromApi" />
 
-  </CoachingForm>
+
 
 
 </template>
@@ -29,7 +29,7 @@
 //get all coachings again
 
 import CoachingForm from "@/components/profile/coaching/CoachingForm.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
 import {useAppStore} from "@/stores/app";
@@ -53,7 +53,15 @@ async function getCoachingsFromApi() {
   }
 }
 
-onMounted(() => getCoachingsFromApi());
+onMounted(async () => {
+      const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
+        if (newVal) {
+          await getCoachingsFromApi();
+          unwatch();
+        }
+      }, {immediate: true});
+    }
+);
 
 </script>
 

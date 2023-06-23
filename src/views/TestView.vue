@@ -4,8 +4,6 @@
   <div class="container max-w-6xl mx-auto text-center bg-white">
     <NavBar class="md:mb-12"/>
 
-    <h1 class="text-2xl font-bold text-primary mb-4">Welche Fächer bietest du an?</h1>
-    <ButtonAccent text="Fach hinzufügen" @click="openCoachingForm"/>
 
     <div class="grid grid-rows-2 grid-cols-4 mt-4">
       <div class="col-span-4 md:col-span-2 bg-blue-400">
@@ -27,33 +25,8 @@
     <div>{{ base64 }}</div>
 
     <br>
-    <!--<section id="coachingSelect">-->
 
-    <!--  <div class="max-w-xl p-4 bg-lightPrimary text-primary">-->
-    <!--    <div class="w-full">-->
-    <!--      <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">-->
-    <!--        <option v-for="subject in subjects" :value="subject">{{ subject }}</option>-->
-    <!--      </select>-->
-    <!--      <div class="text-xl text-accent">{{ selectedSubject }}</div>-->
-
-    <!--      <select id="levelSelect" name="levelSelect" v-model="selectedLevel">-->
-    <!--        <option v-for="level in levels" :value="level">{{ level }}</option>-->
-    <!--      </select>-->
-    <!--      <div class="text-xl text-accent">{{ selectedLevel }}</div>-->
-
-    <!--      <input type="text" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">-->
-
-    <!--      <button @click="validateCoaching">Send new coaching</button>-->
-
-    <!--    </div>-->
-
-    <!--    <div class="w-full">-->
-    <!--      Slider to choose hourly rate-->
-    <!--    </div>-->
-    <!--  </div>-->
-
-
-    <!--</section>-->
+    <h1 class="text-4xl text-accent">Manage Coachings</h1>
 
     <CoachingSettings />
 

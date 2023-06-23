@@ -74,6 +74,9 @@ const conversationStore = useConversationStore();
 async function getConversations(userId) {
   try {
     const response = await axios({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'get',
       url: `${userStore.url}/conversation/user/${userId}`
     });
@@ -105,8 +108,11 @@ async function getMessages(id) {
 async function sendMessage() {
   try {
     const response = await axios({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'post',
-      url: `${userStore.url}/message/sendMessage/${conversationId.value}`,
+      url: `${userStore.url}/message/send-message/${conversationId.value}`,
       data: {
         "title": "title",
         "content": messageText.value,
