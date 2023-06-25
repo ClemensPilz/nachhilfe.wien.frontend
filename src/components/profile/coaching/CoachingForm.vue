@@ -1,21 +1,20 @@
 <template>
-      <div class="w-full bg-gray-300">
-        <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
-          <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
-        </select>
-        <div class="text-xl text-accent">{{ selectedSubject }}</div>
+  <div class="w-full bg-gray-300">
+    <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
+      <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
+    </select>
+    <div class="text-xl text-accent">{{ selectedSubject }}</div>
 
-        <select id="levelSelect" name="levelSelect" v-model="selectedLevel">
-          <option v-for="level in levels" :value="level">{{ level }}</option>
-        </select>
-        <div class="text-xl text-accent">{{ selectedLevel }}</div>
+    <select id="levelSelect" name="levelSelect" v-model="selectedLevel">
+      <option v-for="level in levels" :value="level">{{ level }}</option>
+    </select>
+    <div class="text-xl text-accent">{{ selectedLevel }}</div>
 
-        <input type="text" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">
+    <input type="text" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">
+    <br>
+    <ButtonPrimary @click="validateCoaching" text="Send new coaching"/>
 
-        <button @click="validateCoaching">Send new coaching</button>
-
-      </div>
-
+  </div>
 
 
 </template>
@@ -27,6 +26,7 @@ import axios from "axios";
 import {computed, ref} from "vue";
 import {useAppStore} from "@/stores/app";
 import {useUserStore} from "@/stores/user";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -40,7 +40,7 @@ const emit = defineEmits(['update']);
 async function validateCoaching() {
   if (selectedSubject.value && selectedLevel.value && selectedRate.value &&
       !isNaN(parseInt(selectedRate.value)) && parseInt(selectedRate.value) > 0) {
-    const coaching = new Coaching( selectedSubject.value, selectedLevel.value, parseInt(selectedRate.value));
+    const coaching = new Coaching(selectedSubject.value, selectedLevel.value, parseInt(selectedRate.value));
     try {
       await postCoaching(coaching);
     } catch (e) {

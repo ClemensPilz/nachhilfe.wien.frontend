@@ -30,6 +30,10 @@
 
     <CoachingSettings />
 
+    <h1 class="text-4xl text-accent">Manage Districts</h1>
+
+    <DistrictSettings />
+
   </div>
 </template>
 
@@ -45,6 +49,7 @@ import {useAppStore} from "@/stores/app";
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import {Coaching} from "@/classes";
 import CoachingSettings from "@/components/profile/coaching/CoachingSettings.vue";
+import DistrictSettings from "@/components/profile/districts/DistrictSettings.vue";
 
 const subject = ref();
 const level = ref();
@@ -79,41 +84,6 @@ async function encodeImageToBase64() {
   };
   reader.readAsDataURL(imageData);
 }
-
-async function validateCoaching() {
-  if (selectedSubject.value && selectedLevel.value && selectedRate.value &&
-      !isNaN(parseInt(selectedRate.value)) && parseInt(selectedRate.value) > 0) {
-    const coaching = new Coaching( selectedSubject.value, selectedLevel.value, parseInt(selectedRate.value));
-    try {
-      await postCoaching(coaching);
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    console.warn('Coaching invalid!');
-  }
-}
-
-
-async function postCoaching(newCoaching) {
-  console.log(newCoaching)
-  try {
-    const response = await axios({
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      },
-      url: `${userStore.url}/coaching/offer-coaching/${userStore.userId}`,
-      method: "post",
-      data: {
-        "coachings": [newCoaching]
-      }
-    });
-    console.log(response);
-  } catch (e) {
-    console.log('Error trying to post new coachings: ' + e.toString());
-  }
-}
-
 
 onMounted(() => initTE({Ripple}));
 </script>

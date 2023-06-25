@@ -12,10 +12,13 @@
         <div v-for="coaching in coachings"
              class="px-2 py-1 rounded-lg border border-white
               hover:border-accent hover:cursor-pointer select-none">
-          {{ coaching.subject }}: {{ coaching.price }}
+          {{ coaching.subject }}: {{ coaching.rate }}€/h
         </div>
       </div>
-      <ButtonAccent text="Contact" class="w-fit my-3" @click="$emit('contact')"/>
+      <div class="flex gap-2">
+        <ButtonPrimary text="Profile" class="w-fit my-3" @click="$emit('profile')"/>
+        <ButtonAccent text="Contact" class="w-fit my-3" @click="$emit('contact')"/>
+      </div>
     </div>
 
     <!--Image-Part-->
@@ -29,6 +32,7 @@
 
 <script setup>
 import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const props = defineProps({
   'name': String,
@@ -37,7 +41,7 @@ const props = defineProps({
   'coachings': Array
 })
 
-const emits = defineEmits(['contact']);
+const emits = defineEmits(['contact', 'profile']);
 </script>
 
 <style lang="scss" scoped>

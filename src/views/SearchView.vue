@@ -6,8 +6,9 @@
       <SearchResult
           v-for="teacher in teachersArray"
           @contact="appStore.sendMessage(teacher.teacherId) "
+          @profile="router.push(`/profile/${teacher.teacherId}`)"
           :name="`${teacher.firstName} ${teacher.lastName}`"
-          :description="`${teacher.description}`"
+          :description="`${teacher.description === null ? '' : teacher.description}`"
           :coachings="teacher.coachings"
       />
 
@@ -27,6 +28,7 @@ import {onMounted, ref, watch} from "vue";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import {useAppStore} from "@/stores/app";
+import router from "@/router";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
