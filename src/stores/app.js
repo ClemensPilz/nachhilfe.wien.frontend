@@ -28,6 +28,15 @@ export const useAppStore = defineStore('app', () => {
         }
     }
 
+    function encodeImage(file) {
+        return new Promise((res, rej) => {
+            const reader = new FileReader();
+            reader.onloadend = () => res(reader.result);
+            reader.onerror = rej;
+            reader.readAsDataURL(file);
+        })
+    }
 
-    return { sendMessage, subjects, levels }
+
+    return { sendMessage, encodeImage, subjects, levels }
 })

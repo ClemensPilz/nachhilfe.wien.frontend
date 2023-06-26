@@ -34,6 +34,10 @@
 
     <DistrictSettings />
 
+    <h1 class="text-4xl text-accent">Upload Profile Picture</h1>
+
+    <ImageSettings />
+
   </div>
 </template>
 
@@ -50,6 +54,7 @@ import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import {Coaching} from "@/classes";
 import CoachingSettings from "@/components/profile/coaching/CoachingSettings.vue";
 import DistrictSettings from "@/components/profile/districts/DistrictSettings.vue";
+import ImageSettings from "@/components/profile/image/ImageSettings.vue";
 
 const subject = ref();
 const level = ref();
