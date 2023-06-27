@@ -99,6 +99,7 @@ async function getMessages(id) {
     messages.value = response.data.messages;
     sortMessages();
     conversationId.value = id;
+    console.log(response.data);
   } catch (e) {
     console.log(e);
   }

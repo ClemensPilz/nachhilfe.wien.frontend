@@ -2,6 +2,9 @@
   <div class="container mx-auto max-w-6xl">
     <nav-bar/>
 
+
+
+
     <div class="searchResult">
       <SearchResult
           v-for="teacher in teachersArray"
@@ -11,6 +14,12 @@
           :description="`${teacher.description === null ? '' : teacher.description}`"
           :coachings="teacher.coachings"
       />
+      <button-primary text="click" @click="showModal = !showModal"/>
+      <AppointmentModal v-if="showModal"
+                        title="Termin senden"
+                        @close="showModal = !showModal"
+                        @send="(e) => lookAtTime(e)"/>
+
 
       <SearchResult/>
       <SearchResult/>
@@ -29,11 +38,24 @@ import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
+import AppointmentModal from "@/components/global/AppointmentModal.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
 
 const teachersArray = ref();
+const showModal = ref(false);
+
+function lookAtTime(e) {
+  let startTime = new Date(e.startTime);
+  let endTime = new Date(e.startTime);
+  let duration = e.duration;
+  endTime.setHours(startTime.getHours() + duration);
+  console.log('StartTime: ' + startTime);
+  console.log('endTime: ' + endTime);
+
+}
 
 async function getAllTeachers() {
   try {
