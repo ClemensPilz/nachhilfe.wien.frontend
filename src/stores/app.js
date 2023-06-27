@@ -6,7 +6,6 @@ import axios from "axios";
 import router from "@/router";
 export const useAppStore = defineStore('app', () => {
 
-    const conversationStore = useConversationStore();
     const userStore = useUserStore();
     const subjects = ref({});
     const levels = ["VOLKSSCHULE", "MITTELSCHULE"]

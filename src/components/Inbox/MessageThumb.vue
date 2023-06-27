@@ -22,7 +22,7 @@ import {useUserStore} from "@/stores/user";
 import {computed} from "vue";
 
 const userStore = useUserStore();
-const storeId = computed(() => userStore.user.id);
+const storeId = computed(() => userStore.user.userId);
 const props = defineProps(['content', 'title', 'senderId', 'date']);
 
 </script>
@@ -30,11 +30,11 @@ const props = defineProps(['content', 'title', 'senderId', 'date']);
 <style lang="scss" scoped>
 
 .ownMessage {
-  @apply bg-lightPrimary text-right ml-10
+  @apply bg-gray-100 text-right ml-10
 }
 
 .foreignMessage {
-  @apply bg-accent mr-10
+  @apply bg-lightPrimary mr-10
 }
 
 .ownMessage, .foreignMessage {

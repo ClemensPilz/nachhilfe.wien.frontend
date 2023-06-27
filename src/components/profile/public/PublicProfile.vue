@@ -17,7 +17,7 @@
         <div class="order-1 md:order-2 flex justify-center">
           <img
               class="w-full md:w-48 md:rounded-full shadow-xl"
-              src="https://images.unsplash.com/photo-1601233749202-95d04d5b3c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=838&q=80"
+              :src="props.profile.image ? props.profile.image : 'https://placehold.co/600x400'"
               alt="profile picture of a funny guy"
           />
         </div>
