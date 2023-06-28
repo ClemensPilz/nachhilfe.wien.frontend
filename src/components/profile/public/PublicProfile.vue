@@ -10,7 +10,7 @@
   <!--Container-->
   <div class="mt-10">
     <!--Programmatic-->
-    <div v-if="props.profile">
+    <div v-if="props.profile"
       <!--TopSection-Container-->
       <div class="md:grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
         <!--Image-->
@@ -77,7 +77,7 @@
           </div>
 
           <div class="flex justify-center gap-2">
-            <ButtonAccent text="Nachricht senden" @click="appStore.sendMessage(props.profile.teacherId)"/>
+            <ButtonAccent text="Nachricht senden" @click="appStore.sendMessage(props.profile.teacherId, true)"/>
             <ButtonAccent text="ettest senden" @click="console.log(coachings)"/>
             <button-accent text="updateCoachings" @click=""></button-accent>
           </div>

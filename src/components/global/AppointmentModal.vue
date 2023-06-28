@@ -10,7 +10,8 @@
           <div class="w-fit text-center">
           <VDatePicker v-model.string="startTime" mode="dateTime" is24hr hide-time-header :masks="masks" />
           <br>
-            Dauer: <input type="number" v-model="duration" name="duration" id="duration" class="bg-primary">
+
+            Stunden: <input type="number" v-model="duration" name="duration" id="duration" class="bg-lightPrimary border-2 border-primary p-2 rounded-xl mt-2 w-1/4">
           </div>
         </form>
       </div>

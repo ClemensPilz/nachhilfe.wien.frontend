@@ -1,16 +1,17 @@
-import { ref, } from 'vue'
-import { defineStore } from 'pinia'
+import {ref,} from 'vue'
+import {defineStore} from 'pinia'
 import {useConversationStore} from "@/stores/conversation";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import router from "@/router";
+
 export const useAppStore = defineStore('app', () => {
 
     const userStore = useUserStore();
     const subjects = ref({});
     const levels = ["VOLKSSCHULE", "MITTELSCHULE"]
 
-    async function sendMessage(recipientId) {
+    async function sendMessage(recipientId, isPushing) {
         try {
             const response = await axios({
                 headers: {
@@ -21,7 +22,11 @@ export const useAppStore = defineStore('app', () => {
             });
             const conversationStore = useConversationStore();
             conversationStore.activeConversationInInbox = response.data.conversationId;
-            await router.push("/inbox");
+            if (isPushing) {
+                await router.push("/inbox");
+            } else {
+                return response.data.conversationId;
+            }
         } catch (e) {
             console.log(e);
         }
@@ -37,5 +42,5 @@ export const useAppStore = defineStore('app', () => {
     }
 
 
-    return { sendMessage, encodeImage, subjects, levels }
+    return {sendMessage, encodeImage, subjects, levels}
 })
