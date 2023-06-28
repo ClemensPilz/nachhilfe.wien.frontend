@@ -10,7 +10,7 @@
   <!--Container-->
   <div class="mt-10">
     <!--Programmatic-->
-    <div v-if="props.profile"
+    <div v-if="props.profile">
       <!--TopSection-Container-->
       <div class="md:grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
         <!--Image-->
@@ -69,12 +69,18 @@
 
           <div class="w-full my-2 flex flex-wrap justify-center gap-2">
             <div v-for="coaching in props.profile.coachings" :key="`coaching${coaching.coachingId}`"
-                 class="flex flex-col items-center p-2 gap-1">
+                 class="flex flex-col items-center p-2 gap-1"
+            @click="prepareAppointment(coaching.coachingId)">
               <div>{{ coaching.subject }}</div>
               <div>{{ coaching.level }}</div>
               <div>{{ coaching.rate }}€ / Stunde</div>
             </div>
           </div>
+
+          <AppointmentModal v-if="showModal"
+                            title="Termin senden"
+                            @close="showModal = !showModal"
+                            @send="sendAppointment"/>
 
           <div class="flex justify-center gap-2">
             <ButtonAccent text="Nachricht senden" @click="appStore.sendMessage(props.profile.teacherId, true)"/>
@@ -105,6 +111,7 @@ import router from "@/router";
 import ReviewModal from "@/components/profile/public/ReviewModal.vue";
 import {useRoute} from "vue-router";
 import {useAppStore} from "@/stores/app";
+import AppointmentModal from "@/components/global/AppointmentModal.vue";
 
 const props = defineProps({
   profile: Object,
@@ -117,6 +124,44 @@ const userStore = useUserStore();
 const appStore = useAppStore();
 
 const reviewModalOpen = ref(false);
+const showModal = ref(false);
+const preparedCoaching = ref();
+
+function prepareAppointment(coachingId) {
+  showModal.value = true;
+  preparedCoaching.value = coachingId;
+}
+
+async function sendAppointment(e) {
+  let startTime = new Date(e.startTime);
+  let endTime = new Date(e.startTime);
+  let duration = e.duration;
+  endTime.setHours(startTime.getHours() + duration);
+
+  let conversationId = await appStore.sendMessage(props.profile.teacherId, false);
+  showModal.value = false;
+
+  try {
+    const response = await axios({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      method: 'post',
+      url: `${userStore.url}/appointment/send-appointment/${conversationId}/${preparedCoaching.value}`,
+      data: {
+        "title": "neuer Termin",
+        "content": "ein neuer Termin",
+        "start": startTime.toISOString(),
+        "end": endTime.toISOString(),
+      }
+    })
+    console.log(response.data);
+    alert("coaching-anfrage verschickt!")
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 
 onMounted(() => initTE({Ripple}));
 </script>

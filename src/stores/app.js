@@ -11,6 +11,7 @@ export const useAppStore = defineStore('app', () => {
     const subjects = ref({});
     const levels = ["VOLKSSCHULE", "MITTELSCHULE"]
 
+    //Gets conversation from API. If isPushing is true, will push router to InboxView.vue
     async function sendMessage(recipientId, isPushing) {
         try {
             const response = await axios({

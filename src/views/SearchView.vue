@@ -11,16 +11,16 @@
           @contact="appStore.sendMessage(teacher.teacherId, true) "
           @profile="router.push(`/profile/${teacher.teacherId}`)"
           @requestAppointment="prepareAppointment"
-          :id="teacher.teacherId"
+          :teacherId="teacher.teacherId"
           :name="`${teacher.firstName} ${teacher.lastName}`"
           :description="`${teacher.description === null ? '' : teacher.description}`"
           :coachings="teacher.coachings"
       />
-      <button-primary text="click" @click="showModal = !showModal"/>
+
       <AppointmentModal v-if="showModal"
                         title="Termin senden"
                         @close="showModal = !showModal"
-                        @send="(e) => sendAppointment(e)"/>
+                        @send="sendAppointment"/>
 
 
       <SearchResult/>
@@ -101,10 +101,6 @@ async function getAllTeachers() {
       url: `${userStore.url}/teacher/teacher-profiles`
     });
     teachersArray.value = response.data;
-    for (const teacher of teachersArray.value) {
-      console.log(teacher);
-    }
-
   } catch (e) {
     console.log(e);
   }
