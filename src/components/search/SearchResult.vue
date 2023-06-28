@@ -13,7 +13,7 @@
              :key="coaching.coachingId"
              class="px-2 py-1 rounded-lg border border-white
               hover:border-accent hover:cursor-pointer select-none"
-        @click="$emit('requestAppointment', [coaching.coachingId, teacherId])">
+             @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId})">
           {{ coaching.subject }}: {{ coaching.rate }}€/h
         </div>
       </div>
@@ -43,6 +43,7 @@ const props = defineProps({
   'rating': String,
   'coachings': Array
 })
+
 
 const emits = defineEmits(['contact', 'profile', 'requestAppointment']);
 </script>

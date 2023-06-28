@@ -3,14 +3,12 @@
     <nav-bar/>
 
 
-
-
     <div class="searchResult">
       <SearchResult
           v-for="teacher in teachersArray"
           @contact="appStore.sendMessage(teacher.teacherId, true) "
           @profile="router.push(`/profile/${teacher.teacherId}`)"
-          @requestAppointment="prepareAppointment"
+          @requestAppointment="setAppointmentParameters"
           :teacherId="teacher.teacherId"
           :name="`${teacher.firstName} ${teacher.lastName}`"
           :description="`${teacher.description === null ? '' : teacher.description}`"
@@ -20,7 +18,7 @@
       <AppointmentModal v-if="showModal"
                         title="Termin senden"
                         @close="showModal = !showModal"
-                        @send="sendAppointment"/>
+                        @send="send"/>
 
 
       <SearchResult/>
@@ -45,50 +43,19 @@ import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
-
 const teachersArray = ref();
 const showModal = ref(false);
+const selectedCoachingId = ref();
+const selectedTeacherId = ref();
 
-const preparedAppointment = ref();
-const preparedTeacher = ref();
-
-function prepareAppointment(e) {
-  preparedAppointment.value = e[0];
-  preparedTeacher.value = e[1];
+function setAppointmentParameters(e) {
+  selectedCoachingId.value = e.coachingId;
+  selectedTeacherId.value = e.teacherId;
   showModal.value = true;
-  }
+}
 
-async function sendAppointment(e) {
-  let startTime = new Date(e.startTime);
-  let endTime = new Date(e.startTime);
-  let duration = e.duration;
-  endTime.setHours(startTime.getHours() + duration);
-
-  let conversationId = await appStore.sendMessage(preparedTeacher.value, false);
-  showModal.value = false;
-
-  try {
-    const response = await axios({
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      method: 'post',
-      url: `${userStore.url}/appointment/send-appointment/${conversationId}/${preparedAppointment.value}`,
-      data: {
-        "title": "neuer Termin",
-        "content": "ein neuer Termin",
-        "start": startTime.toISOString(),
-        "end": endTime.toISOString(),
-      }
-    })
-    console.log(response.data);
-    alert("coaching-anfrage verschickt!")
-  } catch (e) {
-    console.log(e)
-  }
-
-
-
+const send = async (e) => {
+  await appStore.postAppointment(selectedTeacherId.value, selectedCoachingId.value, e.startTime, e.duration, e.content)
 }
 
 async function getAllTeachers() {

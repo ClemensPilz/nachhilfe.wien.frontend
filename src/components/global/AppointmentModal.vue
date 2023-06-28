@@ -1,11 +1,10 @@
-<template>
+<template xmlns:input="http://www.w3.org/1999/html">
   <div class="modalBackground"
        @click="$emit('close')">
 
     <div @click.stop="" class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl">
       <h2 class="text-2xl mb-4">{{ title }}</h2>
       <div>
-        <slot/>
         <form>
           <div class="w-fit text-center">
             <VDatePicker v-model.string="startTime"
@@ -13,15 +12,25 @@
                          is24hr
                          hide-time-header
                          :masks="masks"/>
-          <br>
+            <br>
 
             Stunden: <input type="number"
                             v-model="duration"
                             name="duration"
                             id="duration"
-                            class="bg-lightPrimary border-2 border-primary p-2 rounded-xl mt-2 w-1/4">
+                            class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2 w-1/4">
+          </div>
+          <br>
+          <div class="w-full text-center">
+          Anmerkungen, Ort, etc:
+          <br>
+          <input type="text"
+                                              v-model="content"
+                                              id="content"
+                                              class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2">
           </div>
         </form>
+        <slot/>
       </div>
 
 
@@ -30,7 +39,7 @@
         <button class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl" @click="$emit('close')">Abbrechen
         </button>
         <button class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
-                @click="$emit('send', time)">OK
+                @click="$emit('send', parameters)">OK
         </button>
       </div>
     </div>
@@ -48,11 +57,13 @@ const props = defineProps(['title'])
 
 const duration = ref();
 const startTime = ref(new Date());
+const content = ref();
 
-const time = computed(() => {
+const parameters = computed(() => {
   return {
     "startTime": startTime.value,
-    "duration": duration.value
+    "duration": duration.value,
+    "content": content.value
   }
 })
 

@@ -80,11 +80,11 @@
           <AppointmentModal v-if="showModal"
                             title="Termin senden"
                             @close="showModal = !showModal"
-                            @send="sendAppointment"/>
+                            @send="send"/>
 
           <div class="flex justify-center gap-2">
             <ButtonAccent text="Nachricht senden" @click="appStore.sendMessage(props.profile.teacherId, true)"/>
-            <ButtonAccent text="ettest senden" @click="console.log(coachings)"/>
+            <ButtonAccent text="Test senden" @click="console.log(coachings)"/>
             <button-accent text="updateCoachings" @click=""></button-accent>
           </div>
         </div>
@@ -125,43 +125,16 @@ const appStore = useAppStore();
 
 const reviewModalOpen = ref(false);
 const showModal = ref(false);
-const preparedCoaching = ref();
+const selectedCoachingId = ref();
 
 function prepareAppointment(coachingId) {
   showModal.value = true;
-  preparedCoaching.value = coachingId;
+  selectedCoachingId.value = coachingId;
 }
 
-async function sendAppointment(e) {
-  let startTime = new Date(e.startTime);
-  let endTime = new Date(e.startTime);
-  let duration = e.duration;
-  endTime.setHours(startTime.getHours() + duration);
-
-  let conversationId = await appStore.sendMessage(props.profile.teacherId, false);
-  showModal.value = false;
-
-  try {
-    const response = await axios({
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      method: 'post',
-      url: `${userStore.url}/appointment/send-appointment/${conversationId}/${preparedCoaching.value}`,
-      data: {
-        "title": "neuer Termin",
-        "content": "ein neuer Termin",
-        "start": startTime.toISOString(),
-        "end": endTime.toISOString(),
-      }
-    })
-    console.log(response.data);
-    alert("coaching-anfrage verschickt!")
-  } catch (e) {
-    console.log(e)
-  }
+const send = async (e) => {
+  await appStore.postAppointment(props.profile.teacherId, selectedCoachingId.value, e.startTime, e.duration, e.content)
 }
-
 
 onMounted(() => initTE({Ripple}));
 </script>

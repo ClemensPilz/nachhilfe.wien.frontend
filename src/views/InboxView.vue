@@ -32,8 +32,8 @@
 
         <!--Send-Field-->
         <MessageInput :class="conversationId ? 'block' : 'hidden'"
-                      @send="sendMessage"
-                      @keydown.enter="sendMessage"
+                      @send="postMessage"
+                      @keydown.enter="postMessage"
                       button-text="Senden"
                       button-bg="bg-primary">
           <input type="text"
@@ -99,6 +99,9 @@ async function getMessages(id) {
     messages.value = response.data.messages;
     sortMessages();
     conversationId.value = id;
+    for (const message in messages) {
+      console.log(message)
+    }
     console.log(response.data);
   } catch (e) {
     console.log(e);
@@ -106,7 +109,7 @@ async function getMessages(id) {
 }
 
 //Push message to conversation
-async function sendMessage() {
+async function postMessage() {
   try {
     const response = await axios({
       headers: {
