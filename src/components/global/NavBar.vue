@@ -1,5 +1,5 @@
 <template>
-  <nav class="sticky top-0 z-[1000]">
+  <nav class="navBar" ref="navBar" id="navBar">
 
     <!--Container-->
     <div class="w-full bg-white shadow-xl px-4 md:pr-12 py-4 flex justify-between items-center">
@@ -40,7 +40,7 @@
 
 <script setup>
 
-import {computed} from "vue";
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 
 //get the user's ID from local storage
 const userId = computed(() => {
@@ -52,9 +52,49 @@ const userId = computed(() => {
   }
 });
 
+const navBar = ref();
+
+
+function throttle(func, delay) {
+  let lastCall = 0;
+  return function() {
+    let now = Date.now();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return func.apply(this, arguments);
+  };
+}
+
+let onScroll = throttle(() => {
+  let navbar = document.getElementById('navBar');
+  if(window.pageYOffset > 50) {
+    navbar.classList.add('fade-navBar');
+  } else {
+    navbar.classList.remove('fade-navBar');
+  }
+}, 100)
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll);
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll);
+})
+
 </script>
 <style lang="scss" scoped>
 
+.navBar {
+  transition: opacity 0.6s ease;
+  @apply sticky top-0 z-[1000]
+}
+
+.fade-navBar {
+  opacity: 0.7;
+}
 .hiddenLinks {
   display: none;
 }
