@@ -2,26 +2,35 @@
   <div class="m-2 w-full">
 
 
-      <div :class="props.senderId == storeId ? 'ownMessage' : 'foreignMessage'">
-        <div class="paragraph">
-          {{ props.content }}
-        </div>
-        <div class="paragraph font-bold">
-          {{ props.date }}
-        </div>
+    <div :class="{
+        'ownMessage': props.senderId === storeId,
+        'foreignMessage': props.senderId !== storeId,
+        'appointment': props.type === 'APPOINTMENT'
+      }">
+
+      <div v-if="props.type === 'APPOINTMENT'" class="text-sm text-primary italic font-bold uppercase">
+        Neuer Terminvorschlag
       </div>
 
+      <div class="paragraph">
+        {{ props.content }}
+      </div>
+      <div class="paragraph font-bold">
+        {{ props.date }}
+      </div>
     </div>
+
+  </div>
 
 </template>
 
 <script setup>
 import {useUserStore} from "@/stores/user";
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const userStore = useUserStore();
 const storeId = computed(() => userStore.user.userId);
-const props = defineProps(['content', 'title', 'senderId', 'date']);
+const props = defineProps(['content', 'type', 'senderId', 'date']);
 
 </script>
 
@@ -37,6 +46,11 @@ const props = defineProps(['content', 'title', 'senderId', 'date']);
 
 .ownMessage, .foreignMessage {
   @apply rounded-lg w-fit
+
+}
+
+.appointment {
+  @apply border-b-4 border-accent
 }
 
 

@@ -19,16 +19,20 @@
 
       <!--Right Part-->
       <!--Messages-->
-      <div class="flex flex-col col-span-9 overflow-y-scroll overflow-x-hidden max-h-[calc(100vh-70px)] noScrollbar">
-        <div v-if="messages">
+
+      <div class="flex flex-col col-span-9 max-h-[calc(100vh-70px)]">
+
+        <div class="overflow-y-scroll overflow-x-hidden noScrollbar">
           <MessageThumb v-for="message in messages"
                         :key="message.messageId"
-                        class="messageContainer"
-                        :title="message.title"
+                        :type="message.messageType"
                         :content="message.content"
                         :senderId="message.senderId"
                         :date="formatDate(message.timeStamp)"/>
+
+          <div id="pageEnd"></div>
         </div>
+
 
         <!--Send-Field-->
         <MessageInput :class="conversationId ? 'block' : 'hidden'"
@@ -43,7 +47,6 @@
                  class="w-full border border-lightPrimary p-4"
                  v-model="messageText">
         </MessageInput>
-        <div id="pageEnd"></div>
 
       </div>
 

@@ -56,6 +56,7 @@ function setAppointmentParameters(e) {
 
 const send = async (e) => {
   await appStore.postAppointment(selectedTeacherId.value, selectedCoachingId.value, e.startTime, e.duration, e.content)
+  showModal.value = false;
 }
 
 async function getAllTeachers() {

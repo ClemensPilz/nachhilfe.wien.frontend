@@ -1,5 +1,5 @@
 <template>
-  <div class="block rounded-lg bg-white p-6 shadow-lg">
+  <div class="block rounded-lg bg-white p-6">
     <h5 class="mb-2 text-xl font-medium leading-tight text-darkPrimary">
       {{ props.title }}
     </h5>
