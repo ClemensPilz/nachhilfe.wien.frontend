@@ -1,4 +1,4 @@
-<template xmlns:input="http://www.w3.org/1999/html">
+<template>
   <div class="modalBackground"
        @click="$emit('close')">
 
@@ -22,12 +22,12 @@
           </div>
           <br>
           <div class="w-full text-center">
-          Anmerkungen, Ort, etc:
-          <br>
-          <input type="text"
-                                              v-model="content"
-                                              id="content"
-                                              class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2">
+            Anmerkungen, Ort, etc:
+            <br>
+            <input type="text"
+                   v-model="content"
+                   id="content"
+                   class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2">
           </div>
         </form>
         <slot/>

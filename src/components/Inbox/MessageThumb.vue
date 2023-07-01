@@ -9,12 +9,27 @@
       }">
 
       <div v-if="props.type === 'APPOINTMENT'" class="text-sm text-primary italic font-bold uppercase">
-        Neuer Terminvorschlag
+        {{ props.title }}
+      </div>
+
+      <div v-if="props.type === 'APPOINTMENT'">
+        <div>
+          Am {{ props.start }}
+        </div>
+        <div>
+          {{ props.duration }} Stunden
+        </div>
       </div>
 
       <div class="paragraph">
         {{ props.content }}
       </div>
+
+      <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
+        <ButtonSecondary text="Ablehnen" @click="ablehnen" class="mr-2"/>
+        <ButtonPrimary text="Annehmen" @click="annehmen"/>
+      </div>
+
       <div class="paragraph font-bold">
         {{ props.date }}
       </div>
@@ -27,10 +42,15 @@
 <script setup>
 import {useUserStore} from "@/stores/user";
 import {computed, onMounted, ref} from "vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 
 const userStore = useUserStore();
 const storeId = computed(() => userStore.user.userId);
-const props = defineProps(['content', 'type', 'senderId', 'date']);
+const props = defineProps(['content', 'title', 'start', 'duration', 'type', 'senderId', 'date']);
+
+function ablehnen() { alert('abgelehnt')}
+function annehmen() { alert('angenommen')}
 
 </script>
 

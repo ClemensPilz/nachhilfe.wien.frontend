@@ -13,7 +13,7 @@
              :key="coaching.coachingId"
              class="px-2 py-1 rounded-lg border border-white
               hover:border-accent hover:cursor-pointer select-none"
-             @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId})">
+             @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId, 'coachingName': coaching.subject + ' - ' + coaching.rate + ' €/h'})">
           {{ coaching.subject }}: {{ coaching.rate }}€/h
         </div>
       </div>

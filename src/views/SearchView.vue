@@ -46,16 +46,24 @@ const appStore = useAppStore();
 const teachersArray = ref();
 const showModal = ref(false);
 const selectedCoachingId = ref();
+const selectedCoachingName = ref();
 const selectedTeacherId = ref();
 
 function setAppointmentParameters(e) {
   selectedCoachingId.value = e.coachingId;
   selectedTeacherId.value = e.teacherId;
+  selectedCoachingName.value = e.coachingName;
   showModal.value = true;
 }
 
 const send = async (e) => {
-  await appStore.postAppointment(selectedTeacherId.value, selectedCoachingId.value, e.startTime, e.duration, e.content)
+  await appStore.postAppointment(selectedTeacherId.value,
+      selectedCoachingId.value,
+      selectedCoachingName.value,
+      e.startTime,
+      e.duration,
+      e.content)
+
   showModal.value = false;
 }
 

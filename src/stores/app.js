@@ -34,7 +34,7 @@ export const useAppStore = defineStore('app', () => {
         }
     }
 
-    async function postAppointment(teacherId, coachingId, dateTime, duration, content) {
+    async function postAppointment(teacherId, coachingId, coachingName, dateTime, duration, content) {
         const conversationId = await sendMessage(teacherId, false);
         let startTime = new Date(dateTime);
         let endTime = new Date(dateTime);
@@ -49,7 +49,7 @@ export const useAppStore = defineStore('app', () => {
                 method: 'post',
                 url: `${userStore.url}/appointment/send-appointment/${conversationId}/${coachingId}`,
                 data: {
-                    title: 'Neuer Terminvorschlag',
+                    title: 'Terminvorschlag für ' + coachingName,
                     content: content,
                     start: startTime.toISOString(),
                     end: endTime.toISOString()

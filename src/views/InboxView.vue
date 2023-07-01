@@ -26,8 +26,11 @@
           <MessageThumb v-for="message in messages"
                         :key="message.messageId"
                         :type="message.messageType"
+                        :title="message.title"
                         :content="message.content"
                         :senderId="message.senderId"
+                        :start="formatStart(message.start)"
+                        :duration="formatDuration(message.start, message.end)"
                         :date="formatDate(message.timeStamp)"/>
 
           <div id="pageEnd"></div>
@@ -58,7 +61,7 @@
 <script setup>
 
 import NavBar from "@/components/global/NavBar.vue";
-import {onBeforeMount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {computed, onBeforeMount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
@@ -94,6 +97,26 @@ function formatDate(timestamp) {
 
   return `${dateString}, ${timeString.substring(0, 5)}`;
 
+}
+
+
+function formatStart(timestamp) {
+  if (timestamp == null) {
+    return;
+  }
+  const date = new Date(timestamp);
+  const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const timeOptions = { hour: '2-digit', minute: '2-digit' };
+  const locale = 'de-DE';
+
+  const formattedDate = date.toLocaleDateString(locale, dateOptions);
+  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
+
+  return `${formattedDate} um ${formattedTime} Uhr`;
+}
+
+function formatDuration(start, end) {
+  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
 }
 
 
