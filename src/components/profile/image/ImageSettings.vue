@@ -1,8 +1,12 @@
 <template>
 
-  <div class="w-full my-4 bg-lightPrimary text-center">
+  <div class="w-full my-4 text-center">
 
-    <input type="file" name="profilePicture" id="profilePictureInput" @change="upload">
+    <input type="file"
+           class="rounded text-primary mb-2"
+           name="profilePicture"
+           id="profilePictureInput"
+           @change="upload">
 
     <img v-if="profilePictureSrc" :src="profilePictureSrc" alt="" srcset=""
     class="max-w-lg mx-auto">
@@ -15,12 +19,15 @@
 import {useAppStore} from "@/stores/app";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const appStore = useAppStore();
 const userStore = useUserStore();
 
 const profilePictureSrc = ref();
+
+const props = defineProps(['uploadNow']);
+
 
 async function upload(e) {
   const file = e.target.files[0];

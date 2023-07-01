@@ -5,6 +5,7 @@ import DashboardView from "@/views/DashboardView.vue";
 import SearchView from "@/views/SearchView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import TestView from "@/views/TestView.vue";
+import SettingsView from "@/views/SettingsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/profile/:userId',
       name: 'profile',
       component: ProfileView
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView
     },
     {
       path: '/test',

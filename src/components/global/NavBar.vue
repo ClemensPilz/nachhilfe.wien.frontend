@@ -24,6 +24,9 @@
           <RouterLink to="/test">Test</RouterLink>
         </div>
         <div class="routerLink">
+          <RouterLink to="/settings">Settings</RouterLink>
+        </div>
+        <div class="routerLink">
           <RouterLink to="/search">Search</RouterLink>
         </div>
       </div>
