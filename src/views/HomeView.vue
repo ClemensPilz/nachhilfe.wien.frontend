@@ -47,13 +47,13 @@
         <div class="md:w-1/2 text-center">
           <div class="headline">Nachhilfe finden</div>
           <div class="paragraph">Melde dich jetzt an, um einen Nachhilfelehrer in deiner Umgebung zu finden.</div>
-          <ButtonAccent text="anmelden"/>
+          <ButtonAccent text="anmelden" @click="openRegisterModal"/>
         </div>
 
         <div class="md:w-1/2 text-center">
           <div class="headline">Lehrer werden</div>
           <div class="paragraph">Du möchtest dein Wissen weitergeben und selbst Lehrer werden?</div>
-          <ButtonPrimary text="Kontakt" />
+          <ButtonPrimary text="Kontakt" @click="openRegisterModal"/>
         </div>
 
       </div>

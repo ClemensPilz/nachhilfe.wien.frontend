@@ -19,7 +19,7 @@ import {computed} from "vue";
 const props = defineProps(['users']);
 
 const userStore = useUserStore();
-const storeId = computed(() => userStore.user.id);
+const storeId = computed(() => userStore.user.userId);
 const partners = computed(() => {
   const partnerArr = [];
   for (const user of props.users) {

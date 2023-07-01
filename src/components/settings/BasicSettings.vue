@@ -65,7 +65,9 @@ async function updateFirstName() {
   } finally {
     editItem.value = ''
   }
-}async function updateEmail() {
+}
+
+async function updateEmail() {
   try {
     await updateUser('email', email.value);
     await userStore.auth({token: `${localStorage.getItem('token')}`});

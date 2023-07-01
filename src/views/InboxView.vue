@@ -46,7 +46,7 @@
           <input type="text"
                  name="messageText"
                  id="messageText"
-                 placeholder="Is this showing something?"
+                 placeholder="Neue Nachricht senden"
                  class="w-full border border-lightPrimary p-4"
                  v-model="messageText">
         </MessageInput>
