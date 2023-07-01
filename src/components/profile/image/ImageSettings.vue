@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-full my-4 text-center">
+  <div class="w-full my-4">
 
     <input type="file"
            class="rounded text-primary mb-2"
@@ -9,7 +9,7 @@
            @change="upload">
 
     <img v-if="profilePictureSrc" :src="profilePictureSrc" alt="" srcset=""
-    class="max-w-lg mx-auto">
+    class="max-w-lg">
 
   </div>
 </template>
