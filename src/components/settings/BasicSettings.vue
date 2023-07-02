@@ -1,37 +1,13 @@
 <template>
-  <section id="userData" @keydown.esc="editItem = ''">
-    <!--Vorname-->
-    <div v-if="editItem !== 'firstName'"
-    >Vorname: {{ userStore.user.firstName }}
-      <PencilIcon class="h-6 text-primary inline" @click="editItem = 'firstName'"/>
+
+    <div class="flex flex-col gap-4 mt-4">
+    <SettingsField field-key="firstName" field-label="Vorname" field-name="updateFirstName" field-type="text"/>
+    <SettingsField field-key="lastName" field-label="Nachname" field-name="updateLastName" field-type="text"/>
+    <SettingsField field-key="description" field-label="Über mich" field-name="updateDescription" field-type="text"/>
+
+    <div>E-Mail: {{ userStore.user.email }}</div>
     </div>
 
-    <div v-else class="flex items-center">
-      <input type="text" v-model="firstName" name="updateFirstName" id="updateFirstName"
-             :placeholder="userStore.user.firstName"
-             class="mr-1 p-1 border border-primary rounded">
-      <button-secondary text="update" @click="updateFirstName"/>
-      <XMarkIcon class="h-6 text-primary inline" @click="editItem = ''"/>
-    </div>
-
-    <!--Nachname-->
-    <div>Nachname: {{ userStore.user.lastName }}</div>
-
-    <!--E-Mail-->
-    <div v-if="editItem !== 'email'">
-      <div>E-Mail: {{ userStore.user.email }}
-        <PencilIcon class="h-6 text-primary inline" @click="editItem = 'email'"/>
-      </div>
-    </div>
-
-    <div v-else class="flex items-center">
-      <input type="email" v-model="email" name="updateEmail" id="updateEmail" :placeholder="userStore.user.email"
-             class="mr-1 p-1 border border-primary rounded">
-      <button-secondary text="update" @click="updateEmail"/>
-      <XMarkIcon class="h-6 text-primary inline" @click="editItem = ''"/>
-    </div>
-
-  </section>
 </template>
 
 <script setup>
@@ -41,12 +17,15 @@ import {useUserStore} from "@/stores/user";
 import {computed, ref} from "vue";
 import {XMarkIcon} from "@heroicons/vue/20/solid";
 import axios from "axios";
+import SettingsField from "@/components/settings/SettingsField.vue";
 
 
 const userStore = useUserStore();
 const editItem = ref();
 const firstName = ref();
+const lastName = ref();
 const email = ref();
+const token = localStorage.getItem('token');
 
 const requestUrl = computed(() => {
   if (userStore.user.userType === 'TEACHER') {
@@ -58,8 +37,19 @@ const requestUrl = computed(() => {
 
 async function updateFirstName() {
   try {
-    await updateUser('firstName', firstName.value);
-    await userStore.auth({token: `${localStorage.getItem('token')}`});
+    await updateUser('firstName', firstName.value, token);
+    await userStore.auth({token});
+  } catch (e) {
+    console.log(e);
+  } finally {
+    editItem.value = ''
+  }
+}
+
+async function updateLastName() {
+  try {
+    await updateUser('lastName', lastName.value, token);
+    await userStore.auth({token});
   } catch (e) {
     console.log(e);
   } finally {
@@ -69,8 +59,8 @@ async function updateFirstName() {
 
 async function updateEmail() {
   try {
-    await updateUser('email', email.value);
-    await userStore.auth({token: `${localStorage.getItem('token')}`});
+    await updateUser('email', email.value, token);
+    await userStore.auth({token});
   } catch (e) {
     console.log(e);
   } finally {
@@ -79,11 +69,11 @@ async function updateEmail() {
 }
 
 
-async function updateUser(key, value) {
+async function updateUser(key, value, token) {
   try {
     const response = await axios({
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${token}`
       },
       method: 'PUT',
       url: requestUrl.value,
@@ -93,17 +83,9 @@ async function updateUser(key, value) {
     });
     console.log(response.data);
   } catch (e) {
-    console.log(e)
+    console.log(e);
+    throw e;
   }
 }
 
-function updateStudent() {
-
-}
-
-
 </script>
-
-<style lang="scss" scoped>
-
-</style>

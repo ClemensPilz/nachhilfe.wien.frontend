@@ -2,7 +2,7 @@
 <template>
   <header></header>
 
-  <RouterView :key="$route.fullPath" class="w-screen"/>
+  <RouterView :key="$route.fullPath" />
 </template>
 
 <script setup>

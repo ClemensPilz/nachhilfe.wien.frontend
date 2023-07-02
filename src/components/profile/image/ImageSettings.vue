@@ -9,7 +9,7 @@
            @change="upload">
 
     <img v-if="profilePictureSrc" :src="profilePictureSrc" alt="" srcset=""
-    class="max-w-lg">
+    class="max-w-xs rounded-xl shadow-xl">
 
   </div>
 </template>
