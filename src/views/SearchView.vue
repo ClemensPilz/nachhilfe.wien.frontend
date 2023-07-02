@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-6xl">
     <nav-bar/>
+  <div class="container mx-auto max-w-6xl">
 
 
     <div class="searchResult">
@@ -20,11 +20,6 @@
                         @close="showModal = !showModal"
                         @send="send"/>
 
-
-      <SearchResult/>
-      <SearchResult/>
-      <SearchResult/>
-      <SearchResult/>
     </div>
   </div>
 </template>

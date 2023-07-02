@@ -1,8 +1,8 @@
 <template>
 
+  <NavBar class="md:mb-12"/>
   <!--Container-->
   <div class="container max-w-6xl mx-auto text-center bg-white">
-    <NavBar class="md:mb-12"/>
 
 
     <div class="grid grid-rows-2 grid-cols-4 mt-4">
@@ -28,15 +28,15 @@
 
     <h1 class="text-4xl text-accent">Manage Coachings</h1>
 
-    <CoachingSettings />
+    <CoachingSettings/>
 
     <h1 class="text-4xl text-accent">Manage Districts</h1>
 
-    <DistrictSettings />
+    <DistrictSettings/>
 
     <h1 class="text-4xl text-accent">Upload Profile Picture</h1>
 
-    <ImageSettings />
+    <ImageSettings/>
 
   </div>
 </template>

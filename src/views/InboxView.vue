@@ -1,7 +1,7 @@
 <template>
 
+  <NavBar/>
   <div class="container mx-auto max-w-6xl">
-    <NavBar/>
 
     <div class="grid grid-cols-12 gap-2">
 
@@ -105,8 +105,8 @@ function formatStart(timestamp) {
     return;
   }
   const date = new Date(timestamp);
-  const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const timeOptions = { hour: '2-digit', minute: '2-digit' };
+  const dateOptions = {day: '2-digit', month: '2-digit', year: 'numeric'};
+  const timeOptions = {hour: '2-digit', minute: '2-digit'};
   const locale = 'de-DE';
 
   const formattedDate = date.toLocaleDateString(locale, dateOptions);

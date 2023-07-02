@@ -1,5 +1,5 @@
 <template>
-  <NavBar class="md:mb-12 max-w-6xl mx-auto"/>
+  <NavBar />
   <div class="container max-w-3xl mx-auto px-2 md:px-0 bg-white">
 
 

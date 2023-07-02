@@ -1,5 +1,4 @@
 <template>
-  <div class="container max-w-6xl min-h-full mx-auto">
 
     <!--Navbar-->
     <NavBar>
@@ -10,6 +9,9 @@
         </div>
       </div>
     </NavBar>
+
+
+  <div class="container max-w-6xl min-h-full mx-auto">
 
     <!--Modals-->
     <RegisterModal :isOpen="registerOpen" title="Neuen Account anlegen" @update:registerOpen="v => registerOpen = v"/>

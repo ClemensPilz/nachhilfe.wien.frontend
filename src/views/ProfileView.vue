@@ -1,9 +1,8 @@
 <template>
+    <nav-bar />
 
   <div class="container mx-auto max-w-6xl">
 
-    <!--Nav-->
-    <nav-bar />
 
     <PublicProfile :profile="profile" :key="userId"/>
 
