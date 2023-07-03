@@ -6,7 +6,7 @@
     <section id="userData" class="mb-12">
 
       <h5 class="headline-large text-center">Meine Userdaten</h5>
-      <h6 class="mb-2 smallText text-center">Deine Basisdaten anpassen</h6>
+      <h6 class="mb-2 paragraph-small text-center">Deine Basisdaten anpassen</h6>
 
       <!--Name and mail-->
       <BasicSettings/>
@@ -18,7 +18,7 @@
 
       <!--Profile picture-->
       <h5 class="mt-4 headline">Mein Profilbild ändern</h5>
-      <h6 class="mb-2 smallText">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></h6>
+      <h6 class="mb-2 paragraph-small">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></h6>
       <ImageSettings/>
 
     </section>
