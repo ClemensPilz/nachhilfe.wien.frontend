@@ -3,7 +3,7 @@
   <div class="w-full my-4">
 
     <input type="file"
-           class="rounded text-primary mb-2"
+           class="rounded paragraph mb-2"
            name="profilePicture"
            id="profilePictureInput"
            @change="upload">

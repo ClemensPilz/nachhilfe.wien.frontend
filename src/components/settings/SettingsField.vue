@@ -1,6 +1,6 @@
 <template>
   <div v-if="editItem !== fieldKey">
-    {{ fieldLabel }}: <span class="font-bold">{{ userStore.user[fieldKey] }}</span>
+    <span class="smallText">{{ fieldLabel }}:</span> <span class="paragraph font-bold">{{ userStore.user[fieldKey] }}</span>
     <PencilIcon class="h-4 ml-1 text-primary inline" @click="editItem = fieldKey"/>
   </div>
 

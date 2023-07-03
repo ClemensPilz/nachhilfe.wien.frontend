@@ -5,20 +5,20 @@
 
     <section id="userData" class="mb-12">
 
-      <h5 class="text-xl text-center font-medium leading-tight text-darkPrimary">Meine Userdaten</h5>
-      <h6 class="mb-2 text-center text-md font-thin text-primary">Deine Basisdaten anpassen</h6>
+      <h5 class="headline-large text-center">Meine Userdaten</h5>
+      <h6 class="mb-2 smallText text-center">Deine Basisdaten anpassen</h6>
 
       <!--Name and mail-->
       <BasicSettings/>
 
       <!--Password-->
-      <div class="text-right">
+      <div class="mt-4 md:mt-0 md:text-right">
         <ButtonSecondary text="Passwort ändern" @click="changePassword"/>
       </div>
 
       <!--Profile picture-->
-      <h5 class="text-lg mt-4 leading-tight text-darkPrimary">Mein Profilbild ändern</h5>
-      <h6 class="mb-2 text-md font-thin text-primary">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></h6>
+      <h5 class="mt-4 headline">Mein Profilbild ändern</h5>
+      <h6 class="mb-2 smallText">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></h6>
       <ImageSettings/>
 
     </section>

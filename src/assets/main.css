@@ -18,10 +18,18 @@ body {
     overflow-x: hidden;
 }
 
+.headline-large {
+    @apply text-2xl text-darkPrimary font-bold
+}
+
 .headline {
     @apply text-lg text-darkPrimary font-bold
 }
 
 .paragraph {
     @apply text-primary
+}
+
+.smallText {
+    @apply text-sm text-primary
 }

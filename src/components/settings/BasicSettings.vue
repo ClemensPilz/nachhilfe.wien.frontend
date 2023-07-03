@@ -5,7 +5,7 @@
     <SettingsField field-key="lastName" field-label="Nachname" field-name="updateLastName" field-type="text"/>
     <SettingsField field-key="description" field-label="Über mich" field-name="updateDescription" field-type="text"/>
 
-    <div>E-Mail: {{ userStore.user.email }}</div>
+    <div class="smallText">E-Mail: {{ userStore.user.email }}</div>
     </div>
 
 </template>
