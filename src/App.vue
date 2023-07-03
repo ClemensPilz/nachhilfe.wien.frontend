@@ -20,10 +20,11 @@ async function initApp() {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await userStore.auth({'token': token});
+      const response = await userStore.auth({token});
 
     } catch (e) {
       console.log(e);
+      await router.push('/');
     }
 
   } else {

@@ -31,7 +31,6 @@
             <RouterLink to="/search">Search</RouterLink>
           </div>
         </div>
-
         <!--Slot for Register and Login Buttons-->
         <div>
           <slot/>

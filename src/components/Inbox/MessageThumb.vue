@@ -8,22 +8,23 @@
         'appointment': props.type === 'APPOINTMENT'
       }">
 
-      <div v-if="props.type === 'APPOINTMENT'" class="text-sm text-primary italic font-bold uppercase">
-        {{ props.title }}
+      <div v-if="props.type === 'APPOINTMENT'" class="text-sm text-primary italic font-bold">
+        Anfrage für: <span class="text-accent">{{ coachingName }}</span>
       </div>
 
       <div v-if="props.type === 'APPOINTMENT'">
         <div>
-          Am {{ props.start }}
+          Am {{ start }}
         </div>
         <div>
-          {{ props.duration }} Stunden
+          {{ duration }} Stunden
         </div>
       </div>
 
       <div class="paragraph">
         {{ props.content }}
       </div>
+      <div>Status: {{ status }}</div>
 
       <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
         <ButtonSecondary text="Ablehnen" @click="ablehnen" class="mr-2"/>
@@ -47,7 +48,7 @@ import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 
 const userStore = useUserStore();
 const storeId = computed(() => userStore.user.userId);
-const props = defineProps(['content', 'title', 'start', 'duration', 'type', 'senderId', 'date']);
+const props = defineProps(['content', 'title', 'coachingName', 'status', 'start', 'duration', 'type', 'senderId', 'date']);
 
 function ablehnen() { alert('abgelehnt')}
 function annehmen() { alert('angenommen')}

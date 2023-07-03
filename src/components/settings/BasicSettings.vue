@@ -29,9 +29,9 @@ const token = localStorage.getItem('token');
 
 const requestUrl = computed(() => {
   if (userStore.user.userType === 'TEACHER') {
-    return `${userStore.url}/teacher/updateTeacher/${userStore.userId}`
+    return `${userStore.url}/teacher/updateTeacher/${userStore.user.userId}`
   } else {
-    return `${userStore.url}/student/updateStudent/${userStore.userId}`
+    return `${userStore.url}/student/updateStudent/${userStore.user.userId}`
   }
 })
 

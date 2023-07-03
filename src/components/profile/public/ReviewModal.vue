@@ -116,7 +116,7 @@ async function postReview() {
         url: `${userStore.url}/feedback`,
         data: {
           "teacherId": route.params.userId,
-          "studentId": userStore.userId,
+          "studentId": userStore.user.userId,
           "title": "title",
           "content": text.value,
           "rating": rating.value,

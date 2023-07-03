@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
 
     <form id="districtForm">
       <div class="flex flex-col flex-wrap max-w-md mx-auto max-h-24 gap-x-4">

@@ -5,8 +5,8 @@
 
     <section id="userData" class="mb-12">
 
-      <h5 class="headline-large text-center">Meine Userdaten</h5>
-      <h6 class="mb-2 paragraph-small text-center">Deine Basisdaten anpassen</h6>
+      <div class="headline-large text-center">Meine Userdaten</div>
+      <div class="mb-2 paragraph-small text-center">Deine Basisdaten anpassen</div>
 
       <!--Name and mail-->
       <BasicSettings/>
@@ -17,8 +17,8 @@
       </div>
 
       <!--Profile picture-->
-      <h5 class="mt-4 headline">Mein Profilbild ändern</h5>
-      <h6 class="mb-2 paragraph-small">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></h6>
+      <div class="mt-4 headline">Mein Profilbild ändern</div>
+      <div class="mb-2 paragraph-small">Erlaubte Formate: <span class="italic">jpg, png. Maximal 2mb</span></div>
       <ImageSettings/>
 
     </section>
@@ -27,13 +27,14 @@
     <!--Teachers only-->
     <section id="teacherData" v-if="userStore.user.userType === 'TEACHER'" class="border-t-2 pt-8">
 
-      <h5 class="text-xl text-center font-medium leading-tight text-darkPrimary">Lehrer-Bereich</h5>
-      <h6 class="mb-2 text-center text-md font-thin text-primary">Biete Nachhilfe an und lege fest, in welchen Bezirken du verfügbar bist</h6>
+      <div class="headline-large text-center">Lehrer-Bereich</div>
+      <div class="mb-2 paragraph-small text-center">Nachhilfe anbieten</div>
 
-      <h5 class="text-lg mt-4 leading-tight text-darkPrimary">Manage Coachings</h5>
+      <div class="mt-4 headline">Meine Angebote</div>
       <CoachingSettings/>
 
-      <h5 class="text-lg mt-4 leading-tight text-darkPrimary">Manage Districts</h5>
+      <div class="mt-4 headline">Meine Bezirke</div>
+      <div class="mb-2 paragraph-small">Wo bietest du Nachhilfe an?</div>
       <DistrictSettings/>
 
     </section>

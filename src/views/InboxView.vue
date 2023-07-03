@@ -29,6 +29,8 @@
                         :title="message.title"
                         :content="message.content"
                         :senderId="message.senderId"
+                        :coachingName="message.coachingName"
+                        :status="message.status"
                         :start="formatStart(message.start)"
                         :duration="formatDuration(message.start, message.end)"
                         :date="formatDate(message.timeStamp)"/>

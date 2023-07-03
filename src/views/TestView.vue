@@ -4,6 +4,8 @@
   <!--Container-->
   <div class="container max-w-6xl mx-auto text-center bg-white">
 
+    <button @click="getAppointments">Get Appointments</button>
+
 
     <div class="grid grid-rows-2 grid-cols-4 mt-4">
       <div class="col-span-4 md:col-span-2 bg-blue-400">
@@ -88,6 +90,23 @@ async function encodeImageToBase64() {
     console.log(baseString);
   };
   reader.readAsDataURL(imageData);
+}
+
+const getAppointments = async () => {
+  const requestUrl = `${userStore.url}/appointment/get-appointments/${userStore.user.userId}`;
+
+  try {
+    const response = await axios({
+      method: "GET",
+      url: requestUrl,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    console.log(response.data);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 onMounted(() => initTE({Ripple}));
