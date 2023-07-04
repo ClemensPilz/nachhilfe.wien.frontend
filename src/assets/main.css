@@ -2,11 +2,7 @@
 
 @layer base {
     html {
-        @apply text-neutral-800 font-sans;
-    }
-    html.dark {
-        @apply text-neutral-50;
-        @apply bg-neutral-800;
+        @apply text-primary
     }
 }
 
@@ -14,8 +10,40 @@
 @tailwind utilities;
 
 body {
-    background-color: white;
+    @apply: bg-background;
     overflow-x: hidden;
+}
+
+h1 {
+    @apply text-7xl font-semibold leading-tight
+}
+
+h2 {
+    @apply text-6xl font-semibold leading-normal
+}
+
+h3 {
+    @apply text-5xl font-semibold leading-relaxed
+}
+
+h4 {
+    @apply text-3xl font-semibold tracking-wide leading-relaxed
+}
+
+p {
+    @apply text-p
+}
+
+.text-p {
+    @apply text-2xl font-thin leading-normal tracking-wide
+}
+
+small {
+    @apply text-small
+}
+
+.text-small {
+    @apply text-lg font-semibold leading-normal tracking-wide
 }
 
 .headline-large {
@@ -23,7 +51,7 @@ body {
 }
 
 .headline {
-    @apply text-xl text-darkPrimary font-bold
+    @apply text-lg text-darkPrimary font-bold
 }
 
 .paragraph {

@@ -8,18 +8,23 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                mainBlue: '#3d00e0',
-                primary: '#607D8B',
                 darkPrimary: '#455A64',
                 lightPrimary: '#CFD8DC',
                 accent: '#FF5722',
                 darkAccent: '#B3340F',
                 primaryText: '#212121',
                 secondaryText: '#757575',
-                divider: '#BDBDBD'
+                divider: '#BDBDBD',
+                // -----
+                primary: '#1B2130',
+                secondary: '#9EA8B1',
+                background: '#F2F9FF',
+                mainBlue: '#0399FD',
+                mainYellow: '#FEDA57',
+                mainOrange: '#F08151'
             },
-            fontFamily: {gi
-                'sans': ['"Quicksand"', 'sans-serif'],
+            fontFamily: {
+                'sans': ['"Plus Jakarta Sans"', 'sans-serif'],
             }
         },
 
