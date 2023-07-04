@@ -17,8 +17,12 @@ module.exports = {
                 primaryText: '#212121',
                 secondaryText: '#757575',
                 divider: '#BDBDBD'
+            },
+            fontFamily: {gi
+                'sans': ['"Quicksand"', 'sans-serif'],
             }
         },
+
     },
     darkMode: 'class',
     plugins: [require('tw-elements/dist/plugin.cjs')]

@@ -23,6 +23,8 @@
       <HeroImage/>
     </section>
 
+    <div class="font-sans">Font-Sans</div>
+    <div class="font-big text-4xl font-bold">nachhilfe.wien</div>
     <!--Feature-Block-->
     <section class="mb-12 md:mx-10">
       <FeatureBlock/>
