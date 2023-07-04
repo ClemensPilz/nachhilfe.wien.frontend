@@ -19,21 +19,23 @@
           </div>
           <div class="flex items-center md:mt-auto justify-around md:justify-end gap-8 col-span-1">
             <ButtonLarge class="bg-mainBlue" text="Loslegen"/>
-            <div class="rounded-full w-24 h-24 bg-mainYellow flex items-center justify-center">
+            <div class="rounded-full w-24 h-24 bg-mainYellow shadow-lg flex items-center justify-center">
               <h2 class="text-white">?</h2>
             </div>
             <p>Lehrer werden</p>
           </div>
         </div>
       </div>
-      <img src="@/assets/images/home/title-desktop.jpg" alt="classroom situation with laptop"
-           class="w-full h-auto rounded-3xl max-w-7xl mx-auto px-2 mb-20">
+      <img src="@/assets/images/home/title-mobile3.jpg" alt="classroom situation with laptop"
+           class="w-full h-auto max-w-7xl mx-auto mb-20 md:hidden">
+      <img src="@/assets/images/home/title-desktop3.jpg" alt="classroom situation with laptop"
+           class="w-full h-auto max-w-7xl mx-auto mb-20 hidden md:block">
     </section>
 
     <section>
       <div class="container max-w-7xl mx-auto p-2">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-white border rounded-3xl p-6 ">
+          <div class="bg-white border rounded-3xl p-6 shadow-lg ">
             <h1>X</h1>
             <h4 class="text-mainOrange">Hilfe 24/7</h4>
             <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
@@ -43,7 +45,7 @@
               <small>Nachlesen</small>
             </div>
           </div>
-          <div class="bg-white border rounded-3xl p-6 ">
+          <div class="bg-white border rounded-3xl p-6 shadow-lg ">
             <h1>Y</h1>
             <h4>Hilfe 24/7</h4>
             <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
@@ -53,7 +55,7 @@
               <small>Nachlesen</small>
             </div>
           </div>
-          <div class="bg-white border rounded-3xl p-6 ">
+          <div class="bg-white border rounded-3xl p-6 shadow-lg ">
             <h1>Z</h1>
             <h4>Hilfe 24/7</h4>
             <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
@@ -63,7 +65,7 @@
               <small>Nachlesen</small>
             </div>
           </div>
-          <div class="bg-white border rounded-3xl p-6 ">
+          <div class="bg-white border rounded-3xl p-6 shadow-lg ">
             <h1>W</h1>
             <h4>Hilfe 24/7</h4>
             <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
