@@ -62,3 +62,6 @@ export const useUserStore = defineStore("user", () => {
 
   return { userId, user, url, auth, isAuthenticated };
 });
+
+
+
