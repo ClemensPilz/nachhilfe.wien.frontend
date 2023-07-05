@@ -34,7 +34,7 @@ p {
 }
 
 .text-p {
-    @apply text-2xl font-thin leading-normal tracking-wide
+    @apply text-xl font-thin leading-normal tracking-wide
 }
 
 small {
@@ -42,7 +42,7 @@ small {
 }
 
 .text-small {
-    @apply text-lg font-semibold leading-normal tracking-wide
+    @apply text-base font-semibold leading-normal tracking-wide
 }
 
 .headline-large {

@@ -36,7 +36,7 @@ nav {
 }
 
 ul {
-  @apply flex gap-12
+  @apply flex gap-8 md:gap-12
   text-xl
 }
 
