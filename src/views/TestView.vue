@@ -10,10 +10,10 @@
           </div>
           <div class="flex items-center md:mt-auto justify-around md:justify-end gap-8 col-span-1">
             <ButtonLarge class="bg-mainBlue" text="Loslegen"/>
-            <div class="rounded-full w-24 h-24 bg-mainYellow shadow-lg flex items-center justify-center">
-              <h2 class="text-white">?</h2>
+            <div class="rounded-full w-20 h-20 bg-mainYellow shadow-lg flex items-center justify-center hover:shadow-xl hover:cursor-pointer hover:bg-opacity-80">
+              <h3 class="text-white">?</h3>
             </div>
-            <p>Lehrer werden</p>
+            <p class="hover:opacity-70 hover:cursor-pointer">Lehrer werden</p>
           </div>
         </div>
       </div>
@@ -23,51 +23,35 @@
            class="w-full h-auto max-w-7xl mx-auto hidden md:block rounded-t-3xl">
     </section>
 
-    <section id="featureCards" class="bg-white">
+    <section id="features" class="bg-white">
       <div class="container max-w-7xl mx-auto py-12 lg:py-20 p-2">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
+          <div class="text-center">
+            <h1>X</h1>
+            <h4 class="text-mainOrange">Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
+          <div class="text-center">
+            <h1>Y</h1>
+            <h4>Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
+          <div class="text-center">
+            <h1>Z</h1>
+            <h4>Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
           <CardLarge>
             <template v-slot:content>
-              <h1>X</h1>
-              <h4 class="text-mainOrange">Hilfe 24/7</h4>
-              <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+              <h4>Hilfe erhalten</h4>
+              <p class="text-secondary">Wir stehen dir jederzeit bei Fragen oder Problemen zur Verfügung!
               </p>
               <div class="text-right">
-                <ButtonRegular class="text-right bg-mainOrange" text="Nachlesen"/>
-              </div>
-            </template>
-          </CardLarge>
-          <CardLarge>
-            <template v-slot:content>
-              <h1>Y</h1>
-              <h4>Hilfe 24/7</h4>
-              <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
-              </p>
-              <div class="text-right">
-                <ButtonRegular class="text-right bg-mainBlue" text="Nachlesen"/>
-              </div>
-            </template>
-          </CardLarge>
-          <CardLarge>
-            <template v-slot:content>
-              <h1>Z</h1>
-              <h4>Hilfe 24/7</h4>
-              <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
-              </p>
-              <div class="text-right">
-                <ButtonRegular class="text-right bg-mainYellow" text="Nachlesen"/>
-              </div>
-            </template>
-          </CardLarge>
-          <CardLarge>
-            <template v-slot:content>
-              <h1>W</h1>
-              <h4>Hilfe 24/7</h4>
-              <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
-              </p>
-              <div class="text-right">
-                <ButtonRegular class="text-right bg-primary" text="Nachlesen"/>
+                <ButtonRegular class="text-right bg-primary" text="Kontakt"/>
               </div>
             </template>
           </CardLarge>
@@ -84,7 +68,7 @@
           <div class="col-span-3 lg:col-span-2 text-center lg:text-left">
             <h3>Einfach anmelden und mitmachen!</h3>
             <p>Du bist Schüler und suchst jemanden, der dir rasch und unkompliziert auf die Sprünge hilfst?
-              Nachhilfe.Wien ist die Plattform für dich! Anmelden und Temrmin vereinbaren.</p>
+              Nachhilfe.Wien ist die Plattform für dich! Anmelden und Termin vereinbaren.</p>
           </div>
 
           <div class="col-span-3 lg:col-span-1 flex justify-around lg:justify-end lg:items-end">
@@ -97,36 +81,45 @@
     </section>
 
     <section id="userCards">
-      <div class="container max-w-7xl mx-auto p-12 sm:p-2">
+      <div class="container max-w-7xl mx-auto mb-12 p-12 sm:p-2">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-          <CardLarge>
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
             <template v-slot:image>
               <img src="@/assets/images/home/userCards/student.jpg" alt="" class="w-full">
             </template>
             <template v-slot:content>
-              <p>Als Schüler anmelden</p>
-              <small>Hier geht's zur Registrierung</small>
+              <h4 class="text-mainBlue">Als Schüler anmelden</h4>
+              <p class="text-secondary">Registriere dich und finde einen Nachhilfelehrer</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Registrierung</small>
+              </div>
             </template>
           </CardLarge>
 
-          <CardLarge>
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
             <template v-slot:image>
               <img src="@/assets/images/home/userCards/teacher.jpg" alt="" class="w-full">
             </template>
             <template v-slot:content>
-              <p>Als Schüler anmelden</p>
-              <small>Hier geht's zur Registrierung</small>
+              <h4 class="text-mainOrange">Lehrer werden</h4>
+              <p class="text-secondary">Anderen helfen und dabei auch noch Geld verdienen</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Registrierung</small>
+              </div>
             </template>
           </CardLarge>
 
-          <CardLarge>
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
             <template v-slot:image>
               <img src="@/assets/images/home/userCards/help.jpg" alt="" class="w-full">
             </template>
             <template v-slot:content>
-              <p>Als Schüler anmelden</p>
-              <small>Hier geht's zur Registrierung</small>
+              <h4>Jobs</h4>
+              <p class="text-secondary">Werde Teil unseres Teams - schick uns deine Bewerbung</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Kontakt</small>
+              </div>
             </template>
           </CardLarge>
 
@@ -136,13 +129,13 @@
     </section>
 
 
+
   </div>
 </template>
 
 <script setup>
 
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
-import {QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 

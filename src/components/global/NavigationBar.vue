@@ -1,4 +1,15 @@
 <template>
+  <FormModal ref="loginModalRef" >
+    <CardLarge class="m-0">
+      <template v-slot:content>
+        <LoginForm @close="closeFormModal"/>
+      </template>
+    </CardLarge>
+  </FormModal>
+
+
+
+
   <nav>
     <h4 id="logo">logo</h4>
     <ul>
@@ -11,7 +22,7 @@
       <li>
         <RouterLink to="dashboard">Hilfe</RouterLink>
       </li>
-      <li class="text-mainBlue">
+      <li class="text-mainBlue" @click="openFormModal">
         Login
       </li>
     </ul>
@@ -19,6 +30,20 @@
 </template>
 
 <script setup>
+
+import FormModal from "@/components/util/modals/FormModal.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+
+import {ref} from "vue";
+import LoginForm from "@/components/util/forms/LoginForm.vue";
+
+const loginModalRef = ref(null);
+
+function openFormModal() {
+  loginModalRef.value.openModal();
+}function closeFormModal() {
+  loginModalRef.value.closeModal();
+}
 
 </script>
 

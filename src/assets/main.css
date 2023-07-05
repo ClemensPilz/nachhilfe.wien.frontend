@@ -2,16 +2,8 @@
 
 @layer base {
     html {
-        @apply text-primary
+        @apply text-primary bg-background
     }
-}
-
-@tailwind components;
-@tailwind utilities;
-
-html {
-    @apply bg-background;
-}
 
 h1 {
     @apply text-7xl font-semibold leading-tight
@@ -45,6 +37,14 @@ small {
     @apply text-base font-semibold leading-normal tracking-wide
 }
 
+
+
+
+
+
+
+
+
 .headline-large {
     @apply text-2xl text-darkPrimary font-bold
 }
@@ -60,3 +60,12 @@ small {
 .paragraph-small {
     @apply text-sm text-primary
 }
+
+
+
+
+
+}
+
+@tailwind components;
+@tailwind utilities;

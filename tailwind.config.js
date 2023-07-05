@@ -18,7 +18,8 @@ module.exports = {
                 // -----
                 primary: '#1B2130',
                 secondary: '#9EA8B1',
-                background: '#F2F9FF',
+                // background: '#F2F9FF',
+                background: '#edf1f5',
                 mainBlue: '#0399FD',
                 mainYellow: '#FEDA57',
                 mainOrange: '#F08151'
