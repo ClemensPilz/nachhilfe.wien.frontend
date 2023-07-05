@@ -9,9 +9,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply: bg-background;
-    overflow-x: hidden;
+html {
+    @apply bg-background;
 }
 
 h1 {

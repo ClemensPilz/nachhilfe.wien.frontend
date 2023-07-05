@@ -1,14 +1,5 @@
 <template>
-  <div class="bg-background min-h-screen">
-    <nav class="max-w-7xl mx-auto mb-20 pt-8 px-8 flex items-center justify-between">
-      <h4 id="logo" class="text-mainOrange">logo</h4>
-      <ul class="flex gap-12 text-xl">
-        <li class="hover:cursor-pointer">Home</li>
-        <li class="hover:cursor-pointer">About</li>
-        <li class="hover:cursor-pointer">FAQ</li>
-        <li class="hover:cursor-pointer text-mainBlue">Login</li>
-      </ul>
-    </nav>
+  <div class="min-h-screen">
 
     <section>
       <div class="container max-w-7xl mx-auto px-4 mb-8">

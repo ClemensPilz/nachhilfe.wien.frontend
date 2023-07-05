@@ -1,8 +1,12 @@
 
 <template>
-  <header></header>
+
+  <header>
+    <NavigationBar />
+  </header>
 
   <RouterView :key="$route.fullPath" />
+
 </template>
 
 <script setup>
@@ -11,6 +15,7 @@ import {onMounted} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
 import router from "@/router";
+import NavigationBar from "@/components/global/NavigationBar.vue";
 
 const userStore = useUserStore();
 
@@ -36,4 +41,6 @@ onMounted(() => initApp());
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
