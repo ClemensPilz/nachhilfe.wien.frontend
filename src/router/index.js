@@ -6,6 +6,7 @@ import SearchView from "@/views/SearchView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import TestView from "@/views/TestView.vue";
 import AboutUsView from "@/views/AboutUsView.vue";
+import CalendarView from "@/views/CalendarView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutUsView
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: CalendarView
     }
   ]
 })
