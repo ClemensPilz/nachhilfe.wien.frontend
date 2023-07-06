@@ -47,7 +47,7 @@ const router = createRouter({
       component: AboutUsView
     },
     {
-      path: '/calendar',
+      path: '/calendar/:userId',
       name: 'calendar',
       component: CalendarView
     }

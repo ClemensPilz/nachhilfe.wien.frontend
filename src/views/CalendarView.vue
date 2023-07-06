@@ -11,6 +11,8 @@ const route = useRoute();
 const userStore = useUserStore();
 const userId = route.params.userId;
 const firstName = ref();
+const appointments = ref();
+const selectedDayAppointments = ref();
 
 async function getUserData(userid) {
   try {
@@ -27,7 +29,23 @@ async function getUserData(userid) {
   }
 }
 
-onMounted(() => getUserData(userId));
+async function getAppointments() {
+  try {
+    const response = await axios.get(`${userStore.url}/get-appointments/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    appointments.value = response.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+onMounted(() => {
+  getUserData(userId);
+  getAppointments();
+});
 
 </script>
 
@@ -40,13 +58,13 @@ onMounted(() => getUserData(userId));
           <p class="text-sm font-bold uppercase tracking-widest">Persönlicher Kalender</p>
           <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide">
             <span class="text-mainBlue">Willkommen </span>
-            <span class="text-yellow-400" :key="userId"> {{firstName}} </span>
+            <span class="text-yellow-400" :key="firstName"> {{firstName}} </span>
           </h2>
         </div>
         <div class="w-2/3">
           <div class="flex items-center justify-end">
             <div class="w-64 pt-20">
-              <VCalendar show-weeknumbers/>
+              <VCalendar :appointments="appointments" show-weeknumbers/>
             </div>
           </div>
         </div>
@@ -73,6 +91,16 @@ onMounted(() => getUserData(userId));
                     <p class="text-base font-bold text-gray-700 uppercase">{event.name}</p>
                     <p class="mt-1 text-xs text-gray-500">{event.details}</p>
                   </div>
+<!--                  <div v-if="selectedDayAppointments.length === 0">-->
+                    <p>Sie haben einen freien Tag! Genießen Sie die Dinge, die Sie gerne tun.</p>
+<!--                  <div v-else>-->
+<!--                    <div v-for="appointment in selectedDayAppointments" :key="appointment.id">-->
+<!--                      &lt;!&ndash; Anzeigen der Termindetails &ndash;&gt;-->
+<!--                      <p>{{appointment.name}}</p>-->
+<!--                      <p>{{appointment.time}}</p>-->
+<!--                      <p>{{appointment.details}}</p>-->
+<!--                    </div>-->
+
                 </div>
               </li>
             </ul>
