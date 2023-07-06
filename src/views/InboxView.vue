@@ -6,8 +6,8 @@
     <div class="grid grid-cols-12 gap-2">
 
       <!--Left part-->
-      <div class="sticky h-fit col-span-3 top-20">
-        <div class="flex flex-col">
+      <div class="max-h-[calc(100vh-70px)] overflow-y-scroll overflow-x-hidden col-span-3 top-20 noScrollbar">
+        <div class="flex flex-col gap-2">
           <ConversationThumb v-for="conversation in conversations"
                              :key="conversation.conversationId"
                              :users="conversation.users"
@@ -19,7 +19,7 @@
 
       <!--Right Part-->
       <!--Messages-->
-      <div class="flex flex-col col-span-9">
+      <div class="flex flex-col col-span-9 overflow-y-scroll overflow-x-hidden max-h-[calc(100vh-70px)] noScrollbar">
         <div v-if="messages">
           <MessageThumb v-for="message in messages"
                         :key="message.messageId"
@@ -27,13 +27,13 @@
                         :title="message.title"
                         :content="message.content"
                         :senderId="message.senderId"
-                        :date="message.timeStamp"/>
+                        :date="formatDate(message.timeStamp)"/>
         </div>
 
         <!--Send-Field-->
         <MessageInput :class="conversationId ? 'block' : 'hidden'"
-                      @send="sendMessage"
-                      @keydown.enter="sendMessage"
+                      @send="postMessage"
+                      @keydown.enter="postMessage"
                       button-text="Senden"
                       button-bg="bg-primary">
           <input type="text"
@@ -43,6 +43,7 @@
                  class="w-full border border-lightPrimary p-4"
                  v-model="messageText">
         </MessageInput>
+        <div id="pageEnd"></div>
 
       </div>
 
@@ -66,14 +67,40 @@ const userStore = useUserStore();
 const conversationId = ref(null);
 const conversations = ref(null);
 const messages = ref(null);
-const messageText = ref('');
+const messageText = ref(null);
 const conversationStore = useConversationStore();
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+
+  const timeString = date.toTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  const today = new Date();
+  if (today.getDate() === date.getDate()) {
+    return `${timeString.substring(0, 5)}`;
+  }
+
+  const dateString = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+
+  return `${dateString}, ${timeString.substring(0, 5)}`;
+
+}
 
 
 //Gets an array of conversations from API
 async function getConversations(userId) {
   try {
     const response = await axios({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'get',
       url: `${userStore.url}/conversation/user/${userId}`
     });
@@ -96,17 +123,27 @@ async function getMessages(id) {
     messages.value = response.data.messages;
     sortMessages();
     conversationId.value = id;
+    for (const message in messages) {
+      console.log(message)
+    }
+    console.log(response.data);
   } catch (e) {
     console.log(e);
   }
 }
 
 //Push message to conversation
-async function sendMessage() {
+async function postMessage() {
+  if (messageText.value == null) {
+    return;
+  }
   try {
     const response = await axios({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       method: 'post',
-      url: `${userStore.url}/message/sendMessage/${conversationId.value}`,
+      url: `${userStore.url}/message/send-message/${conversationId.value}`,
       data: {
         "title": "title",
         "content": messageText.value,
@@ -117,6 +154,7 @@ async function sendMessage() {
     if (response.status === 201) {
       //reload the conversation
       await getMessages(conversationId.value);
+      messageText.value = null;
     }
 
   } catch (e) {
@@ -149,9 +187,9 @@ async function initInboxView() {
   }
 }
 
-// onUpdated(() => {
-//   scroll();
-// })
+onUpdated(() => {
+  scroll();
+})
 
 // This function sets up a watcher that listens for a change in the isAuthenticated-variable in userStore. This is
 // necessary because initInboxView() will only work once the appropriate user information has been fetched.
@@ -173,5 +211,15 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
+
+.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.noScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 </style>

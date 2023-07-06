@@ -1,20 +1,18 @@
 <template>
-<div class="m-2">
-
-  <div :class="props.senderId == storeId ? 'ownMessage' : 'foreignMessage'">
-    <div class="headline">
-      {{ props.title }}
-    </div>
-    <div class="paragraph">
-      {{ props.content }}
-    </div>
-    <div class="paragraph font-bold">
-      {{ props.date }}
-    </div>
-  </div>
+  <div class="m-2 w-full">
 
 
-</div>
+      <div :class="props.senderId == storeId ? 'ownMessage' : 'foreignMessage'">
+        <div class="paragraph">
+          {{ props.content }}
+        </div>
+        <div class="paragraph font-bold">
+          {{ props.date }}
+        </div>
+      </div>
+
+    </div>
+
 </template>
 
 <script setup>
@@ -22,7 +20,7 @@ import {useUserStore} from "@/stores/user";
 import {computed} from "vue";
 
 const userStore = useUserStore();
-const storeId = computed(() => userStore.user.id);
+const storeId = computed(() => userStore.user.userId);
 const props = defineProps(['content', 'title', 'senderId', 'date']);
 
 </script>
@@ -30,15 +28,15 @@ const props = defineProps(['content', 'title', 'senderId', 'date']);
 <style lang="scss" scoped>
 
 .ownMessage {
-  @apply bg-lightPrimary text-right ml-10
+  @apply bg-gray-100 text-right p-2 pr-4 ml-auto
 }
 
 .foreignMessage {
-  @apply bg-accent mr-10
+  @apply bg-lightPrimary text-left p-2
 }
 
 .ownMessage, .foreignMessage {
-  @apply p-2 rounded-lg
+  @apply rounded-lg w-fit
 }
 
 

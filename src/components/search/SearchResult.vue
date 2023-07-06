@@ -10,12 +10,17 @@
 
       <div class="flex gap-2 flex-wrap text-xs">
         <div v-for="coaching in coachings"
+             :key="coaching.coachingId"
              class="px-2 py-1 rounded-lg border border-white
-              hover:border-accent hover:cursor-pointer select-none">
-          {{ coaching.subject }}: {{ coaching.price }}
+              hover:border-accent hover:cursor-pointer select-none"
+             @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId})">
+          {{ coaching.subject }}: {{ coaching.rate }}€/h
         </div>
       </div>
-      <ButtonAccent text="Contact" class="w-fit my-3"/>
+      <div class="flex gap-2">
+        <ButtonPrimary text="Profile" class="w-fit my-3" @click="$emit('profile')"/>
+        <ButtonAccent text="Contact" class="w-fit my-3" @click="$emit('contact')"/>
+      </div>
     </div>
 
     <!--Image-Part-->
@@ -29,13 +34,18 @@
 
 <script setup>
 import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const props = defineProps({
+  'teacherId': Number,
   'name': String,
   'description': String,
   'rating': String,
   'coachings': Array
 })
+
+
+const emits = defineEmits(['contact', 'profile', 'requestAppointment']);
 </script>
 
 <style lang="scss" scoped>

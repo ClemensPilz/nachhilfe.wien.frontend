@@ -5,7 +5,7 @@
         <div class="text-white">
           <h2 class="mb-4 text-4xl bg-primary px-2 font-semibold text-white">nachhilfe.wien</h2>
           <h4 class="mb-6 text-xl font-semibold text-lightPrimary">Wir bringen dich auf Zack!</h4>
-          <ButtonAccent text="Termin vereinbaren" />
+          <ButtonAccent text="Nachhilfe finden" />
         </div>
       </div>
     </div>
