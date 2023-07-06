@@ -2,7 +2,15 @@
   <FormModal ref="loginModalRef" >
     <CardLarge class="m-0">
       <template v-slot:content>
-        <LoginForm @close="closeFormModal"/>
+        <LoginForm @close="closeLoginModal"/>
+      </template>
+    </CardLarge>
+  </FormModal>
+
+  <FormModal ref="registrationModalRef" >
+    <CardLarge class="m-0">
+      <template v-slot:content>
+        <RegistrationForm @close="closeRegistrationModal" />
       </template>
     </CardLarge>
   </FormModal>
@@ -22,9 +30,13 @@
       <li>
         <RouterLink to="dashboard">Hilfe</RouterLink>
       </li>
-      <li class="text-mainBlue" @click="openFormModal">
+      <li class="text-mainBlue" @click="openLoginModal">
         Login
       </li>
+      <li class="text-mainBlue" @click="openRegistrationModal">
+        Register
+      </li>
+
     </ul>
   </nav>
 </template>
@@ -36,14 +48,23 @@ import CardLarge from "@/components/util/cards/CardLarge.vue";
 
 import {ref} from "vue";
 import LoginForm from "@/components/util/forms/LoginForm.vue";
+import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
 
 const loginModalRef = ref(null);
+const registrationModalRef = ref(null);
 
-function openFormModal() {
+function openLoginModal() {
   loginModalRef.value.openModal();
-}function closeFormModal() {
+}function closeLoginModal() {
   loginModalRef.value.closeModal();
 }
+
+function openRegistrationModal() {
+  registrationModalRef.value.openModal();
+}function closeRegistrationModal() {
+  registrationModalRef.value.closeModal();
+}
+
 
 </script>
 
@@ -67,6 +88,10 @@ ul {
 
 li {
   @apply hover:cursor-pointer
+}
+
+.router-link-active {
+  @apply underline decoration-secondary underline-offset-4
 }
 
 </style>

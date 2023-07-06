@@ -1,12 +1,12 @@
 <template>
-  <form class="w-full flex flex-col bg-background">
+  <form>
 
-    <label for="email" class="text-small text-secondary">E-Mail:</label>
-    <input type="email" class="text-p" name="email" v-model="email" placeholder="E-Mail">
+    <label for="email">E-Mail:</label>
+    <input type="email" name="email" v-model="email" placeholder="E-Mail">
     <div class="error">{{ errors.email }}</div>
 
-    <label for="password" class="text-small text-secondary">Passwort:</label>
-    <input type="password" class="text-p" name="password" v-model="password" placeholder="Passwort">
+    <label for="password">Passwort:</label>
+    <input type="password" name="password" v-model="password" placeholder="Passwort">
     <div class="error">{{ errors.password }}</div>
 
     <div class="mt-2 flex justify-around">
@@ -62,8 +62,6 @@ async function login() {
   if (!meta.value.valid || isCalling.value) {
     return;
   }
-
-  console.log('sdfasfd')
   isCalling.value = true;
   try {
     const response = await userStore.auth({'email': email.value, 'password': password.value});
@@ -84,8 +82,16 @@ async function login() {
 
 <style lang="scss" scoped>
 
+form {
+  @apply w-full flex flex-col bg-background max-h-screen py-2 overflow-y-scroll
+}
+
+label {
+  @apply text-small text-secondary
+}
+
 input {
-  @apply px-4 py-2 m-2 rounded-3xl
+  @apply px-4 py-2 m-2 rounded-3xl text-p
 }
 
 .error {
