@@ -4,6 +4,8 @@ import {useRoute} from "vue-router";
 import {useUserStore} from "@/stores/user";
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import NavBar from "@/components/global/NavBar.vue";
+import FooterBar from "@/components/global/FooterBar.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -31,6 +33,7 @@ onMounted(() => getUserData(userId));
 
 <template>
   <section class="min-h-screen">
+    <nav-bar/>
     <div class="container mx-auto px-6 py-12 lg:px-20 text-white">
       <div class="flex items-center justify-between space-x-8">
         <div class="max-w-2xl">
@@ -77,6 +80,7 @@ onMounted(() => getUserData(userId));
         </div>
       </div>
     </div>
+    <footer-bar/>
   </section>
 </template>
 
