@@ -6,6 +6,7 @@ import SearchView from "@/views/SearchView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import TestView from "@/views/TestView.vue";
 import SettingsView from "@/views/SettingsView.vue";
+import TeacherProfile from "@/views/TeacherProfile.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,7 +34,7 @@ const router = createRouter({
     {
       path: '/profile/:userId',
       name: 'profile',
-      component: ProfileView
+      component: TeacherProfile
     },
     {
       path: '/settings',
