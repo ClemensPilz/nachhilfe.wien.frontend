@@ -6,6 +6,7 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import NavBar from "@/components/global/NavBar.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -65,6 +66,7 @@ onMounted(() => {
           <div class="flex items-center justify-end">
             <div class="w-64 pt-20">
               <VCalendar :appointments="appointments" show-weeknumbers/>
+              <button-primary text="ADD"/>
             </div>
           </div>
         </div>
