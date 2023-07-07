@@ -1,5 +1,26 @@
 <template>
   <div class="min-h-screen">
+    <FormModal ref="reviewModalRef" >
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <ReviewForm @close="closeReviewModal" :teacherId="teacherId" :studentId="userStore.user.userId"/>
+        </template>
+      </CardLarge>
+    </FormModal>
+
+
+
+    <FormModal ref="appointmentModalRef" >
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <!--<ReviewForm @close="closeAppointmentModal" teacherId="teacherId" studentId="userStore.user.userId" />-->
+        </template>
+      </CardLarge>
+    </FormModal>
+
+
+
+
     <h3 v-if="!profile" class="text-center">
       User nicht gefunden!
     </h3>
@@ -29,7 +50,8 @@
                 <h1 class="text-mainOrange">?</h1>
                 <div>
                   <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
-                  <p>Durchschnittl. Wertung: {{ profile.averageRatingScore }}</p>
+                  <p>{{profile.description}}</p>
+                  <small>Durchschnittl. Wertung: {{ profile.averageRatingScore }}</small>
 
                 </div>
               </li>
@@ -46,7 +68,9 @@
                 <div>
                   <small class="block pb-3">Lehrer kontaktieren:</small>
                   <div class="flex gap-2 flex-wrap">
-                    <ButtonRegular v-for="n in 3" class="bg-primary" text="Hello World"/>
+                    <ButtonRegular class="bg-mainOrange" text="Nachricht" @click="appStore.sendMessage(teacherId, true)"/>
+                    <ButtonRegular v-if="userStore.user.userType === 'STUDENT'" class="bg-mainBlue" text="Bewerten" @click="openReviewModal" />
+                    <ButtonRegular v-else class="bg-secondary" text="Bewerten" @click="alert('Nur Schüler können Bewertungen abgeben')" />
                   </div>
                 </div>
 
@@ -72,11 +96,35 @@ import axios from "axios";
 import stockPhoto from "@/assets/images/teacherProfile/teacher-stockphoto.jpg"
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+import {useAppStore} from "@/stores/app";
+import FormModal from "@/components/util/modals/FormModal.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+import ReviewForm from "@/components/util/forms/ReviewForm.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
+const appStore = useAppStore();
 const teacherId = route.params.userId;
 const profile = ref(null);
+
+const reviewModalRef = ref();
+const appointmentModalRef = ref();
+
+function openReviewModal() {
+  reviewModalRef.value.openModal();
+}
+function closeReviewModal() {
+  reviewModalRef.value.closeModal();
+}
+
+function openAppointmentModal() {
+  appointmentModalRef.value.openModal();
+}
+function closeAppointmentModal() {
+  appointmentModalRef.value.closeModal();
+}
+
+
 
 async function getTeacherProfile(id) {
   try {
