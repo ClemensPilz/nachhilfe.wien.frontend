@@ -24,7 +24,7 @@
       <div class="paragraph">
         {{ props.content }}
       </div>
-      <div>Status: {{ status }}</div>
+      <div v-if="props.type === 'APPOINTMENT'">Status: {{ status }}</div>
 
       <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
         <ButtonSecondary text="Ablehnen" @click="ablehnen" class="mr-2"/>
@@ -66,7 +66,7 @@ function annehmen() { alert('angenommen')}
 }
 
 .ownMessage, .foreignMessage {
-  @apply rounded-lg w-fit
+  @apply rounded-3xl w-fit
 
 }
 

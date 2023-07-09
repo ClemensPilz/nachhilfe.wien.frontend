@@ -14,8 +14,6 @@ export const useUserStore = defineStore("user", () => {
 
   const appStore = useAppStore();
 
-  async function tokenAuth(token) {}
-
   //Saves userId to localStorage, userinfos to store and returns 1 if successful, -1 if not
   async function auth(credentials) {
     let axiosConfig;
@@ -56,6 +54,7 @@ export const useUserStore = defineStore("user", () => {
         isAuthenticated.value = true;
         return { status: 1, data: response.data };
       } else {
+        isAuthenticated.value = false;
         return { status: -1, error: "Unexpected response status" };
       }
     } catch (e) {
@@ -64,5 +63,11 @@ export const useUserStore = defineStore("user", () => {
     }
   }
 
-  return { userId, user, url, auth, isAuthenticated };
+  async function logout() {
+    localStorage.removeItem('token');
+    isAuthenticated.value = false;
+    await router.push('/');
+  }
+
+  return { userId, user, url, auth, isAuthenticated, logout};
 });

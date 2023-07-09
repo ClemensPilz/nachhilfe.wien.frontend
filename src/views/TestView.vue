@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen">
 
-    <section id="hero">
+    <section id="hero" class="bg-background">
       <div class="container max-w-7xl mx-auto px-4 mb-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div class="flex flex-col text-center md:text-left col-span-1">
@@ -9,7 +9,7 @@
             <h1>Finde jetzt Nachhilfe</h1>
           </div>
           <div class="flex items-center md:mt-auto justify-around md:justify-end gap-8 col-span-1">
-            <ButtonLarge class="bg-mainBlue" text="Loslegen"/>
+            <ButtonLarge class="bg-mainBlue" text="Loslegen" />
             <div class="rounded-full w-20 h-20 bg-mainYellow shadow-lg flex items-center justify-center hover:shadow-xl hover:cursor-pointer hover:bg-opacity-80">
               <h3 class="text-white">?</h3>
             </div>
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <section id="cta">
+    <section id="cta" class="bg-background">
       <div class="container max-w-7xl mx-auto p-2 lg:p-12">
 
         <div class="grid grid-cols-3 gap-4">
@@ -80,8 +80,8 @@
       </div>
     </section>
 
-    <section id="userCards">
-      <div class="container max-w-7xl mx-auto mb-12 p-12 sm:p-2">
+    <section id="userCards" class="bg-background">
+      <div class="container max-w-7xl mx-auto pb-12 p-12 sm:p-2">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
           <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
@@ -138,6 +138,8 @@
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+import {useUserStore} from "@/stores/user";
+const userStore = useUserStore();
 
 </script>
 

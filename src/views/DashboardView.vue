@@ -1,5 +1,4 @@
 <template>
-  <NavBar/>
   <div class="container max-w-6xl mx-auto min-h-screen">
     <div class="imageContainer topImage flex items-center justify-center">
       <div class="headline-large">Hello Dashboard</div>
@@ -18,7 +17,6 @@
 
 <script setup>
 
-import NavBar from "@/components/global/NavBar.vue";
 </script>
 
 <style lang="scss" scoped>

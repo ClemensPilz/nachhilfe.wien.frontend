@@ -1,21 +1,20 @@
 <template>
-  <form>
+    <form>
 
-    <label for="email">E-Mail:</label>
-    <input type="email" name="email" v-model="email" placeholder="E-Mail">
-    <div class="error">{{ errors.email }}</div>
+      <label for="email">E-Mail:</label>
+      <input type="email" name="email" v-model="email" placeholder="E-Mail">
+      <div class="error">{{ errors.email }}</div>
 
-    <label for="password">Passwort:</label>
-    <input type="password" name="password" v-model="password" placeholder="Passwort">
-    <div class="error">{{ errors.password }}</div>
+      <label for="password">Passwort:</label>
+      <input type="password" name="password" v-model="password" placeholder="Passwort">
+      <div class="error">{{ errors.password }}</div>
 
-    <div class="mt-2 flex justify-around">
-      <ButtonRegular @click="$emit('close')" class="bg-secondary" text="Zurück"/>
-      <ButtonRegular @click="login" class="bg-mainOrange" text="Login"/>
+      <div class="mt-2 flex justify-around">
+        <ButtonRegular @click="$emit('close')" class="bg-secondary" text="Zurück"/>
+        <ButtonRegular @click="login" class="bg-mainOrange" text="Login"/>
+      </div>
 
-    </div>
-
-  </form>
+    </form>
 </template>
 
 <script setup>
@@ -24,6 +23,7 @@ import {useRouter} from "vue-router";
 import {useForm} from "vee-validate";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import {ref} from "vue";
+import {useAppStore} from "@/stores/app";
 
 const userStore = useUserStore();
 const user = userStore.user;

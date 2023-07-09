@@ -12,7 +12,6 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import {onMounted} from "vue";
-import axios from "axios";
 import {useUserStore} from "@/stores/user";
 import router from "@/router";
 import NavigationBar from "@/components/global/NavigationBar.vue";

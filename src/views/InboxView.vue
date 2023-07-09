@@ -1,9 +1,13 @@
 <template>
 
-  <NavBar/>
-  <div class="container mx-auto max-w-6xl">
+  <div class="container mx-auto max-w-7xl mt-4">
 
-    <div class="grid grid-cols-12 gap-2">
+    <div v-if="hasNoMessages">
+      <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
+    </div>
+
+    <div class="grid grid-cols-12 gap-12">
+
 
       <!--Left part-->
       <div class="max-h-[calc(100vh-70px)] overflow-y-scroll overflow-x-hidden col-span-3 top-20 noScrollbar">
@@ -43,13 +47,12 @@
         <MessageInput :class="conversationId ? 'block' : 'hidden'"
                       @send="postMessage"
                       @keydown.enter="postMessage"
-                      button-text="Senden"
-                      button-bg="bg-primary">
+                      button-text="Senden">
           <input type="text"
                  name="messageText"
                  id="messageText"
                  placeholder="Neue Nachricht senden"
-                 class="w-full border border-lightPrimary p-4"
+                 class="w-full border border-secondary p-4 rounded-3xl"
                  v-model="messageText">
         </MessageInput>
 
@@ -61,9 +64,7 @@
 </template>
 
 <script setup>
-
-import NavBar from "@/components/global/NavBar.vue";
-import {computed, onBeforeMount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
@@ -73,10 +74,11 @@ import {useConversationStore} from "@/stores/conversation";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
-const conversations = ref(null);
+const conversations = ref([]);
 const messages = ref(null);
 const messageText = ref(null);
 const conversationStore = useConversationStore();
+const hasNoMessages = ref(false);
 
 function formatDate(timestamp) {
   const date = new Date(timestamp);
@@ -88,7 +90,7 @@ function formatDate(timestamp) {
 
   const today = new Date();
   if (today.getDate() === date.getDate()) {
-    return `${timeString.substring(0, 5)}`;
+    return `heute ${timeString.substring(0, 5)}`;
   }
 
   const dateString = date.toLocaleDateString("en-GB", {
@@ -210,6 +212,11 @@ async function initInboxView() {
       console.log(conversationStore.getActiveConversationInInbox())
       await getMessages(conversationStore.getActiveConversationInInbox());
     }
+    setTimeout(() => {
+      if (conversations.value.length < 1) {
+        hasNoMessages.value = true;
+      }
+    }, 1000);
   } catch (e) {
     console.log(e)
   }

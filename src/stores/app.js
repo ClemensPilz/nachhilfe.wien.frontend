@@ -10,7 +10,21 @@ export const useAppStore = defineStore('app', () => {
 
     const userStore = useUserStore();
     const subjects = ref({});
-    const levels = ["VOLKSSCHULE", "MITTELSCHULE"]
+    const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
+    const selectedCoaching = ref({});
+    const modalStack = ref([]);
+
+    function pushModal(modal) {
+     modalStack.value.push(modal);
+     console.log(modalStack.value)
+    }
+
+    function popModal() {
+        modalStack.value.pop();
+    }
+    function selectCoaching(teacherId, coachingId) {
+        selectedCoaching.value = {teacherId, coachingId}
+    }
 
     //Gets conversation from API. If isPushing is true, will push router to InboxView.vue
     async function sendMessage(recipientId, isPushing) {
@@ -34,7 +48,7 @@ export const useAppStore = defineStore('app', () => {
         }
     }
 
-    async function postAppointment(teacherId, coachingId, coachingName, dateTime, duration, content) {
+    async function postAppointment(teacherId, coachingId, dateTime, duration, content) {
         const conversationId = await sendMessage(teacherId, false);
         let startTime = new Date(dateTime);
         let endTime = new Date(dateTime);
@@ -49,7 +63,7 @@ export const useAppStore = defineStore('app', () => {
                 method: 'post',
                 url: `${userStore.url}/appointment/send-appointment/${conversationId}/${coachingId}`,
                 data: {
-                    title: 'Terminvorschlag für ' + coachingName,
+                    title: 'neuer Terminvorschlag',
                     content: content,
                     start: startTime.toISOString(),
                     end: endTime.toISOString()
@@ -57,7 +71,7 @@ export const useAppStore = defineStore('app', () => {
             })
             console.log(response.data);
         } catch (e) {
-            console.log(e);
+            throw(e);
         }
     }
 
@@ -70,6 +84,5 @@ export const useAppStore = defineStore('app', () => {
         })
     }
 
-
-    return {sendMessage, encodeImage, postAppointment, subjects, levels}
+    return {sendMessage, encodeImage, postAppointment, subjects, levels, selectedCoaching, modalStack, selectCoaching, pushModal, popModal}
 })

@@ -13,7 +13,7 @@
     <FormModal ref="appointmentModalRef" >
       <CardLarge class="m-0">
         <template v-slot:content>
-          <!--<ReviewForm @close="closeAppointmentModal" teacherId="teacherId" studentId="userStore.user.userId" />-->
+          <AppointmentForm @close="closeAppointmentModal" />
         </template>
       </CardLarge>
     </FormModal>
@@ -28,7 +28,7 @@
     <section v-else id="teacherProfile">
 
       <!--Container for content-->
-      <div class="container min-h-screen max-w-7xl mx-auto">
+      <div class="container min-h-screen max-w-7xl mx-auto px-2 mt-8">
 
         <!--Grid-Layout-->
         <div class="w-full grid grid-cols-2 gap-4 items-center">
@@ -59,8 +59,10 @@
                 <h1> > </h1>
                 <div>
                   <div v-for="coaching in profile.coachings">
-                    <p>{{ coaching.subject }}</p>
+                    <p class="underline underline-offset-4 decoration-secondary"
+                    @click="openAppointmentModal(coaching.coachingId)">{{ coaching.subject }}</p>
                   </div>
+                  <div v-if="hasNoCoaching">Dieser Lehrer bietet aktuell keine Nachhilfe an</div>
                 </div>
               </li>
               <li>
@@ -70,7 +72,7 @@
                   <div class="flex gap-2 flex-wrap">
                     <ButtonRegular class="bg-mainOrange" text="Nachricht" @click="appStore.sendMessage(teacherId, true)"/>
                     <ButtonRegular v-if="userStore.user.userType === 'STUDENT'" class="bg-mainBlue" text="Bewerten" @click="openReviewModal" />
-                    <ButtonRegular v-else class="bg-secondary" text="Bewerten" @click="alert('Nur Schüler können Bewertungen abgeben')" />
+                    <ButtonRegular v-else class="bg-secondary" text="Bewerten" @click="noStudentAlert" />
                   </div>
                 </div>
 
@@ -91,7 +93,7 @@
 
 import {useRoute} from "vue-router";
 import {useUserStore} from "@/stores/user";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import axios from "axios";
 import stockPhoto from "@/assets/images/teacherProfile/teacher-stockphoto.jpg"
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
@@ -100,6 +102,7 @@ import {useAppStore} from "@/stores/app";
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ReviewForm from "@/components/util/forms/ReviewForm.vue";
+import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -109,7 +112,9 @@ const profile = ref(null);
 
 const reviewModalRef = ref();
 const appointmentModalRef = ref();
-
+const hasNoCoaching = computed(() => {
+  return profile.value.coachings.length < 1;
+})
 function openReviewModal() {
   reviewModalRef.value.openModal();
 }
@@ -117,13 +122,17 @@ function closeReviewModal() {
   reviewModalRef.value.closeModal();
 }
 
-function openAppointmentModal() {
+function openAppointmentModal(coachingId) {
   appointmentModalRef.value.openModal();
+  appStore.selectCoaching(teacherId, coachingId);
 }
 function closeAppointmentModal() {
   appointmentModalRef.value.closeModal();
 }
 
+function noStudentAlert() {
+  alert('Nur Schüler können Bewertungen abgeben');
+}
 
 
 async function getTeacherProfile(id) {

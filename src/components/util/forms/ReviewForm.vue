@@ -1,7 +1,7 @@
 <template>
   <form>
 
-    <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']" />
+    <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']"/>
 
     <label for="text">Review:</label>
     <input
@@ -85,13 +85,10 @@ async function postReview() {
     console.log(response.status);
     if (response.status === 201) {
       alert('Vielen Dank für dein Review!');
-      closeModal();
-    } else {
-      alert('Fehler beim Absenden des Reviews!');
       emit('close');
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
     alert('Fehler beim Absenden des Reviews!');
     emit('close');
   }

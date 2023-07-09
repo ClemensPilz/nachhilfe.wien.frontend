@@ -2,7 +2,7 @@
 
 @layer base {
     html {
-        @apply text-primary bg-background
+        @apply text-primary bg-white
     }
 
 h1 {

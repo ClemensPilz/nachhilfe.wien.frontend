@@ -3,10 +3,9 @@
 
   <div>
     <div class="p-4 bg-lightPrimary rounded-lg shadow">
-      <div class="paragraph">Convo mit:</div>
-      <div class="headline"
-           v-for="partner in partners">{{ partner.firstName }} {{ partner.lastName }}
-      </div>
+      <p v-for="partner in partners">
+        {{ partner.firstName }} {{ partner.lastName }}
+      </p>
     </div>
   </div>
 </template>

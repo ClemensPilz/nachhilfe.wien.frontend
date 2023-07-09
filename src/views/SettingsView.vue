@@ -1,5 +1,4 @@
 <template>
-  <NavBar/>
   <div class="container max-w-3xl mx-auto px-2 mt-6 md:px-0 bg-white">
 
 

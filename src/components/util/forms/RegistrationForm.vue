@@ -25,7 +25,7 @@
     <div class="error">{{ errors.description }}</div>
 
     <label for="password">Passwort:</label>
-    <input type="password" name="password" v-model="password" @change="console.log(password)" placeholder="Passwort">
+    <input type="password" name="password" v-model="password" placeholder="Passwort">
     <div class="error">{{ errors.password }}</div>
 
     <div class="border-y-2 border-gray-200 flex flex-col space-y-2 items-center py-2 my-2">

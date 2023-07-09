@@ -1,5 +1,5 @@
 <template>
-  <FormModal ref="loginModalRef" >
+  <FormModal ref="loginModalRef">
     <CardLarge class="m-0">
       <template v-slot:content>
         <LoginForm @close="closeLoginModal"/>
@@ -7,38 +7,45 @@
     </CardLarge>
   </FormModal>
 
-  <FormModal ref="registrationModalRef" >
+  <FormModal ref="registrationModalRef">
     <CardLarge class="m-0">
       <template v-slot:content>
-        <RegistrationForm @close="closeRegistrationModal" />
+        <RegistrationForm @close="closeRegistrationModal"/>
       </template>
     </CardLarge>
   </FormModal>
 
-
-
-
+  <div class="w-full bg-background">
   <nav>
     <h4 id="logo">logo</h4>
-    <ul>
+    <ul v-if="userStore.isAuthenticated">
       <li>
         <RouterLink to="/">Home</RouterLink>
       </li>
       <li>
-        <RouterLink to="search">Suche</RouterLink>
+        <RouterLink to="/search">Suche</RouterLink>
       </li>
       <li>
-        <RouterLink to="dashboard">Hilfe</RouterLink>
+        <RouterLink to="/inbox">Inbox</RouterLink>
       </li>
-      <li class="text-mainBlue" @click="openLoginModal">
+      <li>
+        <RouterLink to="/settings">Settings</RouterLink>
+      </li>
+      <li class="text-mainOrange" @click="userStore.logout">
+        Logout
+      </li>
+    </ul>
+
+    <ul v-else>
+      <li v-if="!(userStore.isAuthenticated)" class="text-mainBlue" @click="openLoginModal">
         Login
       </li>
-      <li class="text-mainBlue" @click="openRegistrationModal">
+      <li v-if="!(userStore.isAuthenticated)" class="text-mainBlue" @click="openRegistrationModal">
         Register
       </li>
-
     </ul>
   </nav>
+  </div>
 </template>
 
 <script setup>
@@ -46,24 +53,39 @@
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import LoginForm from "@/components/util/forms/LoginForm.vue";
 import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
+import router from "@/router";
+import {useUserStore} from "@/stores/user";
 
 const loginModalRef = ref(null);
 const registrationModalRef = ref(null);
+const userStore = useUserStore();
 
 function openLoginModal() {
   loginModalRef.value.openModal();
-}function closeLoginModal() {
+}
+
+function closeLoginModal() {
   loginModalRef.value.closeModal();
 }
 
 function openRegistrationModal() {
   registrationModalRef.value.openModal();
-}function closeRegistrationModal() {
+}
+
+function closeRegistrationModal() {
   registrationModalRef.value.closeModal();
 }
+
+watch(() => userStore.showRegistrationModal, (newVal) => {
+  if (newVal) {
+    openRegistrationModal();
+  } else {
+    closeRegistrationModal();
+  }
+});
 
 
 </script>
@@ -73,7 +95,7 @@ function openRegistrationModal() {
 nav {
   @apply max-w-7xl mx-auto
   items-center justify-between
-  mb-20 pt-8 px-8 flex
+  pb-16 pt-8 px-8 flex
   bg-background
 }
 

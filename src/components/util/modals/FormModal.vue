@@ -1,7 +1,7 @@
 <template>
   <div
       :class="isActive ? 'modalBg opacity-100 visible' : 'modalBg opacity-0 invisible'"
-      @click.self="closeModal">
+      @mousedown.self="closeModal">
     <div class="w-full sm:w-[500px]">
       <slot></slot>
     </div>
