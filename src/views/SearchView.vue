@@ -2,6 +2,8 @@
     <nav-bar/>
   <div class="container mx-auto max-w-6xl">
 
+    <SearchForm />
+
 
     <div class="searchResult">
       <SearchResult
@@ -35,6 +37,7 @@ import {useAppStore} from "@/stores/app";
 import router from "@/router";
 import AppointmentModal from "@/components/global/AppointmentModal.vue";
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import SearchForm from "@/components/search/SearchForm.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();

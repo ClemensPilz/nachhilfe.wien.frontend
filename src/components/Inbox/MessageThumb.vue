@@ -8,27 +8,29 @@
         'appointment': props.type === 'APPOINTMENT'
       }">
 
-      <div v-if="props.type === 'APPOINTMENT'" class="text-sm text-primary italic font-bold">
-        Anfrage für: <span class="text-accent">{{ coachingName }}</span>
-      </div>
+      <p v-if="props.type === 'APPOINTMENT'" class="font-bold italic">
+        Anfrage für: <span class="text-mainYellow bg-secondary rounded-3xl px-2 py-1">{{ coachingName }}</span>
+      </p>
 
       <div v-if="props.type === 'APPOINTMENT'">
-        <div>
+        <small class="block">
           Am {{ start }}
-        </div>
-        <div>
+        </small>
+        <small>
           {{ duration }} Stunden
-        </div>
+        </small>
       </div>
 
       <div class="paragraph">
         {{ props.content }}
       </div>
-      <div v-if="props.type === 'APPOINTMENT'">Status: {{ status }}</div>
+      <div v-if="props.type === 'APPOINTMENT'">Status: {{ translateStatus(props.status) }}</div>
 
       <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
-        <ButtonSecondary text="Ablehnen" @click="reject" class="mr-2"/>
-        <ButtonPrimary text="Annehmen" @click="confirm"/>
+        <ButtonSecondary v-if="props.status === 'PENDING'" text="Ablehnen" @click="reject" class="mr-2"/>
+        <ButtonPrimary v-if="props.status === 'PENDING'" text="Annehmen" @click="confirm"/>
+
+        <ButtonSecondary v-if="props.status === 'CONFIRMED'" text="Absagen" @click="reject" class="mr-2"/>
       </div>
 
       <div class="paragraph font-bold">
@@ -76,6 +78,16 @@ async function confirm() {
   }
 }
 
+function translateStatus(status) {
+  if(status === 'PENDING') {
+    return 'Warte auf Rückmeldung';
+  } else if (status === 'CONFIRMED') {
+    return 'Bestätigt';
+  } else if (status === 'REJECTED') {
+    return 'Abgelehnt';
+  }
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -94,7 +106,7 @@ async function confirm() {
 }
 
 .appointment {
-  @apply border-b-4 border-accent
+  @apply border-b-8 border-mainBlue
 }
 
 
