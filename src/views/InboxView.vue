@@ -28,7 +28,8 @@
 
         <div class="overflow-y-scroll overflow-x-hidden noScrollbar">
           <MessageThumb v-for="message in messages"
-                        :key="message.messageId"
+                        :key="message.id"
+                        :id="message.id"
                         :type="message.messageType"
                         :title="message.title"
                         :content="message.content"

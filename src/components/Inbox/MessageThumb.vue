@@ -27,8 +27,8 @@
       <div v-if="props.type === 'APPOINTMENT'">Status: {{ status }}</div>
 
       <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
-        <ButtonSecondary text="Ablehnen" @click="ablehnen" class="mr-2"/>
-        <ButtonPrimary text="Annehmen" @click="annehmen"/>
+        <ButtonSecondary text="Ablehnen" @click="reject" class="mr-2"/>
+        <ButtonPrimary text="Annehmen" @click="confirm"/>
       </div>
 
       <div class="paragraph font-bold">
@@ -45,13 +45,36 @@ import {useUserStore} from "@/stores/user";
 import {computed, onMounted, ref} from "vue";
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
+import {useConversationStore} from "@/stores/conversation";
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const userStore = useUserStore();
+const conversationStore = useConversationStore();
 const storeId = computed(() => userStore.user.userId);
-const props = defineProps(['content', 'title', 'coachingName', 'status', 'start', 'duration', 'type', 'senderId', 'date']);
+const props = defineProps(['content', 'title', 'id', 'coachingName', 'status', 'start', 'duration', 'type', 'senderId', 'date']);
 
-function ablehnen() { alert('abgelehnt')}
-function annehmen() { alert('angenommen')}
+async function reject() {
+  try {
+    const response = await conversationStore.updateAppointment(props.id, 'reject');
+    console.log(response);
+    alert('Termin abgelehnt');
+    router.go(0)
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function confirm() {
+  try {
+    const response = await conversationStore.updateAppointment(props.id, 'confirm');
+    console.log(response);
+    alert('Termin akzeptiert');
+    router.go(0)
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 </script>
 
