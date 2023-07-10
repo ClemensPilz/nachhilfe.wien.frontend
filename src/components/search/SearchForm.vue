@@ -11,12 +11,14 @@
     <!--Subject-->
     <div v-for="subject in appStore.subjects" :key="subject" @change="log">
       <label :for="subject">{{ subject }}</label>
-      <input type="checkbox" :name="subject" :id="subject" :value="subject" v-model="selectedSubjects">
+      <input type="radio" name="subject" :id="subject" :value="subject" v-model="selectedSubject">
     </div>
 
     <!--Minrate/Maxrate-->
     <label for="maxRate">Höchster Stundensatz</label>
-    <input type="number" name="maxRate" id="maxRate">
+    <input type="number" name="maxRate" id="maxRate" v-model="maxRate">
+
+    <button-large text="click" @click="search" />
 
 
   </form>
@@ -25,14 +27,29 @@
 <script setup>
 import {useAppStore} from "@/stores/app";
 import {ref} from "vue";
+import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 
 const appStore = useAppStore();
-const selectedSubjects = ref([]);
+const selectedSubject = ref('');
 const selectedDistricts = ref([]);
+const maxRate = ref(20);
+const emit = defineEmits({result: Object});
 
 function log() {
-  console.log(selectedSubjects.value);
+  console.log(selectedSubject.value);
   console.log(selectedDistricts.value);
+}
+
+async function search() {
+  try {
+    const response = await appStore.filterTeachers(selectedDistricts.value, selectedSubject.value, 1, maxRate.value);
+    console.log(response.data);
+    if(response.data) {
+      emit('result', response.data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 </script>

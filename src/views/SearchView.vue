@@ -2,7 +2,7 @@
     <nav-bar/>
   <div class="container mx-auto max-w-6xl">
 
-    <SearchForm />
+    <SearchForm @result="logResult" />
 
 
     <div class="searchResult">
@@ -11,6 +11,7 @@
           @contact="appStore.sendMessage(teacher.teacherId, true) "
           @profile="router.push(`/profile/${teacher.teacherId}`)"
           @requestAppointment="setAppointmentParameters"
+          :key="teacher.teacherId"
           :teacherId="teacher.teacherId"
           :name="`${teacher.firstName} ${teacher.lastName}`"
           :description="`${teacher.description === null ? '' : teacher.description}`"
@@ -46,6 +47,11 @@ const showModal = ref(false);
 const selectedCoachingId = ref();
 const selectedCoachingName = ref();
 const selectedTeacherId = ref();
+
+function logResult(data) {
+  console.log(data);
+  teachersArray.value = data;
+}
 
 function setAppointmentParameters(e) {
   selectedCoachingId.value = e.coachingId;
@@ -95,7 +101,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 .searchResult {
-  @apply container min-h-screen max-w-lg mx-auto flex flex-col justify-center mt-4
+  @apply container min-h-screen max-w-lg mx-auto flex flex-col mt-4
 }
 
 </style>

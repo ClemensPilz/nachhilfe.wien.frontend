@@ -84,5 +84,27 @@ export const useAppStore = defineStore('app', () => {
         })
     }
 
-    return {sendMessage, encodeImage, postAppointment, subjects, levels, selectedCoaching, modalStack, selectCoaching, pushModal, popModal}
+    async function filterTeachers(districts, subject, minRate, maxRate) {
+        console.log(districts);
+        try {
+            const response = axios({
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                method: 'POST',
+                url: `${userStore.url}/teacher/filter-teachers`,
+                data: {
+                    districts,
+                    subject,
+                    minRate,
+                    maxRate
+                }
+            });
+            return response;
+        } catch (e) {
+            throw (e);
+        }
+    }
+
+    return {sendMessage, encodeImage, postAppointment, subjects, levels, selectedCoaching, modalStack, selectCoaching, filterTeachers}
 })
