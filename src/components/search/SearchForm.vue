@@ -1,16 +1,19 @@
 <template>
-  <form>
+  <form @submit.prevent="search">
 
     <!--District-->
-    <div v-for="n in 23" class="inline">
+    <div class="w-full flex flex-wrap gap-2 pt-4">
+    <div v-for="n in 23" class="inline" :key="`District ${n}`">
       <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`" @change="log"
              :value="n < 10 ? `DISTRICT_10${n}0` : `DISTRICT_1${n}0`" v-model="selectedDistricts">
-      <label>Bezirk {{ n }}</label>
+      <label> Bezirk {{ n }}</label>
+    </div>
     </div>
 
+    <br>
     <!--Subject-->
     <div v-for="subject in appStore.subjects" :key="subject" @change="log">
-      <label :for="subject">{{ subject }}</label>
+      <label class="pr-2" :for="subject">{{ subject }}</label>
       <input type="radio" name="subject" :id="subject" :value="subject" v-model="selectedSubject">
     </div>
 
@@ -18,7 +21,7 @@
     <label for="maxRate">Höchster Stundensatz</label>
     <input type="number" name="maxRate" id="maxRate" v-model="maxRate">
 
-    <button-large text="click" @click="search" />
+    <button-large text="click" type="submit" class="bg-mainBlue" />
 
 
   </form>
@@ -48,7 +51,7 @@ async function search() {
       emit('result', response.data);
     }
   } catch (e) {
-    console.log(e);
+    console.log('Error while searching for teacher: ' + e);
   }
 }
 

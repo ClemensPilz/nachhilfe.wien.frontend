@@ -1,8 +1,7 @@
 <template>
-    <nav-bar/>
   <div class="container mx-auto max-w-6xl">
 
-    <SearchForm @result="logResult" />
+    <SearchForm @result="pasteResult" />
 
 
     <div class="searchResult">
@@ -48,8 +47,7 @@ const selectedCoachingId = ref();
 const selectedCoachingName = ref();
 const selectedTeacherId = ref();
 
-function logResult(data) {
-  console.log(data);
+function pasteResult(data) {
   teachersArray.value = data;
 }
 
