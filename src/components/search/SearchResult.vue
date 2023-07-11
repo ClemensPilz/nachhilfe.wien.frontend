@@ -1,6 +1,6 @@
 <template>
 
-  <div class="my-4 grid grid-cols-3 grid-rows-1 bg-background rounded-xl shadow-lg">
+  <div class="my-4 grid grid-cols-3 grid-rows-1 bg-white rounded-xl shadow-lg">
     <!--Text-Part-->
     <div class="col-span-2 text-primary flex flex-col justify-center p-4">
       <h4 >{{ name }}</h4>

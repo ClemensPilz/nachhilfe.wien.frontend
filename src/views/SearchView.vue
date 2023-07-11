@@ -1,27 +1,34 @@
 <template>
-  <div class="container mx-auto max-w-6xl">
+  <div class="container mx-auto max-w-6xl mt-8 px-2">
 
-    <SearchForm @result="pasteResult" />
+    <h2>Lehrer suchen</h2>
+    <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
 
+    <SearchForm @result="pasteResult"/>
 
-    <div class="searchResult">
-      <SearchResult
-          v-for="teacher in teachersArray"
-          @contact="appStore.sendMessage(teacher.teacherId, true) "
-          @profile="router.push(`/profile/${teacher.teacherId}`)"
-          @requestAppointment="setAppointmentParameters"
-          :key="teacher.teacherId"
-          :teacherId="teacher.teacherId"
-          :name="`${teacher.firstName} ${teacher.lastName}`"
-          :description="`${teacher.description === null ? '' : teacher.description}`"
-          :coachings="teacher.coachings"
-      />
+  </div>
+  <div class="w-full bg-background">
+    <div class="container mx-auto max-w-6xl mt-8">
 
-      <AppointmentModal v-if="showModal"
-                        title="Termin senden"
-                        @close="showModal = !showModal"
-                        @send="send"/>
+      <div class="searchResult">
+        <SearchResult
+            v-for="teacher in teachersArray"
+            @contact="appStore.sendMessage(teacher.teacherId, true) "
+            @profile="router.push(`/profile/${teacher.teacherId}`)"
+            @requestAppointment="setAppointmentParameters"
+            :key="teacher.teacherId"
+            :teacherId="teacher.teacherId"
+            :name="`${teacher.firstName} ${teacher.lastName}`"
+            :description="`${teacher.description === null ? '' : teacher.description}`"
+            :coachings="teacher.coachings"
+        />
 
+        <AppointmentModal v-if="showModal"
+                          title="Termin senden"
+                          @close="showModal = !showModal"
+                          @send="send"/>
+
+      </div>
     </div>
   </div>
 </template>
@@ -99,7 +106,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 .searchResult {
-  @apply container min-h-screen max-w-lg mx-auto flex flex-col mt-4
+  @apply container min-h-screen max-w-lg mx-auto flex flex-col mt-4 pt-8
 }
 
 </style>
