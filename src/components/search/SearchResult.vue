@@ -10,6 +10,7 @@
 
       <div class="flex gap-2 flex-wrap text-xs">
         <div v-for="coaching in coachings"
+             v-show="coaching.active"
              :key="coaching.coachingId"
              class="px-2 py-1 rounded-lg border border-primary
               hover:border-accent hover:cursor-pointer select-none"

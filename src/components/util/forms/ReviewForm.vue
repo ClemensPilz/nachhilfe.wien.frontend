@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent>
 
     <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']"/>
 

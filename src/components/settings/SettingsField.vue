@@ -1,14 +1,20 @@
 <template>
   <div v-if="editItem !== fieldKey">
-    <span class="paragraph-small">{{ fieldLabel }}:</span> <span class="paragraph font-bold">{{ userStore.user[fieldKey] }}</span>
+    <small>
+    {{ fieldLabel }}:
+    </small>
+    <p class="inline">
+      {{ userStore.user[fieldKey] }}
+    </p>
+
     <PencilIcon class="h-4 ml-1 text-primary inline" @click="editItem = fieldKey"/>
   </div>
 
   <div v-else class="flex items-center" @keydown.esc="editItem = ''" @keydown.enter="updateField">
     <input :type="fieldType" v-model="fieldValue" :name="fieldName" :id="fieldName"
            :placeholder="userStore.user[fieldKey]"
-           class="mr-1 p-1 border border-primary rounded">
-    <button-secondary text="update" @click="updateField"/>
+           class="mr-1 px-2 py-1 border border-primary rounded-3xl">
+    <ButtonRegular class="bg-mainBlue" text="update" @click="updateField"/>
     <XMarkIcon class="h-6 text-primary inline" @click="editItem = ''"/>
   </div>
 </template>
@@ -21,6 +27,7 @@ import {XMarkIcon} from "@heroicons/vue/20/solid";
 import {useUserStore} from "@/stores/user";
 import {computed, ref} from "vue";
 import axios from "axios";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const userStore = useUserStore();
 const editItem = ref();

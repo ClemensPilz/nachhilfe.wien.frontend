@@ -17,7 +17,7 @@
 
   <div class="w-full bg-background">
   <nav>
-    <h4 id="logo">logo</h4>
+    <img src="@/assets/images/logos/nachhilfewien-logo.svg" alt="Logo von nachhilfe.wien" class="w-1/6 hover:cursor-pointer" @click="() => {router.push('/')}">
     <ul v-if="userStore.isAuthenticated">
       <li>
         <RouterLink to="/">Home</RouterLink>

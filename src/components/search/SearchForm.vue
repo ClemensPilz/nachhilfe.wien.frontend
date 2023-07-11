@@ -7,7 +7,7 @@
         <!--District-->
         <div class="w-full flex flex-wrap gap-2 py-4 justify-center md:justify-start">
           <div v-for="n in 23" class="inline" :key="`District ${n}`">
-            <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`" @change="log"
+            <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`"
                    :value="n < 10 ? `DISTRICT_10${n}0` : `DISTRICT_1${n}0`" v-model="selectedDistricts">
             <label :for="`district_${n}`"> Bezirk {{ n }}</label>
           </div>

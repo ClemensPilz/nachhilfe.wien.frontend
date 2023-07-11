@@ -141,6 +141,8 @@ import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import {useUserStore} from "@/stores/user";
 const userStore = useUserStore();
 
+
+
 </script>
 
 <style lang="scss" scoped>
