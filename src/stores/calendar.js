@@ -14,16 +14,13 @@ export const useAppointmentStore = defineStore("appointment", () => {
     const findAppointmentsByDate = async (date) => {
         try {
             let response = await axios({
-                method: 'post',
+                method: 'get',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
-                data: {
-                    date,
-                },
-                url: `${url}/appointment/get-appointments/${appointmentId}`,
+                url: `${url}/appointment/get-appointments-date/${date}`,
             });
-
+            console.log(response);
             confirmedAppointments.value = response.data.appointments;
             pendingAppointments.value = response.data.appointments;
         } catch (e) {

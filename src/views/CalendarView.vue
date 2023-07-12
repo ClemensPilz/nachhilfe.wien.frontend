@@ -1,3 +1,26 @@
+<template>
+  <section class="min-h-screen flex flex-col">
+    <nav-bar/>
+    <div class="container mx-auto px-6 py-12 lg:px-20 text-mainBlue">
+      <p class="text-sm font-bold uppercase tracking-widest">Persönlicher Kalender</p>
+      <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide">
+        <span class="text-mainBlue">Willkommen </span>
+        <span class="text-yellow-400" :key="firstName"> {{ firstName }} </span>
+      </h2>
+    </div>
+    <div class="flex-grow flex flex-col md:flex-row items-center justify-center">
+      <div class="w-full flex items-center justify-center">
+        <CalendarComponent/>
+      </div>
+    </div>
+    <div class="pt-8">
+      <footer-bar/>
+    </div>
+  </section>
+</template>
+
+
+
 <script setup>
 import {useUserStore} from "@/stores/user";
 import NavBar from "@/components/global/NavBar.vue";
@@ -32,32 +55,14 @@ async function getUserData(userId) {
   }
 }
 
-onMounted(() => {
-  getUserData(userId);
+onMounted(async () => {
+  await userStore.auth({
+    "token": localStorage.getItem("token")
+  })
 });
 
 </script>
 
-<template>
-  <section class="min-h-screen flex flex-col">
-    <nav-bar/>
-    <div class="container mx-auto px-6 py-12 lg:px-20 text-mainBlue">
-      <p class="text-sm font-bold uppercase tracking-widest">Persönlicher Kalender</p>
-      <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide">
-        <span class="text-mainBlue">Willkommen </span>
-        <span class="text-yellow-400" :key="firstName"> {{ firstName }} </span>
-      </h2>
-    </div>
-    <div class="flex-grow flex flex-col md:flex-row items-center justify-center">
-      <div class="w-full flex items-center justify-center">
-        <CalendarComponent/>
-      </div>
-    </div>
-    <div class="pt-8">
-      <footer-bar/>
-    </div>
-  </section>
-</template>
 
 <style scoped lang="scss">
 

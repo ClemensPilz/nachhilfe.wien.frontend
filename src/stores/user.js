@@ -11,6 +11,7 @@ export const useUserStore = defineStore("user", () => {
   const storeUserId = ref();
   const userId = computed(() => storeUserId.value);
   const isAuthenticated = ref(false);
+  const appointments = ref([]);
 
   const appStore = useAppStore();
 
@@ -64,7 +65,19 @@ export const useUserStore = defineStore("user", () => {
     }
   }
 
-  return { userId, user, url, auth, isAuthenticated };
+  async function getAllAppointments() {
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      method: "get",
+      url: `${url}/appointment/get-appointments/${userId.value}`
+    })
+    console.log(response.data);
+    appointments.value = response.data;
+  }
+
+  return { userId, user, url, auth, isAuthenticated, getAllAppointments, appointments };
 });
 
 

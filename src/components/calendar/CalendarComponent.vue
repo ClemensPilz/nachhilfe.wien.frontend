@@ -1,12 +1,13 @@
 <template>
+  <button @click="test">test</button>
+
   <div>
-    <VCalendar :attributes="attributes"
-               v-model="selectedDate"
-               @input="loadAppointmentsForSelectedDate"/>
+    <VDatePicker :attributes="attributes"
+               v-model="selectedDate"/>
   </div>
 
-  <div v-if="selectedDayAppointments.value && selectedDayAppointments.value.length > 0">
-    <div class="container mx-auto mt-10" v-for="appointment in selectedDayAppointments.value" :key="appointment.id">
+  <div v-if="selectedDayAppointments.length > 0">
+    <div class="container mx-auto mt-10" v-for="appointment in appointments" :key="appointment.start">
       <div class="grid grid-cols-1">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
           <div class="flex items-center justify-between px-6 py-3 bg-gray-100">
@@ -33,28 +34,43 @@
 <script setup>
 import {useAppointmentStore} from "@/stores/calendar";
 import {computed, ref, onMounted} from "vue";
+import {setupCalendar, Calendar, DatePicker} from "v-calendar";
+import {format} from "date-fns";
+import {useUserStore} from "@/stores/user";
 
 const appointmentStore = useAppointmentStore();
-const selectedDate = ref(null);
-const appointments = ref([]);
+const userStore = useUserStore();
+const selectedDate = ref(new Date());
+const appointments = computed(() => userStore.appointments);
 
-const loadAppointmentsForSelectedDate = () => {
-  appointments.value = appointmentStore.findAppointmentsByDate(selectedDate.value);
-};
+// const loadAppointmentsForSelectedDate = async () => {
+//   selectedDate.value = format(selectedDate.value, "yyyy-MM-dd'T'HH-mm-ss-SS")
+//   console.log(selectedDate.value);
+//   appointments.value = await appointmentStore.findAppointmentsByDate(selectedDate.value);
+// };
 
-const selectedDayAppointments = computed(() => {
-  return appointments.value.filter(appointment => appointment.date === selectedDate.value);
-});
+
+ const selectedDayAppointments = computed(() => {
+   return appointments.value.filter(appointment => appointment.start === selectedDate.value);
+ });
 
 const attributes = ref([
   {
+    key: "today",
     highlight: true,
     dates: new Date()
   },
 ]);
 
-onMounted(()=> {
-  appointments.value
-});
+async function test() {
+  await userStore.getAllAppointments();
+}
+
+onMounted(async () => {
+ await userStore.getAllAppointments();
+}
+
+)
+
 
 </script>
