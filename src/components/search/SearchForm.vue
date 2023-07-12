@@ -26,7 +26,7 @@
             <input type="radio" name="subject" :id="subject" :value="subject" v-model="selectedSubject">
           </div>
         </div>
-        </div>
+      </div>
 
       <div class="col-span-1">
 
@@ -40,11 +40,11 @@
 
       </div>
     </div>
-  </form>
 
-<div class="w-full flex justify-center mt-8">
-  <button-large text="Lehrer finden" type="submit" class="bg-mainOrange my-4"/>
-</div>
+    <div class="w-full flex justify-center mt-8">
+      <button-large text="Lehrer finden" type="submit" class="bg-mainOrange my-4"/>
+    </div>
+  </form>
 </template>
 
 <script setup>

@@ -19,7 +19,10 @@
   <nav>
     <img src="@/assets/images/logos/nachhilfewien-logo.svg" alt="Logo von nachhilfe.wien" class="w-1/6 hover:cursor-pointer" @click="() => {router.push('/')}">
     <ul v-if="userStore.isAuthenticated">
-      <li>
+      <li v-if="userStore.isAuthenticated">
+        <RouterLink to="/dashboard">Home</RouterLink>
+      </li>
+      <li v-else>
         <RouterLink to="/">Home</RouterLink>
       </li>
       <li>

@@ -68,7 +68,6 @@ function setAppointmentParameters(e) {
 const send = async (e) => {
   await appStore.postAppointment(selectedTeacherId.value,
       selectedCoachingId.value,
-      selectedCoachingName.value,
       e.startTime,
       e.duration,
       e.content)

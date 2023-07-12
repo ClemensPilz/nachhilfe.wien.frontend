@@ -12,10 +12,6 @@
     <input type="text" name="lastname" v-model="lastname" placeholder="Nachname">
     <div class="error">{{ errors.lastname }}</div>
 
-    <label for="username">Username:</label>
-    <input type="text" name="username" v-model="username" placeholder="Username">
-    <div class="error">{{ errors.username }}</div>
-
     <label for="birthdate">Geburtsdatum:</label>
     <input type="date" name="birthdate" v-model="birthdate" placeholder="Geburtsdatum" @change="console.log(birthdate)">
     <div class="error">{{ errors.birthdate }}</div>
@@ -95,13 +91,6 @@ const validationSchema = {
     return true
   },
 
-  username(value) {
-    if (value.trim().length < 5) {
-      return "Mind. 5 Zeichen"
-    }
-    return true
-  },
-
   birthdate(value) {
     if (value) {
       try {
@@ -126,14 +115,13 @@ const {meta, errors, useFieldModel} = useForm({
     password: '',
     firstname: '',
     lastname: '',
-    username: '',
     birthdate: '2001-01-01',
     description: ''
   }
 })
 
-const [email, password, firstname, lastname, username, birthdate, description]
-    = useFieldModel(['email', 'password', 'firstname', 'lastname', 'username', 'birthdate', 'description']);
+const [email, password, firstname, lastname, birthdate, description]
+    = useFieldModel(['email', 'password', 'firstname', 'lastname', 'birthdate', 'description']);
 
 //Posts new user to backend and then authenticates the user with userStore.auth().
 //@todo: Save userId and token directly within register without the need for userStore.auth()
@@ -157,7 +145,6 @@ async function register() {
         "lastName": lastname.value,
         "birthdate": birthdate.value,
         "profile": {
-          "userName": username.value,
           "password": password.value,
           "email": email.value,
           "active": true,
