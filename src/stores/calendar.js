@@ -1,10 +1,15 @@
-import { defineStore } from "pinia";
+
 import axios from "axios";
-import {ref} from "vue";
+import {ref, computed} from "vue";
+import {defineStore} from "pinia";
 const url ="http://localhost:8080";
 
 export const useAppointmentStore = defineStore("appointment", () => {
     const confirmedAppointments = ref();
+    const pendingAppointments=ref();
+    const appointments = ref({});
+    const storeAppointmentId = ref();
+    const appointmentId = computed(() => storeAppointmentId.value);
 
     const findAppointmentsByDate = async (date) => {
         try {
@@ -16,10 +21,11 @@ export const useAppointmentStore = defineStore("appointment", () => {
                 data: {
                     date,
                 },
-                url: `${url}/appointment/get-appointments`,
+                url: `${url}/appointment/get-appointments/${appointmentId}`,
             });
 
             confirmedAppointments.value = response.data.appointments;
+            pendingAppointments.value = response.data.appointments;
         } catch (e) {
             console.error(e);
             throw (e);
@@ -29,5 +35,5 @@ export const useAppointmentStore = defineStore("appointment", () => {
         return confirmedAppointments.value;
     };
 
-    return { findAppointmentsByDate };
+    return { appointmentId, pendingAppointments, findAppointmentsByDate, appointments, confirmedAppointments };
 });

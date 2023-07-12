@@ -24,13 +24,15 @@
   </div>
   <!-- If there are no appointments, display a free day message -->
   <div v-else>
+
     <p>Sie haben einen freien Tag! Genießen Sie die Dinge, die Sie gerne tun.</p>
+
   </div>
 </template>
 
 <script setup>
 import {useAppointmentStore} from "@/stores/calendar";
-import {computed, ref} from "vue";
+import {computed, ref, onMounted} from "vue";
 
 const appointmentStore = useAppointmentStore();
 const selectedDate = ref(null);
@@ -50,4 +52,9 @@ const attributes = ref([
     dates: new Date()
   },
 ]);
+
+onMounted(()=> {
+  appointments.value
+});
+
 </script>
