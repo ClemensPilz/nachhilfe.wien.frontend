@@ -5,7 +5,8 @@ import SearchView from "@/views/SearchView.vue";
 import TestView from "@/views/TestView.vue";
 import SettingsView from "@/views/SettingsView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import AboutUsView from "@/views/AboutUsView.vue";
+import AboutView from "@/views/AboutView.vue";
+import AdminView from "@/views/AdminView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,8 +44,14 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: AboutUsView
+      component: AboutView
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
     }
+
   ]
 })
 

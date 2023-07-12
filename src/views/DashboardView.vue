@@ -4,6 +4,16 @@
 
     <DashboardTop />
 
+    <DashboardFeature
+        v-if="userStore.user.userType === 'ADMIN'"
+        title="Admin-Funktionen" :left="false" subtitle="Nachhilfe.wien verwalten" text="Zu allen Admin-Funktionen" class="bg-mainOrange">
+      <ButtonLarge class="bg-mainBlue" @click="() => {router.push('/admin')}" text="Admin" />
+      <template v-slot:image>
+        <img src="@/assets/images/dashboard/message.jpg" alt="">
+      </template>
+    </DashboardFeature>
+
+
     <DashboardFeature title="Nachrichten abrufen" :left="false" subtitle="Hier geht's zur Inbox" text="Nachrichten schreiben und empfangen, Termine vereinbaren!" class="bg-mainYellow">
       <ButtonLarge class="bg-mainBlue" @click="() => {router.push('/inbox')}" text="Inbox" />
       <template v-slot:image>
@@ -43,7 +53,9 @@ import DashboardTop from "@/components/dashboard/DashboardTop.vue";
 import DashboardFeature from "@/components/dashboard/DashboardFeature.vue";
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import {useRouter} from "vue-router";
+import {useUserStore} from "@/stores/user";
 const router = useRouter();
+const userStore = useUserStore();
 </script>
 
 <style lang="scss" scoped>
