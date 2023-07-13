@@ -4,7 +4,6 @@ import {useConversationStore} from "@/stores/conversation";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import router from "@/router";
-import {start} from "@popperjs/core";
 
 export const useAppStore = defineStore('app', () => {
 
@@ -14,14 +13,7 @@ export const useAppStore = defineStore('app', () => {
     const selectedCoaching = ref({});
     const modalStack = ref([]);
 
-    function pushModal(modal) {
-     modalStack.value.push(modal);
-     console.log(modalStack.value)
-    }
-
-    function popModal() {
-        modalStack.value.pop();
-    }
+    //Used to pass information of a selected coaching through multiple layers of components
     function selectCoaching(teacherId, coachingId) {
         selectedCoaching.value = {teacherId, coachingId}
     }

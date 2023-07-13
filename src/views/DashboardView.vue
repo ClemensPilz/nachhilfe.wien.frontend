@@ -13,7 +13,6 @@
       </template>
     </DashboardFeature>
 
-
     <DashboardFeature title="Nachrichten abrufen" :left="false" subtitle="Hier geht's zur Inbox" text="Nachrichten schreiben und empfangen, Termine vereinbaren!" class="bg-mainYellow">
       <ButtonLarge class="bg-mainBlue" @click="() => {router.push('/inbox')}" text="Inbox" />
       <template v-slot:image>

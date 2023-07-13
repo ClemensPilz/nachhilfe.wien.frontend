@@ -42,10 +42,8 @@
 </template>
 
 <script setup>
-import NavBar from "@/components/global/NavBar.vue";
 import ImageSettings from "@/components/profile/image/ImageSettings.vue";
 import {useUserStore} from "@/stores/user";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import BasicSettings from "@/components/settings/BasicSettings.vue";
 import DistrictSettings from "@/components/profile/districts/DistrictSettings.vue";
 import CoachingSettings from "@/components/profile/coaching/CoachingSettings.vue";
