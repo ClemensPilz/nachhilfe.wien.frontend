@@ -1,18 +1,6 @@
 <template>
 
   <div class="container mx-auto max-w-6xl">
-    <NavBar/>
-
-    <div>
-      <DominikModal @close="toggleModal" :modal-active="modalActive">
-        <div class="modal-content">
-          <h1> This is a Modal Header</h1>
-          <p> This is a modal message </p>
-        </div>
-      </DominikModal>
-      <button @click="toggleModal" type="button">Open Modal</button>
-    </div>
-
     <section class="bg-white dark:bg-gray-900">
       <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
         <div class="flex flex-col lg:flex-row justify-between gap-8">
@@ -31,7 +19,6 @@
                 src="src/assets/videos/pexels-pressmaster-3209298-1920x1080-25fps.mp4"
                 autoplay loop class="w-full h-auto">
               Your browser does not support the video tag.
-              >
             </video>
           </div>
         </div>
@@ -52,25 +39,33 @@
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
                      alt="Alexa featured Image"/>
-                <img class="md:hidden block" src="https://i.ibb.co/zHjXqg4/Rectangle-118.png"
-                     alt="Alexa featured Image"/>
-                <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Dominik</p>>
+                <ButtonRegular text="Dominik" @click="toggleModal1" class="mt-5 bg-mainBlue">
+                  Dominik</ButtonRegular>
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
                      alt="Olivia featured Image"/>
-                <img class="md:hidden block" src="https://i.ibb.co/NrWKJ1M/Rectangle-119.png"
-                     alt="Olivia featured Image"/>
-                <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Clemens</p>
+                <ButtonRegular text="Clemens" @click="toggleModal2" class="mt-5 bg-mainBlue">
+                  Clemens</ButtonRegular>
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Liam featued Image"/>
                 <img class="md:hidden block" src="https://i.ibb.co/C5MMBcs/Rectangle-120.png" alt="Liam featued Image"/>
-                <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">René</p>
+                <ButtonRegular text="René" @click="toggleModal3" class="mt-5 bg-mainBlue">
+                  René</ButtonRegular>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <DominikModal @close="toggleModal1" :modal-active1="modalActive1"/>
+      </div>
+      <div>
+        <ClemensModal @close="toggleModal2" :modal-active2="modalActive2"/>
+      </div>
+      <div>
+        <ReneModal @close="toggleModal3" :modal-active3="modalActive3"/>
       </div>
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 class="mb-4 text-4xl tracking-tight text-mainBlue font-extrabold text-center dark:text-white">Wir freuen uns
@@ -100,10 +95,7 @@
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Gib hier bitte deinen Text ein..."></textarea>
           </div>
-          <button type="submit"
-                  class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            Send message
-          </button>
+          <button-primary text="Senden"/>
         </form>
       </div>
     </section>
@@ -118,12 +110,28 @@ import NavBar from "@/components/global/NavBar.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
 import DominikModal from "@/components/aboutUs/DominikModal.vue";
 import {ref} from 'vue';
+import ClemensModal from "@/components/aboutUs/ClemensModal.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+import ReneModal from "@/components/aboutUs/ReneModal.vue";
 
 
-const modalActive = ref(false);
+const modalActive1 = ref(false);
+const modalActive2 = ref(false);
+const modalActive3 = ref(false);
 
-const toggleModal = () => {
-  modalActive.value = !modalActive.value;
+
+const toggleModal1 = () => {
+  modalActive1.value = !modalActive1.value;
 }
+
+const toggleModal2 = () => {
+  modalActive2.value = !modalActive2.value;
+}
+
+const toggleModal3 = () => {
+  modalActive3.value = !modalActive3.value;
+}
+
 
 </script>
