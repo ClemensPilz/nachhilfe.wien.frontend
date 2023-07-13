@@ -1,12 +1,7 @@
 <template>
   <section class="min-h-screen flex flex-col">
-    <nav-bar/>
     <div class="container mx-auto px-6 py-12 lg:px-20 v">
-      <p class="text-sm font-bold uppercase tracking-widest text-mainBlue">Persönlicher Kalender</p>
-      <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide text-mainBlue">
-        <span class="text-mainBlue">Willkommen {{userStore.user.firstName}}</span>
-        <span class="text-yellow-400" :key="firstName"> {{ firstName }} </span>
-      </h2>
+      <h2>Persönlicher Kalender</h2>
       <div class="mt-5">
           <CalendarComponent/>
       </div>

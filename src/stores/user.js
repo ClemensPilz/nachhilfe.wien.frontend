@@ -11,6 +11,7 @@ export const useUserStore = defineStore("user", () => {
   const storeUserId = ref();
   const userId = computed(() => storeUserId.value);
   const isAuthenticated = ref(false);
+  const appointments = ref([]);
 
   const appStore = useAppStore();
 
@@ -81,8 +82,6 @@ export const useUserStore = defineStore("user", () => {
     isAuthenticated.value = false;
     await router.push('/');
   }
-
-  return { userId, user, url, auth, isAuthenticated, logout};
 
 
   return { userId, user, url, auth, isAuthenticated, getAllAppointments, appointments, logout };

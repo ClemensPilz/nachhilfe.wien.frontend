@@ -29,6 +29,9 @@
         <RouterLink to="/search">Suche</RouterLink>
       </li>
       <li>
+        <RouterLink to="/calendar">Kalender</RouterLink>
+      </li>
+      <li>
         <RouterLink to="/inbox">Inbox</RouterLink>
       </li>
       <li>

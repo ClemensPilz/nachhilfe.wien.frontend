@@ -9,13 +9,13 @@
       />
     </div>
     <div>
-      <CalendarCardComponent
+      <AppointmentCard
           v-for="appointment in selectedDayAppointments"
           :key="appointment.start"
           :appointmentDetails="appointment"
-          class="mb-3 bg-gray"
+          class="mb-12 bg-gray"
       >
-      </CalendarCardComponent>
+      </AppointmentCard>
     </div>
   </div>
 
@@ -29,6 +29,7 @@ import {setupCalendar, Calendar, DatePicker} from "v-calendar";
 import {isSameDay, parseISO} from "date-fns";
 import {useUserStore} from "@/stores/user";
 import CalendarCardComponent from "@/components/calendar/CalendarCardComponent.vue";
+import AppointmentCard from "@/components/calendar/AppointmentCard.vue";
 
 const appointmentStore = useAppointmentStore();
 const userStore = useUserStore();
