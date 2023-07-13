@@ -28,7 +28,6 @@ import {computed, ref, onMounted} from "vue";
 import {setupCalendar, Calendar, DatePicker} from "v-calendar";
 import {isSameDay, parseISO} from "date-fns";
 import {useUserStore} from "@/stores/user";
-import CalendarCardComponent from "@/components/calendar/CalendarCardComponent.vue";
 import AppointmentCard from "@/components/calendar/AppointmentCard.vue";
 
 const appointmentStore = useAppointmentStore();
