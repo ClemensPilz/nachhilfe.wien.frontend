@@ -9,36 +9,38 @@
         Nachhilfe.Wien
       </div>
 
-      <!--Links-->
-      <div class="flex items-center space-x-4">
-        <div class="routerLink">
-          <RouterLink to="/">Home</RouterLink>
-        </div>
-        <div class="routerLink">
-          <RouterLink to="/calendar">Calendar</RouterLink>
+        <!--Links-->
+        <div class="flex items-center space-x-4">
+          <div class="routerLink">
+            <RouterLink to="/">Home</RouterLink>
+          </div>
+          <div class="routerLink">
+            <RouterLink to="/calendar">Calendar</RouterLink>
         </div>
         <div class="routerLink">
           <RouterLink :to="`/profile/${userId}`">Profile</RouterLink>
-        </div>
-        <div class="routerLink">
-          <RouterLink to="/inbox">Inbox</RouterLink>
-        </div>
-        <div class="routerLink">
-          <RouterLink to="/test">Test</RouterLink>
-        </div>
-        <div class="routerLink">
-          <RouterLink to="/search">Search</RouterLink>
+          </div>
+          <div class="routerLink">
+            <RouterLink to="/inbox">Inbox</RouterLink>
+          </div>
+          <div class="routerLink">
+            <RouterLink to="/test">Test</RouterLink>
+          </div>
+          <div class="routerLink">
+            <RouterLink to="/settings">Settings</RouterLink>
+          </div>
+          <div class="routerLink">
+            <RouterLink to="/search">Search</RouterLink>
         </div>
         <div class="routerLink">
           <RouterLink to="/about">About Us</RouterLink>
+          </div>
+        </div>
+        <!--Slot for Register and Login Buttons-->
+        <div>
+          <slot/>
         </div>
       </div>
-
-      <!--Slot for Register and Login Buttons-->
-      <div>
-        <slot/>
-      </div>
-    </div>
 
 
   </nav>

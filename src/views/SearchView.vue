@@ -1,30 +1,34 @@
 <template>
-  <div class="container mx-auto max-w-6xl">
-    <nav-bar/>
+  <div class="container mx-auto max-w-6xl mt-8 px-2">
 
+    <h2>Lehrer suchen</h2>
+    <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
 
-    <div class="searchResult">
-      <SearchResult
-          v-for="teacher in teachersArray"
-          @contact="appStore.sendMessage(teacher.teacherId, true) "
-          @profile="router.push(`/profile/${teacher.teacherId}`)"
-          @requestAppointment="setAppointmentParameters"
-          :teacherId="teacher.teacherId"
-          :name="`${teacher.firstName} ${teacher.lastName}`"
-          :description="`${teacher.description === null ? '' : teacher.description}`"
-          :coachings="teacher.coachings"
-      />
+    <SearchForm @result="pasteResult"/>
 
-      <AppointmentModal v-if="showModal"
-                        title="Termin senden"
-                        @close="showModal = !showModal"
-                        @send="send"/>
+  </div>
+  <div class="w-full bg-background">
+    <div class="container mx-auto max-w-6xl mt-8">
 
+      <div class="searchResult">
+        <SearchResult
+            v-for="teacher in teachersArray"
+            @contact="appStore.sendMessage(teacher.teacherId, true) "
+            @profile="router.push(`/profile/${teacher.teacherId}`)"
+            @requestAppointment="setAppointmentParameters"
+            :key="teacher.teacherId"
+            :teacherId="teacher.teacherId"
+            :name="`${teacher.firstName} ${teacher.lastName}`"
+            :description="`${teacher.description === null ? '' : teacher.description}`"
+            :coachings="teacher.coachings"
+        />
 
-      <SearchResult/>
-      <SearchResult/>
-      <SearchResult/>
-      <SearchResult/>
+        <AppointmentModal v-if="showModal"
+                          title="Termin senden"
+                          @close="showModal = !showModal"
+                          @send="send"/>
+
+      </div>
     </div>
   </div>
 </template>
@@ -40,22 +44,35 @@ import {useAppStore} from "@/stores/app";
 import router from "@/router";
 import AppointmentModal from "@/components/global/AppointmentModal.vue";
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import SearchForm from "@/components/search/SearchForm.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
 const teachersArray = ref();
 const showModal = ref(false);
 const selectedCoachingId = ref();
+const selectedCoachingName = ref();
 const selectedTeacherId = ref();
+
+function pasteResult(data) {
+  teachersArray.value = data;
+}
 
 function setAppointmentParameters(e) {
   selectedCoachingId.value = e.coachingId;
   selectedTeacherId.value = e.teacherId;
+  selectedCoachingName.value = e.coachingName;
   showModal.value = true;
 }
 
 const send = async (e) => {
-  await appStore.postAppointment(selectedTeacherId.value, selectedCoachingId.value, e.startTime, e.duration, e.content)
+  await appStore.postAppointment(selectedTeacherId.value,
+      selectedCoachingId.value,
+      e.startTime,
+      e.duration,
+      e.content)
+
+  showModal.value = false;
 }
 
 async function getAllTeachers() {
@@ -88,7 +105,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 .searchResult {
-  @apply container min-h-screen max-w-lg mx-auto flex flex-col justify-center mt-4
+  @apply container min-h-screen max-w-lg mx-auto flex flex-col mt-4 pt-8
 }
 
 </style>

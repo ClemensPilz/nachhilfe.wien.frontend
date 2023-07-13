@@ -3,10 +3,9 @@
 
   <div>
     <div class="p-4 bg-lightPrimary rounded-lg shadow">
-      <div class="paragraph">Convo mit:</div>
-      <div class="headline"
-           v-for="partner in partners">{{ partner.firstName }} {{ partner.lastName }}
-      </div>
+      <p v-for="partner in partners">
+        {{ partner.firstName }} {{ partner.lastName }} <span @click="() => {openProfile(partner.id)}">...Profil</span>
+      </p>
     </div>
   </div>
 </template>
@@ -15,11 +14,12 @@
 
 import {useUserStore} from "@/stores/user";
 import {computed} from "vue";
+import router from "@/router";
 
 const props = defineProps(['users']);
 
 const userStore = useUserStore();
-const storeId = computed(() => userStore.user.id);
+const storeId = computed(() => userStore.user.userId);
 const partners = computed(() => {
   const partnerArr = [];
   for (const user of props.users) {
@@ -29,6 +29,11 @@ const partners = computed(() => {
   }
   return partnerArr;
 })
+
+async function openProfile(id) {
+  console.log(id);
+  await router.push(`/profile/${id}`);
+}
 </script>
 
 <style lang="scss" scoped>

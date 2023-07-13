@@ -1,9 +1,13 @@
 <template>
 
-  <div class="container mx-auto max-w-6xl">
-    <NavBar/>
+  <div class="container mx-auto max-w-7xl mt-4">
 
-    <div class="grid grid-cols-12 gap-2">
+    <div v-if="hasNoMessages">
+      <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
+    </div>
+
+    <div class="grid grid-cols-12 gap-12">
+
 
       <!--Left part-->
       <div class="max-h-[calc(100vh-70px)] overflow-y-scroll overflow-x-hidden col-span-3 top-20 noScrollbar">
@@ -19,31 +23,39 @@
 
       <!--Right Part-->
       <!--Messages-->
-      <div class="flex flex-col col-span-9 overflow-y-scroll overflow-x-hidden max-h-[calc(100vh-70px)] noScrollbar">
-        <div v-if="messages">
+
+      <div class="flex flex-col col-span-9 max-h-[calc(100vh-70px)]">
+
+        <div class="overflow-y-scroll overflow-x-hidden noScrollbar">
           <MessageThumb v-for="message in messages"
-                        :key="message.messageId"
-                        class="messageContainer"
+                        :key="message.id"
+                        :id="message.id"
+                        :type="message.messageType"
                         :title="message.title"
                         :content="message.content"
                         :senderId="message.senderId"
+                        :coachingName="message.coachingName"
+                        :status="message.status"
+                        :start="formatStart(message.start)"
+                        :duration="formatDuration(message.start, message.end)"
                         :date="formatDate(message.timeStamp)"/>
+
+          <div id="pageEnd"></div>
         </div>
+
 
         <!--Send-Field-->
         <MessageInput :class="conversationId ? 'block' : 'hidden'"
                       @send="postMessage"
                       @keydown.enter="postMessage"
-                      button-text="Senden"
-                      button-bg="bg-primary">
+                      button-text="Senden">
           <input type="text"
                  name="messageText"
                  id="messageText"
-                 placeholder="Is this showing something?"
-                 class="w-full border border-lightPrimary p-4"
+                 placeholder="Neue Nachricht senden"
+                 class="w-full border border-secondary p-4 rounded-3xl"
                  v-model="messageText">
         </MessageInput>
-        <div id="pageEnd"></div>
 
       </div>
 
@@ -53,9 +65,7 @@
 </template>
 
 <script setup>
-
-import NavBar from "@/components/global/NavBar.vue";
-import {onBeforeMount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
@@ -65,10 +75,11 @@ import {useConversationStore} from "@/stores/conversation";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
-const conversations = ref(null);
+const conversations = ref([]);
 const messages = ref(null);
 const messageText = ref(null);
 const conversationStore = useConversationStore();
+const hasNoMessages = ref(false);
 
 function formatDate(timestamp) {
   const date = new Date(timestamp);
@@ -80,7 +91,7 @@ function formatDate(timestamp) {
 
   const today = new Date();
   if (today.getDate() === date.getDate()) {
-    return `${timeString.substring(0, 5)}`;
+    return `heute ${timeString.substring(0, 5)}`;
   }
 
   const dateString = date.toLocaleDateString("en-GB", {
@@ -91,6 +102,26 @@ function formatDate(timestamp) {
 
   return `${dateString}, ${timeString.substring(0, 5)}`;
 
+}
+
+
+function formatStart(timestamp) {
+  if (timestamp == null) {
+    return;
+  }
+  const date = new Date(timestamp);
+  const dateOptions = {day: '2-digit', month: '2-digit', year: 'numeric'};
+  const timeOptions = {hour: '2-digit', minute: '2-digit'};
+  const locale = 'de-DE';
+
+  const formattedDate = date.toLocaleDateString(locale, dateOptions);
+  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
+
+  return `${formattedDate} um ${formattedTime} Uhr`;
+}
+
+function formatDuration(start, end) {
+  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
 }
 
 
@@ -182,6 +213,11 @@ async function initInboxView() {
       console.log(conversationStore.getActiveConversationInInbox())
       await getMessages(conversationStore.getActiveConversationInInbox());
     }
+    setTimeout(() => {
+      if (conversations.value.length < 1) {
+        hasNoMessages.value = true;
+      }
+    }, 1000);
   } catch (e) {
     console.log(e)
   }

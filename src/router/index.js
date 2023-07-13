@@ -5,6 +5,10 @@ import DashboardView from "@/views/DashboardView.vue";
 import SearchView from "@/views/SearchView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import TestView from "@/views/TestView.vue";
+import SettingsView from "@/views/SettingsView.vue";
+import ProfileView from "@/views/ProfileView.vue";
+import AboutView from "@/views/AboutView.vue";
+import AdminView from "@/views/AdminView.vue";
 import AboutUsView from "@/views/AboutUsView.vue";
 import CalendarView from "@/views/CalendarView.vue";
 
@@ -37,9 +41,19 @@ const router = createRouter({
       component: ProfileView
     },
     {
-      path: '/test',
-      name: 'tests',
-      component: TestView
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
     },
     {
       path: '/about',
