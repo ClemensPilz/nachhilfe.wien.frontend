@@ -1,18 +1,17 @@
 <template>
   <section class="min-h-screen flex flex-col">
     <nav-bar/>
-    <div class="container mx-auto px-6 py-12 lg:px-20 text-mainBlue">
-      <p class="text-sm font-bold uppercase tracking-widest">Persönlicher Kalender</p>
-      <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide">
-        <span class="text-mainBlue">Willkommen </span>
+    <div class="container mx-auto px-6 py-12 lg:px-20 v">
+      <p class="text-sm font-bold uppercase tracking-widest text-mainBlue">Persönlicher Kalender</p>
+      <h2 class="mt-3 text-4xl sm:text-6xl font-extrabold tracking-wide text-mainBlue">
+        <span class="text-mainBlue">Willkommen {{userStore.user.firstName}}</span>
         <span class="text-yellow-400" :key="firstName"> {{ firstName }} </span>
       </h2>
-    </div>
-    <div class="flex-grow flex flex-col md:flex-row items-center justify-center">
-      <div class="w-full flex items-center justify-center">
-        <CalendarComponent/>
+      <div class="mt-5">
+          <CalendarComponent/>
       </div>
     </div>
+
     <div class="pt-8">
       <footer-bar/>
     </div>

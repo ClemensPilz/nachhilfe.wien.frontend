@@ -1,18 +1,23 @@
 <template>
-  <button @click="test">test</button>
-  <div>
-    <VDatePicker :attributes="attributes"
-                 v-model="selectedDate"
-                 show-weeknumbers
-                 :select-attribute="selectAttribute"
-    />
+  <div class="flex gap-5">
+    <div>
+      <VDatePicker :attributes="attributes"
+                   v-model="selectedDate"
+                   show-weeknumbers
+                   :select-attribute="selectAttribute"
+                   title-position="left"
+      />
+    </div>
+    <div>
+      <CalendarCardComponent
+          v-for="appointment in selectedDayAppointments"
+          :key="appointment.start"
+          :appointmentDetails="appointment"
+          class="mb-3 bg-gray"
+      >
+      </CalendarCardComponent>
+    </div>
   </div>
-  <CalendarCardComponent
-      v-for="appointment in selectedDayAppointments"
-      :key="appointment.start"
-      :appointmentDetails="appointment"
-  >
-  </CalendarCardComponent>
 
 
 </template>
@@ -70,10 +75,6 @@ const attributes = ref([
   }
 ]);
 
-async function test() {
-  await userStore.getAllAppointments();
-  console.log(appointments.value)
-}
 
 onMounted(async () => {
   await userStore.auth({

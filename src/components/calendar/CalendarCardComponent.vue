@@ -1,10 +1,15 @@
 <template>
-  <div class="grid-cols-3 grid-rows-3">
-    <div>Hello</div>
-    <div>Datum: {{ startDate }}</div>
-    <div>Von: {{formattedTimeStart}}</div>
-    <div>Bis: {{formattedTimeEnd}}</div>
-
+  <div class="grid grid-cols-3 gap-2 grid-rows-3 border shadow rounded-md p-3">
+    <div class="col-span-3">Datum: {{ startDate }}</div>
+    <div class="col-span-1">Von: {{formattedTimeStart}}</div>
+    <div class="col-span-1">Bis: {{formattedTimeEnd}}</div>
+    <div class="col-span-3">Fach: {{appointmentDetails.coachingName}}</div>
+    <div v-if="userStore.user.userType === 'TEACHER'" class="col-span-3">
+      Schüler: {{ appointmentDetails.studentName}}
+    </div>
+    <div v-else class="col-span-3">
+      Lehrer: {{ appointmentDetails.teacherName}}
+    </div>
   </div>
 <!--
 
@@ -40,7 +45,11 @@
 <script setup>
 
 
+import {useUserStore} from "@/stores/user";
+
 const props = defineProps(['appointmentDetails']);
+
+const userStore = useUserStore();
 
 const startDate = `${props.appointmentDetails.startDate.getDate()}.${props.appointmentDetails.startDate.getMonth()}.${props.appointmentDetails.startDate.getFullYear()}`
 const startTime = `${props.appointmentDetails.startDate.getHours()}.${props.appointmentDetails.startDate.getMinutes()}`;

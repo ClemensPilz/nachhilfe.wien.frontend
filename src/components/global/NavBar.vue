@@ -15,6 +15,9 @@
           <RouterLink to="/">Home</RouterLink>
         </div>
         <div class="routerLink">
+          <RouterLink to="/calendar">Calendar</RouterLink>
+        </div>
+        <div class="routerLink">
           <RouterLink :to="`/profile/${userId}`">Profile</RouterLink>
         </div>
         <div class="routerLink">

@@ -35,7 +35,7 @@
               zu vermitteln. Denn wie es so schön heißt </p> <br>
             <p class="font-bold text-mainBlue">"Mit dem Wissen ist es wie mit der
               Liebe:
-              Je mehr man sie teilt, desto größer wird sie." </p>
+              Je mehr man es teilt, desto größer wird es." </p>
           </div>
           <div class="w-full lg:w-8/12 lg:pt-8 pl-10">
             <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
