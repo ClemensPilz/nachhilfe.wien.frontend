@@ -52,7 +52,7 @@ import {computed, ref} from "vue";
 import {useForm} from "vee-validate";
 import {useUserStore} from "@/stores/user";
 import {useRoute, useRouter} from "vue-router";
-import RatingSelect from "@/components/profile/public/RatingSelect.vue";
+import RatingSelect from "@/components/util/forms/RatingSelect.vue";
 import axios from "axios";
 
 const userStore = useUserStore();

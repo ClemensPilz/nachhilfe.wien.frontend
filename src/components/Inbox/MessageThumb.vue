@@ -27,10 +27,10 @@
       <div v-if="props.type === 'APPOINTMENT'">Status: {{ translateStatus(props.status) }}</div>
 
       <div v-if="props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'">
-        <ButtonSecondary v-if="props.status === 'PENDING'" text="Ablehnen" @click="reject" class="mr-2"/>
-        <ButtonPrimary v-if="props.status === 'PENDING'" text="Annehmen" @click="confirm"/>
+        <ButtonRegular class="mr-2 bg-mainOrange" v-if="props.status === 'PENDING'" text="Ablehnen" @click="reject"/>
+        <ButtonRegular class="bg-mainBlue" v-if="props.status === 'PENDING'" text="Annehmen" @click="confirm"/>
 
-        <ButtonSecondary v-if="props.status === 'CONFIRMED'" text="Absagen" @click="reject" class="mr-2"/>
+        <ButtonRegular class?="bg-mainOrange" v-if="props.status === 'CONFIRMED'" text="Absagen" @click="reject" class="mr-2"/>
       </div>
 
       <div class="paragraph font-bold">
@@ -45,10 +45,9 @@
 <script setup>
 import {useUserStore} from "@/stores/user";
 import {computed, onMounted, ref} from "vue";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import {useConversationStore} from "@/stores/conversation";
 import {useRouter} from "vue-router";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const router = useRouter();
 const userStore = useUserStore();

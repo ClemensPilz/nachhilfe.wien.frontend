@@ -11,11 +11,8 @@
 </template>
 
 <script setup>
-import {PencilIcon} from "@heroicons/vue/24/outline";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import {useUserStore} from "@/stores/user";
 import {computed, ref} from "vue";
-import {XMarkIcon} from "@heroicons/vue/20/solid";
 import axios from "axios";
 import SettingsField from "@/components/settings/SettingsField.vue";
 

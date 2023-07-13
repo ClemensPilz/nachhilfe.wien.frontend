@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
 
-    <form id="districtForm" @change="postDistricts">
+    <form id="districtForm" @change="ostDistricts">
       <div class="flex flex-col flex-wrap max-w-md mx-auto max-h-24 gap-x-4">
         <div v-for="n in 23">
           <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`"
@@ -15,12 +15,9 @@
 </template>
 
 <script setup>
-
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import {nextTick, onMounted, ref, watch} from "vue";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
-import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const districtValue = ref();
 const userStore = useUserStore();

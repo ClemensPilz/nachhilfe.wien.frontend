@@ -110,7 +110,7 @@
                 <p>Bewertung: <span class="text-secondary italic">{{ feedback.rating }}</span></p>
                 <p>Inhalt:</p>
                 <p class="text-secondary italic">{{ feedback.content }}</p>
-                <ButtonAccent text="Delete Feedback" @click="deleteFeedback(feedback.feedbackId)"/>
+                <ButtonRegular text="Delete Feedback" class="bg-mainOrange" @click="deleteFeedback(feedback.feedbackId)"/>
               </div>
 
               <!--A student's written feedbacks-->
@@ -123,7 +123,7 @@
                 <p>Bewertung: <span class="text-secondary italic">{{ feedback.rating }}</span></p>
                 <p>Inhalt:</p>
                 <p class="text-secondary italic">{{ feedback.content }}</p>
-                <ButtonAccent text="Delete Feedback" @click="deleteFeedback(feedback.feedbackId)"/>
+                <ButtonRegular text="Delete Feedback" class="bg-mainOrange" @click="deleteFeedback(feedback.feedbackId)"/>
               </div>
             </div>
           </div>
@@ -134,12 +134,6 @@
 </template>
 
 <script setup>
-
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
-import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
-import AppointmentModal from "@/components/global/AppointmentModal.vue";
-import ReviewModal from "@/components/profile/public/ReviewModal.vue";
 import {ref} from "vue";
 import {useAppStore} from "@/stores/app";
 import axios from "axios";

@@ -25,7 +25,7 @@
 
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import {useForm} from "vee-validate";
-import RatingSelect from "@/components/profile/public/RatingSelect.vue";
+import RatingSelect from "@/components/util/forms/RatingSelect.vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
 

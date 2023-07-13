@@ -24,8 +24,6 @@ import axios from "axios";
 import {computed, ref} from "vue";
 import {useAppStore} from "@/stores/app";
 import {useUserStore} from "@/stores/user";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
-import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const userStore = useUserStore();

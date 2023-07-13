@@ -41,7 +41,7 @@ import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
-import AppointmentModal from "@/components/global/AppointmentModal.vue";
+import AppointmentModal from "@/components/util/modals/AppointmentModal.vue";
 import SearchForm from "@/components/search/SearchForm.vue";
 
 const userStore = useUserStore();

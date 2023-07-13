@@ -96,7 +96,6 @@ import {useUserStore} from "@/stores/user";
 import {computed, onMounted, ref} from "vue";
 import axios from "axios";
 import stockPhoto from "@/assets/images/teacherProfile/teacher-stockphoto.jpg"
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import {useAppStore} from "@/stores/app";
 import FormModal from "@/components/util/modals/FormModal.vue";

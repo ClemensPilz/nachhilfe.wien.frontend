@@ -22,7 +22,6 @@
 <script setup>
 
 import {PencilIcon} from "@heroicons/vue/24/outline";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import {XMarkIcon} from "@heroicons/vue/20/solid";
 import {useUserStore} from "@/stores/user";
 import {computed, ref} from "vue";
