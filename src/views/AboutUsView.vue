@@ -3,6 +3,16 @@
   <div class="container mx-auto max-w-6xl">
     <NavBar/>
 
+    <div>
+      <DominikModal @close="toggleModal" :modal-active="modalActive">
+        <div class="modal-content">
+          <h1> This is a Modal Header</h1>
+          <p> This is a modal message </p>
+        </div>
+      </DominikModal>
+      <button @click="toggleModal" type="button">Open Modal</button>
+    </div>
+
     <section class="bg-white dark:bg-gray-900">
       <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
         <div class="flex flex-col lg:flex-row justify-between gap-8">
@@ -38,13 +48,13 @@
               Je mehr man sie teilt, desto größer wird sie." </p>
           </div>
           <div class="w-full lg:w-8/12 lg:pt-8 pl-10">
-            <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
+            <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
                      alt="Alexa featured Image"/>
                 <img class="md:hidden block" src="https://i.ibb.co/zHjXqg4/Rectangle-118.png"
                      alt="Alexa featured Image"/>
-                <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Dominik</p>
+                <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Dominik</p>>
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
@@ -106,5 +116,14 @@
 <script setup>
 import NavBar from "@/components/global/NavBar.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
+import DominikModal from "@/components/aboutUs/DominikModal.vue";
+import {ref} from 'vue';
+
+
+const modalActive = ref(false);
+
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
+}
 
 </script>
