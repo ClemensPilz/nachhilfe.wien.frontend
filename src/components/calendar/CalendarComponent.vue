@@ -1,76 +1,86 @@
 <template>
   <button @click="test">test</button>
-
   <div>
     <VDatePicker :attributes="attributes"
-               v-model="selectedDate"/>
+                 v-model="selectedDate"
+                 show-weeknumbers
+                 :select-attribute="selectAttribute"
+    />
   </div>
+  <CalendarCardComponent
+      v-for="appointment in selectedDayAppointments"
+      :key="appointment.start"
+      :appointmentDetails="appointment"
+  >
+  </CalendarCardComponent>
 
-  <div v-if="selectedDayAppointments.length > 0">
-    <div class="container mx-auto mt-10" v-for="appointment in appointments" :key="appointment.start">
-      <div class="grid grid-cols-1">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="flex items-center justify-between px-6 py-3 bg-gray-100">
-            <div class="flex items-center">
-              <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">{{ selectedDate }}</h3>
-            </div>
-            <v-card>
-              <p>{{ appointment.title }}</p>
-              <p>{{ appointment.start }} - {{ appointment.end }}</p>
-            </v-card>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- If there are no appointments, display a free day message -->
-  <div v-else>
 
-    <p>Sie haben einen freien Tag! Genießen Sie die Dinge, die Sie gerne tun.</p>
-
-  </div>
 </template>
 
 <script setup>
 import {useAppointmentStore} from "@/stores/calendar";
 import {computed, ref, onMounted} from "vue";
 import {setupCalendar, Calendar, DatePicker} from "v-calendar";
-import {format} from "date-fns";
+import {isSameDay, parseISO} from "date-fns";
 import {useUserStore} from "@/stores/user";
+import CalendarCardComponent from "@/components/calendar/CalendarCardComponent.vue";
 
 const appointmentStore = useAppointmentStore();
 const userStore = useUserStore();
-const selectedDate = ref(new Date());
-const appointments = computed(() => userStore.appointments);
+const selectedDate = ref();
+const appointments = computed(() => {
+  return userStore.appointments.map(appointment => ({
+    ...appointment,
+    startDate: parseISO(appointment.start),
+    endDate: parseISO(appointment.end)
+  }))
+});
+const selectAttribute = ref({})
 
-// const loadAppointmentsForSelectedDate = async () => {
-//   selectedDate.value = format(selectedDate.value, "yyyy-MM-dd'T'HH-mm-ss-SS")
-//   console.log(selectedDate.value);
-//   appointments.value = await appointmentStore.findAppointmentsByDate(selectedDate.value);
-// };
 
-
- const selectedDayAppointments = computed(() => {
-   return appointments.value.filter(appointment => appointment.start === selectedDate.value);
- });
+const selectedDayAppointments = computed(() => {
+  return appointments.value.filter(appointment => isSameDay(appointment.startDate, selectedDate.value));
+});
 
 const attributes = ref([
   {
-    key: "today",
-    highlight: true,
-    dates: new Date()
+    key: 'highlightOutline',
+    dates: selectedDate,
+    highlight: {
+      contentClass: 'outline-highlight',
+      fillMode: 'outline',
+    }
   },
+  {
+    key: "today",
+    dates: new Date(),
+    highlight: {
+      color: "blue",
+      fillMode: "light",
+      contentClass: "italic",
+      contentStyle: {
+        color: "red",
+      }
+    }
+  },
+  {
+    dates: appointments,
+    dot: true,
+    content: "yellow"
+  }
 ]);
 
 async function test() {
   await userStore.getAllAppointments();
+  console.log(appointments.value)
 }
 
 onMounted(async () => {
- await userStore.getAllAppointments();
-}
-
-)
+  await userStore.auth({
+    "token": localStorage.getItem("token")
+  });
+  await userStore.getAllAppointments();
+});
 
 
 </script>

@@ -55,12 +55,6 @@ async function getUserData(userId) {
   }
 }
 
-onMounted(async () => {
-  await userStore.auth({
-    "token": localStorage.getItem("token")
-  })
-});
-
 </script>
 
 
