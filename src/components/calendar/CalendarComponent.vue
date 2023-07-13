@@ -1,18 +1,23 @@
 <template>
-  <button @click="test">test</button>
-  <div>
-    <VDatePicker :attributes="attributes"
-                 v-model="selectedDate"
-                 show-weeknumbers
-                 :select-attribute="selectAttribute"
-    />
+  <div class="flex gap-5">
+    <div>
+      <VDatePicker :attributes="attributes"
+                   v-model="selectedDate"
+                   show-weeknumbers
+                   :select-attribute="selectAttribute"
+                   title-position="left"
+      />
+    </div>
+    <div>
+      <AppointmentCard
+          v-for="appointment in selectedDayAppointments"
+          :key="appointment.start"
+          :appointmentDetails="appointment"
+          class="mb-12 bg-gray"
+      >
+      </AppointmentCard>
+    </div>
   </div>
-  <CalendarCardComponent
-      v-for="appointment in selectedDayAppointments"
-      :key="appointment.start"
-      :appointmentDetails="appointment"
-  >
-  </CalendarCardComponent>
 
 
 </template>
@@ -23,7 +28,7 @@ import {computed, ref, onMounted} from "vue";
 import {setupCalendar, Calendar, DatePicker} from "v-calendar";
 import {isSameDay, parseISO} from "date-fns";
 import {useUserStore} from "@/stores/user";
-import CalendarCardComponent from "@/components/calendar/CalendarCardComponent.vue";
+import AppointmentCard from "@/components/calendar/AppointmentCard.vue";
 
 const appointmentStore = useAppointmentStore();
 const userStore = useUserStore();
@@ -70,10 +75,6 @@ const attributes = ref([
   }
 ]);
 
-async function test() {
-  await userStore.getAllAppointments();
-  console.log(appointments.value)
-}
 
 onMounted(async () => {
   await userStore.auth({

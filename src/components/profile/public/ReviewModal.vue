@@ -1,55 +1,56 @@
 <template>
   <div
-    v-if="props.isOpen"
-    @click="closeModal"
-    @keydown.enter="login"
-    class="fixed inset-0 flex items-center justify-center z-[1001] bg-black bg-opacity-50"
+      v-if="props.isOpen"
+      @click="closeModal"
+      class="fixed inset-0 flex items-center justify-center z-[1001] bg-black bg-opacity-50"
   >
     <div
-      @click.stop=""
-      class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
+        @click.stop=""
+        class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
     >
       <h2 class="text-2xl mb-4">{{ title }}</h2>
       <div>
-        <slot />
+        <slot/>
 
         <form>
-          <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']" />
+          <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']"/>
 
           <label for="text">Review:</label>
           <input
-            type="text"
-            name="text"
-            v-model="text"
-            placeholder="Mein Review..."
+              type="text"
+              name="text"
+              v-model="text"
+              placeholder="Mein Review..."
           />
           <div class="error">{{ errors.text }}</div>
-        </form>
-      </div>
 
-      <!--Buttons-->
-      <div class="flex gap-2 justify-end">
-        <button
-          class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
-          @click="closeModal"
-        >
-          Schließen
-        </button>
-        <button
-          class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
-          @click="postReview"
-        >
-          Absenden
-        </button>
+          <!--Buttons-->
+          <div class="flex gap-2 justify-end">
+            <button
+                type="button"
+                class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
+                @click="closeModal"
+            >
+              Schließen
+            </button>
+            <button
+                type="button"
+                class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
+                @click="postReview"
+            >
+              Absenden
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { useForm } from "vee-validate";
-import { useUserStore } from "@/stores/user";
+import {computed, ref} from "vue";
+import {useForm} from "vee-validate";
+import {useUserStore} from "@/stores/user";
 import {useRoute, useRouter} from "vue-router";
 import RatingSelect from "@/components/profile/public/RatingSelect.vue";
 import axios from "axios";
@@ -58,6 +59,10 @@ const userStore = useUserStore();
 const user = computed(() => userStore.user);
 const router = useRouter();
 const route = useRoute();
+
+const log = () => {
+  console.log('log');
+}
 
 const props = defineProps({
   title: {
@@ -92,7 +97,7 @@ const validationSchema = {
   },
 };
 
-const { meta, errors, useFieldModel } = useForm({
+const {meta, errors, useFieldModel} = useForm({
   validationSchema: validationSchema,
   initialValues: {
     rating: "1",
@@ -106,7 +111,7 @@ async function postReview() {
   if (meta.value.valid) {
     try {
       let date = new Date();
-      date = date.toISOString().slice(0,10);
+      date = date.toISOString().slice(0, 10);
 
       const response = await axios({
         headers: {
@@ -116,7 +121,7 @@ async function postReview() {
         url: `${userStore.url}/feedback`,
         data: {
           "teacherId": route.params.userId,
-          "studentId": userStore.userId,
+          "studentId": userStore.user.userId,
           "title": "title",
           "content": text.value,
           "rating": rating.value,
@@ -124,7 +129,7 @@ async function postReview() {
         }
       });
       console.log(response.data);
-      if(response.status === 201) {
+      if (response.status === 201) {
         alert('Vielen Dank für dein Review!');
         closeModal();
       } else {

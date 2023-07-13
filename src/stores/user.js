@@ -77,8 +77,12 @@ export const useUserStore = defineStore("user", () => {
     appointments.value = response.data;
   }
 
-  return { userId, user, url, auth, isAuthenticated, getAllAppointments, appointments };
+  async function logout() {
+    localStorage.removeItem('token');
+    isAuthenticated.value = false;
+    await router.push('/');
+  }
+
+
+  return { userId, user, url, auth, isAuthenticated, getAllAppointments, appointments, logout };
 });
-
-
-

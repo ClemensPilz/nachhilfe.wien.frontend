@@ -1,18 +1,16 @@
 <template>
-  <div class="w-full bg-gray-300">
+  <div class="w-full">
     <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
       <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
     </select>
-    <div class="text-xl text-accent">{{ selectedSubject }}</div>
 
     <select id="levelSelect" name="levelSelect" v-model="selectedLevel">
       <option v-for="level in levels" :value="level">{{ level }}</option>
     </select>
-    <div class="text-xl text-accent">{{ selectedLevel }}</div>
 
-    <input type="text" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">
-    <br>
-    <ButtonPrimary @click="validateCoaching" text="Send new coaching"/>
+    <input type="number" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">
+
+    <ButtonRegular @click="validateCoaching" text="OK" class="w-full bg-mainBlue ms-0"/>
 
   </div>
 
@@ -27,6 +25,8 @@ import {computed, ref} from "vue";
 import {useAppStore} from "@/stores/app";
 import {useUserStore} from "@/stores/user";
 import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -76,5 +76,9 @@ async function postCoaching(newCoaching) {
 </script>
 
 <style lang="scss" scoped>
+
+input, select {
+  @apply w-full mb-2  p-2 rounded-3xl
+}
 
 </style>

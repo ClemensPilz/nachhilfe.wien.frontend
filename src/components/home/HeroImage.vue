@@ -3,8 +3,8 @@
     <div class="imageOverlay">
       <div class="flex h-full items-center justify-center">
         <div class="text-white">
-          <h2 class="mb-4 text-4xl bg-primary px-2 font-semibold text-white">nachhilfe.wien</h2>
-          <h4 class="mb-6 text-xl font-semibold text-lightPrimary">Wir bringen dich auf Zack!</h4>
+          <h2 class="mb-4 text-4xl bg-primary px-2 font-big font-bold text-white">nachhilfe.wien</h2>
+          <h4 class="mb-6 text-xl text-lightPrimary">Wir bringen dich auf Zack!</h4>
           <ButtonAccent text="Nachhilfe finden" />
         </div>
       </div>

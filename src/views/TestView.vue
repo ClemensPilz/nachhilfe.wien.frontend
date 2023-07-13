@@ -1,96 +1,148 @@
 <template>
+  <div class="min-h-screen">
 
-  <!--Container-->
-  <div class="container max-w-6xl mx-auto text-center bg-white">
-    <NavBar class="md:mb-12"/>
+    <section id="hero" class="bg-background">
+      <div class="container max-w-7xl mx-auto px-4 mb-8">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="flex flex-col text-center md:text-left col-span-1">
+            <small class="text-mainBlue">Nachhilfe-Plattform</small>
+            <h1>Finde jetzt Nachhilfe</h1>
+          </div>
+          <div class="flex items-center md:mt-auto justify-around md:justify-end gap-8 col-span-1">
+            <ButtonLarge class="bg-mainBlue" text="Loslegen" />
+            <div class="rounded-full w-20 h-20 bg-mainYellow shadow-lg flex items-center justify-center hover:shadow-xl hover:cursor-pointer hover:bg-opacity-80">
+              <h3 class="text-white">?</h3>
+            </div>
+            <p class="hover:opacity-70 hover:cursor-pointer">Lehrer werden</p>
+          </div>
+        </div>
+      </div>
+      <img src="@/assets/images/home/title-mobile3.jpg" alt="classroom situation with laptop"
+           class="w-full h-auto max-w-7xl mx-auto md:hidden rounded-t-3xl">
+      <img src="@/assets/images/home/title-desktop3.jpg" alt="classroom situation with laptop"
+           class="w-full h-auto max-w-7xl mx-auto hidden md:block rounded-t-3xl">
+    </section>
 
+    <section id="features" class="bg-white">
+      <div class="container max-w-7xl mx-auto py-12 lg:py-20 p-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-    <div class="grid grid-rows-2 grid-cols-4 mt-4">
-      <div class="col-span-4 md:col-span-2 bg-blue-400">
-        <!--Available subjects-->
+          <div class="text-center">
+            <h1>X</h1>
+            <h4 class="text-mainOrange">Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
+          <div class="text-center">
+            <h1>Y</h1>
+            <h4>Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
+          <div class="text-center">
+            <h1>Z</h1>
+            <h4>Hilfe 24/7</h4>
+            <p class="text-secondary">Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr zur Verfügung.
+            </p>
+          </div>
+          <CardLarge>
+            <template v-slot:content>
+              <h4>Hilfe erhalten</h4>
+              <p class="text-secondary">Wir stehen dir jederzeit bei Fragen oder Problemen zur Verfügung!
+              </p>
+              <div class="text-right">
+                <ButtonRegular class="text-right bg-primary" text="Kontakt"/>
+              </div>
+            </template>
+          </CardLarge>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="bg-background">
+      <div class="container max-w-7xl mx-auto p-2 lg:p-12">
+
+        <div class="grid grid-cols-3 gap-4">
+
+          <div class="col-span-3 lg:col-span-2 text-center lg:text-left">
+            <h3>Einfach anmelden und mitmachen!</h3>
+            <p>Du bist Schüler und suchst jemanden, der dir rasch und unkompliziert auf die Sprünge hilfst?
+              Nachhilfe.Wien ist die Plattform für dich! Anmelden und Termin vereinbaren.</p>
+          </div>
+
+          <div class="col-span-3 lg:col-span-1 flex justify-around lg:justify-end lg:items-end">
+            <ButtonLarge text="Mehr erfahren" class="bg-mainBlue"/>
+          </div>
+
+        </div>
 
       </div>
-      <div class="col-span-4 md:col-span-2 bg-red-400">
-        <!--Current Subject-->
+    </section>
 
+    <section id="userCards" class="bg-background">
+      <div class="container max-w-7xl mx-auto pb-12 p-12 sm:p-2">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
+            <template v-slot:image>
+              <img src="@/assets/images/home/userCards/student.jpg" alt="" class="w-full">
+            </template>
+            <template v-slot:content>
+              <h4 class="text-mainBlue">Als Schüler anmelden</h4>
+              <p class="text-secondary">Registriere dich und finde einen Nachhilfelehrer</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Registrierung</small>
+              </div>
+            </template>
+          </CardLarge>
+
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
+            <template v-slot:image>
+              <img src="@/assets/images/home/userCards/teacher.jpg" alt="" class="w-full">
+            </template>
+            <template v-slot:content>
+              <h4 class="text-mainOrange">Lehrer werden</h4>
+              <p class="text-secondary">Anderen helfen und dabei auch noch Geld verdienen</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Registrierung</small>
+              </div>
+            </template>
+          </CardLarge>
+
+          <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
+            <template v-slot:image>
+              <img src="@/assets/images/home/userCards/help.jpg" alt="" class="w-full">
+            </template>
+            <template v-slot:content>
+              <h4>Jobs</h4>
+              <p class="text-secondary">Werde Teil unseres Teams - schick uns deine Bewerbung</p>
+              <div class="text-right">
+                <small class="underline hover:opacity-70 hover:cursor-pointer">Kontakt</small>
+              </div>
+            </template>
+          </CardLarge>
+
+
+        </div>
       </div>
-    </div>
+    </section>
 
-    <input type="file" name="imageInput" id="imageInput">
-    <ButtonPrimary text="Encode" @click="encodeImageToBase64"/>
 
-    <ButtonAccent text="Decode" @click="decodeImageFromBase64"/>
-    <div id="imageOutput" class="max-w-2xl overflow-hidden"></div>
-
-    <div>{{ base64 }}</div>
-
-    <br>
-
-    <h1 class="text-4xl text-accent">Manage Coachings</h1>
-
-    <CoachingSettings />
-
-    <h1 class="text-4xl text-accent">Manage Districts</h1>
-
-    <DistrictSettings />
-
-    <h1 class="text-4xl text-accent">Upload Profile Picture</h1>
-
-    <ImageSettings />
 
   </div>
 </template>
 
 <script setup>
 
-import NavBar from '@/components/global/NavBar.vue'
-import {Ripple, initTE} from "tw-elements";
-import {computed, onMounted, ref, watch} from "vue";
-import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
-import axios from "axios";
+import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import {useUserStore} from "@/stores/user";
-import {useAppStore} from "@/stores/app";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
-import {Coaching} from "@/classes";
-import CoachingSettings from "@/components/profile/coaching/CoachingSettings.vue";
-import DistrictSettings from "@/components/profile/districts/DistrictSettings.vue";
-import ImageSettings from "@/components/profile/image/ImageSettings.vue";
-
-const subject = ref();
-const level = ref();
-const rate = ref();
 const userStore = useUserStore();
-const appStore = useAppStore();
-const image = ref();
-const base64 = ref();
-const subjects = computed(() => appStore.subjects);
-const selectedSubject = ref();
-
-const levels = computed(() => appStore.levels);
-const selectedLevel = ref();
-
-const selectedRate = ref();
-
-const coachingArray = ref([]);
 
 
-function openCoachingForm() {
 
-}
-
-async function encodeImageToBase64() {
-  const imageData = document.getElementById('imageInput').files[0];
-  const reader = new FileReader();
-  let baseString;
-  reader.onloadend = () => {
-    baseString = reader.result;
-    base64.value = baseString;
-    console.log(baseString);
-  };
-  reader.readAsDataURL(imageData);
-}
-
-onMounted(() => initTE({Ripple}));
 </script>
 
 <style lang="scss" scoped>

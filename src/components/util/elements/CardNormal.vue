@@ -8,6 +8,8 @@
       <slot />
     </p>
     <button type="button" :class="props.buttonBg"
+            v-if="props.buttonVisible"
+            @click="$emit('buttonClick', this)"
             class="inline-block rounded-xl px-6 py-2 text-xs font-medium uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:bg-darkPrimary focus:outline-none focus:ring-0"
             data-te-ripple-init
             data-te-ripple-color="light">
@@ -26,9 +28,12 @@ onMounted(() => initTE({Ripple}))
 const props = defineProps({
   title: String,
   content: String,
+  buttonVisible: Boolean,
   buttonText: String,
   buttonBg: String
 })
+
+const emit = defineEmits(['buttonClick'])
 
 </script>
 
