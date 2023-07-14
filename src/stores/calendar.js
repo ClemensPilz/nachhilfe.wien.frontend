@@ -10,6 +10,7 @@ export const useAppointmentStore = defineStore("appointment", () => {
     const appointments = ref({});
     const storeAppointmentId = ref();
     const appointmentId = computed(() => storeAppointmentId.value);
+    const selectedDate = ref();
 
     const findAppointmentsByDate = async (date) => {
         try {
@@ -32,5 +33,5 @@ export const useAppointmentStore = defineStore("appointment", () => {
         return confirmedAppointments.value;
     };
 
-    return { appointmentId, pendingAppointments, findAppointmentsByDate, appointments, confirmedAppointments };
+    return { appointmentId, pendingAppointments, findAppointmentsByDate, appointments, confirmedAppointments, selectedDate };
 });

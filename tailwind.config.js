@@ -26,7 +26,7 @@ module.exports = {
             },
             fontFamily: {
                 'sans': ['"Plus Jakarta Sans"', 'sans-serif'],
-            }
+            },
         },
 
     },

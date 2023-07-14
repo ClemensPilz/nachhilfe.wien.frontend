@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-5">
+  <div class="flex gap-16">
     <div>
       <VDatePicker :attributes="attributes"
                    v-model="selectedDate"
@@ -14,6 +14,7 @@
           :key="appointment.start"
           :appointmentDetails="appointment"
           class="mb-12 bg-gray"
+          @selectedDate="selectedDate= $event"
       >
       </AppointmentCard>
     </div>
@@ -40,7 +41,6 @@ const appointments = computed(() => {
     endDate: parseISO(appointment.end)
   }))
 });
-const selectAttribute = ref({})
 
 
 const selectedDayAppointments = computed(() => {
