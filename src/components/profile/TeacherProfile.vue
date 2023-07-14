@@ -20,7 +20,6 @@
 
 
 
-
     <h3 v-if="!profile" class="text-center">
       User nicht gefunden!
     </h3>
@@ -132,7 +131,6 @@ function closeAppointmentModal() {
 function noStudentAlert() {
   alert('Nur Schüler können Bewertungen abgeben');
 }
-
 
 async function getTeacherProfile(id) {
   try {

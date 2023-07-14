@@ -42,11 +42,14 @@ const props = defineProps({
 
 const requestUrl = computed(() => {
   if (userStore.user.userType === 'TEACHER') {
-    return `${userStore.url}/teacher/updateTeacher/${userStore.userId}`
-  } else {
-    return `${userStore.url}/student/updateStudent/${userStore.userId}`
+    return `${userStore.url}/teacher/updateTeacher/${userStore.user.userId}`
+  } else if (userStore.user.userType === 'STUDENT') {
+    return `${userStore.url}/student/updateStudent/${userStore.user.userId}`
+  } else if (userStore.user.userType === 'ADMIN') {
+    return `${userStore.url}/admin/updateAdmin/${userStore.user.userId}`
   }
 })
+
 
 async function updateField() {
   if (fieldValue.value.length < 3) {
