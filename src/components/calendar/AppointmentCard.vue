@@ -51,12 +51,14 @@ import {useUserStore} from "@/stores/user";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
 import {useConversationStore} from "@/stores/conversation";
+import {useAppointmentStore} from "@/stores/calendar";
 
 const props = defineProps(['appointmentDetails']);
 
 const userStore = useUserStore();
 const appStore = useAppStore();
 const conversationStore = useConversationStore();
+const appointmentStore = useAppointmentStore();
 
 const startDate = `${props.appointmentDetails.startDate.getDate()}.${props.appointmentDetails.startDate.getMonth()}.${props.appointmentDetails.startDate.getFullYear()}`
 const startTime = `${props.appointmentDetails.startDate.getHours()}.${props.appointmentDetails.startDate.getMinutes()}`;
@@ -76,10 +78,7 @@ const emit = defineEmits(['selectedDate']);
 async function reject() {
   try {
     const response = await conversationStore.updateAppointment(props.appointmentDetails.id, 'reject');
-    alert('Termin abgelehnt');
-    router.go(0);
-    emit("selectedDate", props.appointmentDetails.startDate)
-
+    await userStore.getAllAppointments();
   } catch (e) {
     console.log(e);
   }
@@ -88,9 +87,7 @@ async function reject() {
 async function confirm() {
   try {
     const response = await conversationStore.updateAppointment(props.appointmentDetails.id, 'confirm');
-    alert('Termin akzeptiert');
-    router.go(0);
-    emit("selectedDate")
+    await userStore.getAllAppointments();
   } catch (e) {
     console.log(e);
   }
