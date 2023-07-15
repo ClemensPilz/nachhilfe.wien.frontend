@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
 
-    <form id="districtForm" @change="ostDistricts">
+    <form id="districtForm" @change="postDistricts">
       <div class="flex flex-col flex-wrap max-w-md mx-auto max-h-24 gap-x-4">
         <div v-for="n in 23">
           <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`"
