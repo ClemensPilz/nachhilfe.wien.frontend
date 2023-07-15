@@ -30,6 +30,7 @@
           <MessageThumb v-for="message in messages"
                         :key="message.id"
                         :id="message.id"
+                        @reload="getMessages(conversationId)"
                         :type="message.messageType"
                         :title="message.title"
                         :content="message.content"
@@ -65,13 +66,14 @@
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {onBeforeUnmount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
 import {useUserStore} from "@/stores/user";
 import MessageInput from "@/components/Inbox/MessageInput.vue";
 import {useConversationStore} from "@/stores/conversation";
+import {onBeforeRouteUpdate} from "vue-router";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
@@ -210,7 +212,6 @@ async function initInboxView() {
   try {
     await getConversations(userStore.userId);
     if (conversationStore.getActiveConversationInInbox() !== -1) {
-      console.log(conversationStore.getActiveConversationInInbox())
       await getMessages(conversationStore.getActiveConversationInInbox());
     }
     setTimeout(() => {
@@ -227,21 +228,27 @@ onUpdated(() => {
   scroll();
 })
 
-// This function sets up a watcher that listens for a change in the isAuthenticated-variable in userStore. This is
-// necessary because initInboxView() will only work once the appropriate user information has been fetched.
-onMounted(async () => {
-      const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
-        if (newVal) {
-          await initInboxView();
-          unwatch();
-        }
-      }, {immediate: true});
-    }
-);
+// This function sets up a watcher that listens for a change in the isAuthenticated-variable in userStore if the user is not authenticated. This is
+// necessary because otherwise initInboxView() wouldn't work on page reload if the user has a valid token but the auth() function has not gone through and set the isAuthenticated-variable yet.
 
-onUnmounted(() => {
+
+onMounted(async () => {
+  if (userStore.isAuthenticated) {
+    await initInboxView();
+  } else {
+    const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
+      if (newVal) {
+        await initInboxView();
+        unwatch();
+      }
+    }, {immediate: true});
+  }
+})
+
+onBeforeUnmount(() => {
   conversationStore.setActiveConversationInInbox(conversationId.value);
 })
+
 
 </script>
 

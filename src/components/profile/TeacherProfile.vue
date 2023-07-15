@@ -57,7 +57,8 @@
               <li>
                 <h1> > </h1>
                 <div>
-                  <div v-for="coaching in profile.coachings">
+                  <div v-for="coaching in profile.coachings"
+                       v-show="coaching.active">
                     <p class="underline underline-offset-4 decoration-secondary"
                     @click="openAppointmentModal(coaching.coachingId)">{{ coaching.subject }}</p>
                   </div>

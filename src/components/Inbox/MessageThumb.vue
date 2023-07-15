@@ -30,7 +30,7 @@
         <ButtonRegular class="mr-2 bg-mainOrange" v-if="props.status === 'PENDING'" text="Ablehnen" @click="reject"/>
         <ButtonRegular class="bg-mainBlue" v-if="props.status === 'PENDING'" text="Annehmen" @click="confirm"/>
 
-        <ButtonRegular class?="bg-mainOrange" v-if="props.status === 'CONFIRMED'" text="Absagen" @click="reject" class="mr-2"/>
+        <ButtonRegular class="bg-mainOrange mr-2" v-if="props.status === 'CONFIRMED'" text="Absagen" @click="reject"/>
       </div>
 
       <div class="paragraph font-bold">
@@ -44,7 +44,7 @@
 
 <script setup>
 import {useUserStore} from "@/stores/user";
-import {computed, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import {useConversationStore} from "@/stores/conversation";
 import {useRouter} from "vue-router";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
@@ -53,14 +53,16 @@ const router = useRouter();
 const userStore = useUserStore();
 const conversationStore = useConversationStore();
 const storeId = computed(() => userStore.user.userId);
-const props = defineProps(['content', 'title', 'id', 'coachingName', 'status', 'start', 'duration', 'type', 'senderId', 'date']);
+const props = defineProps(['content', 'title', 'id', 'conversationId', 'coachingName', 'status', 'start', 'duration', 'type', 'senderId', 'date']);
+const emit = defineEmits(['reload']);
+
 
 async function reject() {
   try {
     const response = await conversationStore.updateAppointment(props.id, 'reject');
     console.log(response);
     alert('Termin abgelehnt');
-    router.go(0)
+    emit("reload");
   } catch (e) {
     console.log(e);
   }
@@ -71,14 +73,14 @@ async function confirm() {
     const response = await conversationStore.updateAppointment(props.id, 'confirm');
     console.log(response);
     alert('Termin akzeptiert');
-    router.go(0)
+    emit("reload");
   } catch (e) {
     console.log(e);
   }
 }
 
 function translateStatus(status) {
-  if(status === 'PENDING') {
+  if (status === 'PENDING') {
     return 'Warte auf Rückmeldung';
   } else if (status === 'CONFIRMED') {
     return 'Bestätigt';
