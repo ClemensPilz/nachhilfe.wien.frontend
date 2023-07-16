@@ -84,7 +84,7 @@
         </div>
 
         <!--Comments-->
-        <div class="col-span-2 my-4" v-if="true"> <!--@todo: check if user is teacher-->
+        <div class="col-span-2 my-4" v-if="profile.feedbacks.length > 0"> <!--@todo: check if user is teacher-->
           <table class="w-full text-left text-p">
             <tr>
               <th>Bewertung</th>
