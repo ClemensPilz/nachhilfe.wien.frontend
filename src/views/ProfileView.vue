@@ -1,9 +1,9 @@
 <template>
-  <TeacherProfile />
+  <UserProfile />
 </template>
 
 <script setup>
-import TeacherProfile from "@/components/profile/TeacherProfile.vue";
+import UserProfile from "@/components/profile/UserProfile.vue";
 </script>
 
 <style lang="scss" scoped>
