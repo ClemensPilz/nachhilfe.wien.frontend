@@ -34,12 +34,10 @@
 
             <!--Picture-->
             <div id="teacherPicture" class="group">
-
               <div class="w-full h-[500px] pl-16">
                 <img :src="profile.image ? profile.image : stockPhoto" alt="picture of a teacher"
                      class="h-full object-cover object-center group-hover:scale-105 transition-all duration-300">
               </div>
-
             </div>
 
             <!--Teacher Information-->
@@ -51,9 +49,9 @@
                     <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
                     <p>{{ profile.description }}</p>
                     <small>Durchschnittl. Wertung: {{ profile.averageRatingScore }}</small>
-
                   </div>
                 </li>
+
                 <li>
                   <h1> > </h1>
                   <div>
@@ -65,6 +63,7 @@
                     <div v-if="profile.coachings.length < 0">Dieser Lehrer bietet aktuell keine Nachhilfe an</div>
                   </div>
                 </li>
+
                 <li>
                   <h1>:</h1>
                   <div>
@@ -77,7 +76,6 @@
                       <ButtonRegular v-else class="bg-secondary" text="Bewerten" @click="noStudentAlert"/>
                     </div>
                   </div>
-
                 </li>
               </ul>
             </div>
