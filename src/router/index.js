@@ -51,8 +51,10 @@ const router = createRouter({
       name: 'admin',
       component: AdminView
     }
-
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router
