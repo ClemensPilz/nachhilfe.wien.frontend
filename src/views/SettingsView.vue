@@ -1,7 +1,5 @@
 <template>
   <div class="container max-w-3xl mx-auto px-2 mt-6 md:px-0 bg-white">
-
-
     <section id="userData" class="mb-12">
 
       <h2 class="text-center">Meine Userdaten</h2>
@@ -42,13 +40,11 @@
 </template>
 
 <script setup>
-import NavBar from "@/components/global/NavBar.vue";
-import ImageSettings from "@/components/profile/image/ImageSettings.vue";
+import ImageSettings from "@/components/settings/ImageSettings.vue";
 import {useUserStore} from "@/stores/user";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
 import BasicSettings from "@/components/settings/BasicSettings.vue";
-import DistrictSettings from "@/components/profile/districts/DistrictSettings.vue";
-import CoachingSettings from "@/components/profile/coaching/CoachingSettings.vue";
+import DistrictSettings from "@/components/settings/DistrictSettings.vue";
+import CoachingSettings from "@/components/settings/CoachingSettings.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const userStore = useUserStore();

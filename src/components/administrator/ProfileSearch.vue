@@ -20,11 +20,7 @@
 
 <script setup>
 import {ref} from "vue";
-import ButtonSecondary from "@/components/util/elements/ButtonSecondary.vue";
-import ButtonAccent from "@/components/util/elements/ButtonAccent.vue";
-import axios from "axios";
 import {useUserStore} from "@/stores/user";
-import {data} from "autoprefixer";
 import {useAdminStore} from "@/stores/admin";
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 

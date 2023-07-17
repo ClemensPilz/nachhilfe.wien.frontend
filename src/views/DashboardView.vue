@@ -6,13 +6,12 @@
 
     <DashboardFeature
         v-if="userStore.user.userType === 'ADMIN'"
-        title="Admin-Funktionen" :left="false" subtitle="Nachhilfe.wien verwalten" text="Zu allen Admin-Funktionen" class="bg-mainOrange">
+        title="Admin-Funktionen" :left="true" subtitle="Nachhilfe.wien verwalten" text="Zu allen Admin-Funktionen" class="bg-mainOrange">
       <ButtonLarge class="bg-mainBlue" @click="() => {router.push('/admin')}" text="Admin" />
       <template v-slot:image>
-        <img src="@/assets/images/dashboard/message.jpg" alt="">
+        <img src="@/assets/images/dashboard/admin.jpg" alt="">
       </template>
     </DashboardFeature>
-
 
     <DashboardFeature title="Nachrichten abrufen" :left="false" subtitle="Hier geht's zur Inbox" text="Nachrichten schreiben und empfangen, Termine vereinbaren!" class="bg-mainYellow">
       <ButtonLarge class="bg-mainBlue" @click="() => {router.push('/inbox')}" text="Inbox" />

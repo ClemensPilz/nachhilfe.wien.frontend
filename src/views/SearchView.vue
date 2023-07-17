@@ -21,6 +21,7 @@
             :name="`${teacher.firstName} ${teacher.lastName}`"
             :description="`${teacher.description === null ? '' : teacher.description}`"
             :coachings="teacher.coachings"
+            :image="teacher.image"
         />
 
         <AppointmentModal v-if="showModal"
@@ -36,14 +37,12 @@
 <script setup>
 
 import SearchResult from "@/components/search/SearchResult.vue";
-import NavBar from "@/components/global/NavBar.vue";
 import {onMounted, ref, watch} from "vue";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
-import AppointmentModal from "@/components/global/AppointmentModal.vue";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
+import AppointmentModal from "@/components/util/modals/AppointmentModal.vue";
 import SearchForm from "@/components/search/SearchForm.vue";
 
 const userStore = useUserStore();
@@ -85,6 +84,7 @@ async function getAllTeachers() {
       url: `${userStore.url}/teacher/teacher-profiles`
     });
     teachersArray.value = response.data;
+    console.log(response.data)
   } catch (e) {
     console.log(e);
   }

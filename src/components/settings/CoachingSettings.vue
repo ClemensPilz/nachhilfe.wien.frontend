@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import CoachingForm from "@/components/profile/coaching/CoachingForm.vue";
+import CoachingForm from "@/components/settings/CoachingForm.vue";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/user";
