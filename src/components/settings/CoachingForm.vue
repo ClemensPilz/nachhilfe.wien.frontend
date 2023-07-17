@@ -1,5 +1,8 @@
 <template>
   <div class="w-full">
+    <div class="text-center mb-1">
+    <small class="text-white">Themengebiet</small>
+    </div>
     <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
       <option v-for="subject in subjects" :value="subject">{{ subject }}</option>
     </select>
@@ -8,10 +11,9 @@
       <option v-for="level in levels" :value="level">{{ level }}</option>
     </select>
 
-    <input type="number" name="rateSelect" id="rateSelect" placeholder="rate" v-model="selectedRate">
+    <input type="number" class="text-center" name="rateSelect" id="rateSelect" placeholder="Stundensatz" v-model="selectedRate">
 
     <ButtonRegular @click="validateCoaching" text="OK" class="w-full bg-mainBlue ms-0"/>
-
   </div>
 
 
