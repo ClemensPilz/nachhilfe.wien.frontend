@@ -106,7 +106,6 @@
 </template>
 
 <script setup>
-import NavBar from "@/components/global/NavBar.vue";
 import FooterBar from "@/components/global/FooterBar.vue";
 import DominikModal from "@/components/aboutUs/DominikModal.vue";
 import {ref} from 'vue';

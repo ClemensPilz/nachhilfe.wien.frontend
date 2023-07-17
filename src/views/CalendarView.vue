@@ -7,9 +7,7 @@
       </div>
     </div>
 
-    <div class="pt-8">
-      <footer-bar/>
-    </div>
+
   </section>
 </template>
 
@@ -17,8 +15,6 @@
 
 <script setup>
 import {useUserStore} from "@/stores/user";
-import NavBar from "@/components/global/NavBar.vue";
-import FooterBar from "@/components/global/FooterBar.vue";
 import {ref, onMounted } from "vue";
 import {useRoute} from "vue-router";
 import axios from "axios";
