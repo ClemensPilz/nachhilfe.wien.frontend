@@ -1,6 +1,7 @@
 <template>
   <div class="w-full">
 
+    <small class="text-red-700" v-if="districtValue.length < 1">Wenn du keine Bezirke auswählst, erscheinst du nicht in der Suchfunktion</small>
     <form id="districtForm" @change="postDistricts">
       <div class="flex flex-col flex-wrap max-w-md mx-auto max-h-24 gap-x-4">
         <div v-for="n in 23">
@@ -19,7 +20,7 @@ import {nextTick, onMounted, ref, watch} from "vue";
 import {useUserStore} from "@/stores/user";
 import axios from "axios";
 
-const districtValue = ref();
+const districtValue = ref([]);
 const userStore = useUserStore();
 
 async function postDistricts() {
