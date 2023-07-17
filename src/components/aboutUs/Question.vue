@@ -1,23 +1,25 @@
 <script setup>
+import {defineProps} from "vue";
 
-const {question} = defineProps(["questions"]);
-
+const props = defineProps(['question']);
 
 </script>
 
 <template>
-  <div class="question-container">
-    <h1 class="question">
-      {{ questions.question }}
-    </h1>
-  </div>
-  <div class="options-container">
-    <div v-for="input in questions.input"
-         :key="input.id"
-         class="input">
-      <p class="option-label">{{ input.question }}</p>
-      <div class="option-value">
-        <p>{{input.answer}}</p>
+  <div class="container mx-auto max-w-6xl mt-8 px-2">
+    <div class="question-container">
+      <h1 class="question">
+        {{props.question.id}}. {{ props.question.name }}
+      </h1>
+    </div>
+    <div class="options-container">
+      <div v-for="input in props.question.input"
+           :key="input.id"
+           class="input">
+        <p class="option-label">{{input.id}}. {{ input.question }}</p>
+        <div class="option-value">
+          <p>{{ input.answer }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -33,26 +35,14 @@ const {question} = defineProps(["questions"]);
   margin-bottom: 20px;
 }
 
-.option {
-  display: flex;
-  margin-bottom: 20px;
-  cursor: pointer;
+.options-container {
+  margin-top: 20px;
 }
 
-.option-label {
-  background-color: bisque;
-  width: 50px;
-  height: 50px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.option-value {
-  background-color: rgb(244, 239, 239);
-  width: 100%;
-  font-size: 30px;
-  padding: 0 20px;
+.option-value{
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 25px;
+  margin-top: 10px;
 }
 </style>
