@@ -39,20 +39,19 @@
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
                      alt="Alexa featured Image"/>
-                <ButtonRegular text="Dominik" @click="toggleModal1" class="mt-5 bg-mainBlue">
-                  Dominik</ButtonRegular>
+                <ButtonLarge text="Dominik" @click="toggleModal1" class="mt-5 bg-mainBlue">
+                  Dominik</ButtonLarge>
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
                      alt="Olivia featured Image"/>
-                <ButtonRegular text="Clemens" @click="toggleModal2" class="mt-5 bg-mainBlue">
-                  Clemens</ButtonRegular>
+                <ButtonLarge text="Clemens" @click="toggleModal2" class="mt-5 bg-mainBlue">
+                  Clemens</ButtonLarge>
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
-                <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Liam featued Image"/>
-                <img class="md:hidden block" src="https://i.ibb.co/C5MMBcs/Rectangle-120.png" alt="Liam featued Image"/>
-                <ButtonRegular text="René" @click="toggleModal3" class="mt-5 bg-mainBlue">
-                  René</ButtonRegular>
+                <img class="md:block w-[300px] h-[150px]" src="../assets/images/René-Ali%20Günürün.jpg" alt="René"/>
+                <ButtonLarge text="René" @click="toggleModal3" class="mt-5 bg-mainBlue">
+                  René</ButtonLarge>
               </div>
             </div>
           </div>
@@ -95,24 +94,20 @@
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Gib hier bitte deinen Text ein..."></textarea>
           </div>
-          <button-primary text="Senden"/>
+          <button-regular text="Senden"/>
         </form>
       </div>
     </section>
   </div>
-  <section>
-    <FooterBar/>
-  </section>
 </template>
 
 <script setup>
-import FooterBar from "@/components/global/FooterBar.vue";
 import DominikModal from "@/components/aboutUs/DominikModal.vue";
 import {ref} from 'vue';
 import ClemensModal from "@/components/aboutUs/ClemensModal.vue";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import ReneModal from "@/components/aboutUs/ReneModal.vue";
+import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 
 
 const modalActive1 = ref(false);
