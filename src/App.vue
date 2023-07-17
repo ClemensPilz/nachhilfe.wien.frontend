@@ -25,7 +25,7 @@ async function initApp() {
 
     try {
       const response = await userStore.auth({token});
-
+      await router.push('/dashboard');
     } catch (e) {
       console.log(e);
       await router.push('/');

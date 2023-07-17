@@ -2,9 +2,9 @@
 
   <div class=" grid grid-cols-2 grid-rows-1 bg-white rounded-xl shadow-lg border-2"
        :class="{
-      'border-yellow-500': appointmentDetails.status === 'PENDING',
+      'border-mainYellow': appointmentDetails.status === 'PENDING',
       'border-green-500' : appointmentDetails.status === 'CONFIRMED',
-      'border-red-500': appointmentDetails.status === 'REJECTED'
+      'border-mainOrange': appointmentDetails.status === 'REJECTED'
     }"
       >
     <!--Appointment Details-Part-->
@@ -30,8 +30,8 @@
 
     <!---Appointment Date and Time-->
     <div class="col-span-1 pl-5 pt-5">
-      <p>Von: {{formattedTimeStart}}</p>
-      <p>Bis: {{formattedTimeEnd}}</p>
+      <p>Von: {{startTime}}</p>
+      <p>Bis: {{endTime}}</p>
       <p>Fach: {{appointmentDetails.coachingName}}</p>
       <p>Status: {{appointmentDetails.status}}</p>
       <div v-if="userStore.user.userType === 'TEACHER'" class="py-5" >
@@ -51,7 +51,8 @@ import {useUserStore} from "@/stores/user";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
 import {useConversationStore} from "@/stores/conversation";
-import {useAppointmentStore} from "@/stores/calendar";
+import {useAppointmentStore} from "@/stores/appointment";
+import {computed, onMounted} from "vue";
 
 const props = defineProps(['appointmentDetails']);
 
@@ -60,20 +61,20 @@ const appStore = useAppStore();
 const conversationStore = useConversationStore();
 const appointmentStore = useAppointmentStore();
 
-const startDate = `${props.appointmentDetails.startDate.getDate()}.${props.appointmentDetails.startDate.getMonth()}.${props.appointmentDetails.startDate.getFullYear()}`
-const startTime = `${props.appointmentDetails.startDate.getHours()}.${props.appointmentDetails.startDate.getMinutes()}`;
-const endTime = `${props.appointmentDetails.endDate.getHours()}.${props.appointmentDetails.endDate.getMinutes()}`;
+const startDate = computed(() => {
+  const date = new Date(props.appointmentDetails.startDate);
+  return date.toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})
+})
 
-// Split the time output into hours and minutes
-const [hoursStart, minutesStart] = startTime.split(".");
-const [hoursEnd, minutesEnd] = endTime.split(".");
-// Format the time with leading zeros using padStart()
-const formattedTimeStart = `${hoursStart.padStart(2, '0')}:${minutesStart.padStart(2, '0')}`;
-const formattedTimeEnd = `${hoursEnd.padStart(2, '0')}:${minutesEnd.padStart(2, '0')}`;
+const startTime = computed(() => {
+  const date = new Date(props.appointmentDetails.startDate);
+  return date.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'})
+})
 
-
-const emit = defineEmits(['selectedDate']);
-
+const endTime = computed(() => {
+  const date = new Date(props.appointmentDetails.endDate);
+  return date.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'})
+})
 
 async function reject() {
   try {
@@ -92,6 +93,8 @@ async function confirm() {
     console.log(e);
   }
 }
+
+onMounted(() => { console.log(props.appointmentDetails)})
 
 </script>
 

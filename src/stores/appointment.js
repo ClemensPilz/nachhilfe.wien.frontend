@@ -1,12 +1,14 @@
-
 import axios from "axios";
 import {ref, computed} from "vue";
 import {defineStore} from "pinia";
-const url ="http://localhost:8080";
+import {useUserStore} from "@/stores/user";
+
 
 export const useAppointmentStore = defineStore("appointment", () => {
+    const userStore = useUserStore();
+    const url = computed(() => userStore.url)
     const confirmedAppointments = ref();
-    const pendingAppointments=ref();
+    const pendingAppointments = ref();
     const appointments = ref({});
     const storeAppointmentId = ref();
     const appointmentId = computed(() => storeAppointmentId.value);
@@ -27,11 +29,17 @@ export const useAppointmentStore = defineStore("appointment", () => {
         } catch (e) {
             console.error(e);
             throw (e);
-            // You might want to do more sophisticated error handling
         }
 
         return confirmedAppointments.value;
     };
 
-    return { appointmentId, pendingAppointments, findAppointmentsByDate, appointments, confirmedAppointments, selectedDate };
+    return {
+        appointmentId,
+        pendingAppointments,
+        findAppointmentsByDate,
+        appointments,
+        confirmedAppointments,
+        selectedDate
+    };
 });

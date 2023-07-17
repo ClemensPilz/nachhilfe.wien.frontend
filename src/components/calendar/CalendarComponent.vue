@@ -4,7 +4,6 @@
       <VDatePicker :attributes="attributes"
                    v-model="selectedDate"
                    show-weeknumbers
-                   :select-attribute="selectAttribute"
                    title-position="left"
       />
     </div>
@@ -24,7 +23,7 @@
 </template>
 
 <script setup>
-import {useAppointmentStore} from "@/stores/calendar";
+import {useAppointmentStore} from "@/stores/appointment";
 import {computed, ref, onMounted} from "vue";
 import {setupCalendar, Calendar, DatePicker} from "v-calendar";
 import {isSameDay, parseISO} from "date-fns";
@@ -33,7 +32,7 @@ import AppointmentCard from "@/components/calendar/AppointmentCard.vue";
 
 const appointmentStore = useAppointmentStore();
 const userStore = useUserStore();
-const selectedDate = ref();
+const selectedDate = ref(new Date());
 const appointments = computed(() => {
   return userStore.appointments.map(appointment => ({
     ...appointment,

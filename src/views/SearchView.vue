@@ -1,4 +1,13 @@
 <template>
+
+  <FormModal ref="appointmentModalRef">
+    <CardLarge class="m-0">
+      <template v-slot:content>
+        <AppointmentForm @close="closeAppointmentModal"/>
+      </template>
+    </CardLarge>
+  </FormModal>
+
   <div class="container mx-auto max-w-6xl mt-8 px-2">
 
     <h2>Lehrer suchen</h2>
@@ -23,12 +32,6 @@
             :coachings="teacher.coachings"
             :image="teacher.image"
         />
-
-        <AppointmentModal v-if="showModal"
-                          title="Termin senden"
-                          @close="showModal = !showModal"
-                          @send="send"/>
-
       </div>
     </div>
   </div>
@@ -42,37 +45,45 @@ import {useUserStore} from "@/stores/user";
 import axios from "axios";
 import {useAppStore} from "@/stores/app";
 import router from "@/router";
-import AppointmentModal from "@/components/util/modals/AppointmentModal.vue";
 import SearchForm from "@/components/search/SearchForm.vue";
+import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
+import FormModal from "@/components/util/modals/FormModal.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
 const teachersArray = ref();
 const showModal = ref(false);
 const selectedCoachingId = ref();
-const selectedCoachingName = ref();
 const selectedTeacherId = ref();
+const appointmentModalRef = ref();
+
+function openAppointmentModal(teacherId, coachingId) {
+  appointmentModalRef.value.openModal();
+  appStore.selectCoaching(teacherId, coachingId);
+}
+
+function closeAppointmentModal() {
+  appointmentModalRef.value.closeModal();
+}
 
 function pasteResult(data) {
   teachersArray.value = data;
 }
 
 function setAppointmentParameters(e) {
-  selectedCoachingId.value = e.coachingId;
-  selectedTeacherId.value = e.teacherId;
-  selectedCoachingName.value = e.coachingName;
-  showModal.value = true;
+  openAppointmentModal(e.teacherId, e.coachingId);
 }
 
-const send = async (e) => {
-  await appStore.postAppointment(selectedTeacherId.value,
-      selectedCoachingId.value,
-      e.startTime,
-      e.duration,
-      e.content)
-
-  showModal.value = false;
-}
+// const send = async (e) => {
+//   await appStore.postAppointment(selectedTeacherId.value,
+//       selectedCoachingId.value,
+//       e.startTime,
+//       e.duration,
+//       e.content)
+//
+//   showModal.value = false;
+// }
 
 async function getAllTeachers() {
   try {

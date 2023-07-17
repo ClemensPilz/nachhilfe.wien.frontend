@@ -4,7 +4,7 @@
     <div>
       <form>
         <div class="w-fit text-center">
-          <VDatePicker v-model.string="startTime"
+          <VDatePicker v-model="startTime"
                        mode="dateTime"
                        is24hr
                        hide-time-header
@@ -17,6 +17,7 @@
                           id="duration"
                           class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2 w-1/4">
         </div>
+        {{ startTime }}asdfasdf
         <br>
         <div class="w-full text-center">
           Anmerkungen, Ort, etc:
@@ -48,7 +49,6 @@ import {ref} from "vue";
 import {useAppStore} from "@/stores/app";
 
 const emit = defineEmits(['close']);
-const props = defineProps(['teacherId'])
 const appStore = useAppStore();
 
 const duration = ref();
