@@ -1,7 +1,5 @@
 <template>
   <div class="container max-w-3xl mx-auto px-2 mt-6 md:px-0 bg-white">
-
-
     <section id="userData" class="mb-12">
 
       <h2 class="text-center">Meine Userdaten</h2>

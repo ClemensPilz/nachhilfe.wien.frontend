@@ -60,7 +60,7 @@
                       <p class="underline underline-offset-4 decoration-secondary"
                          @click="openAppointmentModal(coaching.coachingId)">{{ coaching.subject }}</p>
                     </div>
-                    <div v-if="profile.coachings.length < 0">Dieser Lehrer bietet aktuell keine Nachhilfe an</div>
+                    <div v-if="profile.coachings.length < 1">Dieser Lehrer bietet aktuell keine Nachhilfe an</div>
                   </div>
                 </li>
 
