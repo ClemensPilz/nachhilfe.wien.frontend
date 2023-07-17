@@ -1,4 +1,4 @@
-<template>
+ <template>
 
   <!--Container-->
   <div class="mt-10">

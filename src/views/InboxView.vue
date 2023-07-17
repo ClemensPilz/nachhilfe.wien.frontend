@@ -66,14 +66,13 @@
 </template>
 
 <script setup>
-import {onBeforeUnmount, onMounted, onUnmounted, onUpdated, ref, watch} from "vue";
+import {onBeforeUnmount, onMounted, onUpdated, ref, watch} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
 import {useUserStore} from "@/stores/user";
 import MessageInput from "@/components/Inbox/MessageInput.vue";
 import {useConversationStore} from "@/stores/conversation";
-import {onBeforeRouteUpdate} from "vue-router";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
@@ -231,18 +230,13 @@ onUpdated(() => {
 // This function sets up a watcher that listens for a change in the isAuthenticated-variable in userStore if the user is not authenticated. This is
 // necessary because otherwise initInboxView() wouldn't work on page reload if the user has a valid token but the auth() function has not gone through and set the isAuthenticated-variable yet.
 
-
 onMounted(async () => {
-  if (userStore.isAuthenticated) {
-    await initInboxView();
-  } else {
     const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
       if (newVal) {
         await initInboxView();
         unwatch();
       }
     }, {immediate: true});
-  }
 })
 
 onBeforeUnmount(() => {
