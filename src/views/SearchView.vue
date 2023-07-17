@@ -21,6 +21,7 @@
             :name="`${teacher.firstName} ${teacher.lastName}`"
             :description="`${teacher.description === null ? '' : teacher.description}`"
             :coachings="teacher.coachings"
+            :image="teacher.image"
         />
 
         <AppointmentModal v-if="showModal"
@@ -83,6 +84,7 @@ async function getAllTeachers() {
       url: `${userStore.url}/teacher/teacher-profiles`
     });
     teachersArray.value = response.data;
+    console.log(response.data)
   } catch (e) {
     console.log(e);
   }

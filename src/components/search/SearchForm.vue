@@ -3,7 +3,7 @@
 
     <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 pt-8 text-center md:text-left">
 
-      <div class="col-span-1 md:col-span-2">
+      <div class="col-span-1 md:col-span-2 settingsCard">
         <!--District-->
         <div class="w-full flex flex-wrap gap-2 py-4 justify-center md:justify-start">
           <div v-for="n in 23" class="inline" :key="`District ${n}`">
@@ -13,11 +13,11 @@
           </div>
         </div>
 
-        <ButtonRegular text="Alle auswählen" class="bg-mainOrange" @click="selectAll"/>
-        <ButtonRegular text="Keines auswählen" class="bg-secondary" @click="deselectAll"/>
+        <ButtonRegular text="Alle auswählen" class="bg-secondary border border-white" @click="selectAll"/>
+        <ButtonRegular text="Keines auswählen" class="bg-secondary border border-white" @click="deselectAll"/>
       </div>
 
-      <div class="col-span-1">
+      <div class="col-span-1 settingsCard">
         <div class="py-4">
           <p class="font-bold">Was möchtest du lernen?</p>
           <!--Subject-->
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <div class="col-span-1">
+      <div class="col-span-1 settingsCard">
 
         <!--Minrate/Maxrate-->
         <p class="font-bold">Was darf's kosten?</p>
@@ -88,5 +88,9 @@ async function search() {
 </script>
 
 <style lang="scss" scoped>
+
+.settingsCard {
+  @apply bg-secondary rounded-3xl p-4 shadow-xl
+}
 
 </style>

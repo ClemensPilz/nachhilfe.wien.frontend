@@ -26,7 +26,7 @@
 
     <!--Image-Part-->
     <div class="col-span-1">
-      <img src="https://placehold.co/200x250" alt="Image of a teacher" class="w-full rounded-bl-3xl rounded-tr-3xl">
+      <img :src="props.image ? props.image : 'https://placehold.co/200x250'" alt="Image of a teacher" class="w-full h-full rounded-bl-2xl rounded-tr-2xl object-cover">
     </div>
   </div>
 
@@ -41,7 +41,8 @@ const props = defineProps({
   'name': String,
   'description': String,
   'rating': String,
-  'coachings': Array
+  'coachings': Array,
+  'image': String
 })
 
 
