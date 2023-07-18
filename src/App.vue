@@ -1,16 +1,15 @@
-
 <template>
 
   <header>
-    <NavigationBar />
+    <NavigationBar/>
   </header>
 
-  <RouterView :key="$route.fullPath" />
+  <RouterView :key="$route.fullPath"/>
 
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 import {onMounted} from "vue";
 import {useUserStore} from "@/stores/user";
 import router from "@/router";
@@ -22,21 +21,22 @@ const userStore = useUserStore();
 async function initApp() {
   if (localStorage.getItem('token')) {
     const token = localStorage.getItem('token');
-
     try {
       const response = await userStore.auth({token});
-      await router.push('/dashboard');
+      if (response.status !== -1) {
+        await router.push('/dashboard');
+      } else {
+        await router.push('/')
+      }
     } catch (e) {
       console.log(e);
       await router.push('/');
     }
-
   } else {
     await router.push('/');
   }
 }
-
-onMounted(() => initApp());
+  onMounted(() => initApp());
 
 </script>
 

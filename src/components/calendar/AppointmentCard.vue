@@ -55,7 +55,6 @@ import {useAppointmentStore} from "@/stores/appointment";
 import {computed, onMounted} from "vue";
 
 const props = defineProps(['appointmentDetails']);
-
 const userStore = useUserStore();
 const appStore = useAppStore();
 const conversationStore = useConversationStore();

@@ -95,22 +95,18 @@
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Gib hier bitte deinen Text ein..."></textarea>
           </div>
-          <button-primary text="Senden"/>
+          <ButtonRegular class="bg-secondary" text="Senden"/>
         </form>
       </div>
     </section>
   </div>
-  <section>
-    <FooterBar/>
-  </section>
+
 </template>
 
 <script setup>
-import FooterBar from "@/components/global/FooterBar.vue";
 import DominikModal from "@/components/aboutUs/DominikModal.vue";
 import {ref} from 'vue';
 import ClemensModal from "@/components/aboutUs/ClemensModal.vue";
-import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import ReneModal from "@/components/aboutUs/ReneModal.vue";
 
