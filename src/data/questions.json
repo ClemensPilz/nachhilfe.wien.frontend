@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "Allgemeine Fragen",
+    "input": [
+      {
+        "id": 1,
+        "question": "Was ist nachhilfe.wien?",
+        "answer": "nachhilfe.wien ist eine Online-Plattform, die Schülern in Wien und Umgebung Zugang zu qualitativ hochwertiger Nachhilfe bietet. Wir verbinden Schüler mit erfahrenen und geprüften Nachhilfelehrern in einer Vielzahl von Fächern."
+      },
+      {
+        "id": 2,
+        "question": "Für wen ist diese Plattform gedacht?",
+        "answer": "Diese Plattform ist für Schüler aller Altersstufen und Bildungsniveaus konzipiert, die zusätzliche Unterstützung in ihren Schulfächern benötigen."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Über die Nachhilfe",
+    "input": [
+      {
+        "id": 1,
+        "question": "In welchen Fächern wird Nachhilfe angeboten?",
+        "answer": "Wir bieten Nachhilfe in einer breiten Palette von Fächern an, darunter Mathematik, Deutsch, Englisch, Physik, Chemie, Geschichte, und viele mehr."
+      },
+      {
+        "id": 2,
+        "question": "Wie werden Nachhilfelehrer ausgewählt?",
+        "answer": "Unsere Nachhilfelehrer werden sorgfältig ausgewählt und müssen einen strengen Prüfungs- und Überprüfungsprozess durchlaufen. Wir legen großen Wert auf ihre fachliche Qualifikation, pädagogische Erfahrung und Leidenschaft für das Lehren."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Buchung und Bezahlung",
+    "input": [
+      {
+        "id": 1,
+        "question": "Wie buche ich eine Nachhilfestunde?",
+        "answer": "Sie können eine Nachhilfestunde buchen, indem Sie das gewünschte Fach und den gewünschten Lehrer auswählen und einen passenden Termin vereinbaren."
+      },
+      {
+        "id": 2,
+        "question": "Wie kann ich bezahlen?",
+        "answer": "Wir akzeptieren verschiedene Zahlungsmethoden, darunter Kreditkarte, PayPal und Banküberweisung.Die Zahlung erfolgt sicher und verschlüsselt über unsere Plattform."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Technische Anforderungen",
+    "input": [
+      {
+        "id": 1,
+        "question": "Welche technischen Anforderungen gibt es?",
+        "answer": "Sie benötigen eine stabile Internetverbindung und einen Computer, ein Tablet oder ein Smartphone. Unsere Plattform ist auf allen gängigen Betriebssystemen und Browsern zugänglich."
+      },
+      {
+        "id": 2,
+        "question": "Gibt es eine App?",
+        "answer": "Eine eigene App ist aktuell nicht angedacht. Wenn die Nachfrage jedoch größer wird und der Bedarf vorhanden sein sollte, könnten wir über eine eigene App nachdenken."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Datenschutz",
+    "input": [
+      {
+        "id": 1,
+        "question": "Wie wird mit meinen Daten umgegangen?",
+        "answer": "Der Schutz Ihrer Daten ist uns sehr wichtig. Ihre persönlichen Daten werden streng vertraulich behandelt und nicht an Dritte weitergegeben. Weitere Informationen finden Sie in unserer Datenschutzerklärung."
+      },
+      {
+        "id": 2,
+        "question": "Wie kann ich meinen Account löschen?",
+        "answer": "Um Ihren Account zu löschen, kontaktieren Sie bitte unseren Kundenservice. Nach der Bestätigung wird Ihr Account und alle zugehörigen Daten permanent gelöscht."
+      }
+    ]
+  }
+]
+

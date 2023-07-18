@@ -104,9 +104,11 @@
 </template>
 
 <script setup>
+import FooterBar from "@/components/global/FooterBar.vue";
 import DominikModal from "@/components/aboutUs/DominikModal.vue";
 import {ref} from 'vue';
 import ClemensModal from "@/components/aboutUs/ClemensModal.vue";
+import ButtonPrimary from "@/components/util/elements/ButtonPrimary.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import ReneModal from "@/components/aboutUs/ReneModal.vue";
 
