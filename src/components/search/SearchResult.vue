@@ -3,30 +3,33 @@
   <div class="my-4 grid grid-cols-3 grid-rows-1 bg-white rounded-xl shadow-lg">
     <!--Text-Part-->
     <div class="col-span-2 text-primary flex flex-col justify-center p-4">
-      <h4 >{{ name }}</h4>
+      <h4>{{ name }}</h4>
       <p>{{ description }}</p>
 
-      <div id="divider" class="border border-b-1 border-mainYellow mt-2 mb-3"></div>
+      <div v-if="teacherId !== userStore.user.userId">
+        <div id="divider" class="border border-b-1 border-mainYellow mt-2 mb-3"></div>
 
-      <div class="flex gap-2 flex-wrap text-xs">
-        <div v-for="coaching in coachings"
-             v-show="coaching.active"
-             :key="coaching.coachingId"
-             class="px-2 py-1 rounded-lg border border-primary
+        <div class="flex gap-2 flex-wrap text-xs">
+          <div v-for="coaching in coachings"
+               v-show="coaching.active"
+               :key="coaching.coachingId"
+               class="px-2 py-1 rounded-lg border border-primary
               hover:border-accent hover:cursor-pointer select-none"
-             @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId, 'coachingName': coaching.subject + ' - ' + coaching.rate + ' €/h'})">
-          {{ coaching.subject }}: {{ coaching.rate }}€/h
+               @click="$emit('requestAppointment', {'coachingId': coaching.coachingId, 'teacherId': teacherId, 'coachingName': coaching.subject + ' - ' + coaching.rate + ' €/h'})">
+            {{ coaching.subject }}: {{ coaching.rate }}€/h
+          </div>
         </div>
-      </div>
-      <div class="flex gap-2 mt-2">
-        <ButtonRegular text="Profil" class="bg-mainBlue" @click="$emit('profile')" />
-        <ButtonRegular text="Kontakt" class="bg-mainOrange" @click="$emit('contact')" />
+        <div class="flex gap-2 mt-2">
+          <ButtonRegular text="Profil" class="bg-mainBlue" @click="$emit('profile')"/>
+          <ButtonRegular text="Kontakt" class="bg-mainOrange" @click="$emit('contact')"/>
+        </div>
       </div>
     </div>
 
     <!--Image-Part-->
     <div class="col-span-1">
-      <img :src="props.image ? props.image : 'https://placehold.co/200x250'" alt="Image of a teacher" class="w-full h-full rounded-bl-2xl rounded-tr-2xl object-cover">
+      <img :src="props.image ? props.image : 'https://placehold.co/200x250'" alt="Image of a teacher"
+           class="w-full h-full rounded-bl-2xl rounded-tr-2xl object-cover">
     </div>
   </div>
 
@@ -35,6 +38,9 @@
 
 <script setup>
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+import {useUserStore} from "@/stores/user";
+
+const userStore = useUserStore();
 
 const props = defineProps({
   'teacherId': Number,
