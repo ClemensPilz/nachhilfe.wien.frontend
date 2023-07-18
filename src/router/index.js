@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from "@/views/HomeView.vue";
 import InboxView from "@/views/InboxView.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import SearchView from "@/views/SearchView.vue";
-import TestView from "@/views/TestView.vue";
 import SettingsView from "@/views/SettingsView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import AboutView from "@/views/AboutView.vue";
 import AdminView from "@/views/AdminView.vue";
 import CalendarView from "@/views/CalendarView.vue";
 import FaqView from "@/views/FaqView.vue";
@@ -17,7 +16,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: TestView
+            component: HomeView
         },
         {
             path: '/inbox',

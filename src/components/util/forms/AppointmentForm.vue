@@ -17,7 +17,6 @@
                           id="duration"
                           class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2 w-1/4">
         </div>
-        {{ startTime }}asdfasdf
         <br>
         <div class="w-full text-center">
           Anmerkungen, Ort, etc:
