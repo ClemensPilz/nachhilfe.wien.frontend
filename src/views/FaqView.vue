@@ -7,18 +7,19 @@ const search = ref('');
 const questions = ref(q);
 const filteredQuestions = computed(() =>
     questions.value.filter((category) => {
-      const matchingQuestions = category.input.filter((question) =>
-          question.question.toLowerCase().includes(search.value.toLowerCase())
-      );
-      return matchingQuestions.length > 0;
-    })
+          const matchingQuestions = category.input.filter((question) =>
+              question.question.toLowerCase().includes(search.value.toLowerCase())
+          );
+          return matchingQuestions.length > 0;
+        }
+    )
 );
 </script>
 
 <template>
   <div class="container mx-auto max-w-6xl mt-8 px-2">
     <h2 class="text-mainBlue"> Du hast Fragen?</h2>
-    <h3> Wir haben die Antworten (naja, hoffentlich die Meisten!)</h3>
+    <h3> Wir haben die Antworten (naja, hoffentlich die meisten!)</h3>
     <p> Nachfolgend finde ein paar Antworten auf die häufigsten Fragen, die im Bezug auf das Angebot von nachhilfe.wien
       auftreten
       könnten. Wenn du die gesuchte Antwort nicht finden solltest, kontaktiere uns einfach.</p>

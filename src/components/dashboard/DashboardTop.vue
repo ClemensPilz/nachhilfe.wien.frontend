@@ -9,6 +9,8 @@
         oder Anregungen haben, zögere bitte nicht, uns
         <a href="#">eine Nachricht zu schreiben!</a></p>
       <ButtonLarge class="bg-mainBlue mt-4" text="Kontakt"/>
+      <ButtonLarge class="bg-mainBlue mt-4" text="FAQ" @click="() => {router.push('/faq')}"/>
+
     </div>
 
     <!--Image-Element-->
@@ -25,7 +27,9 @@
 
 import {useUserStore} from "@/stores/user";
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const userStore = useUserStore();
 const userName = userStore.user.firstName;
 
