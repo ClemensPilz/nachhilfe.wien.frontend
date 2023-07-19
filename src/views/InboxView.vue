@@ -26,6 +26,7 @@
 
       <div class="flex flex-col col-span-9 max-h-[calc(100vh-70px)]">
 
+        <!--@todo: Just pass the whole message-object as a prop-->
         <div class="overflow-y-scroll overflow-x-hidden noScrollbar">
           <MessageThumb v-for="message in messages"
                         :key="message.id"
