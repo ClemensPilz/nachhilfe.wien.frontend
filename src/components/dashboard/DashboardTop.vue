@@ -1,7 +1,7 @@
 <template>
   <div class="mt-8 grid w-full grid-cols-3 items-center gap-8">
     <!--Text-Elements-->
-    <div class="col-span-3 text-center md:col-span-2 md:text-left">
+    <div class="order-2 col-span-3 text-center md:col-span-2 md:text-left">
       <h2 class="text-mainOrange">Hallo {{ userName }}</h2>
       <h4>Dies ist dein Dashboard!</h4>
       <p>
@@ -20,16 +20,26 @@
             }
           "
         />
+        <ButtonLarge
+          v-if="userStore.user.userType === 'ADMIN'"
+          text="Admin"
+          class="bg-mainOrange"
+          @click="
+            () => {
+              router.push('/admin');
+            }
+          "
+        />
       </div>
     </div>
 
     <!--Image-Element-->
-    <div class="col-span-3 overflow-hidden md:col-span-1">
+    <div class="order-1 col-span-3 overflow-hidden md:order-3 md:col-span-1">
       <a href="#"
         ><img
           src="@/assets/images/dashboard/default-profile-picture.jpg"
           alt="happy teacher"
-          class="h-auto w-full rounded-full"
+          class="-my-20 h-auto rounded-full px-20 py-20 sm:-my-40 sm:px-40 sm:py-40 md:my-0 md:w-full md:px-0 md:py-0"
       /></a>
     </div>
   </div>

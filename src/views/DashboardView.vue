@@ -2,111 +2,87 @@
   <div class="container mx-auto max-w-7xl px-4">
     <DashboardTop />
 
-    <DashboardFeature
-      v-if="userStore.user.userType === 'ADMIN'"
-      title="Admin-Funktionen"
-      :left="true"
-      subtitle="Nachhilfe.wien verwalten"
-      text="Zu allen Admin-Funktionen"
-      class="bg-mainOrange"
-    >
-      <ButtonLarge
-        class="bg-mainBlue"
-        @click="
-          () => {
-            router.push('/admin');
-          }
-        "
-        text="Admin"
-      />
-      <template v-slot:image>
-        <img src="@/assets/images/dashboard/admin.jpg" alt="" />
-      </template>
-    </DashboardFeature>
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <DashboardFeature
+        title="Nachrichten"
+        subtitle="Hier geht's zur Inbox"
+        text="Nachrichten schreiben und empfangen, Termine vereinbaren!"
+        class="bg-mainYellow"
+      >
+        <ButtonLarge
+          class="mt-2 bg-mainBlue"
+          @click="
+            () => {
+              router.push('/inbox');
+            }
+          "
+          text="Inbox"
+        />
+        <template v-slot:image>
+          <img src="@/assets/images/dashboard/message.jpg" alt="" />
+        </template>
+      </DashboardFeature>
 
-    <DashboardFeature
-      title="Nachrichten abrufen"
-      :left="false"
-      subtitle="Hier geht's zur Inbox"
-      text="Nachrichten schreiben und empfangen, Termine vereinbaren!"
-      class="bg-mainYellow"
-    >
-      <ButtonLarge
-        class="bg-mainBlue"
-        @click="
-          () => {
-            router.push('/inbox');
-          }
-        "
-        text="Inbox"
-      />
-      <template v-slot:image>
-        <img src="@/assets/images/dashboard/message.jpg" alt="" />
-      </template>
-    </DashboardFeature>
+      <DashboardFeature
+        title="Mein Kalender"
+        subtitle="Termine auf einen Blick"
+        text="Gutes Zeit-Management ist der Schlüssel zum Erfolg..."
+        class="bg-secondary"
+      >
+        <ButtonLarge
+          class="mt-2 bg-mainBlue"
+          @click="
+            () => {
+              router.push('/');
+            }
+          "
+          text="Kalender"
+        />
+        <template v-slot:image>
+          <img src="@/assets/images/dashboard/calendar.jpg" alt="" />
+        </template>
+      </DashboardFeature>
 
-    <DashboardFeature
-      title="Mein Kalender"
-      :left="true"
-      subtitle="Alle Termine auf einen Blick"
-      text="Lernzeiten einplanen, Termine vereinbaren: Gutes Zeit-Management ist der Schlüssel zum Erfolg..."
-      class="bg-secondary"
-    >
-      <ButtonLarge
-        class="bg-mainBlue"
-        @click="
-          () => {
-            router.push('/');
-          }
-        "
-        text="Kalender"
-      />
-      <template v-slot:image>
-        <img src="@/assets/images/dashboard/calendar.jpg" alt="" />
-      </template>
-    </DashboardFeature>
+      <DashboardFeature
+        title="Lehrer suchen"
+        subtitle="...und finden!"
+        text="Hier findest du garantiert einen Lehrer, der dir weiterhilft!"
+        class="bg-mainYellow"
+      >
+        <ButtonLarge
+          class="mt-2 bg-mainBlue"
+          @click="
+            () => {
+              router.push('/search');
+            }
+          "
+          text="Suche"
+        />
+        <template v-slot:image>
+          <img src="@/assets/images/dashboard/search.jpg" alt="" />
+        </template>
+      </DashboardFeature>
 
-    <DashboardFeature
-      title="Lehrer suchen"
-      :left="false"
-      subtitle="...und den richtigen finden!"
-      text="Alle Fächer, Bezirke, Bezahlmodalitäten: Hier findest du garantiert einen Lehrer, der dir weiterhelfen kann!"
-      class="bg-mainYellow"
-    >
-      <ButtonLarge
-        class="bg-mainBlue"
-        @click="
-          () => {
-            router.push('/search');
-          }
-        "
-        text="Suche"
-      />
-      <template v-slot:image>
-        <img src="@/assets/images/dashboard/search.jpg" alt="" />
-      </template>
-    </DashboardFeature>
-
-    <DashboardFeature
-      title="Einstellungen ändern"
-      :left="true"
-      subtitle="Manage hier deinen Account!"
-      text="Stelle sicher,dass deine persönlichen Infos auf dem neuesten Stand sind..."
-      class="bg-secondary"
-    >
-      <ButtonLarge
-        class="bg-mainBlue"
-        @click="
-          () => {
-            router.push('/settings');
-          }
-        "
-        text="Einstellungen"
-      />
-      <template v-slot:image>
-        <img src="@/assets/images/dashboard/settings.jpg" alt="" />
-      </template>
-    </DashboardFeature>
+      <DashboardFeature
+        title="Profil"
+        subtitle="Manage dein Profil"
+        text="Stelle sicher,dass deine Infos auf dem neuesten Stand sind..."
+        class="bg-secondary"
+      >
+        <ButtonLarge
+          class="mt-2 bg-mainBlue"
+          @click="
+            () => {
+              router.push('/settings');
+            }
+          "
+          text="Settings"
+        />
+        <template v-slot:image>
+          <img src="@/assets/images/dashboard/settings.jpg" alt="" />
+        </template>
+      </DashboardFeature>
+    </div>
   </div>
 </template>
 
@@ -126,6 +102,6 @@ a {
 }
 
 img {
-  @apply hidden max-h-[400px] w-1/3 object-cover md:block;
+  @apply object-cover;
 }
 </style>
