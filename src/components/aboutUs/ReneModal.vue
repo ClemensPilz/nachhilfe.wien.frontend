@@ -1,12 +1,12 @@
 <template>
-  <div class="grid bg-white rounded-xl shadow-lg">
+  <div class="grid rounded-xl bg-white shadow-lg">
     <transition name="modal-animation">
       <div v-show="modalActive === 3" class="modal">
         <transition name="modal-animation-inner">
           <div v-show="modalActive === 3" class="modal-inner">
             <h4 class="text-mainBlue">Das ist René</h4>
             <img
-              class="md:flex w-[20%] h-[20%] mt-5"
+              class="mt-5 h-[20%] w-[20%] md:flex"
               src="@/assets/images/René-Ali%20Günürün.jpg"
               alt="René"
             />
@@ -27,7 +27,7 @@
             <slot />
             <ButtonRegular
               text="Close"
-              class="bg-mainOrange mt-5"
+              class="mt-5 bg-mainOrange"
               @click="closeModal"
               type="button"
             />

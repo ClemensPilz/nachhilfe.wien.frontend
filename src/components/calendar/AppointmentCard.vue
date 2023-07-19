@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-2 grid-rows-1 bg-white rounded-xl shadow-lg border-2"
+    class="grid grid-cols-2 grid-rows-1 rounded-xl border-2 bg-white shadow-lg"
     :class="{
       'border-mainYellow': appointmentDetails.status === 'PENDING',
       'border-green-500': appointmentDetails.status === 'CONFIRMED',
@@ -9,7 +9,7 @@
   >
     <!--Appointment Details-Part-->
     <div
-      class="text-primary flex flex-col justify-center p-4 bg-gray-50 rounded-xl"
+      class="flex flex-col justify-center rounded-xl bg-gray-50 p-4 text-primary"
     >
       <h4>Termin: {{ startDate }}</h4>
       <p v-if="userStore.user.userType === 'TEACHER'" class="col-span-3">
@@ -18,9 +18,9 @@
       <p v-else>Lehrer: {{ appointmentDetails.teacherName }}</p>
       <div
         id="divider"
-        class="border border-b-1 border-mainYellow mt-2 mb-3"
+        class="border-b-1 mb-3 mt-2 border border-mainYellow"
       ></div>
-      <div v-if="userStore.user.userType === 'TEACHER'" class="flex gap-2 mt-2">
+      <div v-if="userStore.user.userType === 'TEACHER'" class="mt-2 flex gap-2">
         <ButtonRegular
           text="Profil"
           class="bg-mainBlue"
@@ -32,7 +32,7 @@
           @click="appStore.sendMessage(appointmentDetails.studentId, true)"
         />
       </div>
-      <div v-if="userStore.user.userType === 'STUDENT'" class="flex gap-2 mt-2">
+      <div v-if="userStore.user.userType === 'STUDENT'" class="mt-2 flex gap-2">
         <ButtonRegular
           text="Profil"
           class="bg-mainBlue"
@@ -112,7 +112,7 @@ async function reject() {
   try {
     const response = await conversationStore.updateAppointment(
       props.appointmentDetails.id,
-      "reject"
+      "reject",
     );
     await userStore.getAllAppointments();
   } catch (e) {
@@ -124,7 +124,7 @@ async function confirm() {
   try {
     const response = await conversationStore.updateAppointment(
       props.appointmentDetails.id,
-      "confirm"
+      "confirm",
     );
     await userStore.getAllAppointments();
   } catch (e) {
