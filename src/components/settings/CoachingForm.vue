@@ -31,7 +31,6 @@
 </template>
 
 <script setup>
-import { Coaching } from "@/classes";
 import axios from "axios";
 import { computed, ref } from "vue";
 import { useAppStore } from "@/stores/app";
