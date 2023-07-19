@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-7xl mx-auto px-4">
+  <div class="container mx-auto max-w-7xl px-4">
     <DashboardTop />
 
     <DashboardFeature
@@ -122,10 +122,10 @@ const userStore = useUserStore();
 
 <style lang="scss" scoped>
 a {
-  @apply underline text-mainBlue underline-offset-4;
+  @apply text-mainBlue underline underline-offset-4;
 }
 
 img {
-  @apply max-h-[400px] hidden md:block w-1/3 object-cover;
+  @apply hidden max-h-[400px] w-1/3 object-cover md:block;
 }
 </style>
