@@ -1,45 +1,39 @@
 <template>
-
   <header>
-    <NavigationBar/>
+    <NavigationBar />
   </header>
 
-  <RouterView :key="$route.fullPath"/>
-
+  <RouterView :key="$route.fullPath" />
 </template>
 
 <script setup>
-import {RouterView} from 'vue-router'
-import {onMounted} from "vue";
-import {useUserStore} from "@/stores/user";
+import { RouterView } from "vue-router";
+import { onMounted } from "vue";
+import { useUserStore } from "@/stores/user";
 import router from "@/router";
 import NavigationBar from "@/components/global/NavigationBar.vue";
 
 const userStore = useUserStore();
 
-
 async function initApp() {
-  if (localStorage.getItem('token')) {
-    const token = localStorage.getItem('token');
+  if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
     try {
-      const response = await userStore.auth({token});
+      const response = await userStore.auth({ token });
       if (response.status !== -1) {
-        await router.push('/dashboard');
+        await router.push("/dashboard");
       } else {
-        await router.push('/')
+        await router.push("/");
       }
     } catch (e) {
       console.log(e);
-      await router.push('/');
+      await router.push("/");
     }
   } else {
-    await router.push('/');
+    await router.push("/");
   }
 }
-  onMounted(() => initApp());
-
+onMounted(() => initApp());
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

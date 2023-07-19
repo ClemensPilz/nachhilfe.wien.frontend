@@ -3,23 +3,18 @@
     <div class="container mx-auto px-6 py-12 lg:px-20 v">
       <h2>Persönlicher Kalender</h2>
       <div class="mt-5">
-          <CalendarComponent/>
+        <CalendarComponent />
       </div>
     </div>
-
-
   </section>
 </template>
 
-
-
 <script setup>
-import {useUserStore} from "@/stores/user";
-import {ref, onMounted } from "vue";
-import {useRoute} from "vue-router";
+import { useUserStore } from "@/stores/user";
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
 import CalendarComponent from "@/components/calendar/CalendarComponent.vue";
-
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -27,29 +22,26 @@ const userId = route.params.userId;
 const firstName = ref();
 const props = defineProps({
   appointments: Array,
-  selectedDate: String
+  selectedDate: String,
 });
 
 async function getUserData(userId) {
   try {
     const response = await axios({
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      method: 'get',
-      url: `${userStore.url}/user/${userId}`
+      method: "get",
+      url: `${userStore.url}/user/${userId}`,
     });
     firstName.value = response.data.firstName;
   } catch (e) {
     console.log(e);
   }
 }
-
 </script>
 
-
 <style scoped lang="scss">
-
 //@media (min-width: 1024px) {
 //  .about {
 //    min-height: 100vh;
@@ -57,5 +49,4 @@ async function getUserData(userId) {
 //    align-items: center;
 //  }
 //}
-
 </style>

@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import axios from "axios";
-import {useAppStore} from "@/stores/app";
+import { useAppStore } from "@/stores/app";
 
 export const useUserStore = defineStore("user", () => {
   const url = "http://localhost:8080";
@@ -68,21 +68,29 @@ export const useUserStore = defineStore("user", () => {
   async function getAllAppointments() {
     const response = await axios({
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       method: "get",
-      url: `${url}/appointment/get-appointments/${userId.value}`
-    })
+      url: `${url}/appointment/get-appointments/${userId.value}`,
+    });
     console.log(response.data);
     appointments.value = response.data;
   }
 
   async function logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     isAuthenticated.value = false;
-    await router.push('/');
+    await router.push("/");
   }
 
-
-  return { userId, user, url, auth, isAuthenticated, getAllAppointments, appointments, logout };
+  return {
+    userId,
+    user,
+    url,
+    auth,
+    isAuthenticated,
+    getAllAppointments,
+    appointments,
+    logout,
+  };
 });

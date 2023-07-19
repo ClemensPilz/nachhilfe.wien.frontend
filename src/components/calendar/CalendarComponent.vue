@@ -1,59 +1,59 @@
 <template>
   <div class="flex gap-16">
     <div>
-      <VDatePicker :attributes="attributes"
-                   v-model="selectedDate"
-                   show-weeknumbers
-                   title-position="left"
+      <VDatePicker
+        :attributes="attributes"
+        v-model="selectedDate"
+        show-weeknumbers
+        title-position="left"
       />
     </div>
     <div>
       <AppointmentCard
-          v-for="appointment in selectedDayAppointments"
-          :key="appointment.start"
-          :appointmentDetails="appointment"
-          class="mb-12 bg-gray"
-          @selectedDate="selectedDate= $event"
+        v-for="appointment in selectedDayAppointments"
+        :key="appointment.start"
+        :appointmentDetails="appointment"
+        class="mb-12 bg-gray"
+        @selectedDate="selectedDate = $event"
       >
       </AppointmentCard>
     </div>
   </div>
-
-
 </template>
 
 <script setup>
-import {useAppointmentStore} from "@/stores/appointment";
-import {computed, ref, onMounted} from "vue";
-import {setupCalendar, Calendar, DatePicker} from "v-calendar";
-import {isSameDay, parseISO} from "date-fns";
-import {useUserStore} from "@/stores/user";
+import { useAppointmentStore } from "@/stores/appointment";
+import { computed, ref, onMounted } from "vue";
+import { setupCalendar, Calendar, DatePicker } from "v-calendar";
+import { isSameDay, parseISO } from "date-fns";
+import { useUserStore } from "@/stores/user";
 import AppointmentCard from "@/components/calendar/AppointmentCard.vue";
 
 const appointmentStore = useAppointmentStore();
 const userStore = useUserStore();
 const selectedDate = ref(new Date());
 const appointments = computed(() => {
-  return userStore.appointments.map(appointment => ({
+  return userStore.appointments.map((appointment) => ({
     ...appointment,
     startDate: parseISO(appointment.start),
-    endDate: parseISO(appointment.end)
-  }))
+    endDate: parseISO(appointment.end),
+  }));
 });
 
-
 const selectedDayAppointments = computed(() => {
-  return appointments.value.filter(appointment => isSameDay(appointment.startDate, selectedDate.value));
+  return appointments.value.filter((appointment) =>
+    isSameDay(appointment.startDate, selectedDate.value)
+  );
 });
 
 const attributes = ref([
   {
-    key: 'highlightOutline',
+    key: "highlightOutline",
     dates: selectedDate,
     highlight: {
-      contentClass: 'outline-highlight',
-      fillMode: 'outline',
-    }
+      contentClass: "outline-highlight",
+      fillMode: "outline",
+    },
   },
   {
     key: "today",
@@ -64,23 +64,20 @@ const attributes = ref([
       contentClass: "italic",
       contentStyle: {
         color: "red",
-      }
-    }
+      },
+    },
   },
   {
     dates: appointments,
     dot: true,
-    content: "yellow"
-  }
+    content: "yellow",
+  },
 ]);
-
 
 onMounted(async () => {
   await userStore.auth({
-    "token": localStorage.getItem("token")
+    token: localStorage.getItem("token"),
   });
   await userStore.getAllAppointments();
 });
-
-
 </script>

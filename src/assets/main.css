@@ -1,60 +1,57 @@
 @tailwind base;
 
 @layer base {
-    html {
-        @apply text-primary bg-white
-    }
+  html {
+    @apply text-primary bg-white;
+  }
 
-    h1 {
-        @apply text-7xl font-semibold leading-tight
-    }
+  h1 {
+    @apply text-7xl font-semibold leading-tight;
+  }
 
-    h2 {
-        @apply text-6xl font-semibold leading-normal
-    }
+  h2 {
+    @apply text-6xl font-semibold leading-normal;
+  }
 
-    h3 {
-        @apply text-5xl font-semibold leading-relaxed
-    }
+  h3 {
+    @apply text-5xl font-semibold leading-relaxed;
+  }
 
-    h4 {
-        @apply text-3xl font-semibold tracking-wide leading-relaxed
-    }
+  h4 {
+    @apply text-3xl font-semibold tracking-wide leading-relaxed;
+  }
 
-    p {
-        @apply text-p
-    }
+  p {
+    @apply text-p;
+  }
 
-    .text-p {
-        @apply text-xl font-thin leading-normal tracking-wide
-    }
+  .text-p {
+    @apply text-xl font-thin leading-normal tracking-wide;
+  }
 
-    small {
-        @apply text-small
-    }
+  small {
+    @apply text-small;
+  }
 
-    .text-small {
-        @apply text-base font-semibold leading-normal tracking-wide
-    }
+  .text-small {
+    @apply text-base font-semibold leading-normal tracking-wide;
+  }
 
+  .headline-large {
+    @apply text-2xl text-darkPrimary font-bold;
+  }
 
-    .headline-large {
-        @apply text-2xl text-darkPrimary font-bold
-    }
+  .headline {
+    @apply text-lg text-darkPrimary font-bold;
+  }
 
-    .headline {
-        @apply text-lg text-darkPrimary font-bold
-    }
+  .paragraph {
+    @apply text-black font-sans;
+  }
 
-    .paragraph {
-        @apply text-black font-sans
-    }
-
-    .paragraph-small {
-        @apply text-sm text-primary
-    }
-
-
+  .paragraph-small {
+    @apply text-sm text-primary;
+  }
 }
 
 @tailwind components;

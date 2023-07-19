@@ -1,42 +1,48 @@
 <template>
   <div class="w-full">
-
-    <small class="text-red-700" v-if="districtValue.length < 1">Wenn du keine Bezirke auswählst, erscheinst du nicht in der Suchfunktion</small>
+    <small class="text-red-700" v-if="districtValue.length < 1"
+      >Wenn du keine Bezirke auswählst, erscheinst du nicht in der
+      Suchfunktion</small
+    >
     <form id="districtForm" @change="postDistricts">
       <div class="flex flex-col flex-wrap max-w-md mx-auto max-h-24 gap-x-4">
         <div v-for="n in 23">
-          <input type="checkbox" :id="`district_${n}`" :name="`district_${n}`"
-                 :value="n < 10 ? `DISTRICT_10${n}0` : `DISTRICT_1${n}0`" v-model="districtValue">
+          <input
+            type="checkbox"
+            :id="`district_${n}`"
+            :name="`district_${n}`"
+            :value="n < 10 ? `DISTRICT_10${n}0` : `DISTRICT_1${n}0`"
+            v-model="districtValue"
+          />
           <label>Bezirk {{ n }}</label>
         </div>
       </div>
     </form>
-
   </div>
 </template>
 
 <script setup>
-import {nextTick, onMounted, ref, watch} from "vue";
-import {useUserStore} from "@/stores/user";
+import { nextTick, onMounted, ref, watch } from "vue";
+import { useUserStore } from "@/stores/user";
 import axios from "axios";
 
 const districtValue = ref([]);
 const userStore = useUserStore();
 
 async function postDistricts() {
-  console.log(districtValue.value)
+  console.log(districtValue.value);
   try {
     const response = await axios({
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      method: 'put',
+      method: "put",
       url: `${userStore.url}/teacher/update-districts/${userStore.userId}`,
       data: {
-        "teacherId": userStore.userId,
-        "districts": districtValue.value
-      }
-    })
+        teacherId: userStore.userId,
+        districts: districtValue.value,
+      },
+    });
     console.log(response.data);
     userStore.user.districts = response.data.districts;
   } catch (e) {
@@ -44,23 +50,21 @@ async function postDistricts() {
   }
 }
 
-
 onMounted(async () => {
-      const unwatch = watch(() => userStore.isAuthenticated, async (newVal) => {
-        if (newVal) {
-          districtValue.value = userStore.user.districts;
-          await nextTick();
-          console.log(districtValue.value)
-          console.log(userStore.user)
-          unwatch();
-        }
-      }, {immediate: true});
-    }
-);
-
+  const unwatch = watch(
+    () => userStore.isAuthenticated,
+    async (newVal) => {
+      if (newVal) {
+        districtValue.value = userStore.user.districts;
+        await nextTick();
+        console.log(districtValue.value);
+        console.log(userStore.user);
+        unwatch();
+      }
+    },
+    { immediate: true }
+  );
+});
 </script>
 
-<style lang="scss" scoped>
-
-
-</style>
+<style lang="scss" scoped></style>

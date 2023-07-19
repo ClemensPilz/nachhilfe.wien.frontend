@@ -4,19 +4,26 @@
   <div>
     <div class="p-4 bg-lightPrimary rounded-lg shadow">
       <p v-for="partner in partners">
-        {{ partner.firstName }} {{ partner.lastName }} <span @click="() => {openProfile(partner.id)}">...Profil</span>
+        {{ partner.firstName }} {{ partner.lastName }}
+        <span
+          @click="
+            () => {
+              openProfile(partner.id);
+            }
+          "
+          >...Profil</span
+        >
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
-
-import {useUserStore} from "@/stores/user";
-import {computed} from "vue";
+import { useUserStore } from "@/stores/user";
+import { computed } from "vue";
 import router from "@/router";
 
-const props = defineProps(['users']);
+const props = defineProps(["users"]);
 
 const userStore = useUserStore();
 const storeId = computed(() => userStore.user.userId);
@@ -28,7 +35,7 @@ const partners = computed(() => {
     }
   }
   return partnerArr;
-})
+});
 
 async function openProfile(id) {
   console.log(id);
@@ -36,6 +43,4 @@ async function openProfile(id) {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

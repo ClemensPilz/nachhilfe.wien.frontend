@@ -1,42 +1,42 @@
 <template>
   <div
-      v-if="props.isOpen"
-      @click="closeModal"
-      class="fixed inset-0 flex items-center justify-center z-[1001] bg-black bg-opacity-50"
+    v-if="props.isOpen"
+    @click="closeModal"
+    class="fixed inset-0 flex items-center justify-center z-[1001] bg-black bg-opacity-50"
   >
     <div
-        @click.stop=""
-        class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
+      @click.stop=""
+      class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
     >
       <h2 class="text-2xl mb-4">{{ title }}</h2>
       <div>
-        <slot/>
+        <slot />
 
         <form>
-          <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']"/>
+          <RatingSelect v-model="rating" :options="['1', '2', '3', '4', '5']" />
 
           <label for="text">Review:</label>
           <input
-              type="text"
-              name="text"
-              v-model="text"
-              placeholder="Mein Review..."
+            type="text"
+            name="text"
+            v-model="text"
+            placeholder="Mein Review..."
           />
           <div class="error">{{ errors.text }}</div>
 
           <!--Buttons-->
           <div class="flex gap-2 justify-end">
             <button
-                type="button"
-                class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
-                @click="closeModal"
+              type="button"
+              class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
+              @click="closeModal"
             >
               Schließen
             </button>
             <button
-                type="button"
-                class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
-                @click="postReview"
+              type="button"
+              class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
+              @click="postReview"
             >
               Absenden
             </button>
@@ -48,10 +48,10 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
-import {useForm} from "vee-validate";
-import {useUserStore} from "@/stores/user";
-import {useRoute, useRouter} from "vue-router";
+import { computed, ref } from "vue";
+import { useForm } from "vee-validate";
+import { useUserStore } from "@/stores/user";
+import { useRoute, useRouter } from "vue-router";
 import RatingSelect from "@/components/util/forms/RatingSelect.vue";
 import axios from "axios";
 
@@ -61,8 +61,8 @@ const router = useRouter();
 const route = useRoute();
 
 const log = () => {
-  console.log('log');
-}
+  console.log("log");
+};
 
 const props = defineProps({
   title: {
@@ -73,8 +73,8 @@ const props = defineProps({
     type: Boolean,
   },
   teacherId: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 const emit = defineEmits(["update:reviewModalOpen"]);
@@ -97,7 +97,7 @@ const validationSchema = {
   },
 };
 
-const {meta, errors, useFieldModel} = useForm({
+const { meta, errors, useFieldModel } = useForm({
   validationSchema: validationSchema,
   initialValues: {
     rating: "1",
@@ -105,7 +105,7 @@ const {meta, errors, useFieldModel} = useForm({
   },
 });
 
-const [rating, text] = useFieldModel(['rating', 'text']);
+const [rating, text] = useFieldModel(["rating", "text"]);
 
 async function postReview() {
   if (meta.value.valid) {
@@ -115,29 +115,29 @@ async function postReview() {
 
       const response = await axios({
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         method: "post",
         url: `${userStore.url}/feedback`,
         data: {
-          "teacherId": route.params.userId,
-          "studentId": userStore.user.userId,
-          "title": "title",
-          "content": text.value,
-          "rating": rating.value,
-          "date": date
-        }
+          teacherId: route.params.userId,
+          studentId: userStore.user.userId,
+          title: "title",
+          content: text.value,
+          rating: rating.value,
+          date: date,
+        },
       });
       console.log(response.data);
       if (response.status === 201) {
-        alert('Vielen Dank für dein Review!');
+        alert("Vielen Dank für dein Review!");
         closeModal();
       } else {
-        alert('Fehler beim Absenden des Reviews!');
+        alert("Fehler beim Absenden des Reviews!");
         closeModal();
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   } else {
     console.log("invalid");

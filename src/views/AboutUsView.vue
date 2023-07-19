@@ -194,20 +194,4 @@ const activeModal = ref(0);
 function setActiveModal(modalNumber) {
   activeModal.value = activeModal.value === modalNumber ? 0 : modalNumber;
 }
-
-const modalActive1 = ref(false);
-const modalActive2 = ref(false);
-const modalActive3 = ref(false);
-
-const toggleModal1 = () => {
-  modalActive1.value = !modalActive1.value;
-};
-
-const toggleModal2 = () => {
-  modalActive2.value = !modalActive2.value;
-};
-
-const toggleModal3 = () => {
-  modalActive3.value = !modalActive3.value;
-};
 </script>
