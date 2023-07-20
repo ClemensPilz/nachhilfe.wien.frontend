@@ -34,13 +34,22 @@
     </div>
 
     <!--Image-Element-->
-    <div class="order-1 col-span-3 overflow-hidden md:order-3 md:col-span-1">
-      <a href="#"
-        ><img
-          src="@/assets/images/dashboard/default-profile-picture.jpg"
-          alt="happy teacher"
-          class="-my-20 h-auto rounded-full px-20 py-20 sm:-my-40 sm:px-40 sm:py-40 md:my-0 md:w-full md:px-0 md:py-0"
-      /></a>
+    <div
+      class="order-1 col-span-3 flex items-center justify-center overflow-hidden rounded-full md:order-3 md:col-span-1 md:-translate-y-1/4 md:scale-75"
+      style="width: 200px; height: 200px"
+    >
+      <a href="#">
+        <img
+          :src="topPictureSource"
+          alt="a users profile picture"
+          class="h-full w-full object-cover"
+          @click="
+            () => {
+              router.push('/settings');
+            }
+          "
+        />
+      </a>
     </div>
   </div>
 </template>
@@ -49,10 +58,15 @@
 import { useUserStore } from "@/stores/user";
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import { useRouter } from "vue-router";
+import { computed } from "vue";
+import image from "@/assets/images/dashboard/default-profile-picture.jpg";
 
 const router = useRouter();
 const userStore = useUserStore();
 const userName = userStore.user.firstName;
+const topPictureSource = computed(() => {
+  return userStore.user.image === null ? image : userStore.user.image;
+});
 </script>
 
 <style lang="scss" scoped></style>

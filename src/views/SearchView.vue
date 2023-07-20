@@ -7,14 +7,14 @@
     </CardLarge>
   </FormModal>
 
-  <div class="container mx-auto max-w-6xl mt-8 px-2">
+  <div class="container mx-auto mt-8 max-w-6xl px-2">
     <h2>Lehrer suchen</h2>
     <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
 
     <SearchForm @result="pasteResult" />
   </div>
   <div class="w-full bg-background">
-    <div class="container mx-auto max-w-6xl mt-8">
+    <div class="container mx-auto mt-8 max-w-6xl">
       <div class="searchResult">
         <SearchResult
           v-for="teacher in teachersArray"
@@ -50,9 +50,6 @@ import CardLarge from "@/components/util/cards/CardLarge.vue";
 const userStore = useUserStore();
 const appStore = useAppStore();
 const teachersArray = ref();
-const showModal = ref(false);
-const selectedCoachingId = ref();
-const selectedTeacherId = ref();
 const appointmentModalRef = ref();
 
 function openAppointmentModal(teacherId, coachingId) {
@@ -71,16 +68,6 @@ function pasteResult(data) {
 function setAppointmentParameters(e) {
   openAppointmentModal(e.teacherId, e.coachingId);
 }
-
-// const send = async (e) => {
-//   await appStore.postAppointment(selectedTeacherId.value,
-//       selectedCoachingId.value,
-//       e.startTime,
-//       e.duration,
-//       e.content)
-//
-//   showModal.value = false;
-// }
 
 async function getAllTeachers() {
   try {
@@ -107,13 +94,13 @@ onMounted(async () => {
         unwatch();
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 });
 </script>
 
 <style lang="scss" scoped>
 .searchResult {
-  @apply container min-h-screen max-w-lg mx-auto flex flex-col mt-4 pt-8;
+  @apply container mx-auto mt-4 flex min-h-screen max-w-lg flex-col pt-8;
 }
 </style>

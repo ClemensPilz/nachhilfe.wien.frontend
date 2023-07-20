@@ -1,5 +1,7 @@
 <template>
-  <UserProfile />
+  <div class="flex-grow">
+    <UserProfile />
+  </div>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-3xl mx-auto px-2 mt-6 md:px-0 bg-white">
+  <div class="container mx-auto mt-6 max-w-3xl flex-grow bg-white px-2 md:px-0">
     <section id="userData" class="mb-12">
       <h2 class="text-center">Meine Userdaten</h2>
       <p class="mb-2 text-center">Deine Basisdaten anpassen</p>

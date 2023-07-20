@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-7xl mt-4">
+  <div class="container mx-auto mt-4 max-w-7xl flex-grow bg-green-800">
     <div v-if="hasNoMessages">
       <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
     </div>
@@ -7,7 +7,7 @@
     <div class="grid grid-cols-12 gap-12">
       <!--Left part-->
       <div
-        class="max-h-[calc(100vh-70px)] overflow-y-scroll overflow-x-hidden col-span-3 top-20 noScrollbar"
+        class="noScrollbar top-20 col-span-3 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll"
       >
         <div class="flex flex-col gap-2">
           <ConversationThumb
@@ -22,9 +22,9 @@
       <!--Right Part-->
       <!--Messages-->
 
-      <div class="flex flex-col col-span-9 max-h-[calc(100vh-70px)]">
+      <div class="col-span-9 flex max-h-[calc(100vh-70px)] flex-col">
         <!--@todo: Just pass the whole message-object as a prop-->
-        <div class="overflow-y-scroll overflow-x-hidden noScrollbar">
+        <div class="noScrollbar overflow-x-hidden overflow-y-scroll">
           <MessageThumb
             v-for="message in messages"
             :key="message.id"
@@ -56,7 +56,7 @@
             name="messageText"
             id="messageText"
             placeholder="Neue Nachricht senden"
-            class="w-full border border-secondary p-4 rounded-3xl"
+            class="w-full rounded-3xl border border-secondary p-4"
             v-model="messageText"
           />
         </MessageInput>
@@ -235,7 +235,7 @@ onMounted(async () => {
         unwatch();
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 });
 

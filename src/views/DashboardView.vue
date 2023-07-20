@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto max-w-7xl px-4">
-    <DashboardTop />
+    <DashboardTop class="pb-10" />
 
-    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <DashboardFeature
         title="Nachrichten"
         subtitle="Hier geht's zur Inbox"
