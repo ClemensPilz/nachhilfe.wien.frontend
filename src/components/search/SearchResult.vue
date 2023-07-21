@@ -4,10 +4,10 @@
   >
     <!--Text-Part-->
     <div class="col-span-2 flex flex-col justify-center p-4 text-primary">
-      <h4>{{ name }}</h4>
-      <p>{{ description }}</p>
+      <h4>{{ teacher.firstName }} {{ teacher.lastName }}</h4>
+      <p>{{ teacher.description === null ? "" : teacher.description }}</p>
 
-      <div v-if="teacherId !== userStore.user.userId">
+      <div v-if="teacher.teacherId !== userStore.user.userId">
         <div
           id="divider"
           class="border-b-1 mb-3 mt-2 border border-mainYellow"
@@ -22,7 +22,7 @@
             @click="
               $emit('requestAppointment', {
                 coachingId: coaching.coachingId,
-                teacherId: teacherId,
+                teacherId: teacher.teacherId,
                 coachingName: coaching.subject + ' - ' + coaching.rate + ' €/h',
               })
             "
@@ -48,7 +48,7 @@
     <!--Image-Part-->
     <div class="col-span-1">
       <img
-        :src="props.image ? props.image : 'https://placehold.co/200x250'"
+        :src="teacher.image ? teacher.image : 'https://placehold.co/200x250'"
         alt="Image of a teacher"
         class="h-full w-full rounded-bl-2xl rounded-tr-2xl object-cover"
       />
@@ -62,14 +62,7 @@ import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
 
-const props = defineProps({
-  teacherId: Number,
-  name: String,
-  description: String,
-  rating: String,
-  coachings: Array,
-  image: String,
-});
+const props = defineProps({ teacher: Object, coachings: Array });
 
 const emits = defineEmits(["contact", "profile", "requestAppointment"]);
 </script>

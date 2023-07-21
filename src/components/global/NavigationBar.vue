@@ -15,8 +15,9 @@
     </CardLarge>
   </FormModal>
 
-  <div class="w-full bg-background">
+  <div class="relative w-full bg-background">
     <nav>
+      <!--Logo-->
       <img
         src="@/assets/images/logos/nachhilfewien-logo.svg"
         alt="Logo von nachhilfe.wien"
@@ -27,33 +28,38 @@
           }
         "
       />
-      <ul v-if="userStore.isAuthenticated">
-        <li>
-          <RouterLink to="/dashboard">Home</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/search">Suche</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/calendar">Kalender</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/inbox">Inbox</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/settings">Settings</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/about">Our Team</RouterLink>
-        </li>
-        <li class="text-mainOrange" @click="userStore.logout">Logout</li>
-      </ul>
 
+      <!--Desktop-Nav-Items-->
+      <div v-if="userStore.isAuthenticated" class="hidden sm:block">
+        <ul>
+          <NavigationBarLinks />
+        </ul>
+      </div>
+
+      <!--Mobile-Hamburgerbutton-->
+      <div
+        v-if="userStore.isAuthenticated"
+        class="block w-full text-right sm:hidden"
+      >
+        <span @click="showMobile = !showMobile">Hello Oida</span>
+      </div>
+
+      <!--Login-Buttons if user is not authenticated-->
       <ul v-if="!userStore.isAuthenticated">
         <li class="text-mainBlue" @click="openLoginModal">Login</li>
         <li class="text-mainBlue" @click="openRegistrationModal">Register</li>
       </ul>
     </nav>
+  </div>
+
+  <!--Mobile-Nav-Items-->
+  <div
+    class="bottom-0 flex min-h-screen w-full flex-col bg-mainBlue sm:hidden"
+    :class="{ block: showMobile, hidden: !showMobile }"
+    @click="showMobile = false"
+  >
+    Hello sers
+    <NavigationBarLinks />
   </div>
 </template>
 
@@ -66,10 +72,12 @@ import LoginForm from "@/components/util/forms/LoginForm.vue";
 import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
+import NavigationBarLinks from "@/components/global/NavigationBarLinks.vue";
 
 const loginModalRef = ref(null);
 const registrationModalRef = ref(null);
 const userStore = useUserStore();
+const showMobile = ref(false);
 
 function openLoginModal() {
   loginModalRef.value.openModal();

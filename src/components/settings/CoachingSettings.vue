@@ -1,28 +1,27 @@
 <template>
-  <div class="w-full grid grid-cols-4 gap-4">
-    <div class="col-span-4 sm:col-span-1 bg-secondary p-4 rounded-3xl">
+  <div class="grid w-full grid-cols-4 gap-4">
+    <div class="col-span-4 rounded-3xl bg-secondary p-4 sm:col-span-1">
       <CoachingForm @update="getCoachingsFromApi" />
     </div>
 
     <div
-      class="w-full flex flex-wrap justify-center gap-2 col-span-4 sm:col-span-3 bg-secondary p-4 rounded-3xl h-full"
+      class="col-span-4 flex h-full w-full flex-wrap justify-center gap-2 rounded-3xl bg-secondary p-4 sm:col-span-3"
     >
       <div
         v-for="coaching in coachings"
         v-show="coaching.active"
         :key="`coaching${coaching.coachingId}`"
-        class="flex flex-col items-center p-2 gap-1"
+        class="flex flex-col items-center gap-1 p-2"
         :data-coachingId="coaching.coachingId"
-        @click="console.log(coaching.coachingId)"
       >
-        <p class="bg-mainBlue text-white px-4 py-2 rounded-3xl">
+        <p class="rounded-3xl bg-mainBlue px-4 py-2 text-white">
           {{ coaching.subject }}
         </p>
-        <small class="text-white font-thin">{{ coaching.level }}</small>
+        <small class="font-thin text-white">{{ coaching.level }}</small>
         <small class="text-white">{{ coaching.rate }}€ / Stunde</small>
         <small
           v-if="idToRemove !== coaching.coachingId"
-          class="text-mainYellow underline hover:text-red-700 hover:cursor-pointer"
+          class="text-mainYellow underline hover:cursor-pointer hover:text-red-700"
           @click="
             () => {
               idToRemove = coaching.coachingId;
@@ -46,7 +45,7 @@
                 deleteCoaching(
                   coaching.coachingId,
                   coaching.level,
-                  coaching.rate
+                  coaching.rate,
                 );
               }
             "
@@ -64,12 +63,9 @@ import CoachingForm from "@/components/settings/CoachingForm.vue";
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import { useUserStore } from "@/stores/user";
-import { useAppStore } from "@/stores/app";
-import router from "@/router";
 
 const coachings = ref();
 const userStore = useUserStore();
-const appStore = useAppStore();
 const idToRemove = ref(-1);
 
 async function getCoachingsFromApi() {
@@ -101,7 +97,7 @@ async function deleteCoaching(id, level, rate) {
         active: false,
       },
     });
-    await router.go(0);
+    await getCoachingsFromApi();
   } catch (e) {
     console.log("Fehler beim Löschen des Coachings: " + e);
   }
@@ -116,7 +112,7 @@ onMounted(async () => {
         unwatch();
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 });
 </script>

@@ -1,6 +1,11 @@
 <template>
   <div class="container mx-auto max-w-7xl px-4">
-    <DashboardTop class="pb-10" />
+    <DashboardTop
+      :userType="userType"
+      :userImage="userImage"
+      :userName="userName"
+      class="pb-10"
+    />
 
     <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <DashboardFeature
@@ -88,8 +93,21 @@ import DashboardFeature from "@/components/dashboard/DashboardFeature.vue";
 import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
+import { computed } from "vue";
 const router = useRouter();
 const userStore = useUserStore();
+
+const userType = computed(() => {
+  return userStore.user.userType || "none";
+});
+
+const userImage = computed(() => {
+  return userStore.user.image || "notSet";
+});
+
+const userName = computed(() => {
+  return userStore.user.firstName;
+});
 </script>
 
 <style lang="scss" scoped>

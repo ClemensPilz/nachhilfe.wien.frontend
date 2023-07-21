@@ -1,36 +1,33 @@
 <template>
-  <FormModal ref="appointmentModalRef">
-    <CardLarge class="m-0">
-      <template v-slot:content>
-        <AppointmentForm @close="closeAppointmentModal" />
-      </template>
-    </CardLarge>
-  </FormModal>
+  <div>
+    <FormModal ref="appointmentModalRef">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <AppointmentForm @close="closeAppointmentModal" />
+        </template>
+      </CardLarge>
+    </FormModal>
 
-  <div class="container mx-auto mt-8 max-w-6xl px-2">
-    <h2>Lehrer suchen</h2>
-    <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
+    <div class="container mx-auto mt-8 max-w-6xl px-2">
+      <h2>Lehrer suchen</h2>
+      <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
 
-    <SearchForm @result="pasteResult" />
-  </div>
-  <div class="w-full bg-background">
-    <div class="container mx-auto mt-8 max-w-6xl">
-      <div class="searchResult">
-        <SearchResult
-          v-for="teacher in teachersArray"
-          class="col-span-1"
-          @contact="appStore.sendMessage(teacher.teacherId, true)"
-          @profile="router.push(`/profile/${teacher.teacherId}`)"
-          @requestAppointment="setAppointmentParameters"
-          :key="teacher.teacherId"
-          :teacherId="teacher.teacherId"
-          :name="`${teacher.firstName} ${teacher.lastName}`"
-          :description="`${
-            teacher.description === null ? '' : teacher.description
-          }`"
-          :coachings="teacher.coachings"
-          :image="teacher.image"
-        />
+      <SearchForm @result="pasteResult" />
+    </div>
+    <div class="w-full bg-background">
+      <div class="container mx-auto mt-8 max-w-6xl">
+        <div class="searchResult">
+          <SearchResult
+            v-for="teacher in teachersArray"
+            class="col-span-1"
+            @contact="appStore.sendMessage(teacher.teacherId, true)"
+            @profile="router.push(`/profile/${teacher.teacherId}`)"
+            @requestAppointment="setAppointmentParameters"
+            :key="teacher.teacherId"
+            :teacher="teacher"
+            :coachings="teacher.coachings"
+          />
+        </div>
       </div>
     </div>
   </div>
