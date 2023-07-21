@@ -7,7 +7,6 @@
         title="Nachrichten"
         subtitle="Hier geht's zur Inbox"
         text="Nachrichten schreiben und empfangen, Termine vereinbaren!"
-        class="bg-mainYellow"
       >
         <ButtonLarge
           class="mt-2 bg-mainBlue"
@@ -27,7 +26,6 @@
         title="Mein Kalender"
         subtitle="Termine auf einen Blick"
         text="Gutes Zeit-Management ist der Schlüssel zum Erfolg..."
-        class="bg-secondary"
       >
         <ButtonLarge
           class="mt-2 bg-mainBlue"
@@ -47,7 +45,6 @@
         title="Lehrer suchen"
         subtitle="...und finden!"
         text="Hier findest du garantiert einen Lehrer, der dir weiterhilft!"
-        class="bg-mainYellow"
       >
         <ButtonLarge
           class="mt-2 bg-mainBlue"
@@ -67,7 +64,6 @@
         title="Profil"
         subtitle="Manage dein Profil"
         text="Stelle sicher,dass deine Infos auf dem neuesten Stand sind..."
-        class="bg-secondary"
       >
         <ButtonLarge
           class="mt-2 bg-mainBlue"

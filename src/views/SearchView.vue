@@ -18,6 +18,7 @@
       <div class="searchResult">
         <SearchResult
           v-for="teacher in teachersArray"
+          class="col-span-1"
           @contact="appStore.sendMessage(teacher.teacherId, true)"
           @profile="router.push(`/profile/${teacher.teacherId}`)"
           @requestAppointment="setAppointmentParameters"
@@ -101,6 +102,6 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .searchResult {
-  @apply container mx-auto mt-4 flex min-h-screen max-w-lg flex-col pt-8;
+  @apply mx-auto mt-4 grid min-h-screen grid-cols-1 gap-4 px-4 pt-8 lg:grid-cols-2;
 }
 </style>

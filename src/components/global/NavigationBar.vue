@@ -28,11 +28,8 @@
         "
       />
       <ul v-if="userStore.isAuthenticated">
-        <li v-if="userStore.isAuthenticated">
+        <li>
           <RouterLink to="/dashboard">Home</RouterLink>
-        </li>
-        <li v-else>
-          <RouterLink to="/">Home</RouterLink>
         </li>
         <li>
           <RouterLink to="/search">Suche</RouterLink>
@@ -52,21 +49,9 @@
         <li class="text-mainOrange" @click="userStore.logout">Logout</li>
       </ul>
 
-      <ul v-else>
-        <li
-          v-if="!userStore.isAuthenticated"
-          class="text-mainBlue"
-          @click="openLoginModal"
-        >
-          Login
-        </li>
-        <li
-          v-if="!userStore.isAuthenticated"
-          class="text-mainBlue"
-          @click="openRegistrationModal"
-        >
-          Register
-        </li>
+      <ul v-if="!userStore.isAuthenticated">
+        <li class="text-mainBlue" @click="openLoginModal">Login</li>
+        <li class="text-mainBlue" @click="openRegistrationModal">Register</li>
       </ul>
     </nav>
   </div>
@@ -110,16 +95,16 @@ watch(
     } else {
       closeRegistrationModal();
     }
-  }
+  },
 );
 </script>
 
 <style lang="scss" scoped>
 nav {
-  @apply max-w-7xl mx-auto
-  items-center justify-between
-  pb-16 pt-8 px-8 flex
-  bg-background;
+  @apply mx-auto flex
+  max-w-7xl items-center
+  justify-between bg-background px-8 pb-16
+  pt-8;
 }
 
 #logo {
@@ -127,8 +112,8 @@ nav {
 }
 
 ul {
-  @apply flex gap-8 md:gap-12
-  text-xl;
+  @apply flex gap-8 text-xl
+  md:gap-12;
 }
 
 li {

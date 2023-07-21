@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-4 max-w-7xl flex-grow bg-green-800">
+  <div class="container mx-auto mt-4 max-w-7xl flex-grow">
     <div v-if="hasNoMessages">
       <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
     </div>

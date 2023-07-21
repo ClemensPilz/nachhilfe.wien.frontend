@@ -10,9 +10,9 @@
         <a href="#">eine Nachricht zu schreiben!</a>
       </p>
       <div class="mt-4 flex justify-center gap-4 md:justify-start">
-        <ButtonLarge class="bg-mainBlue" text="Kontakt" />
+        <ButtonLarge class="bg-secondary" text="Kontakt" />
         <ButtonLarge
-          class="bg-mainBlue"
+          class="bg-secondary"
           text="FAQ"
           @click="
             () => {
@@ -35,20 +35,33 @@
 
     <!--Image-Element-->
     <div
-      class="order-1 col-span-3 flex items-center justify-center overflow-hidden rounded-full md:order-3 md:col-span-1 md:-translate-y-1/4 md:scale-75"
-      style="width: 200px; height: 200px"
+      class="order-1 col-span-3 flex items-center justify-center overflow-hidden md:order-3 md:col-span-1"
     >
-      <a href="#">
+      <a
+        @click="
+          () => {
+            router.push('/settings');
+          }
+        "
+        class="relative h-[200px] w-[200px]"
+      >
         <img
           :src="topPictureSource"
           alt="a users profile picture"
-          class="h-full w-full object-cover"
+          class="h-full rounded-full object-cover"
+          :class="{ 'opacity-50': userStore.user.image === null }"
           @click="
             () => {
               router.push('/settings');
             }
           "
         />
+        <div
+          v-if="userStore.user.image === null"
+          class="absolute top-1/2 z-[999] w-full text-center text-white"
+        >
+          <small>Profilbild hochladen</small>
+        </div>
       </a>
     </div>
   </div>
