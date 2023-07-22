@@ -8,14 +8,14 @@
         @click.stop=""
         class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
     >
-      <h2 class="text-2xl mb-4">{{ title }}</h2>
-      <div>
+      <h2 class="text-2xl mb-4 text-center">{{ title }}</h2>
+      <div >
         <slot />
 
 
 
           <!--Buttons-->
-          <div class="flex gap-2 justify-end">
+          <div class="flex gap-2 justify-end mt-5">
             <button
                 type="button"
                 class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
@@ -25,10 +25,10 @@
             </button>
             <button
                 type="button"
-                class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
+                class="mt-4 w-fit py-2 px-4 ml-12 bg-accent text-white rounded-xl"
                 @click="deleteUser"
             >
-              Absenden
+              Löschen
             </button>
           </div>
       </div>

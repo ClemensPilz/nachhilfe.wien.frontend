@@ -78,7 +78,7 @@
                 @click="openDelete = true"
             />
             <DeleteAcceptionModal title="User löschen" :openDelete="openDelete"  @update:openDelete="v => openDelete = v">
-              <p>User wirklich löschen?</p>
+              <p class="text-center">User wirklich löschen?</p>
             </DeleteAcceptionModal>
           </div>
         </div>
