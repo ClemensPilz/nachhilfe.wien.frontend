@@ -1,14 +1,8 @@
 <template>
-  <div class="min-h-screen">
-    <!--Hero-Section-->
+  <div>
     <HomeHero />
-    <!--Features-->
     <HomeFeatures />
-
-    <!--Call to action-->
     <HomeCta />
-
-    <!--UserCards-->
     <HomeUserCards />
   </div>
 </template>

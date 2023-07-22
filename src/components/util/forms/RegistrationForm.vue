@@ -118,6 +118,8 @@ const validationSchema = {
   description(value) {
     if (value.trim().length < 20) {
       return "Erzähle über dich";
+    } else if (value.trim().length > 200) {
+      return "Maximal 200 Zeichen";
     }
     return true;
   },

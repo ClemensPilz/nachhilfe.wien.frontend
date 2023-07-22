@@ -36,7 +36,7 @@ const router = useRouter();
 const props = defineProps({ userImage: String });
 
 const topPictureSource = computed(() => {
-  return props.userImage === "notSet" ? image : props.userImage;
+  return props.userImage === "none" ? image : props.userImage;
 });
 </script>
 
