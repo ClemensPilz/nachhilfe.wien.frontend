@@ -18,8 +18,11 @@
             v-if="userStore.user.userType != 'ADMIN'"
             class="bg-secondary"
             text="Account löschen"
-            @click="deleteUser"
+            @click="openDelete=true"
         />
+        <DeleteAcceptionModal title="User löschen" :openDelete="openDelete"  @update:openDelete="v => openDelete = v">
+          <p>User wirklich löschen?</p>
+        </DeleteAcceptionModal>
       </div>
 
 
@@ -57,28 +60,17 @@ import CoachingSettings from "@/components/settings/CoachingSettings.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import axios from "axios";
 import router from "@/router";
+import DeleteAcceptionModal from "@/components/util/modals/DeleteAcceptionModal.vue";
+import {ref} from "vue";
 
 const userStore = useUserStore();
+const openDelete = ref();
+
 
 function changePassword() {
   alert("Diese Funktion steht noch nicht zur Verfügung.");
 }
 
-async function deleteUser() {
-  try {
-    const response = await axios({
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      method: "PUT",
-      url: `${userStore.url}/user/delete/${userStore.userId}`
-    });
-    userStore.isAuthenticated = false;
-    await router.push("/")
-  } catch (e) {
-    throw e;
-  }
-}
 
 </script>
 

@@ -42,6 +42,7 @@ import axios from "axios";
 import {useAdminStore} from "@/stores/admin";
 import {useUserStore} from "@/stores/user";
 import {ref} from "vue";
+import router from "@/router";
 
 const adminStore = useAdminStore();
 const userStore = useUserStore();
@@ -60,17 +61,17 @@ const deleteUser = async () => {
       },
       url: userStore.user.userType === 'ADMIN' ?`${userStore.url}/admin/delete-user/${adminStore.foundUser.userId}` : `${userStore.url}/user/delete/${userStore.userId}`,
     })
-    console.log(response);
     if (response.status == 204 && userStore.user.userType === 'ADMIN') {
       adminStore.foundUser = "";
     }
-    if (response.status == 204  && (userStore.user.userType === 'TEACHER' || userStore.user.userType === 'STUDEN') ) {
+    if (response.status == 204  && (userStore.user.userType === 'TEACHER' || userStore.user.userType === 'STUDENT') ) {
       userStore.user = "";
       userStore.storeUserId = "";
       userStore.isAuthenticated = false;
+      console.log("test")
+      await router.push("/");
     }
     closeModal();
-    console.log(adminStore.foundUser)
   } catch (e) {
     console.log(e);
   }

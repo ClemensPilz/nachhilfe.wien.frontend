@@ -23,6 +23,9 @@ function closeModal() {
   isActive.value = false;
 }
 
+const openDelete = ref();
+
+
 defineExpose({ openModal, closeModal });
 </script>
 
