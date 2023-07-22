@@ -41,7 +41,7 @@
 <script setup>
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
-const props = defineProps(["modalActive"]);
+const {props} = defineProps(["modalActive"]);
 
 const emits = defineEmits(["close"]);
 

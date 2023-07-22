@@ -69,7 +69,7 @@
                 />
                 <ButtonRegular
                     text="Dominik"
-                    @click="setActiveModal(1)"
+                    @click="() => setActiveModal(1)"
                     class="mt-5 bg-mainBlue"
                 >
                   Dominik
@@ -84,7 +84,7 @@
                 />
                 <ButtonRegular
                     text="Clemens"
-                    @click="setActiveModal(2)"
+                    @click="() => setActiveModal(2)"
                     class="mt-5 bg-mainBlue"
                 >
                   Clemens
@@ -104,7 +104,7 @@
                 />
                 <ButtonRegular
                     text="René"
-                    @click="setActiveModal(3)"
+                    @click="() => setActiveModal(3)"
                     class="mt-5 bg-mainBlue"
                 >
                   René
@@ -136,7 +136,7 @@
           Falls dir etwas am Herzen liegt, freuen wir uns auf eine Nachricht von
           dir. Hilf uns dabei unsere Webseite laufend zu verbessern.
         </p>
-        <form @submit.prevent="handleSubmit" class="space-y-8">
+        <form class="space-y-8">
           <div>
             <label
                 for="email"
@@ -184,7 +184,7 @@
                 minlength="25"
             ></textarea>
           </div>
-          <ButtonRegular class="bg-mainOrange" text="Senden"/>
+          <ButtonRegular @click.prevent="handleSubmit" class="bg-mainOrange" text="Senden"/>
         </form>
         <div>
           <ThankYouModal @close="setActiveModal(4)" :modal-active="activeModal"/>
@@ -204,23 +204,24 @@ import ThankYouModal from "@/components/aboutUs/ThankYouModal.vue";
 
 const activeModal = ref(0);
 
+function setActiveModal(modalNumber) {
+  activeModal.value = activeModal.value === modalNumber ? 0 : modalNumber;
+}
+
 const email = ref("");
 const subject = ref("");
 const message = ref("");
 
 function handleSubmit() {
-  const form = document.querySelector("form");
-  if (!form.checkValidity()) {
+  if (!email.value || !subject.value || message.value.trim().length < 25 ) {
     alert("Please fill out all required fields correctly.");
+    console.log("validity check error")
   } else {
+    console.log("Form is valid")
     setActiveModal(4);
     email.value = "";
     subject.value = "";
     message.value = "";
-  }
-
-  function setActiveModal(modalNumber) {
-    activeModal.value = activeModal.value === modalNumber ? 0 : modalNumber;
   }
 
 }
