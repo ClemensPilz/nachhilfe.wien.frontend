@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-7xl px-4">
+  <div class="container mx-auto max-w-7xl px-4 pb-4">
     <DashboardTop
       :userType="userType"
       :userImage="userImage"

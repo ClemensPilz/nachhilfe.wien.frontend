@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-background px-8 py-2">
+  <div class="border-t bg-white px-8 py-2 pt-4">
     <FooterInfo v-if="!userStore.isAuthenticated" />
     <FooterCopyright />
   </div>
