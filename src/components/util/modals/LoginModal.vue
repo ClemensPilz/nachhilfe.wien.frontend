@@ -1,7 +1,9 @@
 <template>
   <div
     :class="
-      isActive ? 'modalBg visible opacity-100' : 'modalBg invisible opacity-0'
+      appStore.loginModalActive
+        ? 'modalBg visible opacity-100'
+        : 'modalBg invisible opacity-0'
     "
     @mousedown.self="appStore.resetModals()"
   >
@@ -12,21 +14,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useAppStore } from "@/stores/app";
 
-const isActive = ref(false);
 const appStore = useAppStore();
-
-function openModal() {
-  isActive.value = true;
-}
-
-function closeModal() {
-  isActive.value = false;
-}
-
-defineExpose(["openModal", "closeModal"]);
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,6 @@
 <template>
   <div class="min-h-screen">
+    <!--Hero-Section-->
     <section id="hero" class="bg-background">
       <div class="container mx-auto mb-8 max-w-7xl px-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -10,13 +11,41 @@
           <div
             class="col-span-1 flex items-center justify-around gap-8 md:mt-auto md:justify-end"
           >
-            <ButtonLarge class="bg-mainBlue" text="Loslegen" />
+            <ButtonLarge
+              class="bg-mainBlue"
+              text="Loslegen"
+              @click="
+                () => {
+                  appStore.registrationModalActive =
+                    !appStore.registrationModalActive;
+                }
+              "
+            />
             <div
               class="flex h-20 w-20 items-center justify-center rounded-full bg-mainYellow shadow-lg hover:cursor-pointer hover:bg-opacity-80 hover:shadow-xl"
             >
-              <h3 class="text-white">?</h3>
+              <h3
+                class="text-white"
+                @click="
+                  () => {
+                    router.push('/faq');
+                  }
+                "
+              >
+                ?
+              </h3>
             </div>
-            <p class="hover:cursor-pointer hover:opacity-70">Lehrer werden</p>
+            <p
+              class="hover:cursor-pointer hover:opacity-70"
+              @click="
+                () => {
+                  appStore.registrationModalActive =
+                    !appStore.registrationModalActive;
+                }
+              "
+            >
+              Lehrer werden
+            </p>
           </div>
         </div>
       </div>
@@ -32,6 +61,7 @@
       />
     </section>
 
+    <!--Features-->
     <section id="features" class="bg-white">
       <div class="container mx-auto max-w-7xl p-2 py-12 lg:py-20">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -67,7 +97,15 @@
                 Verfügung!
               </p>
               <div class="text-right">
-                <ButtonRegular class="bg-primary text-right" text="Kontakt" />
+                <ButtonRegular
+                  class="bg-primary text-center"
+                  text="Kontakt"
+                  @click="
+                    () => {
+                      router.push('/about');
+                    }
+                  "
+                />
               </div>
             </template>
           </CardLarge>
@@ -75,6 +113,7 @@
       </div>
     </section>
 
+    <!--Call to action-->
     <section id="cta" class="bg-background">
       <div class="container mx-auto max-w-7xl p-2 lg:p-12">
         <div class="grid grid-cols-3 gap-4">
@@ -90,12 +129,21 @@
           <div
             class="col-span-3 flex justify-around lg:col-span-1 lg:items-end lg:justify-end"
           >
-            <ButtonLarge text="Mehr erfahren" class="bg-mainBlue" />
+            <ButtonLarge
+              text="Mehr erfahren"
+              class="bg-mainBlue"
+              @click="
+                () => {
+                  router.push('/faq');
+                }
+              "
+            />
           </div>
         </div>
       </div>
     </section>
 
+    <!--UserCards-->
     <section id="userCards" class="bg-background">
       <div class="container mx-auto max-w-7xl p-12 pb-12 sm:p-2">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -113,7 +161,14 @@
                 Registriere dich und finde einen Nachhilfelehrer
               </p>
               <div class="text-right">
-                <small class="underline hover:cursor-pointer hover:opacity-70"
+                <small
+                  class="underline hover:cursor-pointer hover:opacity-70"
+                  @click="
+                    () => {
+                      appStore.registrationModalActive =
+                        !appStore.registrationModalActive;
+                    }
+                  "
                   >Registrierung</small
                 >
               </div>
@@ -134,7 +189,14 @@
                 Anderen helfen und dabei auch noch Geld verdienen
               </p>
               <div class="text-right">
-                <small class="underline hover:cursor-pointer hover:opacity-70"
+                <small
+                  class="underline hover:cursor-pointer hover:opacity-70"
+                  @click="
+                    () => {
+                      appStore.registrationModalActive =
+                        !appStore.registrationModalActive;
+                    }
+                  "
                   >Registrierung</small
                 >
               </div>
@@ -155,7 +217,13 @@
                 Werde Teil unseres Teams - schick uns deine Bewerbung
               </p>
               <div class="text-right">
-                <small class="underline hover:cursor-pointer hover:opacity-70"
+                <small
+                  class="underline hover:cursor-pointer hover:opacity-70"
+                  @click="
+                    () => {
+                      router.push('/faq');
+                    }
+                  "
                   >Kontakt</small
                 >
               </div>
@@ -172,9 +240,12 @@ import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
-import FooterBar from "@/components/global/FooterBar.vue";
+import { useAppStore } from "@/stores/app";
+import { useRouter } from "vue-router";
 
+const appStore = useAppStore();
 const userStore = useUserStore();
+const router = useRouter();
 </script>
 
 <style lang="scss" scoped></style>

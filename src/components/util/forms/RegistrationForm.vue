@@ -51,7 +51,7 @@
     <div class="error">{{ errors.password }}</div>
 
     <div
-      class="border-y-2 border-gray-200 flex flex-col space-y-2 items-center py-2 my-2"
+      class="my-2 flex flex-col items-center space-y-2 border-y-2 border-gray-200 py-2"
     >
       <label class="text-black" for="type">Ich möchte...</label>
       <select class="typeSelect" v-model="type" name="type" id="type">
@@ -62,7 +62,7 @@
 
     <div class="mt-2 flex justify-around">
       <ButtonRegular
-        @click="$emit('close')"
+        @click="appStore.resetModals()"
         class="bg-secondary"
         text="Zurück"
       />
@@ -78,12 +78,13 @@ import { ref } from "vue";
 import axios from "axios";
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
+import { useAppStore } from "@/stores/app";
 
+const appStore = useAppStore();
 const userStore = useUserStore();
 const type = ref("Student");
 const isCalling = ref(false);
 
-const emit = defineEmits(["close"]);
 // Validation
 const validationSchema = {
   email(value) {
@@ -203,14 +204,14 @@ async function register() {
     console.log(e);
   } finally {
     isCalling.value = false;
-    emit("close");
+    appStore.resetModals();
   }
 }
 </script>
 
 <style lang="scss" scoped>
 form {
-  @apply w-full flex flex-col bg-background max-h-screen py-2 overflow-y-scroll;
+  @apply flex max-h-screen w-full flex-col overflow-y-scroll bg-background py-2;
 }
 
 label {
@@ -218,7 +219,7 @@ label {
 }
 
 input {
-  @apply px-4 py-2 m-2 rounded-3xl text-p;
+  @apply text-p m-2 rounded-3xl px-4 py-2;
 }
 
 .error {

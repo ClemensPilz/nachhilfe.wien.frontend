@@ -11,6 +11,13 @@ export const useAppStore = defineStore("app", () => {
   const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
   const selectedCoaching = ref({});
   const modalStack = ref([]);
+  const registrationModalActive = ref(false);
+  const loginModalActive = ref(false);
+
+  function resetModals() {
+    registrationModalActive.value = false;
+    loginModalActive.value = false;
+  }
 
   //Used to pass information of a selected coaching through multiple layers of components
   function selectCoaching(teacherId, coachingId) {
@@ -45,7 +52,7 @@ export const useAppStore = defineStore("app", () => {
     coachingId,
     dateTime,
     duration,
-    content
+    content,
   ) {
     const conversationId = await sendMessage(teacherId, false);
     let startTime = new Date(dateTime);
@@ -114,5 +121,8 @@ export const useAppStore = defineStore("app", () => {
     modalStack,
     selectCoaching,
     filterTeachers,
+    registrationModalActive,
+    loginModalActive,
+    resetModals,
   };
 });
