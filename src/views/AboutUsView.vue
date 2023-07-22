@@ -57,13 +57,13 @@
               desto größer wird es."
             </p>
           </div>
-          <div class="w-full lg:w-8/12 lg:pt-8 pl-10">
+          <div class="w-full lg:w-8/12 lg:pt-8">
             <div
                 class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md"
             >
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img
-                    class="md:block hidden"
+                    class="md:block m-auto h-auto hidden"
                     src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
                     alt="Alexa featured Image"
                 />
@@ -78,7 +78,7 @@
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img
-                    class="md:block hidden"
+                    class="md:block m-auto h-auto hidden"
                     src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
                     alt="Olivia featured Image"
                 />
@@ -93,15 +93,15 @@
               </div>
               <div class="p-4 pb-6 flex justify-center flex-col items-center">
                 <img
-                    class="md:block hidden"
+                    class="md:block m-auto h-auto hidden"
                     src="@/assets/images/René-Ali%20Günürün.jpg"
-                    alt="Liam featued Image"
+                    alt="René"
                 />
-                <img
-                    class="md:hidden block"
-                    src="@/assets/images/René-Ali%20Günürün.jpg"
-                    alt="Liam featued Image"
-                />
+<!--                <img-->
+<!--                    class="md:hidden block"-->
+<!--                    src="@/assets/images/René-Ali%20Günürün.jpg"-->
+<!--                    alt="Liam featued Image"-->
+<!--                />-->
                 <ButtonRegular
                     text="René"
                     @click="() => setActiveModal(3)"

@@ -1,6 +1,6 @@
 <template>
-  <section class="min-h-screen flex flex-col">
-    <div class="container mx-auto px-6 py-12 lg:px-20 v">
+  <section class="flex flex-grow flex-col">
+    <div class="container mx-auto max-w-6xl px-2 py-12">
       <h2>Persönlicher Kalender</h2>
       <div class="mt-5">
         <CalendarComponent />
@@ -11,7 +11,7 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import CalendarComponent from "@/components/calendar/CalendarComponent.vue";

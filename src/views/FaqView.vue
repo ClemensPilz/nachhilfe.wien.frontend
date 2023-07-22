@@ -1,5 +1,5 @@
 <script setup>
-import {ref, computed} from "vue";
+import { ref, computed } from "vue";
 import q from "@/data/questions.json";
 import Question from "@/components/aboutUs/Question.vue";
 

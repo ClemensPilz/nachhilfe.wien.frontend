@@ -1,9 +1,11 @@
 <template>
-  <header>
-    <NavigationBar />
-  </header>
+  <div class="flex min-h-screen flex-col">
+    <header>
+      <NavigationBar />
+    </header>
 
-  <RouterView :key="$route.fullPath" />
+    <RouterView :key="$route.fullPath" class="flex-grow-1" />
+  </div>
 </template>
 
 <script setup>

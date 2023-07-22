@@ -1,42 +1,42 @@
 <template>
   <div class="min-h-screen">
     <section id="hero" class="bg-background">
-      <div class="container max-w-7xl mx-auto px-4 mb-8">
+      <div class="container mx-auto mb-8 max-w-7xl px-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div class="flex flex-col text-center md:text-left col-span-1">
+          <div class="col-span-1 flex flex-col text-center md:text-left">
             <small class="text-mainBlue">Nachhilfe-Plattform</small>
             <h1>Finde jetzt Nachhilfe</h1>
           </div>
           <div
-            class="flex items-center md:mt-auto justify-around md:justify-end gap-8 col-span-1"
+            class="col-span-1 flex items-center justify-around gap-8 md:mt-auto md:justify-end"
           >
             <ButtonLarge class="bg-mainBlue" text="Loslegen" />
             <div
-              class="rounded-full w-20 h-20 bg-mainYellow shadow-lg flex items-center justify-center hover:shadow-xl hover:cursor-pointer hover:bg-opacity-80"
+              class="flex h-20 w-20 items-center justify-center rounded-full bg-mainYellow shadow-lg hover:cursor-pointer hover:bg-opacity-80 hover:shadow-xl"
             >
               <h3 class="text-white">?</h3>
             </div>
-            <p class="hover:opacity-70 hover:cursor-pointer">Lehrer werden</p>
+            <p class="hover:cursor-pointer hover:opacity-70">Lehrer werden</p>
           </div>
         </div>
       </div>
       <img
         src="@/assets/images/home/title-mobile3.jpg"
         alt="classroom situation with laptop"
-        class="w-full h-auto max-w-7xl mx-auto md:hidden rounded-t-3xl"
+        class="mx-auto h-auto w-full max-w-7xl rounded-t-3xl md:hidden"
       />
       <img
         src="@/assets/images/home/title-desktop3.jpg"
         alt="classroom situation with laptop"
-        class="w-full h-auto max-w-7xl mx-auto hidden md:block rounded-t-3xl"
+        class="mx-auto hidden h-auto w-full max-w-7xl rounded-t-3xl md:block"
       />
     </section>
 
     <section id="features" class="bg-white">
-      <div class="container max-w-7xl mx-auto py-12 lg:py-20 p-2">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="container mx-auto max-w-7xl p-2 py-12 lg:py-20">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div class="text-center">
-            <h1>X</h1>
+            <ClockIcon class="w-[130px] h-[130px] mx-auto"/>
             <h4 class="text-mainOrange">Hilfe 24/7</h4>
             <p class="text-secondary">
               Unsere Trainer stehen dir sieben Tage die Woche, rund um die Uhr
@@ -67,7 +67,7 @@
                 Verfügung!
               </p>
               <div class="text-right">
-                <ButtonRegular class="text-right bg-primary" text="Kontakt" />
+                <ButtonRegular class="bg-primary text-right" text="Kontakt" />
               </div>
             </template>
           </CardLarge>
@@ -76,9 +76,9 @@
     </section>
 
     <section id="cta" class="bg-background">
-      <div class="container max-w-7xl mx-auto p-2 lg:p-12">
+      <div class="container mx-auto max-w-7xl p-2 lg:p-12">
         <div class="grid grid-cols-3 gap-4">
-          <div class="col-span-3 lg:col-span-2 text-center lg:text-left">
+          <div class="col-span-3 text-center lg:col-span-2 lg:text-left">
             <h3>Einfach anmelden und mitmachen!</h3>
             <p>
               Du bist Schüler und suchst jemanden, der dir rasch und
@@ -88,7 +88,7 @@
           </div>
 
           <div
-            class="col-span-3 lg:col-span-1 flex justify-around lg:justify-end lg:items-end"
+            class="col-span-3 flex justify-around lg:col-span-1 lg:items-end lg:justify-end"
           >
             <ButtonLarge text="Mehr erfahren" class="bg-mainBlue" />
           </div>
@@ -97,8 +97,8 @@
     </section>
 
     <section id="userCards" class="bg-background">
-      <div class="container max-w-7xl mx-auto pb-12 p-12 sm:p-2">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="container mx-auto max-w-7xl p-12 pb-12 sm:p-2">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <CardLarge class="bg-white hover:cursor-pointer hover:shadow-xl">
             <template v-slot:image>
               <img
@@ -113,7 +113,7 @@
                 Registriere dich und finde einen Nachhilfelehrer
               </p>
               <div class="text-right">
-                <small class="underline hover:opacity-70 hover:cursor-pointer"
+                <small class="underline hover:cursor-pointer hover:opacity-70"
                   >Registrierung</small
                 >
               </div>
@@ -134,7 +134,7 @@
                 Anderen helfen und dabei auch noch Geld verdienen
               </p>
               <div class="text-right">
-                <small class="underline hover:opacity-70 hover:cursor-pointer"
+                <small class="underline hover:cursor-pointer hover:opacity-70"
                   >Registrierung</small
                 >
               </div>
@@ -155,7 +155,7 @@
                 Werde Teil unseres Teams - schick uns deine Bewerbung
               </p>
               <div class="text-right">
-                <small class="underline hover:opacity-70 hover:cursor-pointer"
+                <small class="underline hover:cursor-pointer hover:opacity-70"
                   >Kontakt</small
                 >
               </div>
@@ -172,6 +172,11 @@ import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
+import {ClockIcon} from "@heroicons/vue/24/outline";
+
+
+
+
 const userStore = useUserStore();
 </script>
 

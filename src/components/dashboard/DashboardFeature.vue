@@ -1,16 +1,14 @@
 <template>
   <div
-    class="w-full border-2 border-primary my-8 rounded-3xl text-center flex justify-between overflow-hidden shadow-xl"
-    :class="left ? 'md:text-left' : 'md:text-right flex-row-reverse'"
+    class="flex w-full flex-col gap-2 overflow-hidden rounded-3xl text-center shadow-xl"
   >
-    <div class="p-8">
+    <slot name="image" />
+    <div class="mx-4 mb-4">
       <h4>{{ title }}</h4>
       <p class="font-bold">{{ subtitle }}</p>
       <p>{{ text }}</p>
       <slot />
     </div>
-
-    <slot name="image" />
   </div>
 </template>
 

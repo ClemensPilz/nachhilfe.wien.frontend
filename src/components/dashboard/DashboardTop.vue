@@ -1,46 +1,40 @@
 <template>
-  <div class="w-full grid grid-cols-2 items-center mt-8 gap-8">
+  <div class="mt-8 grid w-full grid-cols-3 items-center gap-8">
     <!--Text-Elements-->
-    <div class="col-span-2 md:col-span-1">
+    <div class="order-2 col-span-3 text-center md:col-span-2 md:text-left">
       <h2 class="text-mainOrange">Hallo {{ userName }}</h2>
       <h4>Dies ist dein Dashboard!</h4>
       <p>
         Hier findest du die wichtigsten Funktionen von nachhilfe.wien. Solltest
-        du noch Fragen oder Anregungen haben, zögere bitte nicht, uns
-        <a href="#">eine Nachricht zu schreiben!</a>
+        du noch Fragen oder Anregungen haben, zögere bitte nicht, uns eine
+        Nachricht zu schreiben!
       </p>
-      <ButtonLarge class="bg-mainBlue mt-4" text="Kontakt" />
-      <ButtonLarge
-        class="bg-mainBlue mt-4"
-        text="FAQ"
-        @click="
-          () => {
-            router.push('/faq');
-          }
-        "
-      />
+      <div class="mt-4 flex justify-center gap-4 md:justify-start">
+        <DashboardTopButtons :userType="userType" />
+      </div>
     </div>
 
     <!--Image-Element-->
-    <div class="col-span-2 md:col-span-1 overflow-hidden">
-      <a href="#"
-        ><img
-          src="@/assets/images/dashboard/happy-teacher.jpg"
-          alt="happy teacher"
-          class="w-full h-auto rounded-full"
-      /></a>
+    <div
+      class="order-1 col-span-3 flex items-center justify-center overflow-hidden md:order-3 md:col-span-1"
+    >
+      <DashboardTopPicture
+        :userImage="userImage"
+        class="hover:cursor-pointer"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useUserStore } from "@/stores/user";
-import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
-import { useRouter } from "vue-router";
+import DashboardTopPicture from "@/components/dashboard/DashboardTopPicture.vue";
+import DashboardTopButtons from "@/components/dashboard/DashboardTopButtons.vue";
 
-const router = useRouter();
-const userStore = useUserStore();
-const userName = userStore.user.firstName;
+const props = defineProps({
+  userType: String,
+  userImage: String,
+  userName: String,
+});
 </script>
 
 <style lang="scss" scoped></style>

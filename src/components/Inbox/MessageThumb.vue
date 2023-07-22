@@ -9,7 +9,7 @@
     >
       <p v-if="props.type === 'APPOINTMENT'" class="font-bold italic">
         Anfrage für:
-        <span class="text-mainYellow bg-secondary rounded-3xl px-2 py-1">{{
+        <span class="rounded-3xl bg-secondary px-2 py-1 text-mainYellow">{{
           coachingName
         }}</span>
       </p>
@@ -45,7 +45,7 @@
         />
 
         <ButtonRegular
-          class="bg-mainOrange mr-2"
+          class="mr-2 bg-mainOrange"
           v-if="props.status === 'CONFIRMED'"
           text="Absagen"
           @click="reject"
@@ -61,7 +61,7 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { computed, getCurrentInstance, onMounted, ref } from "vue";
+import { computed } from "vue";
 import { useConversationStore } from "@/stores/conversation";
 import { useRouter } from "vue-router";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
@@ -89,7 +89,7 @@ async function reject() {
   try {
     const response = await conversationStore.updateAppointment(
       props.id,
-      "reject"
+      "reject",
     );
     console.log(response);
     alert("Termin abgelehnt");
@@ -103,7 +103,7 @@ async function confirm() {
   try {
     const response = await conversationStore.updateAppointment(
       props.id,
-      "confirm"
+      "confirm",
     );
     console.log(response);
     alert("Termin akzeptiert");
@@ -126,16 +126,16 @@ function translateStatus(status) {
 
 <style lang="scss" scoped>
 .ownMessage {
-  @apply bg-gray-100 text-right p-2 pr-4 ml-auto;
+  @apply ml-auto bg-gray-100 p-2 pr-4 text-right;
 }
 
 .foreignMessage {
-  @apply bg-lightPrimary text-left p-2;
+  @apply bg-lightPrimary p-2 text-left;
 }
 
 .ownMessage,
 .foreignMessage {
-  @apply rounded-3xl w-fit;
+  @apply w-fit rounded-3xl;
 }
 
 .appointment {
