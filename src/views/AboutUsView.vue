@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-6xl">
+  <div class="min-h-screen">
     <section class="bg-white dark:bg-gray-900">
       <div
         class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4"
