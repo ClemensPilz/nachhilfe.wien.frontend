@@ -14,9 +14,6 @@
   <li>
     <RouterLink to="/settings">Settings</RouterLink>
   </li>
-  <li>
-    <RouterLink to="/about">Our Team</RouterLink>
-  </li>
   <li class="text-mainOrange" @click="userStore.logout">Logout</li>
 </template>
 
