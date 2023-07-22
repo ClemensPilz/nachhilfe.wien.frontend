@@ -11,11 +11,11 @@
     <div
       class="flex flex-col justify-center rounded-xl bg-gray-50 p-4 text-primary"
     >
-      <h4>Termin: {{ startDate }}</h4>
-      <p v-if="userStore.user.userType === 'TEACHER'" class="col-span-3">
+      <h4 v-if="userStore.user.userType === 'TEACHER'" class="col-span-3">
         Schüler: {{ appointmentDetails.studentName }}
-      </p>
-      <p v-else>Lehrer: {{ appointmentDetails.teacherName }}</p>
+      </h4>
+      <h4 v-else>Lehrer: {{ appointmentDetails.teacherName }}</h4>
+      <p>Fach: {{ appointmentDetails.coachingName }}</p>
       <div
         id="divider"
         class="border-b-1 mb-3 mt-2 border border-mainYellow"
@@ -48,17 +48,23 @@
 
     <!---Appointment Date and Time-->
     <div class="col-span-1 pl-5 pt-5">
+      <p>Termin: {{ startDate }}</p>
       <p>Von: {{ startTime }}</p>
       <p>Bis: {{ endTime }}</p>
-      <p>Fach: {{ appointmentDetails.coachingName }}</p>
-      <p>Status: {{ appointmentDetails.status }}</p>
-      <div v-if="userStore.user.userType === 'TEACHER'" class="py-5">
+      <p>Status:
+        <span v-if="appointmentDetails.status === 'PENDING'">Offen</span>
+        <span v-if="appointmentDetails.status === 'CONFIRMED'">Bestätigt</span>
+        <span v-if="appointmentDetails.status === 'REJECTED'">Abgelehnt</span>
+      </p>
+      <div v-if="userStore.user.userType === 'TEACHER' && isBeforeNow(appointmentDetails.start)" class="py-5" >
         <ButtonRegular
+            v-if="appointmentDetails.status === 'PENDING'"
           text="Akzeptieren"
           class="bg-secondary"
           @click="confirm"
         ></ButtonRegular>
         <ButtonRegular
+            v-if="appointmentDetails.status === 'PENDING' ||appointmentDetails.status === 'CONFIRMED'"
           text="Stornieren"
           class="bg-secondary"
           @click="reject"
@@ -130,6 +136,11 @@ async function confirm() {
   } catch (e) {
     console.log(e);
   }
+}
+
+const isBeforeNow = (date) => {
+  let now = new Date();
+  return new Date(date) > now;
 }
 
 onMounted(() => {
