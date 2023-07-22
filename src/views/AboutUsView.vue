@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-6xl">
+  <div class="min-h-screen">
     <section class="bg-white dark:bg-gray-900">
       <div
           class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4"
@@ -184,7 +184,9 @@
                 minlength="25"
             ></textarea>
           </div>
-          <ButtonRegular @click.prevent="handleSubmit" class="bg-mainOrange" text="Senden"/>
+          <div class="flex justify-center">
+            <ButtonRegular @click.prevent="handleSubmit" class="bg-mainOrange mt-5 py-2 px-4 rounded" text="Senden"/>
+          </div>
         </form>
         <div>
           <ThankYouModal @close="setActiveModal(4)" :modal-active="activeModal"/>
@@ -213,7 +215,7 @@ const subject = ref("");
 const message = ref("");
 
 function handleSubmit() {
-  if (!email.value || !subject.value || message.value.trim().length < 25 ) {
+  if (!email.value || !subject.value || message.value.trim().length < 25) {
     alert("Please fill out all required fields correctly.");
     console.log("validity check error")
   } else {
