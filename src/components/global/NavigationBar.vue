@@ -66,7 +66,6 @@
 <script setup>
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
-
 import { ref, watch } from "vue";
 import LoginForm from "@/components/util/forms/LoginForm.vue";
 import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
@@ -94,25 +93,14 @@ function openRegistrationModal() {
 function closeRegistrationModal() {
   registrationModalRef.value.closeModal();
 }
-
-watch(
-  () => userStore.showRegistrationModal,
-  (newVal) => {
-    if (newVal) {
-      openRegistrationModal();
-    } else {
-      closeRegistrationModal();
-    }
-  },
-);
 </script>
 
 <style lang="scss" scoped>
 nav {
   @apply mx-auto flex
   max-w-7xl items-center
-  justify-between bg-background px-8 pb-16
-  pt-8;
+  justify-between bg-background px-8 pb-4 pt-2 md:pb-16
+  md:pt-8;
 }
 
 #logo {
