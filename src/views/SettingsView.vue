@@ -14,7 +14,14 @@
           text="Passwort ändern"
           @click="changePassword"
         />
+        <ButtonRegular
+            v-if="userStore.user.userType != 'ADMIN'"
+            class="bg-secondary"
+            text="Account löschen"
+            @click="deleteUser"
+        />
       </div>
+
 
       <!--Profile picture-->
       <h4>Mein Profilbild ändern</h4>
@@ -48,12 +55,31 @@ import BasicSettings from "@/components/settings/BasicSettings.vue";
 import DistrictSettings from "@/components/settings/DistrictSettings.vue";
 import CoachingSettings from "@/components/settings/CoachingSettings.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+import axios from "axios";
+import router from "@/router";
 
 const userStore = useUserStore();
 
 function changePassword() {
   alert("Diese Funktion steht noch nicht zur Verfügung.");
 }
+
+async function deleteUser() {
+  try {
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      method: "PUT",
+      url: `${userStore.url}/user/delete/${userStore.userId}`
+    });
+    userStore.isAuthenticated = false;
+    await router.push("/")
+  } catch (e) {
+    throw e;
+  }
+}
+
 </script>
 
 <style lang="scss" scoped></style>
