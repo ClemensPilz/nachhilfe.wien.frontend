@@ -222,6 +222,9 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <h2>User not found!</h2>
+    </div>
   </div>
 </template>
 

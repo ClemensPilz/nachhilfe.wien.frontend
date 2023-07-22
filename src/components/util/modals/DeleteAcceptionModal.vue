@@ -50,8 +50,6 @@ const userStore = useUserStore();
 const props = defineProps(["openDelete", "title"])
 const emit = defineEmits(["update:openDelete"]);
 
-const isOpen = ref(props.openDelete);
-
 
 const deleteUser = async () => {
   try {
@@ -60,9 +58,19 @@ const deleteUser = async () => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      url: adminStore.foundUser.userType === 'ADMIN' ?`${userStore.url}/admin/delete-user/${adminStore.foundUser.userId}` : `${userStore.url}/user/delete/${userStore.userId}`,
+      url: userStore.user.userType === 'ADMIN' ?`${userStore.url}/admin/delete-user/${adminStore.foundUser.userId}` : `${userStore.url}/user/delete/${userStore.userId}`,
     })
     console.log(response);
+    if (response.status == 204 && userStore.user.userType === 'ADMIN') {
+      adminStore.foundUser = "";
+    }
+    if (response.status == 204  && (userStore.user.userType === 'TEACHER' || userStore.user.userType === 'STUDEN') ) {
+      userStore.user = "";
+      userStore.storeUserId = "";
+      userStore.isAuthenticated = false;
+    }
+    closeModal();
+    console.log(adminStore.foundUser)
   } catch (e) {
     console.log(e);
   }

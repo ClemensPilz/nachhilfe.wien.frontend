@@ -38,9 +38,10 @@ export const useAdminStore = defineStore("admin", () => {
         url: `${userStore.url}/admin/find-user`,
       });
     } catch (e) {
-      throw e;
+      foundUser.value = null;
     }
     foundUser.value = response.value.data;
+    console.log()
     return foundUser.value;
   }
 
