@@ -12,21 +12,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useAppStore } from "@/stores/app";
 
-const isActive = ref(false);
 const appStore = useAppStore();
-
-function openModal() {
-  isActive.value = true;
-}
-
-function closeModal() {
-  isActive.value = false;
-}
-
-defineExpose(["openModal", "closeModal"]);
+defineProps({ isActive: Boolean });
 </script>
 
 <style lang="scss" scoped>

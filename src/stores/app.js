@@ -13,6 +13,8 @@ export const useAppStore = defineStore("app", () => {
   const modalStack = ref([]);
   const registrationModalActive = ref(false);
   const loginModalActive = ref(false);
+  const reviewModalActive = ref(false);
+  const appointmentModalActive = ref(false);
 
   function resetModals() {
     registrationModalActive.value = false;
@@ -124,5 +126,7 @@ export const useAppStore = defineStore("app", () => {
     registrationModalActive,
     loginModalActive,
     resetModals,
+    reviewModalActive,
+    appointmentModalActive,
   };
 });

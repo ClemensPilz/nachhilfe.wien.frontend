@@ -1,9 +1,9 @@
 <template>
   <div
     @click.stop=""
-    class="max-h-screen bg-white py-6 px-10 mx-2 mt-20 rounded-xl"
+    class="mx-2 mt-20 max-h-screen rounded-xl bg-white px-10 py-6"
   >
-    <h2 class="text-2xl mb-4">Terminvorschlag</h2>
+    <h2 class="mb-4 text-2xl">Terminvorschlag</h2>
     <div>
       <form>
         <div class="w-fit text-center">
@@ -22,7 +22,7 @@
             v-model="duration"
             name="duration"
             id="duration"
-            class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2 w-1/4"
+            class="mt-2 w-1/4 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
           />
         </div>
         <br />
@@ -33,7 +33,7 @@
             type="text"
             v-model="content"
             id="content"
-            class="bg-lightPrimary border-2 border-gray-400 p-2 rounded-xl mt-2"
+            class="mt-2 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
           />
         </div>
       </form>
@@ -41,15 +41,15 @@
     </div>
 
     <!--Buttons-->
-    <div class="flex gap-2 justify-end">
+    <div class="flex justify-end gap-2">
       <button
-        class="mt-4 w-fit py-2 px-4 bg-lightPrimary text-white rounded-xl"
-        @click="$emit('close')"
+        class="mt-4 w-fit rounded-xl bg-lightPrimary px-4 py-2 text-white"
+        @click="appStore.resetModals()"
       >
         Abbrechen
       </button>
       <button
-        class="mt-4 w-fit py-2 px-4 bg-accent text-white rounded-xl"
+        class="mt-4 w-fit rounded-xl bg-accent px-4 py-2 text-white"
         @click="send"
       >
         OK
@@ -88,7 +88,7 @@ async function send() {
       appStore.selectedCoaching.coachingId,
       startTime.value,
       duration.value,
-      content.value
+      content.value,
     );
   } catch (e) {
     console.log(e);

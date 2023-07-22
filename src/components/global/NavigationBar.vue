@@ -1,19 +1,19 @@
 <template>
-  <LoginModal>
+  <FormModal :is-active="appStore.loginModalActive">
     <CardLarge class="m-0">
       <template v-slot:content>
         <LoginForm />
       </template>
     </CardLarge>
-  </LoginModal>
+  </FormModal>
 
-  <RegistrationModal>
+  <FormModal :is-active="appStore.registrationModalActive">
     <CardLarge class="m-0">
       <template v-slot:content>
         <RegistrationForm />
       </template>
     </CardLarge>
-  </RegistrationModal>
+  </FormModal>
 
   <div class="relative w-full bg-background">
     <nav>
@@ -103,8 +103,7 @@ import { useUserStore } from "@/stores/user";
 import NavigationBarLinks from "@/components/global/NavigationBarLinks.vue";
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 import { useAppStore } from "@/stores/app";
-import LoginModal from "@/components/util/modals/LoginModal.vue";
-import RegistrationModal from "@/components/util/modals/RegistrationModal.vue";
+import FormModal from "@/components/util/modals/FormModal.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();

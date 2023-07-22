@@ -11,7 +11,7 @@
       :src="topPictureSource"
       alt="a users profile picture"
       class="h-full rounded-full object-cover"
-      :class="{ 'opacity-50': userImage === 'notSet' }"
+      :class="{ 'opacity-50': userImage === 'none' }"
       @click="
         () => {
           router.push('/settings');
@@ -19,7 +19,7 @@
       "
     />
     <div
-      v-if="userImage === 'notSet'"
+      v-if="userImage === 'none'"
       class="absolute top-1/2 z-[999] w-full text-center text-white"
     >
       <small>Profilbild hochladen</small>
