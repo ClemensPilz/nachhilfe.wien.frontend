@@ -12,7 +12,7 @@
     <RouterLink to="/inbox">Inbox</RouterLink>
   </li>
   <li>
-    <RouterLink to="/settings">Settings</RouterLink>
+    <RouterLink to="/settings">Profil</RouterLink>
   </li>
   <li class="text-mainOrange" @click="userStore.logout">Logout</li>
 </template>

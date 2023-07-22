@@ -21,7 +21,17 @@
       <img
         src="@/assets/images/logos/nachhilfewien-logo.svg"
         alt="Logo von nachhilfe.wien"
-        class="w-1/6 hover:cursor-pointer"
+        class="hidden w-1/6 hover:cursor-pointer sm:block"
+        @click="
+          () => {
+            router.push('/');
+          }
+        "
+      />
+      <img
+        src="@/assets/images/logos/nachhilfewien-logo.svg"
+        alt="Logo von nachhilfe.wien"
+        class="block w-1/3 hover:cursor-pointer sm:hidden"
         @click="
           () => {
             router.push('/');
