@@ -5,7 +5,9 @@
     <!--Text-Part-->
     <div class="col-span-2 flex flex-col justify-center p-4 text-primary">
       <h4>{{ teacher.firstName }} {{ teacher.lastName }}</h4>
-      <p>{{ teacher.description === null ? "" : teacher.description }}</p>
+      <small class="font-thin">{{
+        teacher.description === null ? "" : teacher.description
+      }}</small>
 
       <div v-if="teacher.teacherId !== userStore.user.userId">
         <div

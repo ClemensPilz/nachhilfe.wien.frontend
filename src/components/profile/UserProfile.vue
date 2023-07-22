@@ -1,21 +1,17 @@
 <template>
   <div class="min-h-screen">
-    <FormModal ref="reviewModalRef">
+    <FormModal :is-active="appStore.reviewModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <ReviewForm
-            @close="closeReviewModal"
-            :teacherId="userId"
-            :studentId="userStore.user.userId"
-          />
+          <ReviewForm />
         </template>
       </CardLarge>
     </FormModal>
 
-    <FormModal ref="appointmentModalRef">
+    <FormModal :is-active="appStore.appointmentModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <AppointmentForm @close="closeAppointmentModal" />
+          <AppointmentForm />
         </template>
       </CardLarge>
     </FormModal>
@@ -25,16 +21,16 @@
 
       <section v-else id="userProfile">
         <!--Container for content-->
-        <div class="container min-h-screen max-w-7xl mx-auto px-2 mt-8">
+        <div class="container mx-auto mt-8 min-h-screen max-w-7xl px-2">
           <!--Grid-Layout-->
-          <div class="w-full grid grid-cols-2 gap-4 items-center">
+          <div class="grid w-full grid-cols-2 items-center gap-4">
             <!--Picture-->
             <div id="teacherPicture" class="group">
-              <div class="w-full h-[500px] pl-16">
+              <div class="h-[500px] w-full pl-16">
                 <img
                   :src="profile.image ? profile.image : stockPhoto"
                   alt="picture of a teacher"
-                  class="h-full object-cover object-center group-hover:scale-105 transition-all duration-300"
+                  class="h-full object-cover object-center transition-all duration-300 group-hover:scale-105"
                 />
               </div>
             </div>
@@ -66,7 +62,7 @@
                       v-show="coaching.active"
                     >
                       <p
-                        class="underline underline-offset-4 decoration-secondary"
+                        class="underline decoration-secondary underline-offset-4"
                         @click="openAppointmentModal(coaching.coachingId)"
                       >
                         {{ coaching.subject }}
@@ -82,7 +78,7 @@
                   <h1>:</h1>
                   <div>
                     <small class="block pb-3">Lehrer kontaktieren:</small>
-                    <div class="flex gap-2 flex-wrap">
+                    <div class="flex flex-wrap gap-2">
                       <ButtonRegular
                         class="bg-mainOrange"
                         text="Nachricht"
@@ -92,7 +88,10 @@
                         v-if="userStore.user.userType === 'STUDENT'"
                         class="bg-mainBlue"
                         text="Bewerten"
-                        @click="openReviewModal"
+                        @click="
+                          appStore.reviewModalActive =
+                            !appStore.reviewModalActive
+                        "
                       />
                       <ButtonRegular
                         v-else
@@ -125,7 +124,7 @@
             class="col-span-2 my-4"
             v-if="userType === 'TEACHER' && profile.feedbacks.length > 0"
           >
-            <table class="w-full text-left text-p">
+            <table class="text-p w-full text-left">
               <tr>
                 <th>Bewertung</th>
                 <th>Stern</th>
@@ -223,11 +222,11 @@ onBeforeMount(async () => {
 #teacherPicture {
   border-radius: 0px 0px 0px 200px;
 
-  @apply col-span-2 md:col-span-1 md:mr-20 bg-mainYellow overflow-hidden shadow-xl;
+  @apply col-span-2 overflow-hidden bg-mainYellow shadow-xl md:col-span-1 md:mr-20;
 }
 
 li {
-  @apply grid grid-cols-6 mb-12;
+  @apply mb-12 grid grid-cols-6;
 
   > :first-child {
     @apply col-span-1;
