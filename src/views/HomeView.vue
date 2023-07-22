@@ -172,6 +172,7 @@ import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
+import FooterBar from "@/components/global/FooterBar.vue";
 
 const userStore = useUserStore();
 </script>
