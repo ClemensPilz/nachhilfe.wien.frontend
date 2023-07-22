@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-16">
+  <div class="flex gap-16 flex-col md:flex-row">
     <div>
       <VDatePicker
         :attributes="attributes"
@@ -8,7 +8,7 @@
         title-position="left"
       />
     </div>
-    <div>
+    <div class="lg:w-3/5 md:w-fit ">
       <AppointmentCard
         v-for="appointment in selectedDayAppointments"
         :key="appointment.start"

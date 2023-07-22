@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-2 grid-rows-1 rounded-xl border-2 bg-white shadow-lg"
+    class="md:grid grid-cols-2 grid-rows-1 rounded-xl border-2 bg-white shadow-lg"
     :class="{
       'border-mainYellow': appointmentDetails.status === 'PENDING',
       'border-green-500': appointmentDetails.status === 'CONFIRMED',
@@ -12,38 +12,21 @@
       class="flex flex-col justify-center rounded-xl bg-gray-50 p-4 text-primary"
     >
       <h4 v-if="userStore.user.userType === 'TEACHER'" class="col-span-3">
-        Schüler: {{ appointmentDetails.studentName }}
+        {{ appointmentDetails.studentName }}
       </h4>
-      <h4 v-else>Lehrer: {{ appointmentDetails.teacherName }}</h4>
+      <h4 v-else>{{ appointmentDetails.teacherName }}</h4>
       <p>Fach: {{ appointmentDetails.coachingName }}</p>
       <div
         id="divider"
         class="border-b-1 mb-3 mt-2 border border-mainYellow"
-      ></div>
-      <div v-if="userStore.user.userType === 'TEACHER'" class="mt-2 flex gap-2">
-        <ButtonRegular
-          text="Profil"
-          class="bg-mainBlue"
-          @click="router.push(`/profile/${appointmentDetails.studentId}`)"
-        />
-        <ButtonRegular
-          text="Kontakt"
-          class="bg-mainOrange"
-          @click="appStore.sendMessage(appointmentDetails.studentId, true)"
-        />
+      >
       </div>
-      <div v-if="userStore.user.userType === 'STUDENT'" class="mt-2 flex gap-2">
-        <ButtonRegular
-          text="Profil"
-          class="bg-mainBlue"
-          @click="router.push(`/profile/${appointmentDetails.teacherId}`)"
-        />
-        <ButtonRegular
-          text="Kontakt"
-          class="bg-mainOrange"
-          @click="appStore.sendMessage(appointmentDetails.teacherId, true)"
-        />
-      </div>
+      <AppointmentCardButtons :appointment-details="appointmentDetails" display="desktop" />
+
+
+
+
+
     </div>
 
     <!---Appointment Date and Time-->
@@ -71,6 +54,8 @@
         ></ButtonRegular>
       </div>
     </div>
+
+    <AppointmentCardButtons :appointment-details="appointmentDetails" display="mobile"/>
   </div>
 </template>
 
@@ -78,12 +63,15 @@
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
 import { useAppStore } from "@/stores/app";
-import router from "@/router";
+
 import { useConversationStore } from "@/stores/conversation";
 import { useAppointmentStore } from "@/stores/appointment";
 import { computed, onMounted } from "vue";
+import AppointmentCardButtons from "@/components/calendar/AppointmentCardButtons.vue";
+import {useRouter} from "vue-router";
 
 const props = defineProps(["appointmentDetails"]);
+const router = useRouter();
 const userStore = useUserStore();
 const appStore = useAppStore();
 const conversationStore = useConversationStore();
