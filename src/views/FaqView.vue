@@ -1,18 +1,22 @@
 <script setup>
-import { ref, computed } from "vue";
+import {ref, computed} from "vue";
 import q from "@/data/questions.json";
 import Question from "@/components/aboutUs/Question.vue";
 
 const search = ref("");
 const questions = ref(q);
-const filteredQuestions = computed(() =>
-  questions.value.filter((category) => {
-    const matchingQuestions = category.input.filter((question) =>
-      question.question.toLowerCase().includes(search.value.toLowerCase())
-    );
-    return matchingQuestions.length > 0;
-  })
-);
+
+const filteredQuestions = computed(() => {
+      return questions.value.filter((category) => {
+        if (category.name.toLowerCase().includes(search.value.toLowerCase())) {
+          return true;
+        }
+        const matchingQuestions = category.input.filter((question) =>
+            question.question.toLowerCase().includes(search.value.toLowerCase())
+        );
+        return matchingQuestions.length > 0;
+      });
+    });
 </script>
 
 <template>
@@ -27,14 +31,14 @@ const filteredQuestions = computed(() =>
   </div>
 
   <div class="container mx-auto max-w-6xl mt-8 px-2">
-    <input v-model.trim="search" type="text" placeholder="Search..." />
+    <input v-model.trim="search" type="text" placeholder="Search..."/>
   </div>
 
   <div class="container mx-auto max-w-6xl mt-8 px-2">
     <Question
-      v-for="question in filteredQuestions"
-      :key="question.id"
-      :question="question"
+        v-for="question in filteredQuestions"
+        :key="question.id"
+        :question="question"
     />
 
     <p class="mt-10 align-center">
