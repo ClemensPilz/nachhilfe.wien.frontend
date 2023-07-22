@@ -9,6 +9,7 @@ import AdminView from "@/views/AdminView.vue";
 import CalendarView from "@/views/CalendarView.vue";
 import FaqView from "@/views/FaqView.vue";
 import AboutUsView from "@/views/AboutUsView.vue";
+import ImprintView from "@/views/ImprintView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,11 @@ const router = createRouter({
       path: "/faq",
       name: "faq",
       component: FaqView,
+    },
+    {
+      path: "/imprint",
+      name: "imprint",
+      component: ImprintView,
     },
   ],
   scrollBehavior() {

@@ -1,16 +1,16 @@
 <template>
-  <FormModal ref="loginModalRef">
+  <FormModal :is-active="appStore.loginModalActive">
     <CardLarge class="m-0">
       <template v-slot:content>
-        <LoginForm @close="closeLoginModal" />
+        <LoginForm />
       </template>
     </CardLarge>
   </FormModal>
 
-  <FormModal ref="registrationModalRef">
+  <FormModal :is-active="appStore.registrationModalActive">
     <CardLarge class="m-0">
       <template v-slot:content>
-        <RegistrationForm @close="closeRegistrationModal" />
+        <RegistrationForm />
       </template>
     </CardLarge>
   </FormModal>
@@ -63,8 +63,20 @@
         <li>
           <RouterLink to="/about">Our Team</RouterLink>
         </li>
-        <li class="text-mainBlue" @click="openLoginModal">Login</li>
-        <li class="text-mainBlue" @click="openRegistrationModal">Register</li>
+        <li
+          class="text-mainBlue"
+          @click="appStore.loginModalActive = !appStore.loginModalActive"
+        >
+          Login
+        </li>
+        <li
+          class="text-mainBlue"
+          @click="
+            appStore.registrationModalActive = !appStore.registrationModalActive
+          "
+        >
+          Register
+        </li>
       </ul>
     </nav>
   </div>
@@ -82,36 +94,20 @@
 </template>
 
 <script setup>
-import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import LoginForm from "@/components/util/forms/LoginForm.vue";
 import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
 import NavigationBarLinks from "@/components/global/NavigationBarLinks.vue";
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
+import { useAppStore } from "@/stores/app";
+import FormModal from "@/components/util/modals/FormModal.vue";
 
-const loginModalRef = ref(null);
-const registrationModalRef = ref(null);
 const userStore = useUserStore();
+const appStore = useAppStore();
 const showMobile = ref(false);
-
-function openLoginModal() {
-  loginModalRef.value.openModal();
-}
-
-function closeLoginModal() {
-  loginModalRef.value.closeModal();
-}
-
-function openRegistrationModal() {
-  registrationModalRef.value.openModal();
-}
-
-function closeRegistrationModal() {
-  registrationModalRef.value.closeModal();
-}
 </script>
 
 <style lang="scss" scoped>

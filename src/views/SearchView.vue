@@ -16,7 +16,9 @@
     </div>
     <div class="w-full bg-background">
       <div class="container mx-auto mt-8 max-w-6xl">
-        <div class="searchResult">
+        <div
+          class="mx-auto mt-4 grid min-h-screen grid-cols-1 gap-6 px-4 pt-8 lg:grid-cols-2"
+        >
           <SearchResult
             v-for="teacher in teachersArray"
             class="col-span-1"
@@ -97,8 +99,4 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="scss" scoped>
-.searchResult {
-  @apply mx-auto mt-4 grid min-h-screen grid-cols-1 gap-4 px-4 pt-8 lg:grid-cols-2;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -32,9 +32,10 @@ import { useForm } from "vee-validate";
 import RatingSelect from "@/components/util/forms/RatingSelect.vue";
 import axios from "axios";
 import { useUserStore } from "@/stores/user";
+import { useAppStore } from "@/stores/app";
 
 const props = defineProps(["teacherId", "studentId"]);
-const emit = defineEmits(["close"]);
+const appStore = useAppStore();
 const userStore = useUserStore();
 
 const validationSchema = {
@@ -89,19 +90,19 @@ async function postReview() {
     console.log(response.status);
     if (response.status === 201) {
       alert("Vielen Dank für dein Review!");
-      emit("close");
+      appStore.resetModals();
     }
   } catch (e) {
     console.log(e);
     alert("Fehler beim Absenden des Reviews!");
-    emit("close");
+    appStore.resetModals();
   }
 }
 </script>
 
 <style lang="scss" scoped>
 form {
-  @apply w-full flex flex-col bg-background max-h-screen py-2 overflow-y-scroll;
+  @apply flex max-h-screen w-full flex-col overflow-y-scroll bg-background py-2;
 }
 
 label {
@@ -109,7 +110,7 @@ label {
 }
 
 input {
-  @apply px-4 py-2 m-2 rounded-3xl text-p;
+  @apply text-p m-2 rounded-3xl px-4 py-2;
 }
 
 .error {
