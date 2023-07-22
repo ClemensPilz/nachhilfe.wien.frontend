@@ -41,7 +41,11 @@
         v-if="userStore.isAuthenticated"
         class="block w-full text-right sm:hidden"
       >
-        <span @click="showMobile = !showMobile">Hello Oida</span>
+        <ChevronDownIcon
+          class="inline w-12 text-mainOrange transition-all duration-200 hover:cursor-pointer"
+          :class="{ 'rotate-180': showMobile }"
+          @click="showMobile = !showMobile"
+        />
       </div>
 
       <!--Login-Buttons if user is not authenticated-->
@@ -54,12 +58,13 @@
 
   <!--Mobile-Nav-Items-->
   <div
-    class="bottom-0 flex min-h-screen w-full flex-col bg-mainBlue sm:hidden"
+    class="bottom-0 flex w-full flex-col bg-white sm:hidden"
     :class="{ block: showMobile, hidden: !showMobile }"
     @click="showMobile = false"
   >
-    Hello sers
-    <NavigationBarLinks />
+    <ul class="mx-8 my-6 flex flex-col items-end">
+      <NavigationBarLinks />
+    </ul>
   </div>
 </template>
 
@@ -72,6 +77,7 @@ import RegistrationForm from "@/components/util/forms/RegistrationForm.vue";
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
 import NavigationBarLinks from "@/components/global/NavigationBarLinks.vue";
+import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 
 const loginModalRef = ref(null);
 const registrationModalRef = ref(null);
