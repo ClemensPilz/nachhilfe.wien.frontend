@@ -16,6 +16,14 @@
       </CardLarge>
     </FormModal>
 
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
+        </template>
+      </CardLarge>
+    </FormModal>
+
     <div v-if="loaded">
       <h3 v-if="!profile" class="text-center">User nicht gefunden!</h3>
 
@@ -99,6 +107,12 @@
                         text="Bewerten"
                         @click="noStudentAlert"
                       />
+
+                      <ButtonRegular
+                        text="Bezirke"
+                        class="bg-secondary"
+                        @click="openDistrictModal(profile.districts)"
+                      />
                     </div>
                   </div>
                 </li>
@@ -161,6 +175,7 @@ import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ReviewForm from "@/components/util/forms/ReviewForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -179,6 +194,11 @@ function openAppointmentModal(coachingId) {
   }
   appStore.selectCoaching(userId, coachingId);
   appStore.appointmentModalActive = !appStore.appointmentModalActive;
+}
+
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 // Fetching data from api
