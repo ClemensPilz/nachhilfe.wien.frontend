@@ -42,6 +42,11 @@
             class="bg-mainOrange"
             @click="$emit('contact')"
           />
+          <ButtonRegular
+            text="Bezirke"
+            class="bg-secondary"
+            @click="$emit('districts')"
+          />
         </div>
       </div>
     </div>
@@ -65,7 +70,12 @@ const userStore = useUserStore();
 
 const props = defineProps({ teacher: Object });
 
-const emits = defineEmits(["contact", "profile", "requestAppointment"]);
+const emits = defineEmits([
+  "contact",
+  "profile",
+  "requestAppointment",
+  "districts",
+]);
 </script>
 
 <style lang="scss" scoped></style>

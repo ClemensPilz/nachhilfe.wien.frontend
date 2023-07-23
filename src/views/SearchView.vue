@@ -8,6 +8,14 @@
       </CardLarge>
     </FormModal>
 
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
+        </template>
+      </CardLarge>
+    </FormModal>
+
     <div class="container mx-auto mt-8 max-w-6xl px-2">
       <h2>Lehrer suchen</h2>
       <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
@@ -27,6 +35,7 @@
             @requestAppointment="
               (e) => openAppointmentModal(e.teacherId, e.coachingId)
             "
+            @districts="openDistrictModal(teacher.districts)"
             :key="teacher.teacherId"
             :teacher="teacher"
           />
@@ -47,6 +56,7 @@ import SearchForm from "@/components/search/SearchForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -60,6 +70,11 @@ function openAppointmentModal(teacherId, coachingId) {
   }
   appStore.selectCoaching(teacherId, coachingId);
   appStore.appointmentModalActive = !appStore.appointmentModalActive;
+}
+
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 function pasteResult(data) {

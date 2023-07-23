@@ -10,11 +10,13 @@ export const useAppStore = defineStore("app", () => {
   const subjects = ref({});
   const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
   const selectedCoaching = ref({});
+  const selectedDistricts = ref([]);
   const modalStack = ref([]);
   const registrationModalActive = ref(false);
   const loginModalActive = ref(false);
   const reviewModalActive = ref(false);
   const appointmentModalActive = ref(false);
+  const districtModalActive = ref(false);
   const conversationStore = useConversationStore();
 
   function resetModals() {
@@ -22,6 +24,7 @@ export const useAppStore = defineStore("app", () => {
     loginModalActive.value = false;
     reviewModalActive.value = false;
     appointmentModalActive.value = false;
+    districtModalActive.value = false;
   }
 
   //Used to pass information of a selected coaching through multiple layers of components
@@ -125,6 +128,7 @@ export const useAppStore = defineStore("app", () => {
     subjects,
     levels,
     selectedCoaching,
+    selectedDistricts,
     modalStack,
     selectCoaching,
     filterTeachers,
@@ -133,5 +137,6 @@ export const useAppStore = defineStore("app", () => {
     resetModals,
     reviewModalActive,
     appointmentModalActive,
+    districtModalActive,
   };
 });
