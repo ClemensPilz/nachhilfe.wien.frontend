@@ -24,10 +24,11 @@
             class="col-span-1"
             @contact="appStore.sendMessage(teacher.teacherId, true)"
             @profile="router.push(`/profile/${teacher.teacherId}`)"
-            @requestAppointment="setAppointmentParameters"
+            @requestAppointment="
+              (e) => openAppointmentModal(e.teacherId, e.coachingId)
+            "
             :key="teacher.teacherId"
             :teacher="teacher"
-            :coachings="teacher.coachings"
           />
         </div>
       </div>
@@ -63,10 +64,6 @@ function openAppointmentModal(teacherId, coachingId) {
 
 function pasteResult(data) {
   teachersArray.value = data;
-}
-
-function setAppointmentParameters(e) {
-  openAppointmentModal(e.teacherId, e.coachingId);
 }
 
 async function getAllTeachers() {

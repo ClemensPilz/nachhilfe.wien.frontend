@@ -34,15 +34,11 @@
         <div class="py-4">
           <p class="font-bold">Was möchtest du lernen?</p>
           <!--Subject-->
-          <div
-            v-for="subject in appStore.subjects"
-            :key="subject"
-            @change="log"
-          >
+          <div v-for="subject in appStore.subjects" :key="subject">
             <label class="pr-2" :for="subject">{{ subject }}</label>
             <input
               type="radio"
-              name="subject"
+              :name="subject"
               :id="subject"
               :value="subject"
               v-model="selectedSubject"
@@ -63,6 +59,19 @@
         />
         <p class="inline">Euro/Stunde</p>
         <br />
+
+        <p class="font-bold">Niveau</p>
+        <!--Subject-->
+        <div v-for="level in appStore.levels" :key="level">
+          <label class="pr-2" :for="level">{{ level }}</label>
+          <input
+            type="radio"
+            :name="level"
+            :id="level"
+            :value="level"
+            v-model="selectedLevel"
+          />
+        </div>
       </div>
     </div>
 
@@ -84,6 +93,7 @@ import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const appStore = useAppStore();
 const selectedSubject = ref("");
+const selectedLevel = ref("");
 const selectedDistricts = ref([]);
 const maxRate = ref(20);
 const emit = defineEmits({ result: Object });
@@ -103,6 +113,7 @@ function log() {
   console.log(selectedDistricts.value);
 }
 
+//@todo add level and average rating to it
 async function search() {
   try {
     const response = await appStore.filterTeachers(
