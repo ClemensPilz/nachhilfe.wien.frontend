@@ -15,10 +15,13 @@ export const useAppStore = defineStore("app", () => {
   const loginModalActive = ref(false);
   const reviewModalActive = ref(false);
   const appointmentModalActive = ref(false);
+  const conversationStore = useConversationStore();
 
   function resetModals() {
     registrationModalActive.value = false;
     loginModalActive.value = false;
+    reviewModalActive.value = false;
+    appointmentModalActive.value = false;
   }
 
   //Used to pass information of a selected coaching through multiple layers of components
@@ -77,6 +80,8 @@ export const useAppStore = defineStore("app", () => {
         },
       });
       console.log(response.data);
+      conversationStore.setActiveConversationInInbox(conversationId);
+      await router.push("/inbox");
     } catch (e) {
       throw e;
     }

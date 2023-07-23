@@ -1,42 +1,38 @@
 <template>
-  <div
-    @click.stop=""
-    class="mx-2 mt-20 max-h-screen rounded-xl bg-white px-10 py-6"
-  >
+  <form @submit.prevent>
     <h2 class="mb-4 text-2xl">Terminvorschlag</h2>
     <div>
-      <form>
-        <div class="w-fit text-center">
-          <VDatePicker
-            v-model="startTime"
-            mode="dateTime"
-            is24hr
-            hide-time-header
-            :masks="masks"
-          />
-          <br />
-
-          Stunden:
-          <input
-            type="number"
-            v-model="duration"
-            name="duration"
-            id="duration"
-            class="mt-2 w-1/4 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
-          />
-        </div>
+      <div class="w-fit text-center">
+        <VDatePicker
+          v-model="startTime"
+          mode="dateTime"
+          is24hr
+          hide-time-header
+          :masks="masks"
+        />
         <br />
-        <div class="w-full text-center">
-          Anmerkungen, Ort, etc:
-          <br />
-          <input
-            type="text"
-            v-model="content"
-            id="content"
-            class="mt-2 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
-          />
-        </div>
-      </form>
+
+        Stunden:
+        <input
+          type="number"
+          v-model="duration"
+          name="duration"
+          id="duration"
+          class="mt-2 w-1/4 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
+        />
+      </div>
+      <br />
+      <div class="w-full text-center">
+        Anmerkungen, Ort, etc:
+        <br />
+        <input
+          type="text"
+          v-model="content"
+          id="content"
+          class="mt-2 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
+        />
+      </div>
+
       <slot />
     </div>
 
@@ -55,14 +51,13 @@
         OK
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useAppStore } from "@/stores/app";
 
-const emit = defineEmits(["close"]);
 const appStore = useAppStore();
 
 const duration = ref();
@@ -93,7 +88,7 @@ async function send() {
   } catch (e) {
     console.log(e);
   } finally {
-    emit("close");
+    appStore.resetModals();
   }
 }
 </script>

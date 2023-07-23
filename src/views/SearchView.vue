@@ -1,9 +1,9 @@
 <template>
   <div>
-    <FormModal ref="appointmentModalRef">
+    <FormModal :is-active="appStore.appointmentModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <AppointmentForm @close="closeAppointmentModal" />
+          <AppointmentForm />
         </template>
       </CardLarge>
     </FormModal>
@@ -53,12 +53,12 @@ const teachersArray = ref();
 const appointmentModalRef = ref();
 
 function openAppointmentModal(teacherId, coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    alert("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(teacherId, coachingId);
-}
-
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
 function pasteResult(data) {

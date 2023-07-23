@@ -3,7 +3,7 @@
     <FormModal :is-active="appStore.reviewModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <ReviewForm />
+          <ReviewForm :teacher-id="userId" />
         </template>
       </CardLarge>
     </FormModal>
@@ -49,7 +49,7 @@
                     <p>{{ profile.description }}</p>
                     <small
                       >Durchschnittl. Wertung:
-                      {{ profile.averageRatingScore }}</small
+                      {{ profile.averageRatingScore || "-" }}</small
                     >
                   </div>
                 </li>
@@ -172,22 +172,13 @@ const userType = ref("");
 const reviewModalRef = ref();
 const appointmentModalRef = ref();
 
-// Modals
-function openReviewModal() {
-  reviewModalRef.value.openModal();
-}
-
-function closeReviewModal() {
-  reviewModalRef.value.closeModal();
-}
-
 function openAppointmentModal(coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    alert("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(userId, coachingId);
-}
-
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
 // Fetching data from api
