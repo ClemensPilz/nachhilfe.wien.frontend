@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="flex flex-col items-center">
     <h2 class="mb-4 text-2xl">Terminvorschlag</h2>
     <div>
       <div class="w-fit text-center">
@@ -12,17 +12,22 @@
         />
         <br />
 
-        Stunden:
-        <input
-          type="number"
-          v-model="duration"
-          name="duration"
-          id="duration"
-          class="mt-2 w-1/4 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
-        />
+        <div :class="{ 'text-mainOrange': duration < 1 }">
+          Stunden:
+          <input
+            type="number"
+            v-model="duration"
+            name="duration"
+            id="duration"
+            class="mt-2 w-1/4 rounded-xl border-2 border-gray-400 bg-lightPrimary p-2"
+          />
+        </div>
       </div>
       <br />
-      <div class="w-full text-center">
+      <div
+        class="w-full text-center"
+        :class="{ 'text-mainOrange': content === '' }"
+      >
         Anmerkungen, Ort, etc:
         <br />
         <input
@@ -37,19 +42,13 @@
     </div>
 
     <!--Buttons-->
-    <div class="flex justify-end gap-2">
-      <button
-        class="mt-4 w-fit rounded-xl bg-lightPrimary px-4 py-2 text-white"
+    <div class="my-2 flex justify-end gap-2">
+      <ButtonRegular
+        class="bg-secondary"
+        text="Abbrechen"
         @click="appStore.resetModals()"
-      >
-        Abbrechen
-      </button>
-      <button
-        class="mt-4 w-fit rounded-xl bg-accent px-4 py-2 text-white"
-        @click="send"
-      >
-        OK
-      </button>
+      />
+      <ButtonRegular class="bg-mainOrange" @click="send" text="OK" />
     </div>
   </form>
 </template>
@@ -57,23 +56,20 @@
 <script setup>
 import { ref } from "vue";
 import { useAppStore } from "@/stores/app";
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const appStore = useAppStore();
 
-const duration = ref();
+const duration = ref(1);
 const startTime = ref(new Date());
-const content = ref();
+const content = ref("Hallo!");
 
 const masks = ref({
   modelValue: "YYYY-MM-ddThh:mm:ss.SSS",
 });
 
 async function send() {
-  if (
-    startTime.value == null ||
-    duration.value == null ||
-    content.value == null
-  ) {
+  if (startTime.value == null || duration.value === 0 || content.value === "") {
     console.log("invalid");
     return;
   }
