@@ -174,7 +174,7 @@ const appointmentModalRef = ref();
 
 function openAppointmentModal(coachingId) {
   if (userStore.user.userType !== "STUDENT") {
-    alert("Nur Schüler können Terminanfragen senden.");
+    console.log("Nur Schüler können Terminanfragen senden.");
     return;
   }
   appStore.selectCoaching(userId, coachingId);
