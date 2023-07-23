@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-4 max-w-7xl flex-grow">
+  <div class="container mx-auto mt-4 max-w-7xl flex-grow px-2">
     <div v-if="hasNoMessages">
       <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
     </div>
@@ -7,7 +7,7 @@
     <div class="grid grid-cols-12 gap-12">
       <!--Left part-->
       <div
-        class="noScrollbar top-20 col-span-3 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll"
+        class="noScrollbar top-20 col-span-9 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll sm:col-span-3"
       >
         <div class="flex flex-col gap-2">
           <ConversationThumb
