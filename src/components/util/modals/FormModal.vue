@@ -1,9 +1,9 @@
 <template>
   <div
     :class="
-      isActive ? 'modalBg opacity-100 visible' : 'modalBg opacity-0 invisible'
+      isActive ? 'modalBg visible opacity-100' : 'modalBg invisible opacity-0'
     "
-    @mousedown.self="closeModal"
+    @mousedown.self="appStore.resetModals()"
   >
     <div class="w-full sm:w-[500px]">
       <slot></slot>
@@ -12,9 +12,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const isActive = ref(false);
+import { useAppStore } from "@/stores/app";
 
 const appStore = useAppStore();
 defineProps({ isActive: Boolean });
@@ -22,6 +20,6 @@ defineProps({ isActive: Boolean });
 
 <style lang="scss" scoped>
 .modalBg {
-  @apply fixed z-50 inset-0 flex items-center justify-center transition-all ease-in-out bg-black bg-opacity-50;
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-all ease-in-out;
 }
 </style>

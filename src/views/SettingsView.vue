@@ -1,5 +1,12 @@
 <template>
   <div class="container mx-auto mt-6 max-w-3xl flex-grow bg-white px-2 md:px-0">
+    <FormModal :is-active="appStore.deleteAccountModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DeleteAccountForm />
+        </template>
+      </CardLarge>
+    </FormModal>
     <section id="userData" class="mb-12">
       <h2 class="text-center">Meine Userdaten</h2>
       <p class="mb-2 text-center">Deine Basisdaten anpassen</p>
@@ -15,16 +22,15 @@
           @click="changePassword"
         />
         <ButtonRegular
-            v-if="userStore.user.userType != 'ADMIN'"
-            class="bg-secondary"
-            text="Account löschen"
-            @click="openDelete=true"
+          v-if="userStore.user.userType !== 'ADMIN'"
+          class="bg-secondary"
+          text="Account löschen"
+          @click="
+            appStore.deleteAccountModalActive =
+              !appStore.deleteAccountModalActive
+          "
         />
-        <DeleteAcceptionModal title="User löschen" :openDelete="openDelete"  @update:openDelete="v => openDelete = v">
-          <p class="text-center">User wirklich löschen?</p>
-        </DeleteAcceptionModal>
       </div>
-
 
       <!--Profile picture-->
       <h4>Mein Profilbild ändern</h4>
@@ -58,20 +64,19 @@ import BasicSettings from "@/components/settings/BasicSettings.vue";
 import DistrictSettings from "@/components/settings/DistrictSettings.vue";
 import CoachingSettings from "@/components/settings/CoachingSettings.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
-import axios from "axios";
-import router from "@/router";
-import DeleteAcceptionModal from "@/components/util/modals/DeleteAcceptionModal.vue";
-import {ref} from "vue";
+import { ref } from "vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+import FormModal from "@/components/util/modals/FormModal.vue";
+import DeleteAccountForm from "@/components/util/forms/DeleteAccountForm.vue";
+import { useAppStore } from "@/stores/app";
 
+const appStore = useAppStore();
 const userStore = useUserStore();
 const openDelete = ref();
-
 
 function changePassword() {
   alert("Diese Funktion steht noch nicht zur Verfügung.");
 }
-
-
 </script>
 
 <style lang="scss" scoped></style>

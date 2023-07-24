@@ -19,7 +19,7 @@
         <ButtonRegular
           text="Nachricht"
           class="bg-mainOrange"
-          @click="router.push(`/profile/${appointmentDetails.studentId}`)"
+          @click="appStore.sendMessage(appointmentDetails.studentId, true)"
         ></ButtonRegular>
       </div>
 

@@ -24,6 +24,7 @@ export const useAppStore = defineStore("app", () => {
   const reviewModalActive = ref(false);
   const appointmentModalActive = ref(false);
   const districtModalActive = ref(false);
+  const deleteAccountModalActive = ref(false);
 
   function resetModals() {
     registrationModalActive.value = false;
@@ -31,6 +32,7 @@ export const useAppStore = defineStore("app", () => {
     reviewModalActive.value = false;
     appointmentModalActive.value = false;
     districtModalActive.value = false;
+    deleteAccountModalActive.value = false;
   }
 
   //Used to pass information of a selected coaching through multiple layers of components
@@ -143,5 +145,6 @@ export const useAppStore = defineStore("app", () => {
     reviewModalActive,
     appointmentModalActive,
     districtModalActive,
+    deleteAccountModalActive,
   };
 });
