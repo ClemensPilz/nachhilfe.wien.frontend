@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:grid grid-cols-2 grid-rows-1 rounded-xl border-2 bg-white shadow-lg"
+    class="grid-cols-2 grid-rows-1 rounded-xl border-2 bg-white shadow-lg md:grid"
     :class="{
       'border-mainYellow': appointmentDetails.status === 'PENDING',
       'border-green-500': appointmentDetails.status === 'CONFIRMED',
@@ -19,14 +19,11 @@
       <div
         id="divider"
         class="border-b-1 mb-3 mt-2 border border-mainYellow"
-      >
-      </div>
-      <AppointmentCardButtons :appointment-details="appointmentDetails" display="desktop" />
-
-
-
-
-
+      ></div>
+      <AppointmentCardButtons
+        :appointment-details="appointmentDetails"
+        display="desktop"
+      />
     </div>
 
     <!---Appointment Date and Time-->
@@ -34,20 +31,30 @@
       <p>Termin: {{ startDate }}</p>
       <p>Von: {{ startTime }}</p>
       <p>Bis: {{ endTime }}</p>
-      <p>Status:
+      <p>
+        Status:
         <span v-if="appointmentDetails.status === 'PENDING'">Offen</span>
         <span v-if="appointmentDetails.status === 'CONFIRMED'">Bestätigt</span>
         <span v-if="appointmentDetails.status === 'REJECTED'">Abgelehnt</span>
       </p>
-      <div v-if="userStore.user.userType === 'TEACHER' && isBeforeNow(appointmentDetails.start)" class="py-5" >
+      <div
+        v-if="
+          userStore.user.userType === 'TEACHER' &&
+          isBeforeNow(appointmentDetails.start)
+        "
+        class="py-5"
+      >
         <ButtonRegular
-            v-if="appointmentDetails.status === 'PENDING'"
+          v-if="appointmentDetails.status === 'PENDING'"
           text="Akzeptieren"
           class="bg-secondary"
           @click="confirm"
         ></ButtonRegular>
         <ButtonRegular
-            v-if="appointmentDetails.status === 'PENDING' ||appointmentDetails.status === 'CONFIRMED'"
+          v-if="
+            appointmentDetails.status === 'PENDING' ||
+            appointmentDetails.status === 'CONFIRMED'
+          "
           text="Stornieren"
           class="bg-secondary"
           @click="reject"
@@ -55,7 +62,11 @@
       </div>
     </div>
 
-    <AppointmentCardButtons :appointment-details="appointmentDetails" display="mobile"/>
+    <AppointmentCardButtons
+      :appointment-details="appointmentDetails"
+      display="mobile"
+      class="mt-5"
+    />
   </div>
 </template>
 
@@ -68,7 +79,7 @@ import { useConversationStore } from "@/stores/conversation";
 import { useAppointmentStore } from "@/stores/appointment";
 import { computed, onMounted } from "vue";
 import AppointmentCardButtons from "@/components/calendar/AppointmentCardButtons.vue";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 
 const props = defineProps(["appointmentDetails"]);
 const router = useRouter();
@@ -129,7 +140,7 @@ async function confirm() {
 const isBeforeNow = (date) => {
   let now = new Date();
   return new Date(date) > now;
-}
+};
 
 onMounted(() => {
   console.log(props.appointmentDetails);
