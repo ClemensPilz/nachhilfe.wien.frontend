@@ -17,7 +17,7 @@
       <!--Password-->
       <div class="mt-4 md:mt-0 md:text-right">
         <ButtonRegular
-          class="bg-secondary"
+          class="hidden bg-secondary"
           text="Passwort ändern"
           @click="changePassword"
         />
