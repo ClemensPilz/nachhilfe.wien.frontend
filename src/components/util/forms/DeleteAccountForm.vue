@@ -58,11 +58,12 @@ const deleteUser = async () => {
       userStore.user = "";
       userStore.storeUserId = "";
       userStore.isAuthenticated = false;
-      appStore.resetModals();
       await router.push("/");
     }
   } catch (e) {
     console.log(e);
+  } finally {
+    appStore.resetModals();
   }
 };
 </script>

@@ -1,6 +1,13 @@
 <template>
   <!--Container-->
   <div class="mt-10">
+    <FormModal :is-active="appStore.deleteAccountModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DeleteAccountForm />
+        </template>
+      </CardLarge>
+    </FormModal>
     <!--Programmatic-->
     <div v-if="adminStore.foundUser">
       <!--TopSection-Container-->
@@ -79,15 +86,11 @@
             <ButtonRegular
               class="w-full bg-primary"
               text="User löschen"
-              @click="openDelete = true"
+              @click="
+                appStore.deleteAccountModalActive =
+                  !appStore.deleteAccountModalActive
+              "
             />
-            <DeleteAcceptionModal
-              title="User löschen"
-              :openDelete="openDelete"
-              @update:openDelete="(v) => (openDelete = v)"
-            >
-              <p class="text-center">User wirklich löschen?</p>
-            </DeleteAcceptionModal>
           </div>
         </div>
       </div>
@@ -244,16 +247,15 @@ import { useUserStore } from "@/stores/user";
 import { useAdminStore } from "@/stores/admin";
 import UserEditModal from "@/components/administrator/UserEditModal.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
-
-const reviewModalOpen = ref(false);
-const showModal = ref(false);
+import DeleteAccountForm from "@/components/util/forms/DeleteAccountForm.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+import FormModal from "@/components/util/modals/FormModal.vue";
 
 const appStore = useAppStore();
 const userStore = useUserStore();
 const adminStore = useAdminStore();
 
 const openEdit = ref(false);
-const openDelete = ref();
 
 const deleteFeedback = async (feedbackId) => {
   await axios({
@@ -289,8 +291,6 @@ const deleteImage = async () => {
   await adminStore.findById(adminStore.foundUser.userId);
   console.log(adminStore.foundUser.profile.imageBase64);
 };
-
-const changeFields = async () => {};
 </script>
 
 <style lang="scss" scoped></style>
