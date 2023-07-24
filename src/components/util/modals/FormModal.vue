@@ -16,17 +16,8 @@ import { ref } from "vue";
 
 const isActive = ref(false);
 
-const openModal = () => {
-  isActive.value = true;
-};
-function closeModal() {
-  isActive.value = false;
-}
-
-const openDelete = ref();
-
-
-defineExpose({ openModal, closeModal });
+const appStore = useAppStore();
+defineProps({ isActive: Boolean });
 </script>
 
 <style lang="scss" scoped>

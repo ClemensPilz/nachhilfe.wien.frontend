@@ -12,12 +12,11 @@
     <RouterLink to="/inbox">Inbox</RouterLink>
   </li>
   <li>
-    <RouterLink to="/settings">Settings</RouterLink>
+    <RouterLink to="/settings">Profil</RouterLink>
   </li>
-  <li>
-    <RouterLink to="/about">Our Team</RouterLink>
+  <li class="text-mainOrange hover:cursor-pointer" @click="userStore.logout">
+    Logout
   </li>
-  <li class="text-mainOrange" @click="userStore.logout">Logout</li>
 </template>
 
 <script setup>

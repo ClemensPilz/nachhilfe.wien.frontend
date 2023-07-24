@@ -37,6 +37,9 @@ export const useAdminStore = defineStore("admin", () => {
         },
         url: `${userStore.url}/admin/find-user`,
       });
+      if (response.value.status === 404) {
+        foundUser.value = null;
+      }
     } catch (e) {
       foundUser.value = null;
     }

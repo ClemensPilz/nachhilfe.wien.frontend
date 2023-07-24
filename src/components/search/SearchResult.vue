@@ -5,7 +5,9 @@
     <!--Text-Part-->
     <div class="col-span-2 flex flex-col justify-center p-4 text-primary">
       <h4>{{ teacher.firstName }} {{ teacher.lastName }}</h4>
-      <p>{{ teacher.description === null ? "" : teacher.description }}</p>
+      <small class="font-thin">{{
+        teacher.description === null ? "" : teacher.description
+      }}</small>
 
       <div v-if="teacher.teacherId !== userStore.user.userId">
         <div
@@ -15,7 +17,7 @@
 
         <div class="flex flex-wrap gap-2 text-xs">
           <div
-            v-for="coaching in coachings"
+            v-for="coaching in teacher.coachings"
             v-show="coaching.active"
             :key="coaching.coachingId"
             class="select-none rounded-lg border border-primary px-2 py-1 hover:cursor-pointer hover:border-accent"
@@ -23,7 +25,6 @@
               $emit('requestAppointment', {
                 coachingId: coaching.coachingId,
                 teacherId: teacher.teacherId,
-                coachingName: coaching.subject + ' - ' + coaching.rate + ' €/h',
               })
             "
           >
@@ -40,6 +41,11 @@
             text="Kontakt"
             class="bg-mainOrange"
             @click="$emit('contact')"
+          />
+          <ButtonRegular
+            text="Bezirke"
+            class="bg-secondary"
+            @click="$emit('districts')"
           />
         </div>
       </div>
@@ -62,9 +68,14 @@ import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
 
-const props = defineProps({ teacher: Object, coachings: Array });
+const props = defineProps({ teacher: Object });
 
-const emits = defineEmits(["contact", "profile", "requestAppointment"]);
+const emits = defineEmits([
+  "contact",
+  "profile",
+  "requestAppointment",
+  "districts",
+]);
 </script>
 
 <style lang="scss" scoped></style>

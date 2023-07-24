@@ -15,7 +15,7 @@
 
     <div class="mt-2 flex justify-around">
       <ButtonRegular
-        @click="$emit('close')"
+        @click="appStore.resetModals()"
         class="bg-secondary"
         text="Zurück"
       />
@@ -32,12 +32,11 @@ import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { ref } from "vue";
 import { useAppStore } from "@/stores/app";
 
+const appStore = useAppStore();
 const userStore = useUserStore();
 const user = userStore.user;
 const router = useRouter();
 const isCalling = ref(false);
-
-const emit = defineEmits(["close"]);
 
 const validationSchema = {
   email(value) {
@@ -84,14 +83,14 @@ async function login() {
     alert("Fehler beim Einloggen!");
   } finally {
     isCalling.value = false;
-    emit("close");
+    appStore.resetModals();
   }
 }
 </script>
 
 <style lang="scss" scoped>
 form {
-  @apply w-full flex flex-col bg-background max-h-screen py-2 overflow-y-scroll;
+  @apply flex max-h-screen w-full flex-col overflow-y-scroll bg-background py-2;
 }
 
 label {
@@ -99,7 +98,7 @@ label {
 }
 
 input {
-  @apply px-4 py-2 m-2 rounded-3xl text-p;
+  @apply text-p m-2 rounded-3xl px-4 py-2;
 }
 
 .error {

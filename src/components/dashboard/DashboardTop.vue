@@ -18,7 +18,10 @@
     <div
       class="order-1 col-span-3 flex items-center justify-center overflow-hidden md:order-3 md:col-span-1"
     >
-      <DashboardTopPicture :userImage="userImage" />
+      <DashboardTopPicture
+        :userImage="userImage"
+        class="hover:cursor-pointer"
+      />
     </div>
   </div>
 </template>

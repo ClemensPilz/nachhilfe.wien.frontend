@@ -1,11 +1,11 @@
 <template>
   <div class="grid w-full grid-cols-4 gap-4">
-    <div class="col-span-4 rounded-3xl bg-secondary p-4 sm:col-span-1">
+    <div class="col-span-4 rounded-3xl bg-gray-100 p-4 shadow-xl sm:col-span-1">
       <CoachingForm @update="getCoachingsFromApi" />
     </div>
 
     <div
-      class="col-span-4 flex h-full w-full flex-wrap justify-center gap-2 rounded-3xl bg-secondary p-4 sm:col-span-3"
+      class="col-span-4 flex h-full w-full flex-wrap justify-center gap-2 rounded-3xl bg-gray-100 p-4 shadow-xl sm:col-span-3"
     >
       <div
         v-for="coaching in coachings"
@@ -17,11 +17,11 @@
         <p class="rounded-3xl bg-mainBlue px-4 py-2 text-white">
           {{ coaching.subject }}
         </p>
-        <small class="font-thin text-white">{{ coaching.level }}</small>
-        <small class="text-white">{{ coaching.rate }}€ / Stunde</small>
+        <small class="font-thin text-primary">{{ coaching.level }}</small>
+        <small class="text-primary">{{ coaching.rate }}€ / Stunde</small>
         <small
           v-if="idToRemove !== coaching.coachingId"
-          class="text-mainYellow underline hover:cursor-pointer hover:text-red-700"
+          class="text-mainOrange underline hover:cursor-pointer hover:text-red-700"
           @click="
             () => {
               idToRemove = coaching.coachingId;

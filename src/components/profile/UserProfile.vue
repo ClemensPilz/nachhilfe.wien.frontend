@@ -1,21 +1,25 @@
 <template>
   <div class="min-h-screen">
-    <FormModal ref="reviewModalRef">
+    <FormModal :is-active="appStore.reviewModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <ReviewForm
-            @close="closeReviewModal"
-            :teacherId="userId"
-            :studentId="userStore.user.userId"
-          />
+          <ReviewForm :teacher-id="userId" />
         </template>
       </CardLarge>
     </FormModal>
 
-    <FormModal ref="appointmentModalRef">
+    <FormModal :is-active="appStore.appointmentModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <AppointmentForm @close="closeAppointmentModal" />
+          <AppointmentForm />
+        </template>
+      </CardLarge>
+    </FormModal>
+
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
         </template>
       </CardLarge>
     </FormModal>
@@ -25,16 +29,16 @@
 
       <section v-else id="userProfile">
         <!--Container for content-->
-        <div class="container min-h-screen max-w-7xl mx-auto px-2 mt-8">
+        <div class="container mx-auto mt-8 min-h-screen max-w-7xl px-2">
           <!--Grid-Layout-->
-          <div class="w-full grid grid-cols-2 gap-4 items-center">
+          <div class="grid w-full grid-cols-2 items-center gap-4">
             <!--Picture-->
             <div id="teacherPicture" class="group">
-              <div class="w-full h-[500px] pl-16">
+              <div class="h-[500px] w-full pl-16">
                 <img
                   :src="profile.image ? profile.image : stockPhoto"
                   alt="picture of a teacher"
-                  class="h-full object-cover object-center group-hover:scale-105 transition-all duration-300"
+                  class="h-full object-cover object-center transition-all duration-300 group-hover:scale-105"
                 />
               </div>
             </div>
@@ -46,30 +50,36 @@
               class="col-span-2 md:col-span-1"
             >
               <ul>
-                <li>
-                  <h1 class="text-mainOrange">?</h1>
+                <li class="flex items-center">
+                  <UserIcon class="w-20 text-mainOrange" />
+
                   <div>
                     <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
                     <p>{{ profile.description }}</p>
                     <small
                       >Durchschnittl. Wertung:
-                      {{ profile.averageRatingScore }}</small
+                      {{ profile.averageRatingScore || "-" }}</small
                     >
                   </div>
                 </li>
 
-                <li>
-                  <h1>></h1>
+                <li class="flex items-center">
+                  <AcademicCapIcon class="w-20 text-secondary" />
                   <div>
                     <div
                       v-for="coaching in profile.coachings"
                       v-show="coaching.active"
                     >
                       <p
-                        class="underline underline-offset-4 decoration-secondary"
+                        :class="{
+                          'my-1 w-fit rounded-3xl border px-4 py-1 hover:cursor-pointer hover:text-mainBlue':
+                            userStore.user.userType === 'STUDENT',
+                          'select-none': true,
+                        }"
                         @click="openAppointmentModal(coaching.coachingId)"
                       >
                         {{ coaching.subject }}
+                        <span class="text-xs">{{ coaching.level }}</span>
                       </p>
                     </div>
                     <div v-if="profile.coachings.length < 1">
@@ -78,11 +88,11 @@
                   </div>
                 </li>
 
-                <li>
-                  <h1>:</h1>
+                <li class="flex items-center">
+                  <ChatBubbleLeftRightIcon class="w-20 text-secondary" />
                   <div>
                     <small class="block pb-3">Lehrer kontaktieren:</small>
-                    <div class="flex gap-2 flex-wrap">
+                    <div class="flex flex-wrap gap-2">
                       <ButtonRegular
                         class="bg-mainOrange"
                         text="Nachricht"
@@ -92,13 +102,22 @@
                         v-if="userStore.user.userType === 'STUDENT'"
                         class="bg-mainBlue"
                         text="Bewerten"
-                        @click="openReviewModal"
+                        @click="
+                          appStore.reviewModalActive =
+                            !appStore.reviewModalActive
+                        "
                       />
                       <ButtonRegular
                         v-else
                         class="bg-secondary"
                         text="Bewerten"
                         @click="noStudentAlert"
+                      />
+
+                      <ButtonRegular
+                        text="Bezirke"
+                        class="bg-secondary"
+                        @click="openDistrictModal(profile.districts)"
                       />
                     </div>
                   </div>
@@ -112,11 +131,16 @@
               id="studentInformation"
               class="col-span-2 md:col-span-1"
             >
-              <h1 class="text-mainOrange">?</h1>
+              <h4 class="text-mainOrange">Schüler</h4>
               <div>
-                <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
+                <h2>{{ profile.firstName }} {{ profile.lastName }}</h2>
                 <p>{{ profile.description }}</p>
               </div>
+              <ButtonRegular
+                class="mx-0 my-2 bg-mainOrange"
+                text="Nachricht"
+                @click="appStore.sendMessage(userId, true)"
+              />
             </div>
           </div>
 
@@ -125,7 +149,7 @@
             class="col-span-2 my-4"
             v-if="userType === 'TEACHER' && profile.feedbacks.length > 0"
           >
-            <table class="w-full text-left text-p">
+            <table class="text-p w-full text-left">
               <tr>
                 <th>Bewertung</th>
                 <th>Stern</th>
@@ -162,6 +186,10 @@ import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ReviewForm from "@/components/util/forms/ReviewForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
+import { ChatBubbleLeftRightIcon } from "@heroicons/vue/24/outline";
+import { AcademicCapIcon } from "@heroicons/vue/24/outline";
+import { UserIcon } from "@heroicons/vue/24/solid";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -173,22 +201,18 @@ const userType = ref("");
 const reviewModalRef = ref();
 const appointmentModalRef = ref();
 
-// Modals
-function openReviewModal() {
-  reviewModalRef.value.openModal();
-}
-
-function closeReviewModal() {
-  reviewModalRef.value.closeModal();
-}
-
 function openAppointmentModal(coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    console.log("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(userId, coachingId);
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 // Fetching data from api
@@ -223,11 +247,11 @@ onBeforeMount(async () => {
 #teacherPicture {
   border-radius: 0px 0px 0px 200px;
 
-  @apply col-span-2 md:col-span-1 md:mr-20 bg-mainYellow overflow-hidden shadow-xl;
+  @apply col-span-2 overflow-hidden bg-mainYellow shadow-xl md:col-span-1 md:mr-20;
 }
 
 li {
-  @apply grid grid-cols-6 mb-12;
+  @apply mb-12 grid grid-cols-6;
 
   > :first-child {
     @apply col-span-1;

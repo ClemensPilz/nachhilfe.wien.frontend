@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-4 max-w-7xl flex-grow">
+  <div class="container mx-auto mt-4 max-w-7xl flex-grow px-2">
     <div v-if="hasNoMessages">
       <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
     </div>
@@ -7,14 +7,22 @@
     <div class="grid grid-cols-12 gap-12">
       <!--Left part-->
       <div
-        class="noScrollbar top-20 col-span-3 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll"
+        class="noScrollbar top-20 col-span-9 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll sm:col-span-3"
       >
         <div class="flex flex-col gap-2">
           <ConversationThumb
             v-for="conversation in conversations"
             :key="conversation.conversationId"
-            :users="conversation.users"
-            @click="getMessages(conversation.conversationId)"
+            :user="
+              conversation.users.filter(
+                (user) => user.id !== userStore.user.userId,
+              )[0]
+            "
+            @click="
+              () => {
+                getMessages(conversation.conversationId);
+              }
+            "
           />
         </div>
       </div>
@@ -48,8 +56,8 @@
         <MessageInput
           :class="conversationId ? 'block' : 'hidden'"
           @send="postMessage"
+          @go-to-profile="router.push(`/profile/${partnerId}`)"
           @keydown.enter="postMessage"
-          button-text="Senden"
         >
           <input
             type="text"
@@ -66,21 +74,32 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, onUpdated, ref, watch } from "vue";
+import {
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  watch,
+  computed,
+} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
 import { useUserStore } from "@/stores/user";
 import MessageInput from "@/components/Inbox/MessageInput.vue";
 import { useConversationStore } from "@/stores/conversation";
+import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
+const partnerId = ref(null);
 const conversations = ref([]);
 const messages = ref(null);
 const messageText = ref(null);
 const conversationStore = useConversationStore();
 const hasNoMessages = ref(false);
+const myId = computed(() => userStore.user.userId);
+const router = useRouter();
 
 function formatDate(timestamp) {
   const date = new Date(timestamp);
@@ -152,6 +171,9 @@ async function getMessages(id) {
     messages.value = response.data.messages;
     sortMessages();
     conversationId.value = id;
+    partnerId.value = response.data.users.filter(
+      (user) => user.id !== userStore.user.userId,
+    )[0].id;
     for (const message in messages) {
       console.log(message);
     }
