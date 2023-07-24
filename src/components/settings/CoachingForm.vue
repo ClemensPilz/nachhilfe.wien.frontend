@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="mb-1 text-center">
-      <small class="text-white">Themengebiet</small>
+      <small class="text-primary">Themengebiet</small>
     </div>
     <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
       <option v-for="subject in subjects" :value="subject">
@@ -94,6 +94,6 @@ async function postCoaching(newCoaching) {
 <style lang="scss" scoped>
 input,
 select {
-  @apply mb-2 w-full  rounded-3xl p-2;
+  @apply mb-2 w-full  rounded-3xl border p-2;
 }
 </style>

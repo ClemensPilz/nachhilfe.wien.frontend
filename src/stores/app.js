@@ -6,18 +6,24 @@ import axios from "axios";
 import router from "@/router";
 
 export const useAppStore = defineStore("app", () => {
+  //Stores
   const userStore = useUserStore();
+  const conversationStore = useConversationStore();
+
+  //General app information
   const subjects = ref({});
   const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
+
+  //Utility variables for passing info between components
   const selectedCoaching = ref({});
   const selectedDistricts = ref([]);
-  const modalStack = ref([]);
+
+  //Modal visibility
   const registrationModalActive = ref(false);
   const loginModalActive = ref(false);
   const reviewModalActive = ref(false);
   const appointmentModalActive = ref(false);
   const districtModalActive = ref(false);
-  const conversationStore = useConversationStore();
 
   function resetModals() {
     registrationModalActive.value = false;
@@ -129,7 +135,6 @@ export const useAppStore = defineStore("app", () => {
     levels,
     selectedCoaching,
     selectedDistricts,
-    modalStack,
     selectCoaching,
     filterTeachers,
     registrationModalActive,

@@ -14,7 +14,9 @@
   <li>
     <RouterLink to="/settings">Profil</RouterLink>
   </li>
-  <li class="text-mainOrange" @click="userStore.logout">Logout</li>
+  <li class="text-mainOrange hover:cursor-pointer" @click="userStore.logout">
+    Logout
+  </li>
 </template>
 
 <script setup>

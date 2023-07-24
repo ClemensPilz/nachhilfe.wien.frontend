@@ -76,7 +76,7 @@
     </div>
 
     <div class="mt-8 flex w-full justify-center">
-      <button-large
+      <ButtonLarge
         text="Lehrer finden"
         type="submit"
         class="my-4 bg-mainOrange"
