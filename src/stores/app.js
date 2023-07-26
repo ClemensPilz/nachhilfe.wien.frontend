@@ -107,8 +107,8 @@ export const useAppStore = defineStore("app", () => {
     });
   }
 
-  async function filterTeachers(districts, subject, minRate, maxRate) {
-    console.log(districts);
+  async function filterTeachers(districts, subject, minRate, maxRate, level) {
+    console.log(level);
     try {
       const response = axios({
         headers: {
@@ -117,10 +117,11 @@ export const useAppStore = defineStore("app", () => {
         method: "POST",
         url: `${userStore.url}/teacher/filter-teachers`,
         data: {
-          districts,
-          subject,
+          districts: districts ? districts : null,
+          subject: subject ? subject : null,
           minRate,
           maxRate,
+          level: level ? level : null,
         },
       });
       return response;

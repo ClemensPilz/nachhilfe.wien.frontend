@@ -113,7 +113,6 @@ function log() {
   console.log(selectedDistricts.value);
 }
 
-//@todo add level and average rating to it
 async function search() {
   try {
     const response = await appStore.filterTeachers(
@@ -121,6 +120,7 @@ async function search() {
       selectedSubject.value,
       1,
       maxRate.value,
+      selectedLevel.value,
     );
     console.log(response.data);
     if (response.data) {
