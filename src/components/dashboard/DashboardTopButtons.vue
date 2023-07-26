@@ -7,7 +7,7 @@
   <ButtonLarge
     class="bg-secondary"
     text="Hilfe"
-    @click="appStore.sendMessage(21, true)"
+    @click="appStore.sendMessage(1, true)"
   />
   <ButtonLarge
     class="bg-secondary"
