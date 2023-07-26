@@ -42,9 +42,9 @@ export const useAdminStore = defineStore("admin", () => {
       }
     } catch (e) {
       foundUser.value = null;
-      throw e;
     }
     foundUser.value = response.value.data;
+    console.log()
     return foundUser.value;
   }
 

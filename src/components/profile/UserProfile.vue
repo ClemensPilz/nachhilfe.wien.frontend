@@ -3,7 +3,7 @@
     <FormModal :is-active="appStore.reviewModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <ReviewForm />
+          <ReviewForm :teacher-id="userId" />
         </template>
       </CardLarge>
     </FormModal>
@@ -12,6 +12,14 @@
       <CardLarge class="m-0">
         <template v-slot:content>
           <AppointmentForm />
+        </template>
+      </CardLarge>
+    </FormModal>
+
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
         </template>
       </CardLarge>
     </FormModal>
@@ -42,30 +50,36 @@
               class="col-span-2 md:col-span-1"
             >
               <ul>
-                <li>
-                  <h1 class="text-mainOrange">?</h1>
+                <li class="flex items-center">
+                  <UserIcon class="w-20 text-mainOrange" />
+
                   <div>
                     <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
                     <p>{{ profile.description }}</p>
                     <small
                       >Durchschnittl. Wertung:
-                      {{ profile.averageRatingScore }}</small
+                      {{ profile.averageRatingScore || "-" }}</small
                     >
                   </div>
                 </li>
 
-                <li>
-                  <h1>></h1>
+                <li class="flex items-center">
+                  <AcademicCapIcon class="w-20 text-secondary" />
                   <div>
                     <div
                       v-for="coaching in profile.coachings"
                       v-show="coaching.active"
                     >
                       <p
-                        class="underline decoration-secondary underline-offset-4"
+                        :class="{
+                          'my-1 w-fit rounded-3xl border px-4 py-1 hover:cursor-pointer hover:text-mainBlue':
+                            userStore.user.userType === 'STUDENT',
+                          'select-none': true,
+                        }"
                         @click="openAppointmentModal(coaching.coachingId)"
                       >
                         {{ coaching.subject }}
+                        <span class="text-xs">{{ coaching.level }}</span>
                       </p>
                     </div>
                     <div v-if="profile.coachings.length < 1">
@@ -74,8 +88,8 @@
                   </div>
                 </li>
 
-                <li>
-                  <h1>:</h1>
+                <li class="flex items-center">
+                  <ChatBubbleLeftRightIcon class="w-20 text-secondary" />
                   <div>
                     <small class="block pb-3">Lehrer kontaktieren:</small>
                     <div class="flex flex-wrap gap-2">
@@ -99,6 +113,12 @@
                         text="Bewerten"
                         @click="noStudentAlert"
                       />
+
+                      <ButtonRegular
+                        text="Bezirke"
+                        class="bg-secondary"
+                        @click="openDistrictModal(profile.districts)"
+                      />
                     </div>
                   </div>
                 </li>
@@ -111,11 +131,16 @@
               id="studentInformation"
               class="col-span-2 md:col-span-1"
             >
-              <h1 class="text-mainOrange">?</h1>
+              <h4 class="text-mainOrange">Schüler</h4>
               <div>
-                <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
+                <h2>{{ profile.firstName }} {{ profile.lastName }}</h2>
                 <p>{{ profile.description }}</p>
               </div>
+              <ButtonRegular
+                class="mx-0 my-2 bg-mainOrange"
+                text="Nachricht"
+                @click="appStore.sendMessage(userId, true)"
+              />
             </div>
           </div>
 
@@ -161,6 +186,10 @@ import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
 import ReviewForm from "@/components/util/forms/ReviewForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
+import { ChatBubbleLeftRightIcon } from "@heroicons/vue/24/outline";
+import { AcademicCapIcon } from "@heroicons/vue/24/outline";
+import { UserIcon } from "@heroicons/vue/24/solid";
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -172,22 +201,18 @@ const userType = ref("");
 const reviewModalRef = ref();
 const appointmentModalRef = ref();
 
-// Modals
-function openReviewModal() {
-  reviewModalRef.value.openModal();
-}
-
-function closeReviewModal() {
-  reviewModalRef.value.closeModal();
-}
-
 function openAppointmentModal(coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    console.log("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(userId, coachingId);
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 // Fetching data from api

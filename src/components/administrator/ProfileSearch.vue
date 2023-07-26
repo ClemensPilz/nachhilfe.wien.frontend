@@ -50,8 +50,7 @@ const response = ref();
 
 const findUser = async () => {
   //input validation
-  await adminStore.findUser(findBy.value, searchParameter.value);
-  console.log(adminStore.foundUser);
+  const response = await adminStore.findUser(findBy.value, searchParameter.value);
 };
 
 let open = ref(false);

@@ -34,7 +34,7 @@ import axios from "axios";
 import { useUserStore } from "@/stores/user";
 import { useAppStore } from "@/stores/app";
 
-const props = defineProps(["teacherId", "studentId"]);
+const props = defineProps(["teacherId"]);
 const appStore = useAppStore();
 const userStore = useUserStore();
 
@@ -79,7 +79,7 @@ async function postReview() {
       url: `${userStore.url}/feedback`,
       data: {
         teacherId: parseInt(props.teacherId),
-        studentId: parseInt(props.studentId),
+        studentId: userStore.user.userId,
         title: `Review von ${userStore.user.firstName}`,
         content: text.value,
         rating: rating.value,

@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-grow flex-col">
-    <div class="container mx-auto max-w-6xl px-2 py-12">
-      <h2>Persönlicher Kalender</h2>
+    <div class="v container mx-auto px-6 py-12 lg:px-20">
+      <h2 class="text-center text-5xl md:text-6xl">Persönlicher Kalender</h2>
       <div class="mt-5">
         <CalendarComponent />
       </div>

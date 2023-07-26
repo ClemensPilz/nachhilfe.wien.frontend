@@ -57,7 +57,7 @@
   </DashboardFeedCard>
 
   <DashboardFeedCard
-    title="Profil"
+    title="Settings"
     subtitle="Manage dein Profil"
     text="Stelle sicher,dass deine Infos auf dem neuesten Stand sind..."
   >

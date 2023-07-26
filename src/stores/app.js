@@ -6,19 +6,33 @@ import axios from "axios";
 import router from "@/router";
 
 export const useAppStore = defineStore("app", () => {
+  //Stores
   const userStore = useUserStore();
+  const conversationStore = useConversationStore();
+
+  //General app information
   const subjects = ref({});
-  const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
+  const levels = ["Unterstufe", "Oberstufe", "Matura", "Universität"];
+
+  //Utility variables for passing info between components
   const selectedCoaching = ref({});
-  const modalStack = ref([]);
+  const selectedDistricts = ref([]);
+
+  //Modal visibility
   const registrationModalActive = ref(false);
   const loginModalActive = ref(false);
   const reviewModalActive = ref(false);
   const appointmentModalActive = ref(false);
+  const districtModalActive = ref(false);
+  const deleteAccountModalActive = ref(false);
 
   function resetModals() {
     registrationModalActive.value = false;
     loginModalActive.value = false;
+    reviewModalActive.value = false;
+    appointmentModalActive.value = false;
+    districtModalActive.value = false;
+    deleteAccountModalActive.value = false;
   }
 
   //Used to pass information of a selected coaching through multiple layers of components
@@ -77,6 +91,8 @@ export const useAppStore = defineStore("app", () => {
         },
       });
       console.log(response.data);
+      conversationStore.setActiveConversationInInbox(conversationId);
+      await router.push("/inbox");
     } catch (e) {
       throw e;
     }
@@ -120,7 +136,7 @@ export const useAppStore = defineStore("app", () => {
     subjects,
     levels,
     selectedCoaching,
-    modalStack,
+    selectedDistricts,
     selectCoaching,
     filterTeachers,
     registrationModalActive,
@@ -128,5 +144,7 @@ export const useAppStore = defineStore("app", () => {
     resetModals,
     reviewModalActive,
     appointmentModalActive,
+    districtModalActive,
+    deleteAccountModalActive,
   };
 });

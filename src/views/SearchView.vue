@@ -1,9 +1,17 @@
 <template>
   <div>
-    <FormModal ref="appointmentModalRef">
+    <FormModal :is-active="appStore.appointmentModalActive">
       <CardLarge class="m-0">
         <template v-slot:content>
-          <AppointmentForm @close="closeAppointmentModal" />
+          <AppointmentForm />
+        </template>
+      </CardLarge>
+    </FormModal>
+
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
         </template>
       </CardLarge>
     </FormModal>
@@ -24,10 +32,12 @@
             class="col-span-1"
             @contact="appStore.sendMessage(teacher.teacherId, true)"
             @profile="router.push(`/profile/${teacher.teacherId}`)"
-            @requestAppointment="setAppointmentParameters"
+            @requestAppointment="
+              (e) => openAppointmentModal(e.teacherId, e.coachingId)
+            "
+            @districts="openDistrictModal(teacher.districts)"
             :key="teacher.teacherId"
             :teacher="teacher"
-            :coachings="teacher.coachings"
           />
         </div>
       </div>
@@ -46,6 +56,7 @@ import SearchForm from "@/components/search/SearchForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -53,20 +64,21 @@ const teachersArray = ref();
 const appointmentModalRef = ref();
 
 function openAppointmentModal(teacherId, coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    console.log("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(teacherId, coachingId);
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 function pasteResult(data) {
   teachersArray.value = data;
-}
-
-function setAppointmentParameters(e) {
-  openAppointmentModal(e.teacherId, e.coachingId);
 }
 
 async function getAllTeachers() {
