@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent @keydown.enter="login">
+  <form @submit.prevent>
     <label for="email">E-Mail:</label>
     <input type="email" name="email" v-model="email" placeholder="E-Mail" />
     <div class="error">{{ errors.email }}</div>

@@ -12,7 +12,7 @@ export const useAppStore = defineStore("app", () => {
 
   //General app information
   const subjects = ref({});
-  const levels = ["VOLKSSCHULE", "MITTELSCHULE"];
+  const levels = ["Unterstufe", "Oberstufe", "Matura", "Universität"];
 
   //Utility variables for passing info between components
   const selectedCoaching = ref({});
