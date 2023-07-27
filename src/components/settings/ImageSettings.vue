@@ -47,6 +47,7 @@ async function upload(e) {
   }
 
   const imageString = await appStore.encodeImage(file);
+  console.log(imageString);
 
   try {
     const response = await axios({

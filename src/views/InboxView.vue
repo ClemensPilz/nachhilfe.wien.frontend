@@ -31,7 +31,6 @@
       <!--Messages-->
 
       <div class="col-span-9 flex max-h-[calc(100vh-70px)] flex-col">
-        <!--@todo: Just pass the whole message-object as a prop-->
         <div class="noScrollbar overflow-x-hidden overflow-y-scroll">
           <MessageThumb
             v-for="message in messages"

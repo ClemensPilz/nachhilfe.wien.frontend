@@ -163,7 +163,6 @@ const [email, password, firstname, lastname, birthdate, description] =
   ]);
 
 //Posts new user to backend and then authenticates the user with userStore.auth().
-//@todo: Save userId and token directly within register without the need for userStore.auth()
 async function register() {
   if (!meta.value.valid && isCalling.value) {
     return;
