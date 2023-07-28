@@ -15,6 +15,7 @@
 
     <input
       type="number"
+      min="0"
       class="text-center"
       name="rateSelect"
       id="rateSelect"

@@ -152,7 +152,7 @@
             <table class="text-p w-full text-left">
               <tr>
                 <th>Bewertung</th>
-                <th>Stern</th>
+                <th>Sterne</th>
                 <th>von</th>
               </tr>
               <tr v-for="feedback in profile.feedbacks">
