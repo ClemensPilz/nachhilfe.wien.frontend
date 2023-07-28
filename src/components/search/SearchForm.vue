@@ -72,6 +72,17 @@
             v-model="selectedLevel"
           />
         </div>
+        <div>
+          <label class="pr-2">Mindestens {{ selectedRating }} Sterne</label>
+          <input
+            type="range"
+            name="rating"
+            id="rating"
+            v-model="selectedRating"
+            min="0"
+            max="5"
+          />
+        </div>
       </div>
     </div>
 
@@ -96,6 +107,7 @@ const selectedSubject = ref("");
 const selectedLevel = ref("");
 const selectedDistricts = ref([]);
 const maxRate = ref(20);
+const selectedRating = ref(0);
 const emit = defineEmits({ result: Object });
 
 function selectAll() {
@@ -121,6 +133,7 @@ async function search() {
       1,
       maxRate.value,
       selectedLevel.value,
+      selectedRating.value,
     );
     console.log(response.data);
     if (response.data) {

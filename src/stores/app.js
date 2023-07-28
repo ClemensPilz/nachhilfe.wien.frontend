@@ -107,7 +107,14 @@ export const useAppStore = defineStore("app", () => {
     });
   }
 
-  async function filterTeachers(districts, subject, minRate, maxRate, level) {
+  async function filterTeachers(
+    districts,
+    subject,
+    minRate,
+    maxRate,
+    level,
+    rating,
+  ) {
     console.log(level);
     try {
       const response = axios({
@@ -122,6 +129,7 @@ export const useAppStore = defineStore("app", () => {
           minRate,
           maxRate,
           level: level ? level : null,
+          rating,
         },
       });
       return response;
