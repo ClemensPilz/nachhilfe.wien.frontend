@@ -4,7 +4,7 @@
       <h2 class="text-mainOrange">Nachhilfe.Wien</h2>
       <p>
         Ein Projekt von René-Ali Günürün, Dominik Köberl und Clemens Pilz im
-        Rahmen der Ausbildung zum Full-Stack-Developer bei CodersBay.Vienna
+        Rahmen der Ausbildung zum Full-Stack-Developer bei Coders.Bay Vienna
       </p>
       <small class="italic"
         >Diese Webseite dient ausschließlich als technisches Showcase und keinen

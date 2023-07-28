@@ -48,8 +48,8 @@
               class="text-base font-normal leading-6 text-gray-600 dark:text-white"
             >
               Unser Team besteht aus drei motivierten und wissensdurstigen
-              Entwicklern, die es sich zum Ziel gemacht hat Wissen auf einfache
-              Weise zu vermitteln. Denn wie es so schön heißt
+              Entwicklern, die es sich zum Ziel gemacht haben, Wissen auf
+              einfache Weise zu vermitteln. Denn wie es so schön heißt
             </p>
             <br />
             <p class="font-bold text-mainBlue">
@@ -59,11 +59,11 @@
           </div>
           <div class="w-full lg:w-8/12 lg:pt-8">
             <div
-              class="grid grid-cols-1 rounded-md shadow-lg sm:grid-cols-2 md:grid-cols-3 lg:gap-4"
+              class="mx-20 grid grid-cols-1 rounded-md shadow-lg md:mx-0 md:grid-cols-3 lg:gap-4"
             >
               <div class="flex flex-col items-center justify-center p-4 pb-6">
                 <img
-                  class="m-auto hidden h-auto md:block"
+                  class=""
                   :src="dominikImage"
                   alt="Image of Dominik Köberl"
                 />
@@ -76,11 +76,7 @@
                 </ButtonRegular>
               </div>
               <div class="flex flex-col items-center justify-center p-4 pb-6">
-                <img
-                  class="m-auto hidden h-auto md:block"
-                  :src="clemensImage"
-                  alt="Image of Clemens Pilz"
-                />
+                <img class="" :src="clemensImage" alt="Image of Clemens Pilz" />
                 <ButtonRegular
                   text="Clemens"
                   @click="() => setActiveModal(2)"
@@ -90,11 +86,7 @@
                 </ButtonRegular>
               </div>
               <div class="flex flex-col items-center justify-center p-4 pb-6">
-                <img
-                  class="m-auto hidden h-auto md:block"
-                  :src="reneImage"
-                  alt="Image of René Günürün"
-                />
+                <img class="" :src="reneImage" alt="Image of René Günürün" />
                 <ButtonRegular
                   text="René"
                   @click="() => setActiveModal(3)"

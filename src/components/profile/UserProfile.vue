@@ -36,7 +36,7 @@
             <div id="teacherPicture" class="group">
               <div class="h-[500px] w-full pl-16">
                 <img
-                  :src="profile.image ? profile.image : stockPhoto"
+                  :src="profile.image ? profile.image : defaultPicture"
                   alt="picture of a teacher"
                   class="h-full object-cover object-center transition-all duration-300 group-hover:scale-105"
                 />
@@ -179,7 +179,7 @@ import { useRoute } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { computed, onBeforeMount, onMounted, ref } from "vue";
 import axios from "axios";
-import stockPhoto from "@/assets/images/teacherProfile/teacher-stockphoto.jpg";
+import defaultPicture from "@/assets/images/teacherProfile/default-profile-picture.jpg";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useAppStore } from "@/stores/app";
 import FormModal from "@/components/util/modals/FormModal.vue";

@@ -5,12 +5,12 @@
         router.push('/settings');
       }
     "
-    class="relative h-[200px] w-[200px]"
+    class="relative h-[200px] w-[200px] overflow-hidden rounded-full"
   >
     <img
       :src="topPictureSource"
       alt="a users profile picture"
-      class="h-full rounded-full object-cover"
+      class="object-cover"
       :class="{ 'opacity-50': userImage === 'none' }"
       @click="
         () => {
@@ -29,7 +29,7 @@
 
 <script setup>
 import { computed } from "vue";
-import image from "@/assets/images/dashboard/default-profile-picture.jpg";
+import image from "@/assets/images/teacherProfile/default-profile-picture.jpg";
 import { useRouter } from "vue-router";
 
 const router = useRouter();

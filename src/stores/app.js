@@ -74,7 +74,6 @@ export const useAppStore = defineStore("app", () => {
     let startTime = new Date(dateTime);
     let endTime = new Date(dateTime);
     endTime.setHours(startTime.getHours() + duration);
-    console.log(endTime);
 
     try {
       const response = await axios({

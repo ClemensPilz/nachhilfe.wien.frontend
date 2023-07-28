@@ -54,7 +54,7 @@
     <!--Image-Part-->
     <div class="col-span-1">
       <img
-        :src="teacher.image ? teacher.image : 'https://placehold.co/200x250'"
+        :src="teacher.image ? teacher.image : defaultImage"
         alt="Image of a teacher"
         class="h-full w-full rounded-bl-2xl rounded-tr-2xl object-cover"
       />
@@ -65,6 +65,7 @@
 <script setup>
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
+import defaultImage from "@/assets/images/teacherProfile/default-profile-picture.jpg";
 
 const userStore = useUserStore();
 

@@ -44,12 +44,12 @@
       </div>
     </div>
     <img
-      src="@/assets/images/home/title-mobile3.jpg"
+      src="@/assets/images/home/title-mobile.jpg"
       alt="classroom situation with laptop"
       class="mx-auto h-auto w-full max-w-7xl rounded-t-3xl md:hidden"
     />
     <img
-      src="@/assets/images/home/title-desktop3.jpg"
+      src="@/assets/images/home/header4d.jpg"
       alt="classroom situation with laptop"
       class="mx-auto hidden h-auto w-full max-w-7xl rounded-t-3xl md:block"
     />
