@@ -15,7 +15,7 @@
       </p>
 
       <div v-if="props.type === 'APPOINTMENT'">
-        <small class="block"> Am {{ start }} </small>
+        <small class="block"> Am {{ formatStart(props.start) }} </small>
         <small> {{ duration }} Stunden </small>
       </div>
 
@@ -28,7 +28,9 @@
 
       <div
         v-if="
-          props.type === 'APPOINTMENT' && userStore.user.userType === 'TEACHER'
+          props.type === 'APPOINTMENT' &&
+          userStore.user.userType === 'TEACHER' &&
+          checkActuality(props.start)
         "
       >
         <ButtonRegular
@@ -53,7 +55,7 @@
       </div>
 
       <div class="paragraph font-bold">
-        {{ props.date }}
+        {{ formatDate(props.date) }}
       </div>
     </div>
   </div>
@@ -111,6 +113,51 @@ async function confirm() {
   } catch (e) {
     console.log(e);
   }
+}
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+
+  const timeString = date.toTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const today = new Date();
+  if (today.getDate() === date.getDate()) {
+    return `heute ${timeString.substring(0, 5)}`;
+  }
+
+  const dateString = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  return `${dateString}, ${timeString.substring(0, 5)}`;
+}
+
+function checkActuality(timestamp) {
+  const today = new Date();
+  const checkDate = new Date(timestamp);
+  console.log(today);
+  console.log(checkDate);
+  return checkDate > today;
+}
+
+function formatStart(timestamp) {
+  if (timestamp == null) {
+    return;
+  }
+  const date = new Date(timestamp);
+  const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const timeOptions = { hour: "2-digit", minute: "2-digit" };
+  const locale = "de-DE";
+
+  const formattedDate = date.toLocaleDateString(locale, dateOptions);
+  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
+
+  return `${formattedDate} um ${formattedTime} Uhr`;
 }
 
 function translateStatus(status) {

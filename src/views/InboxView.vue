@@ -43,9 +43,9 @@
             :senderId="message.senderId"
             :coachingName="message.coachingName"
             :status="message.status"
-            :start="formatStart(message.start)"
+            :start="message.start"
             :duration="formatDuration(message.start, message.end)"
-            :date="formatDate(message.timeStamp)"
+            :date="message.timeStamp"
           />
 
           <div id="pageEnd"></div>
@@ -100,47 +100,6 @@ const hasNoMessages = ref(false);
 const myId = computed(() => userStore.user.userId);
 const router = useRouter();
 
-function formatDate(timestamp) {
-  const date = new Date(timestamp);
-
-  const timeString = date.toTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  const today = new Date();
-  if (today.getDate() === date.getDate()) {
-    return `heute ${timeString.substring(0, 5)}`;
-  }
-
-  const dateString = date.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-
-  return `${dateString}, ${timeString.substring(0, 5)}`;
-}
-
-function formatStart(timestamp) {
-  if (timestamp == null) {
-    return;
-  }
-  const date = new Date(timestamp);
-  const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
-  const timeOptions = { hour: "2-digit", minute: "2-digit" };
-  const locale = "de-DE";
-
-  const formattedDate = date.toLocaleDateString(locale, dateOptions);
-  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
-
-  return `${formattedDate} um ${formattedTime} Uhr`;
-}
-
-function formatDuration(start, end) {
-  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
-}
-
 //Gets an array of conversations from API
 async function getConversations(userId) {
   try {
@@ -180,6 +139,10 @@ async function getMessages(id) {
   } catch (e) {
     console.log(e);
   }
+}
+
+function formatDuration(start, end) {
+  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
 }
 
 //Push message to conversation
