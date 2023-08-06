@@ -53,7 +53,10 @@ https://github.com/dokoe92/nachhilfe.wien.backend
 
 For the Router documentation you can have a look into the index.js:
 
-@/router/index.js
+src/router/index.js
 
+And to get a look for the deployed version please clock on the following link:
+
+http://nachhilfe-wien.info
 
 ```
