@@ -14,7 +14,7 @@ By streamlining this process, we hope to foster a thriving educational community
 
 ### Prerequisites
 Ensure you have the following installed:
-- Vite3: A fast build tool and framework for modern web development. 
+- Vite: A fast build tool and framework for modern web development. 
 - Node.js: A JavaScript runtime that allows executing JavaScript code outside of a web browser.
 - Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
  
@@ -51,11 +51,9 @@ https://github.com/dokoe92/nachhilfe.wien.backend
 
 ## Documentation
 
-For the Endpoint documentation you can look up the API paths in our Swagger documentation.   
-Just run the application and insert the following link in your browser:
+For the Router documentation you can have a look into the index.js:
 
-http://localhost:8080/swagger-ui
+@/router/index.js
 
-If the links is not working please check the port where you are running the application.
 
 ```
