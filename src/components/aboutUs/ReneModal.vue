@@ -35,15 +35,15 @@
                 die das Wissen schätzen und ihre Ambitionen nutzen, um innovative
                 Lösungen zu schaffen.
               </p>
-            </div>
 
-            <slot/>
-            <ButtonRegular
-                text="Close"
-                class="mt-5 rounded bg-mainOrange px-4 py-2"
-                @click="closeModal"
-                type="button"
-            />
+              <slot/>
+              <ButtonRegular
+                  text="Close"
+                  class="mt-5 rounded bg-mainOrange px-4 py-2"
+                  @click="closeModal"
+                  type="button"
+              />
+            </div>
           </div>
         </div>
       </div>
