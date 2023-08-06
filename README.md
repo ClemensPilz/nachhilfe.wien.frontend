@@ -14,9 +14,7 @@ By streamlining this process, we hope to foster a thriving educational community
 
 ### Prerequisites
 Ensure you have the following installed:
-- Vite: A fast build tool and framework for modern web development. 
 - Node.js: A JavaScript runtime that allows executing JavaScript code outside of a web browser.
-- Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
  
 Ensure that you have these prerequisites installed and configured correctly to avoid any issues while working with the project. If you need assistance with installation or setup, please refer to the respective documentation for each tool.
 
@@ -44,7 +42,7 @@ npm install
 npm run dev
 ```
 
-## Install Frontend
+## Install Backend
 
 Follow the instructions for installation in this repository  
 https://github.com/dokoe92/nachhilfe.wien.backend
@@ -53,9 +51,14 @@ https://github.com/dokoe92/nachhilfe.wien.backend
 
 For the Router documentation you can have a look into the index.js:
 
-src/router/index.js
+- src/router/index.js
 
-And to get a look for the deployed version please clock on the following link:
+Codersbay_Nachhilfe.Wien.pdf you can find our final presentation for the
+CODERS.BAY Vienna Bootcamp.
+
+## Live Demo
+
+And to get a glimpse for the deployed version please click on the following link:
 
 http://nachhilfe-wien.info
 
