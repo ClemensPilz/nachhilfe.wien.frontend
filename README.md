@@ -1,34 +1,5 @@
 # nachhilfe.wien.frontend
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-
-# nachhilfe.wien Frontend
-
 ## Introduction
 Welcome to the culmination of the CODERS.BAY Vienna Bootcamp: the nachhilfe.wien project.  
 This endeavor is split into two distinct repositories: the frontend (which you're currently viewing) and the backend.
@@ -39,18 +10,17 @@ Concurrently, students can effortlessly search for suitable teachers, initiate c
 
 By streamlining this process, we hope to foster a thriving educational community in Vienna, making quality education accessible and convenient for all.
 
-
-
-
 ## Run Locally
 
 ### Prerequisites
 Ensure you have the following installed:
-- Vite
-- Node.js
-- Tailwind.css
+- Vite3: A fast build tool and framework for modern web development. 
+- Node.js: A JavaScript runtime that allows executing JavaScript code outside of a web browser.
+- Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
+ 
+Ensure that you have these prerequisites installed and configured correctly to avoid any issues while working with the project. If you need assistance with installation or setup, please refer to the respective documentation for each tool.
 
-Clone the project
+Clone the project:
 
 ```bash
   git clone https://github.com/ClemensPilz/nachhilfe.wien.frontend.git
@@ -62,25 +32,22 @@ Go to the project directory
   cd nachhilfe.wien.frontend
 ```
 
-Install dependencies and run the app in dev mode so the h2-database will be used (in memory database)
+Install dependencies & packages:
 
 ```bash
-  mvn spring-boot:run -Dspring-boot.run.profiles=dev
-
+npm install
 ```
 
-If it is not working try:
+### Compile and Hot-Reload for Development
+
 ```bash
-    & 'mvn' 'spring-boot:run' '-Dspring-boot.run.profiles=dev'
-    
+npm run dev
 ```
 
 ## Install Frontend
 
 Follow the instructions for installation in this repository  
 https://github.com/dokoe92/nachhilfe.wien.backend
-
-
 
 ## Documentation
 
