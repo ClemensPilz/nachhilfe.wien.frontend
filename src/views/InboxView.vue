@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-4 max-w-7xl flex-grow bg-green-800">
+  <div class="container mx-auto mt-4 max-w-7xl flex-grow px-2">
     <div v-if="hasNoMessages">
       <h3>Du hast noch keine Nachrichten in deiner Inbox</h3>
     </div>
@@ -7,14 +7,22 @@
     <div class="grid grid-cols-12 gap-12">
       <!--Left part-->
       <div
-        class="noScrollbar top-20 col-span-3 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll"
+        class="noScrollbar top-20 col-span-9 max-h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll sm:col-span-3"
       >
         <div class="flex flex-col gap-2">
           <ConversationThumb
             v-for="conversation in conversations"
             :key="conversation.conversationId"
-            :users="conversation.users"
-            @click="getMessages(conversation.conversationId)"
+            :user="
+              conversation.users.filter(
+                (user) => user.id !== userStore.user.userId,
+              )[0]
+            "
+            @click="
+              () => {
+                getMessages(conversation.conversationId);
+              }
+            "
           />
         </div>
       </div>
@@ -23,7 +31,6 @@
       <!--Messages-->
 
       <div class="col-span-9 flex max-h-[calc(100vh-70px)] flex-col">
-        <!--@todo: Just pass the whole message-object as a prop-->
         <div class="noScrollbar overflow-x-hidden overflow-y-scroll">
           <MessageThumb
             v-for="message in messages"
@@ -36,9 +43,9 @@
             :senderId="message.senderId"
             :coachingName="message.coachingName"
             :status="message.status"
-            :start="formatStart(message.start)"
+            :start="message.start"
             :duration="formatDuration(message.start, message.end)"
-            :date="formatDate(message.timeStamp)"
+            :date="message.timeStamp"
           />
 
           <div id="pageEnd"></div>
@@ -48,8 +55,8 @@
         <MessageInput
           :class="conversationId ? 'block' : 'hidden'"
           @send="postMessage"
+          @go-to-profile="router.push(`/profile/${partnerId}`)"
           @keydown.enter="postMessage"
-          button-text="Senden"
         >
           <input
             type="text"
@@ -66,62 +73,32 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, onUpdated, ref, watch } from "vue";
+import {
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  watch,
+  computed,
+} from "vue";
 import axios from "axios";
 import ConversationThumb from "@/components/Inbox/ConversationThumb.vue";
 import MessageThumb from "@/components/Inbox/MessageThumb.vue";
 import { useUserStore } from "@/stores/user";
 import MessageInput from "@/components/Inbox/MessageInput.vue";
 import { useConversationStore } from "@/stores/conversation";
+import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 const conversationId = ref(null);
+const partnerId = ref(null);
 const conversations = ref([]);
 const messages = ref(null);
 const messageText = ref(null);
 const conversationStore = useConversationStore();
 const hasNoMessages = ref(false);
-
-function formatDate(timestamp) {
-  const date = new Date(timestamp);
-
-  const timeString = date.toTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  const today = new Date();
-  if (today.getDate() === date.getDate()) {
-    return `heute ${timeString.substring(0, 5)}`;
-  }
-
-  const dateString = date.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-
-  return `${dateString}, ${timeString.substring(0, 5)}`;
-}
-
-function formatStart(timestamp) {
-  if (timestamp == null) {
-    return;
-  }
-  const date = new Date(timestamp);
-  const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
-  const timeOptions = { hour: "2-digit", minute: "2-digit" };
-  const locale = "de-DE";
-
-  const formattedDate = date.toLocaleDateString(locale, dateOptions);
-  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
-
-  return `${formattedDate} um ${formattedTime} Uhr`;
-}
-
-function formatDuration(start, end) {
-  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
-}
+const myId = computed(() => userStore.user.userId);
+const router = useRouter();
 
 //Gets an array of conversations from API
 async function getConversations(userId) {
@@ -152,6 +129,9 @@ async function getMessages(id) {
     messages.value = response.data.messages;
     sortMessages();
     conversationId.value = id;
+    partnerId.value = response.data.users.filter(
+      (user) => user.id !== userStore.user.userId,
+    )[0].id;
     for (const message in messages) {
       console.log(message);
     }
@@ -159,6 +139,10 @@ async function getMessages(id) {
   } catch (e) {
     console.log(e);
   }
+}
+
+function formatDuration(start, end) {
+  return Math.abs(new Date(start) - new Date(end)) / (60 * 60 * 1000);
 }
 
 //Push message to conversation

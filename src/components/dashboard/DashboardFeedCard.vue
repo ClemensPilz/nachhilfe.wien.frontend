@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex w-full flex-col gap-2 overflow-hidden rounded-3xl border-2 border-primary text-center shadow-xl"
+    class="flex w-full flex-col gap-2 overflow-hidden rounded-3xl text-center shadow-xl"
   >
     <slot name="image" />
     <div class="mx-4 mb-4">

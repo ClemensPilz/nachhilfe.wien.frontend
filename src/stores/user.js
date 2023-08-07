@@ -80,7 +80,7 @@ export const useUserStore = defineStore("user", () => {
   async function logout() {
     localStorage.removeItem("token");
     isAuthenticated.value = false;
-    await router.push("/");
+    await router.go(0);
   }
 
   return {

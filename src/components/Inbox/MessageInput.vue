@@ -1,6 +1,6 @@
 <template>
   <div
-    class="block rounded-3xl shadow-lg bg-white p-6 border-2 border-secondary"
+    class="block rounded-3xl border-2 border-secondary bg-white p-6 shadow-lg"
   >
     <h5 class="mb-2 text-xl font-medium leading-tight text-primary">
       {{ props.title }}
@@ -9,25 +9,32 @@
       {{ props.content }}
       <slot />
     </p>
-    <button
-      type="button"
-      @click.stop="$emit('send')"
+    <ButtonRegular
+      class="bg-mainBlue"
+      text="Senden"
+      @click="$emit('send')"
       @keydown.enter.stop=""
-      class="inline-block rounded-3xl px-6 py-3 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out bg-mainBlue shadow-md hover:shadow-xl focus:outline-none focus:ring-0"
-    >
-      {{ props.buttonText }}
-    </button>
+    />
+
+    <ButtonRegular
+      class="bg-mainOrange"
+      text="Profil"
+      @click="$emit('goToProfile')"
+      @keydown.enter.stop=""
+    />
   </div>
 </template>
 
 <script setup>
+import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
+
 const props = defineProps({
   title: String,
   content: String,
   buttonText: String,
 });
 
-const emits = defineEmits(["send"]);
+const emits = defineEmits(["send", "goToProfile"]);
 </script>
 
 <style lang="scss" scoped></style>

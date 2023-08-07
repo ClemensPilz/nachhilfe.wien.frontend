@@ -1,34 +1,37 @@
 <template>
-  <div class="my-4 grid grid-cols-3 grid-rows-1 bg-white rounded-xl shadow-lg">
+  <div
+    class="my-4 grid h-fit grid-cols-3 grid-rows-1 rounded-xl bg-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-2xl"
+  >
     <!--Text-Part-->
-    <div class="col-span-2 text-primary flex flex-col justify-center p-4">
-      <h4>{{ name }}</h4>
-      <p>{{ description }}</p>
+    <div class="col-span-2 flex flex-col justify-center p-4 text-primary">
+      <h4>{{ teacher.firstName }} {{ teacher.lastName }}</h4>
+      <small class="font-thin">{{
+        teacher.description === null ? "" : teacher.description
+      }}</small>
 
-      <div v-if="teacherId !== userStore.user.userId">
+      <div v-if="teacher.teacherId !== userStore.user.userId">
         <div
           id="divider"
-          class="border border-b-1 border-mainYellow mt-2 mb-3"
+          class="border-b-1 mb-3 mt-2 border border-mainYellow"
         ></div>
 
-        <div class="flex gap-2 flex-wrap text-xs">
+        <div class="flex flex-wrap gap-2 text-xs">
           <div
-            v-for="coaching in coachings"
+            v-for="coaching in teacher.coachings"
             v-show="coaching.active"
             :key="coaching.coachingId"
-            class="px-2 py-1 rounded-lg border border-primary hover:border-accent hover:cursor-pointer select-none"
+            class="select-none rounded-lg border border-primary px-2 py-1 hover:cursor-pointer hover:border-accent"
             @click="
               $emit('requestAppointment', {
                 coachingId: coaching.coachingId,
-                teacherId: teacherId,
-                coachingName: coaching.subject + ' - ' + coaching.rate + ' €/h',
+                teacherId: teacher.teacherId,
               })
             "
           >
             {{ coaching.subject }}: {{ coaching.rate }}€/h
           </div>
         </div>
-        <div class="flex gap-2 mt-2">
+        <div class="mt-2 flex gap-2">
           <ButtonRegular
             text="Profil"
             class="bg-mainBlue"
@@ -39,6 +42,11 @@
             class="bg-mainOrange"
             @click="$emit('contact')"
           />
+          <ButtonRegular
+            text="Bezirke"
+            class="bg-secondary"
+            @click="$emit('districts')"
+          />
         </div>
       </div>
     </div>
@@ -46,9 +54,9 @@
     <!--Image-Part-->
     <div class="col-span-1">
       <img
-        :src="props.image ? props.image : 'https://placehold.co/200x250'"
+        :src="teacher.image ? teacher.image : defaultImage"
         alt="Image of a teacher"
-        class="w-full h-full rounded-bl-2xl rounded-tr-2xl object-cover"
+        class="h-full w-full rounded-bl-2xl rounded-tr-2xl object-cover"
       />
     </div>
   </div>
@@ -57,19 +65,18 @@
 <script setup>
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import { useUserStore } from "@/stores/user";
+import defaultImage from "@/assets/images/teacherProfile/default-profile-picture.jpg";
 
 const userStore = useUserStore();
 
-const props = defineProps({
-  teacherId: Number,
-  name: String,
-  description: String,
-  rating: String,
-  coachings: Array,
-  image: String,
-});
+const props = defineProps({ teacher: Object });
 
-const emits = defineEmits(["contact", "profile", "requestAppointment"]);
+const emits = defineEmits([
+  "contact",
+  "profile",
+  "requestAppointment",
+  "districts",
+]);
 </script>
 
 <style lang="scss" scoped></style>

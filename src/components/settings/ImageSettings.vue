@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full my-4">
+  <div class="my-4 w-full">
     <input
       type="file"
-      class="rounded paragraph mb-2"
+      class="paragraph mb-2 rounded"
       name="profilePicture"
       id="profilePictureInput"
       @change="upload"
@@ -22,12 +22,14 @@
 import { useAppStore } from "@/stores/app";
 import axios from "axios";
 import { useUserStore } from "@/stores/user";
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const appStore = useAppStore();
 const userStore = useUserStore();
 
-const profilePictureSrc = ref();
+const profilePictureSrc = computed(() => {
+  return userStore.user.image;
+});
 
 const props = defineProps(["uploadNow"]);
 
@@ -45,9 +47,10 @@ async function upload(e) {
   }
 
   const imageString = await appStore.encodeImage(file);
+  console.log(imageString);
 
   try {
-    const response = axios({
+    const response = await axios({
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -58,20 +61,11 @@ async function upload(e) {
       },
     });
     console.log(response);
-    localStorage.setItem("profilePicture", imageString);
-    profilePictureSrc.value = localStorage.getItem("profilePicture");
+    userStore.user.image = response.data.imageBase64;
   } catch (e) {
     console.log(e);
   }
 }
-
-onMounted(() => {
-  try {
-    profilePictureSrc.value = localStorage.getItem("profilePicture");
-  } catch (e) {
-    console.log(e);
-  }
-});
 </script>
 
 <style lang="scss" scoped></style>

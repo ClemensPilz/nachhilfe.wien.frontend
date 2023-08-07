@@ -1,35 +1,45 @@
 <template>
-  <FormModal ref="appointmentModalRef">
-    <CardLarge class="m-0">
-      <template v-slot:content>
-        <AppointmentForm @close="closeAppointmentModal" />
-      </template>
-    </CardLarge>
-  </FormModal>
+  <div>
+    <FormModal :is-active="appStore.appointmentModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <AppointmentForm />
+        </template>
+      </CardLarge>
+    </FormModal>
 
-  <div class="container mx-auto mt-8 max-w-6xl px-2">
-    <h2>Lehrer suchen</h2>
-    <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
+    <FormModal :is-active="appStore.districtModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DistrictModalForm />
+        </template>
+      </CardLarge>
+    </FormModal>
 
-    <SearchForm @result="pasteResult" />
-  </div>
-  <div class="w-full bg-background">
-    <div class="container mx-auto mt-8 max-w-6xl">
-      <div class="searchResult">
-        <SearchResult
-          v-for="teacher in teachersArray"
-          @contact="appStore.sendMessage(teacher.teacherId, true)"
-          @profile="router.push(`/profile/${teacher.teacherId}`)"
-          @requestAppointment="setAppointmentParameters"
-          :key="teacher.teacherId"
-          :teacherId="teacher.teacherId"
-          :name="`${teacher.firstName} ${teacher.lastName}`"
-          :description="`${
-            teacher.description === null ? '' : teacher.description
-          }`"
-          :coachings="teacher.coachings"
-          :image="teacher.image"
-        />
+    <div class="container mx-auto mt-8 max-w-6xl px-2">
+      <h2>Lehrer suchen</h2>
+      <h4 class="text-mainBlue">Finde einen Lehrer, der zu dir passt!</h4>
+
+      <SearchForm @result="pasteResult" />
+    </div>
+    <div class="w-full bg-background">
+      <div class="container mx-auto mt-8 max-w-6xl">
+        <div
+          class="mx-auto mt-4 grid grid-cols-1 gap-6 px-4 pt-8 lg:grid-cols-2"
+        >
+          <SearchResult
+            v-for="teacher in teachersArray"
+            class="col-span-1"
+            @contact="appStore.sendMessage(teacher.teacherId, true)"
+            @profile="router.push(`/profile/${teacher.teacherId}`)"
+            @requestAppointment="
+              (e) => openAppointmentModal(e.teacherId, e.coachingId)
+            "
+            @districts="openDistrictModal(teacher.districts)"
+            :key="teacher.teacherId"
+            :teacher="teacher"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +56,7 @@ import SearchForm from "@/components/search/SearchForm.vue";
 import AppointmentForm from "@/components/util/forms/AppointmentForm.vue";
 import FormModal from "@/components/util/modals/FormModal.vue";
 import CardLarge from "@/components/util/cards/CardLarge.vue";
+import DistrictModalForm from "@/components/util/forms/DistrictModalForm.vue";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
@@ -53,20 +64,21 @@ const teachersArray = ref();
 const appointmentModalRef = ref();
 
 function openAppointmentModal(teacherId, coachingId) {
-  appointmentModalRef.value.openModal();
+  if (userStore.user.userType !== "STUDENT") {
+    console.log("Nur Schüler können Terminanfragen senden.");
+    return;
+  }
   appStore.selectCoaching(teacherId, coachingId);
+  appStore.appointmentModalActive = !appStore.appointmentModalActive;
 }
 
-function closeAppointmentModal() {
-  appointmentModalRef.value.closeModal();
+function openDistrictModal(districts) {
+  appStore.selectedDistricts = districts;
+  appStore.districtModalActive = !appStore.districtModalActive;
 }
 
 function pasteResult(data) {
   teachersArray.value = data;
-}
-
-function setAppointmentParameters(e) {
-  openAppointmentModal(e.teacherId, e.coachingId);
 }
 
 async function getAllTeachers() {
@@ -99,8 +111,4 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="scss" scoped>
-.searchResult {
-  @apply container mx-auto mt-4 flex min-h-screen max-w-lg flex-col pt-8;
-}
-</style>
+<style lang="scss" scoped></style>

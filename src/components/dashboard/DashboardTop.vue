@@ -6,66 +6,34 @@
       <h4>Dies ist dein Dashboard!</h4>
       <p>
         Hier findest du die wichtigsten Funktionen von nachhilfe.wien. Solltest
-        du noch Fragen oder Anregungen haben, zögere bitte nicht, uns
-        <a href="#">eine Nachricht zu schreiben!</a>
+        du noch Fragen oder Anregungen haben, zögere bitte nicht, uns eine
+        Nachricht zu schreiben!
       </p>
       <div class="mt-4 flex justify-center gap-4 md:justify-start">
-        <ButtonLarge class="bg-mainBlue" text="Kontakt" />
-        <ButtonLarge
-          class="bg-mainBlue"
-          text="FAQ"
-          @click="
-            () => {
-              router.push('/faq');
-            }
-          "
-        />
-        <ButtonLarge
-          v-if="userStore.user.userType === 'ADMIN'"
-          text="Admin"
-          class="bg-mainOrange"
-          @click="
-            () => {
-              router.push('/admin');
-            }
-          "
-        />
+        <DashboardTopButtons :userType="userType" />
       </div>
     </div>
 
     <!--Image-Element-->
     <div
-      class="order-1 col-span-3 flex items-center justify-center overflow-hidden rounded-full md:order-3 md:col-span-1 md:-translate-y-1/4 md:scale-75"
-      style="width: 200px; height: 200px"
+      class="order-1 col-span-3 flex items-center justify-center overflow-hidden md:order-3 md:col-span-1"
     >
-      <a href="#">
-        <img
-          :src="topPictureSource"
-          alt="a users profile picture"
-          class="h-full w-full object-cover"
-          @click="
-            () => {
-              router.push('/settings');
-            }
-          "
-        />
-      </a>
+      <DashboardTopPicture
+        :userImage="userImage"
+        class="hover:cursor-pointer"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useUserStore } from "@/stores/user";
-import ButtonLarge from "@/components/util/buttons/ButtonLarge.vue";
-import { useRouter } from "vue-router";
-import { computed } from "vue";
-import image from "@/assets/images/dashboard/default-profile-picture.jpg";
+import DashboardTopPicture from "@/components/dashboard/DashboardTopPicture.vue";
+import DashboardTopButtons from "@/components/dashboard/DashboardTopButtons.vue";
 
-const router = useRouter();
-const userStore = useUserStore();
-const userName = userStore.user.firstName;
-const topPictureSource = computed(() => {
-  return userStore.user.image === null ? image : userStore.user.image;
+const props = defineProps({
+  userType: String,
+  userImage: String,
+  userName: String,
 });
 </script>
 

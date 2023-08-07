@@ -1,14 +1,21 @@
 <template>
   <!--Container-->
   <div class="mt-10">
+    <FormModal :is-active="appStore.deleteAccountModalActive">
+      <CardLarge class="m-0">
+        <template v-slot:content>
+          <DeleteAccountForm />
+        </template>
+      </CardLarge>
+    </FormModal>
     <!--Programmatic-->
     <div v-if="adminStore.foundUser">
       <!--TopSection-Container-->
-      <div class="md:grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
+      <div class="grid-cols-1 items-center gap-4 md:grid md:grid-cols-3">
         <!--Image-->
-        <div class="order-1 md:order-1 flex mx-auto flex-wrap flex-col">
+        <div class="order-1 mx-auto flex flex-col flex-wrap md:order-1">
           <img
-            class="w-full md:w-56 md:rounded-full shadow-xl"
+            class="w-full shadow-xl md:w-56 md:rounded-full"
             :src="
               adminStore.foundUser.profile.imageBase64
                 ? adminStore.foundUser.profile.imageBase64
@@ -18,13 +25,13 @@
           />
           <ButtonRegular
             text="Bild löschen"
-            class="md:mt-5 mx-auto bg-primary"
+            class="mx-auto bg-primary md:mt-5"
             @click="deleteImage"
           />
         </div>
         <!--User Information-->
-        <div class="order-2 md:order2 flex gap-3 align-center">
-          <div class="text-primary font-bold">
+        <div class="md:order2 align-center order-2 flex gap-3">
+          <div class="font-bold text-primary">
             <p>UserId:</p>
             <p>E-Mail:</p>
             <p>First name:</p>
@@ -36,7 +43,7 @@
               Beschreibung:
             </p>
           </div>
-          <div class="text-secondary italic">
+          <div class="italic text-secondary">
             <p>{{ adminStore.foundUser.userId }}</p>
             <p>{{ adminStore.foundUser.profile.email }}</p>
             <p>{{ adminStore.foundUser.firstName }}</p>
@@ -52,21 +59,21 @@
 
         <!--Stats-->
         <div
-          class="order-3 md:order-3 flex flex-col md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-6"
+          class="order-3 flex flex-col space-y-4 md:order-3 md:flex-row md:justify-center md:space-x-6 md:space-y-0"
         >
-          <div class="flex gap-3 items-center">
+          <div class="grid grid-cols-2 items-center gap-3">
             <ButtonRegular
               text="Nachricht senden"
-              class="bg-mainOrange"
+              class="col-span-1 w-full bg-mainOrange"
               @click="appStore.sendMessage(adminStore.foundUser.userId, true)"
             />
             <ButtonRegular
-              class="bg-primary"
+              class="col-span-1 w-full bg-primary"
               text="User aktiv/inaktiv"
               @click="changeActiveStatus"
             />
             <ButtonRegular
-              class="bg-primary"
+              class="w-full bg-primary"
               text="Userinformation ändern"
               @click="openEdit = true"
             />
@@ -75,22 +82,31 @@
               :isOpen="openEdit"
               @update:openEdit="(v) => (openEdit = v)"
             />
+
+            <ButtonRegular
+              class="w-full bg-primary"
+              text="User löschen"
+              @click="
+                appStore.deleteAccountModalActive =
+                  !appStore.deleteAccountModalActive
+              "
+            />
           </div>
         </div>
       </div>
 
       <!--BodySection-Container-->
       <div
-        class="block rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mt-5"
+        class="mt-5 block rounded-lg bg-white text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
       >
         <div class="flex justify-center gap-56">
           <div class="p-6">
             <div v-if="adminStore.foundUser.userType === 'TEACHER'">
-              <h2 class="text-primary font-bold">Bezirke:</h2>
+              <h2 class="font-bold text-primary">Bezirke:</h2>
               <div
                 v-for="district in adminStore.foundUser.districts"
                 :key="`district${district}`"
-                class="text-left p-0.5"
+                class="p-0.5 text-left"
               >
                 <div>{{ district }}</div>
               </div>
@@ -99,12 +115,12 @@
 
           <div class="p-6">
             <div v-if="adminStore.foundUser.userType === 'TEACHER'">
-              <h2 class="text-primary font-bold">Nachhilfe:</h2>
+              <h2 class="font-bold text-primary">Nachhilfe:</h2>
               <div class="flex flex-wrap justify-center gap-2">
                 <div
                   v-for="coaching in adminStore.foundUser.coachings"
                   :key="`coaching${coaching.coachingId}`"
-                  class="flex flex-col p-2 text-left mr-3"
+                  class="mr-3 flex flex-col p-2 text-left"
                 >
                   <div>{{ coaching.subject }}</div>
                   <div>{{ coaching.level }}</div>
@@ -120,14 +136,14 @@
             <!--If user is Teacher -->
             <h2
               v-if="adminStore.foundUser.userType === 'TEACHER'"
-              class="text-primary font-bold mb-3"
+              class="mb-3 font-bold text-primary"
             >
               Bewertungen / Durchschnittliche Bewertung:
               {{ adminStore.foundUser.profile.averageRatingScore }}:
             </h2>
 
             <!--If user is Student-->
-            <h2 v-else class="text-primary font-bold mb-3">Bewertungen:</h2>
+            <h2 v-else class="mb-3 font-bold text-primary">Bewertungen:</h2>
 
             <!--Feedbacks-->
             <div
@@ -142,31 +158,31 @@
               >
                 <h4>
                   Titel:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.title
                   }}</span>
                 </h4>
                 <p>
                   Von:
-                  <span class="text-secondary italic"
+                  <span class="italic text-secondary"
                     >{{ feedback.studentFirstName }}
                     {{ feedback.studentLastName }}</span
                   >
                 </p>
                 <p>
                   Schüler ID:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.studentId
                   }}</span>
                 </p>
                 <p>
                   Bewertung:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.rating
                   }}</span>
                 </p>
                 <p>Inhalt:</p>
-                <p class="text-secondary italic">{{ feedback.content }}</p>
+                <p class="italic text-secondary">{{ feedback.content }}</p>
                 <ButtonRegular
                   text="Delete Feedback"
                   class="bg-mainOrange"
@@ -181,31 +197,31 @@
               >
                 <h4>
                   Title:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.title
                   }}</span>
                 </h4>
                 <p>
                   An:
-                  <span class="text-secondary italic"
+                  <span class="italic text-secondary"
                     >{{ feedback.teacherFirstName }}
                     {{ feedback.teacherLastName }}</span
                   >
                 </p>
                 <p>
                   Lehrer ID:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.teacherId
                   }}</span>
                 </p>
                 <p>
                   Bewertung:
-                  <span class="text-secondary italic">{{
+                  <span class="italic text-secondary">{{
                     feedback.rating
                   }}</span>
                 </p>
                 <p>Inhalt:</p>
-                <p class="text-secondary italic">{{ feedback.content }}</p>
+                <p class="italic text-secondary">{{ feedback.content }}</p>
                 <ButtonRegular
                   text="Delete Feedback"
                   class="bg-mainOrange"
@@ -216,6 +232,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <h2>User not found!</h2>
     </div>
   </div>
 </template>
@@ -228,9 +247,9 @@ import { useUserStore } from "@/stores/user";
 import { useAdminStore } from "@/stores/admin";
 import UserEditModal from "@/components/administrator/UserEditModal.vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
-
-const reviewModalOpen = ref(false);
-const showModal = ref(false);
+import DeleteAccountForm from "@/components/util/forms/DeleteAccountForm.vue";
+import CardLarge from "@/components/util/cards/CardLarge.vue";
+import FormModal from "@/components/util/modals/FormModal.vue";
 
 const appStore = useAppStore();
 const userStore = useUserStore();
@@ -272,8 +291,6 @@ const deleteImage = async () => {
   await adminStore.findById(adminStore.foundUser.userId);
   console.log(adminStore.foundUser.profile.imageBase64);
 };
-
-const changeFields = async () => {};
 </script>
 
 <style lang="scss" scoped></style>

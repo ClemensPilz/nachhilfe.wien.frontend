@@ -1,12 +1,10 @@
 <template>
   <form @submit.prevent="search">
-    <div
-      class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 pt-8 text-center md:text-left"
-    >
-      <div class="col-span-1 md:col-span-2 settingsCard">
+    <div class="grid w-full grid-cols-1 gap-4 pt-8 text-center md:grid-cols-4">
+      <div class="settingsCard col-span-1 md:col-span-2">
         <!--District-->
         <div
-          class="w-full flex flex-wrap gap-2 py-4 justify-center md:justify-start"
+          class="flex w-full flex-wrap justify-center gap-2 py-4 md:justify-start"
         >
           <div v-for="n in 23" class="inline" :key="`District ${n}`">
             <input
@@ -22,29 +20,25 @@
 
         <ButtonRegular
           text="Alle auswählen"
-          class="bg-secondary border border-white"
+          class="bg-secondary"
           @click="selectAll"
         />
         <ButtonRegular
           text="Keines auswählen"
-          class="bg-secondary border border-white"
+          class="bg-secondary"
           @click="deselectAll"
         />
       </div>
 
-      <div class="col-span-1 settingsCard">
+      <div class="settingsCard col-span-1">
         <div class="py-4">
           <p class="font-bold">Was möchtest du lernen?</p>
           <!--Subject-->
-          <div
-            v-for="subject in appStore.subjects"
-            :key="subject"
-            @change="log"
-          >
+          <div v-for="subject in appStore.subjects" :key="subject">
             <label class="pr-2" :for="subject">{{ subject }}</label>
             <input
               type="radio"
-              name="subject"
+              :name="subject"
               :id="subject"
               :value="subject"
               v-model="selectedSubject"
@@ -53,27 +47,50 @@
         </div>
       </div>
 
-      <div class="col-span-1 settingsCard">
+      <div class="settingsCard col-span-1">
         <!--Minrate/Maxrate-->
         <p class="font-bold">Was darf's kosten?</p>
-        <label for="maxRate">Bis zu</label>
         <input
           type="number"
           name="maxRate"
           id="maxRate"
           v-model="maxRate"
-          class="w-fit text-center py-2 rounded-3xl mx-3 border-2"
+          class="mx-3 w-16 rounded-3xl border-2 py-2 pl-4 text-center"
         />
-        <p class="inline">Euro pro Stunde</p>
+        <p class="inline">Euro/Stunde</p>
         <br />
+
+        <p class="font-bold">Niveau</p>
+        <!--Subject-->
+        <div v-for="level in appStore.levels" :key="level">
+          <label class="pr-2" :for="level">{{ level }}</label>
+          <input
+            type="radio"
+            :name="level"
+            :id="level"
+            :value="level"
+            v-model="selectedLevel"
+          />
+        </div>
+        <div>
+          <label class="pr-2">Mindestens {{ selectedRating }} Sterne</label>
+          <input
+            type="range"
+            name="rating"
+            id="rating"
+            v-model="selectedRating"
+            min="0"
+            max="5"
+          />
+        </div>
       </div>
     </div>
 
-    <div class="w-full flex justify-center mt-8">
-      <button-large
+    <div class="mt-8 flex w-full justify-center">
+      <ButtonLarge
         text="Lehrer finden"
         type="submit"
-        class="bg-mainOrange my-4"
+        class="my-4 bg-mainOrange"
       />
     </div>
   </form>
@@ -87,13 +104,15 @@ import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 
 const appStore = useAppStore();
 const selectedSubject = ref("");
+const selectedLevel = ref("");
 const selectedDistricts = ref([]);
 const maxRate = ref(20);
+const selectedRating = ref(0);
 const emit = defineEmits({ result: Object });
 
 function selectAll() {
   selectedDistricts.value = Array.from({ length: 23 }, (_, i) =>
-    i < 9 ? `DISTRICT_10${i + 1}0` : `DISTRICT_1${i + 1}0`
+    i < 9 ? `DISTRICT_10${i + 1}0` : `DISTRICT_1${i + 1}0`,
   );
 }
 
@@ -112,7 +131,9 @@ async function search() {
       selectedDistricts.value,
       selectedSubject.value,
       1,
-      maxRate.value
+      maxRate.value,
+      selectedLevel.value,
+      selectedRating.value,
     );
     console.log(response.data);
     if (response.data) {
@@ -126,6 +147,6 @@ async function search() {
 
 <style lang="scss" scoped>
 .settingsCard {
-  @apply bg-secondary rounded-3xl p-4 shadow-xl;
+  @apply rounded-3xl p-4 shadow-2xl;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
-    <div class="text-center mb-1">
-      <small class="text-white">Themengebiet</small>
+    <div class="mb-1 text-center">
+      <small class="text-primary">Themengebiet</small>
     </div>
     <select id="subjectSelect" name="subjectSelect" v-model="selectedSubject">
       <option v-for="subject in subjects" :value="subject">
@@ -15,6 +15,7 @@
 
     <input
       type="number"
+      min="0"
       class="text-center"
       name="rateSelect"
       id="rateSelect"
@@ -25,7 +26,7 @@
     <ButtonRegular
       @click="validateCoaching"
       text="OK"
-      class="w-full bg-mainBlue ms-0"
+      class="ms-0 w-full bg-mainBlue"
     />
   </div>
 </template>
@@ -54,11 +55,11 @@ async function validateCoaching() {
     !isNaN(parseInt(selectedRate.value)) &&
     parseInt(selectedRate.value) > 0
   ) {
-    const coaching = new Coaching(
-      selectedSubject.value,
-      selectedLevel.value,
-      parseInt(selectedRate.value)
-    );
+    const coaching = {
+      subject: selectedSubject.value,
+      level: selectedLevel.value,
+      rate: parseInt(selectedRate.value),
+    };
     try {
       await postCoaching(coaching);
     } catch (e) {
@@ -94,6 +95,6 @@ async function postCoaching(newCoaching) {
 <style lang="scss" scoped>
 input,
 select {
-  @apply w-full mb-2  p-2 rounded-3xl;
+  @apply mb-2 w-full  rounded-3xl border p-2;
 }
 </style>

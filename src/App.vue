@@ -6,6 +6,7 @@
 
     <RouterView :key="$route.fullPath" class="flex-grow-1" />
   </div>
+  <FooterBar />
 </template>
 
 <script setup>
@@ -14,6 +15,7 @@ import { onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
 import router from "@/router";
 import NavigationBar from "@/components/global/NavigationBar.vue";
+import FooterBar from "@/components/global/FooterBar.vue";
 
 const userStore = useUserStore();
 
@@ -35,7 +37,10 @@ async function initApp() {
     await router.push("/");
   }
 }
-onMounted(() => initApp());
+
+onMounted(async () => {
+  await initApp();
+});
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
