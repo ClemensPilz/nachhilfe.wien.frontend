@@ -61,7 +61,7 @@
       <!--Login-Buttons if user is not authenticated-->
       <ul v-if="!userStore.isAuthenticated">
         <li>
-          <RouterLink to="/about">Our Team</RouterLink>
+          <RouterLink to="/about">Team</RouterLink>
         </li>
         <li
           class="text-mainBlue"

@@ -25,6 +25,11 @@ export const useAppStore = defineStore("app", () => {
   const appointmentModalActive = ref(false);
   const districtModalActive = ref(false);
   const deleteAccountModalActive = ref(false);
+  const devModals = ref({
+    dominink: false,
+    clemens: false,
+    rene: false,
+  });
 
   function resetModals() {
     registrationModalActive.value = false;
@@ -33,6 +38,9 @@ export const useAppStore = defineStore("app", () => {
     appointmentModalActive.value = false;
     districtModalActive.value = false;
     deleteAccountModalActive.value = false;
+    for (const key in devModals.value) {
+      devModals.value[key] = false;
+    }
   }
 
   //Used to pass information of a selected coaching through multiple layers of components
@@ -116,7 +124,7 @@ export const useAppStore = defineStore("app", () => {
   ) {
     console.log(level);
     try {
-      const response = axios({
+      return await axios({
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -131,7 +139,6 @@ export const useAppStore = defineStore("app", () => {
           rating,
         },
       });
-      return response;
     } catch (e) {
       throw e;
     }
@@ -154,5 +161,6 @@ export const useAppStore = defineStore("app", () => {
     appointmentModalActive,
     districtModalActive,
     deleteAccountModalActive,
+    devModals,
   };
 });
