@@ -108,7 +108,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import ButtonRegular from "@/components/util/buttons/ButtonRegular.vue";
 import clemensImage from "@/assets/images/team/clemens.jpg";
 import dominikImage from "@/assets/images/team/dominik.jpg";
@@ -116,29 +115,8 @@ import reneImage from "@/assets/images/team/rene.jpg";
 import { useAppStore } from "@/stores/app.js";
 import DevModals from "@/components/aboutUs/DevModals.vue";
 import ContactForm from "@/components/aboutUs/ContactForm.vue";
-const activeModal = ref(0);
 
-function setActiveModal(modalNumber) {
-  activeModal.value = activeModal.value === modalNumber ? 0 : modalNumber;
-}
-
-const email = ref("");
-const subject = ref("");
-const message = ref("");
 const appStore = useAppStore();
-
-function handleSubmit() {
-  if (!email.value || !subject.value || message.value.trim().length < 25) {
-    alert("Please fill out all required fields correctly.");
-    console.log("validity check error");
-  } else {
-    console.log("Form is valid");
-    setActiveModal(4);
-    email.value = "";
-    subject.value = "";
-    message.value = "";
-  }
-}
 </script>
 
 <style lang="scss" scoped></style>
